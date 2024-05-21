@@ -1,0 +1,11 @@
+touch tex/introduction.tex
+touch tex/literature_review.tex
+touch tex/actor-based-large-neighborhood-search.tex
+touch tex/multi-agent-scheduling-system.tex
+touch tex/verification-study.tex
+touch tex/discussion.tex
+touch tex/conclusion.tex
+
+mkdir appendices
+touch appendices/appendixA
+touch bib/references.bib
