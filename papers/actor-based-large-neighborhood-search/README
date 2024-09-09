@@ -1,0 +1,6 @@
+Contains the source for the "Actor-based Large Neighborhood Search". 
+
+Call `tectonic -X compile tex/main.tex` to compile the main.pdf.
+
+Figures in figures/
+References in bib/refs.bib

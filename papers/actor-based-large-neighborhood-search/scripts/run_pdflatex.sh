@@ -1,0 +1,7 @@
+#!/bin/fish
+
+
+
+ls **.tex | entr -s "tectonic -o build main.tex" && zathura main.pdf
+
+
