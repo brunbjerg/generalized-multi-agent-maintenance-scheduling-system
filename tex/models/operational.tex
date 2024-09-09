@@ -1,4 +1,29 @@
-
-
 \section{The Operational Model}
 
+Here the o is a single operation and o2 is another operation. It is crucial to understand here that the main
+decision variable, $x$ defines an ordering of the operations that a single operational agent will do the 
+operations in. 
+
+The $s_{ik}$ is the start time of job $i$ in segment $k$ and $f_{ik}$ is the finish time of job $i$ in segment $k$.
+$p_{ik}$ is the processing time of each segment. 
+\begin{alignat}{2}
+	&Max \sum_{i \in I} \sum_{k \in K} p_{ik} \\
+	&\text{Subject to:} \notag \\
+    &\sum_{k \in K} p_{ik} \cdot x_{ik} = (w_i \cdot \theta_i) \quad \forall i \in I \\
+	&s_{j1} \geq f_{i,last(i)} + preparation(i, j) \notag \\ 
+	&\quad \forall i \in I, j \in J\\
+	&s_{ik} \geq f_{i,k-1} - M \cdot (2 - x_{ik} + x_{i,k-1}) \\
+	&p_{ik} = f_{ik} - s_{ik} \\
+	&\quad \forall i \in I, k \in K \notag\\
+	&s_{ik} \geq event_{te} + d_{te} - M \cdot (1 - y_{ikte}) \\ 
+	&f_{ik} \leq event_{te} + M \cdot y_{ikte} \\ 
+	&s_{i1} \geq tws_i \forall i \in I \\
+	&f_{i,last(i)} \leq twf_i \forall i \in I \\
+	&x_{ik} \in \{0, 1\} \quad \forall i \in I, k \in K\\
+	&s_{ik} \in [a, b] \quad \forall i \in I, k \in K\\
+	&f_{ik} \in [a, b] \quad \forall i \in I, k \in K\\
+	&p_{ik} \in [0, w_i] \quad \forall i \in I, k \in K \\
+	&y_{ikte} \in \{0, 1\} \\ 
+	&\quad \forall i \in I, k \in K, t \in T, e \in E \notag \\
+	&\theta_i \in \{0, 1\} \quad \forall i \in I \\
+\end{alignat}

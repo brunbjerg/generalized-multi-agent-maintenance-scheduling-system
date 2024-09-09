@@ -1,0 +1,56 @@
+
+\section{Sets}
+\subsection{Strategic}
+* W: WorkOrders
+* P: Periods
+* tau: Traits
+
+\subsection{Tactical}
+* O: Operation
+* D: Days
+* C: Traits
+\subsection{Supervisor}
+\subsection{Operational}
+
+\section{Parameters}
+\subsection{Strategic}
+* $v_{wp}$: value of WorkOrder in period
+* d: penalty of exceeding capacity
+* clu: Gain from clustering two work orders
+* cap_{ptau}: Capacity by period and trait
+
+\subsection{Tactical}
+v_{do}: value of tactical operation (RENAME)
+pen: penalty of exceeding daily trait capacity
+w_{co}: hours of work in an operation (RENAME)
+R_{dc}: hours of available work for c(trait) (RENAME)
+start-start: relations between operations that have start-start
+finish-start: relations between operations that have finish-start
+number_o: number of people required to complete the operation
+operating_time: allowed hours to be worked on the operation per day
+duration_lower_o: shortest allowed duration
+duration_upper_o: longest allowed duration
+
+\subsection{Supervisor}
+\subsection{Operational}
+
+\section{Variables}
+\subsection{Strategic}
+x_{wp}: Assignment of WorkOrder w to period p
+pen_{ptau}: penalty for exceeding capacity in period p for trait tau
+
+
+\subsection{Tactical}
+y_{do}: work for each day
+p_{cd}: penalty for exceeding capacity
+\subsection{Supervisor}
+\subsection{Operational}
+
+\section{Metavariable}
+t: absolute time (RENAME TO TAU)
+
+
+% NOTES
+% Absolute time should be tau
+% Determine if we should use traits or work_center
+% t should be in the positive reals

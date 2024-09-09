@@ -10,22 +10,22 @@ out on each of the days of the work orders scheduled by the strategic agent.
 
 The tactical model is responsible for providing an initial suggestion for a weekly schedule, below we see the model for the tactical agent.
 \begin{alignat}{2}
-\text{Min}     & \sum_{i \in I} v_{c}(t) \cdot y_{dj}(t)                                                      \\  
+\text{Min}     & \sum_{o \in O} \sum_{d \in D} v_{do}(t) \cdot y_{do}(t)                                                      \\  
 	         + & \sum_{c \in C} \sum_{d \in D} pen \cdot p_{cd}(t)                                               \\  
 			                                                                                                  \\
                &\text{subject to:}                                                          \notag                                                                   \\
-	           & \sum_{j \in J} w_{cj} \cdot y_{dj}(t)  \leq R_{dc} + p_{dc}(t)                                   \\ 
+	           & \sum_{o \in O} w_{co} \cdot y_{do}(t)  \leq R_{dc} + p_{dc}(t)                                   \\ 
 			   & \quad \quad \forall  d \in D, \forall c \in C                              \notag                                    \\ 
-	           & \sum_{d \in D} d \cdot y_{di}(t) + \delta_i  = \sum_{d \in D} d \cdot y_{dj}(t)                    \\ 
-			   & \quad \quad \forall (i, j) \in \text{finish-start}(t)                        \notag                                   \\ 
-	           & \sum_{d \in D} d \cdot y_{di}(t) = \sum_{d \in D} d \cdot y_{dj}(t)                                \\ 
-			   & \quad \quad \forall (i, j) \in \text{start-start}(t)                          \notag                             \\ 
-			   & y_{dj}(t) \leq number_j(t) * operating\_time_j                                                     \\ 
-			   & \quad \quad ,\forall d \in D, \forall j \in J                              \notag                                    \\
-			   & y_{dj}(t) \in \{0, 1\} \quad ,\forall d \in D, j \in J                                          \\
+	           & \sum_{d \in D} d \cdot y_{do1}(t) + \delta_o  = \sum_{d \in D} d \cdot y_{do2}(t)                    \\ 
+			   & \quad \quad \forall (o1, o2) \in \text{finish-start}(t)                        \notag                                   \\ 
+	           & \sum_{d \in D} d \cdot y_{do1}(t) = \sum_{d \in D} d \cdot y_{do2}(t)                                \\ 
+			   & \quad \quad \forall (o1, o2) \in \text{start-start}(t)                          \notag                             \\ 
+			   & y_{do}(t) \leq number_o(t) * operating\_time_o                                                     \\ 
+			   & \quad \quad ,\forall d \in D, \forall o \in O                              \notag                                    \\
+			   & y_{do}(t) \in \{0, 1\} \quad ,\forall d \in D, o \in O                                          \\
 			   & p_{cd}(t) \in \mathbb{R} \quad ,\forall c \in C, d \in D                                        \\
-			   & \delta_j \in \{ duration\_lower_j(t),                                                           \\ 
-			   & \quad \quad duration\_upper_j \}(t) \quad, \forall j \in J \notag                                      \\
+			   & \delta_o \in \{ duration\_lower_o(t),                                                           \\ 
+			   & \quad \quad duration\_upper_o \}(t) \quad, \forall o \in O \notag                                      \\
 			   & t \in  [0, \infty] 
 \end{alignat}
 
