@@ -1,56 +1,80 @@
-
 \section{Sets}
-\subsection{Strategic}
-* W: WorkOrders
-* P: Periods
-* tau: Traits
 
+\subsection{Strategic}
+* $W$                        : WorkOrders
+* $P$                        : Periods
+* $R$                        : Resources
 \subsection{Tactical}
-* O: Operation
-* D: Days
-* C: Traits
+* $O$                        : Operations
+* $D$                        : Days
+* $R$                        : Resources
 \subsection{Supervisor}
+* $A$                        : Activities 
+* $C$                        : Crew
 \subsection{Operational}
+* $K$                        : Segments 
+* $A$                        : Activities 
+* $I$                        : Instances
+* $E$                        : Events
 
 \section{Parameters}
+
 \subsection{Strategic}
-* $v_{wp}$: value of WorkOrder in period
-* d: penalty of exceeding capacity
-* clu: Gain from clustering two work orders
-* cap_{ptau}: Capacity by period and trait
-
+* $strategic_value_{wp}$     : value of WorkOrder in period
+* $strategic_penalty$     : penalty of exceeding capacity
+* $clutering_value_{o1, o2}$          : Gain from clustering two work orders
+* $strategic_resource_{pr}$  : Capacity by period and resource
 \subsection{Tactical}
-v_{do}: value of tactical operation (RENAME)
-pen: penalty of exceeding daily trait capacity
-w_{co}: hours of work in an operation (RENAME)
-R_{dc}: hours of available work for c(trait) (RENAME)
-start-start: relations between operations that have start-start
-finish-start: relations between operations that have finish-start
-number_o: number of people required to complete the operation
-operating_time: allowed hours to be worked on the operation per day
-duration_lower_o: shortest allowed duration
-duration_upper_o: longest allowed duration
-
+* $tactical_value_{do}$      : value of tactical operation (RENAME)
+* $tactical_penalty$         : penalty of exceeding daily trait capacity
+* $work_{o}$                : hours of work in an operation (RENAME)
+* $tactical_resource_{dr}$   : hours of available work for r
+* $start_start_{o1, o2}$     : relations between operations that have start-start
+* $finish_start_{o1, o2}$    : relations between operations that have finish-start
+* $number_{o}$                 : number of people required to complete the operation
+* $operating\_time_{o}$          : allowed hours to be worked on the operation per day
+* $duration\_lower_{o}$        : shortest allowed duration
+* $duration\_upper_{o}$        : longest allowed duration
 \subsection{Supervisor}
+* $supervisor_value_{oc}$    : value of assigning the operation to crew member c
+* $numbor_{o}$               : Number of workers that the operation needs to be assigned to
+* $feasible_{ow}$            : parameter specifying whether worker w can execute operation o
 \subsection{Operational}
+* $work_i$                   : total hours of work in an activity (COORDINATE NAMING)
+* $preparation_{ij}$         : preparation between job i and j
+* $event_{te}$               : start time of event e (LOGIC ERROR HERE)
+* $duration_{te}$            : duration of event e
+* $constraint_limit$         : Big M to model if statement (Metaheuristic does not care)
+* $time_window_start_i$      : time window start of job i
+* $time_window_finish_i$     : time window finish of job i
+* $availability_start$       : start of availability of operational model
+* $availability_end$         : end of availability of operational model
 
 \section{Variables}
+
 \subsection{Strategic}
-x_{wp}: Assignment of WorkOrder w to period p
-pen_{ptau}: penalty for exceeding capacity in period p for trait tau
-
-
+* $\alpha_{wp}$              : Assignment of WorkOrder w to period p
+* $\epsilon_{ptau}$          : penalty for exceeding capacity in period p for trait tau
 \subsection{Tactical}
-y_{do}: work for each day
-p_{cd}: penalty for exceeding capacity
+* $\beta_{do}$               : work for each day
+* $\mu_{cd}$                 : penalty for exceeding capacity
 \subsection{Supervisor}
+* $\gamma_{at}$              : Determining the assignment of each activity to each technician.
 \subsection{Operational}
+* $\delta_{ik}$              : processing time of job i's kth segment
+* $\pi_{ik}$                 : binary variable specifying whether the kth segment for job i is active
+* $\lambda_{ik}$             : start time of segment k of job i
+* $\Lambda_{ik}$             : finish time of segment k  of job i
+* $\omega_{ikte}$            : binary variable determining the position of event e in the ordering of segment k for job i (REWRITE LOGIC ERROR ON "t", MISSIN: constrain y not all can be one)
+* $\theta_i$                 : binary variable for each job determining whether or not it is in the solution
 
-\section{Metavariable}
-t: absolute time (RENAME TO TAU)
+\section{Metavariables}
+* $\tau$                     : absolute time (RENAME TO TAU)
 
 
 % NOTES
 % Absolute time should be tau
-% Determine if we should use traits or work_center
+% Determine if we should use traits or work\_center
 % t should be in the positive reals
+% There are multiple things that needs to be handled in the SupervisorAgent which is 
+% currently not being handled correctly. 

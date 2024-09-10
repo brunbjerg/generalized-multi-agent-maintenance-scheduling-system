@@ -1,0 +1,65 @@
+% Sets
+\newcommand{\SetWorkOrder}{W(t)}
+\newcommand{\SetPeriod}{P(t)}
+\newcommand{\SetTrait}{T(t)} %RECONSIDER | RELEVANT FOR BOTH STRATEGIC AND TACTICAL
+\newcommand{\SetOperation}{O(t, <STRATEGIC VARIABLE>)}
+
+\newcommand{\SetDays}{D(t)}
+\newcommand{\SetActivity}{A(t, <TACTICAL VARIABLE>)}
+\newcommand{\SetCrew}{C(t)}
+\newcommand{\SetWorkSegment}{K(<SUPERVISOR VARIABLE>)}
+
+\newcommand{\SetTimeInstance}{I(t)}
+\newcommand{\SetEvent}{E(t, <SUPERVISOR VARIABLE>)}
+
+% Parameters
+\newcommand{\ParStrategicValue}{strategic_value_{wp}}
+\newcommand{\ParStrategicPenalty}{strategic_penalty}
+\newcommand{\ParClusteringValue}{clustering_value_{o1, o2}}
+\newcommand{\ParStrategicResource}{resource}
+
+\newcommand{\ParTacticalValue}{tactical_value_{do}}
+\newcommand{\ParTacticalPenalty}{tactical_penalty}
+\newcommand{\ParOperationWork}{work_{i}}
+\newcommand{\ParTacticalResource}{tactical_resource_{dr}}
+
+\newcommand{\ParStartStart}{start\_start_{o1, o2}}
+\newcommand{\ParFinishStart}{finish\_start_{o1, o2}}
+\newcommand{\ParNumberOfPeople}{number_{o}}
+\newcommand{\ParOperatingTime}{operating\_time_{o}}
+
+\newcommand{\ParDurationLower}{duration\_lower_{o}}
+\newcommand{\ParDurationUpper}{duration\_upper_{o}}
+\newcommand{\ParSupervisorValue}{supervisor_value_{oc}} % We should determine if the supervisor should assign for each operation or for each activity. My guts say that it should be for each activity
+\newcommand{\ParFeasible}{feasible_{ot}}
+
+\newcommand{\ParActivityWork}{activity_work_{a}}
+\newcommand{\ParPreparation}{preparation_{a1, a2}}
+\newcommand{\ParEvent}{event_{ie}}
+\newcommand{\ParEventDuration}{duration_{ie}}
+
+\newcommand{\ParConstraintLimit}{constraint_limit}
+\newcommand{\ParTimeWindowStart}{time_window_start_{a}}
+\newcommand{\ParTimeWindowFinish}{time_window_finish_{a}}
+\newcommand{\ParAvailabilityStart}{availability_start}
+
+\newcommand{\ParAvailabilityFinish}{availability_finish}
+
+% Variables
+\newcommand{\VarStrategicWorkOrderAssignment}{\alpha_{wp}}
+\newcommand{\VarStrategicExcess}{\epsilon_{pr}}
+\newcommand{\VarTacticalWork}{\beta_{do}}
+\newcommand{\VarTacticalExcess}{\mu_{rd}} : excess capacity for each day
+
+\newcommand{\VarSupervisorAssignment}{\gamma_{at}}
+\newcommand{\VarProcessingTime}{\delta_{ak}} 
+\newcommand{\VarActiveSegment}{\pi_{ak}}
+\newcommand{\VarStartOfSegment}{\lambda_{ak}}
+
+\newcommand{\VarFinishOfSegment}{\Lambda_{ak}}
+\newcommand{\VarSegmentInRelation}{\omega_{akie}}
+\newcommand{\VarIncludeActivity}{\theta_{a}}
+
+% Meta variables
+\newcommand{\VarMetaTime}{\tau}
+
