@@ -1,64 +1,75 @@
 % Sets
-\newcommand{\SetWorkOrder}{W(t)}
-\newcommand{\SetPeriod}{P(t)}
-\newcommand{\SetTrait}{T(t)} %RECONSIDER | RELEVANT FOR BOTH STRATEGIC AND TACTICAL
-\newcommand{\SetOperation}{O(t, <STRATEGIC VARIABLE>)}
+\newcommand{\SetWorkOrder}[1]{W(\VarMetaTime, \VarStrategicWorkOrderAssignment{}{})}
+\newcommand{\SetPeriod}{P(\VarMetaTime)}
+\newcommand{\SetResource}{R(\VarMetaTime)} %RECONSIDER | RELEVANT FOR BOTH STRATEGIC AND TACTICAL
+\newcommand{\SetOperation}{O(\VarMetaTime, \VarStrategicWorkOrderAssignment{}{} )}
 
-\newcommand{\SetDays}{D(t)}
-\newcommand{\SetActivity}{A(t, <TACTICAL VARIABLE>)}
-\newcommand{\SetCrew}{C(t)}
-\newcommand{\SetWorkSegment}{K(<SUPERVISOR VARIABLE>)}
+\newcommand{\SetDays}{D(\VarMetaTime)}
+\newcommand{\SetActivity}[1]{A(\VarMetaTime, #1)}
+\newcommand{\SetTechnician}{T(\VarMetaTime)}
+\newcommand{\SetWorkSegment}{K(\VarSupervisorAssignment)}
 
-\newcommand{\SetTimeInstance}{I(t)}
-\newcommand{\SetEvent}{E(t, <SUPERVISOR VARIABLE>)}
+\newcommand{\SetTimeInstance}{I(\VarMetaTime)}
+\newcommand{\SetEvent}{E(\VarMetaTime)}
 
 % Parameters
-\newcommand{\ParStrategicValue}{strategic_value_{wp}}
-\newcommand{\ParStrategicPenalty}{strategic_penalty}
-\newcommand{\ParClusteringValue}{clustering_value_{o1, o2}}
-\newcommand{\ParStrategicResource}{resource}
+\newcommand{\ParStrategicValue}{strategic\_value_{wp}(\VarMetaTime)}
+\newcommand{\ParStrategicPenalty}{strategic\_penalty}
+\newcommand{\ParClusteringValue}{clustering\_value_{w1, w2}}
+\newcommand{\ParStrategicResource}{resource_{pr}(\VarMetaTime)}
 
-\newcommand{\ParTacticalValue}{tactical_value_{do}}
-\newcommand{\ParTacticalPenalty}{tactical_penalty}
-\newcommand{\ParOperationWork}{work_{i}}
-\newcommand{\ParTacticalResource}{tactical_resource_{dr}}
+\newcommand{\ParStrategicWorkOrderWeight}{work\_order\_work_{wr}}
+\newcommand{\ParStrategicInclude}{include(\VarMetaTime)}
+\newcommand{\ParStrategicExclude}{exclude(\VarMetaTime)}
+\newcommand{\ParTacticalValue}{tactical\_value_{do}(\VarMetaTime)}
 
+\newcommand{\ParTacticalPenalty}{tactical\_penalty}
+\newcommand{\ParOperationWork}{work_{o}}
+\newcommand{\ParTacticalResource}{tactical\_resource_{dr}(\VarMetaTime)}
 \newcommand{\ParStartStart}{start\_start_{o1, o2}}
+
 \newcommand{\ParFinishStart}{finish\_start_{o1, o2}}
-\newcommand{\ParNumberOfPeople}{number_{o}}
+\newcommand{\ParNumberOfPeople}{number_{o}(\VarMetaTime)}
 \newcommand{\ParOperatingTime}{operating\_time_{o}}
+\newcommand{\ParDurationLower}{duration\_lower_{o}(\VarMetaTime)}
 
-\newcommand{\ParDurationLower}{duration\_lower_{o}}
-\newcommand{\ParDurationUpper}{duration\_upper_{o}}
-\newcommand{\ParSupervisorValue}{supervisor_value_{oc}} % We should determine if the supervisor should assign for each operation or for each activity. My guts say that it should be for each activity
-\newcommand{\ParFeasible}{feasible_{ot}}
+\newcommand{\ParDurationUpper}{duration\_upper_{o}(\VarMetaTime)}
+\newcommand{\ParSupervisorValue}{supervisor\_value_{ac}(\VarMetaTime)} % We should determine if the supervisor should assign for each operation or for each activity. My guts say that it should be for each activity
+\newcommand{\ParFeasible}{feasible_{at}(\VarIncludeActivity{})}
+\newcommand{\ParOperationsForWorkOrder}{work\_order\_to\_operations_{w}}
 
-\newcommand{\ParActivityWork}{activity_work_{a}}
+\newcommand{\ParOperationsInWorkOrder}{operations\_in\_work\_order_{w}}
+\newcommand{\ParActivitiesForOperation}{activities\_for\_operation_{o}}
+\newcommand{\ParActivityWork}{activity\_work_{a}(\VarMetaTime)}
 \newcommand{\ParPreparation}{preparation_{a1, a2}}
+
 \newcommand{\ParEvent}{event_{ie}}
 \newcommand{\ParEventDuration}{duration_{ie}}
+\newcommand{\ParConstraintLimit}{constraint\_limit}
+\newcommand{\ParTimeWindowStart}{time\_window\_start_{a}}
 
-\newcommand{\ParConstraintLimit}{constraint_limit}
-\newcommand{\ParTimeWindowStart}{time_window_start_{a}}
-\newcommand{\ParTimeWindowFinish}{time_window_finish_{a}}
-\newcommand{\ParAvailabilityStart}{availability_start}
-
-\newcommand{\ParAvailabilityFinish}{availability_finish}
+\newcommand{\ParTimeWindowFinish}{time\_window\_finish_{a}}
+\newcommand{\ParAvailabilityStart}{availability\_start}
+\newcommand{\ParAvailabilityFinish}{availability\_finish}
 
 % Variables
-\newcommand{\VarStrategicWorkOrderAssignment}{\alpha_{wp}}
-\newcommand{\VarStrategicExcess}{\epsilon_{pr}}
-\newcommand{\VarTacticalWork}{\beta_{do}}
+\newcommand{\VarStrategicWorkOrderAssignment}[2]{\alpha_{#1#2}(\VarMetaTime)}
+\newcommand{\VarStrategicExcess}{\epsilon_{pr}(\VarMetaTime)}
+\newcommand{\VarTacticalWork}[1]{\beta_{d#1}(\VarMetaTime)}
 \newcommand{\VarTacticalExcess}{\mu_{rd}} : excess capacity for each day
 
+\newcommand{\VarTacticalWorkBinary}[1]{\sigma_{d#1}}
+\newcommand{\VarTacticalWorkBinaryConsecutive}{\eta_{do}}
 \newcommand{\VarSupervisorAssignment}{\gamma_{at}}
-\newcommand{\VarProcessingTime}{\delta_{ak}} 
-\newcommand{\VarActiveSegment}{\pi_{ak}}
-\newcommand{\VarStartOfSegment}{\lambda_{ak}}
+\newcommand{\VarSupervisorAssignmentWhole}{\phi_{a}}
 
-\newcommand{\VarFinishOfSegment}{\Lambda_{ak}}
+\newcommand{\VarProcessingTime}{\delta_{ak}} 
+\newcommand{\VarActiveSegment}[2]{\pi_{#1#2}}
+\newcommand{\VarStartOfSegment}[2]{\lambda_{#1#2}}
+\newcommand{\VarFinishOfSegment}[2]{\Lambda_{#1#2}}
+
 \newcommand{\VarSegmentInRelation}{\omega_{akie}}
-\newcommand{\VarIncludeActivity}{\theta_{a}}
+\newcommand{\VarIncludeActivity}[1]{\theta_{#1}}
 
 % Meta variables
 \newcommand{\VarMetaTime}{\tau}

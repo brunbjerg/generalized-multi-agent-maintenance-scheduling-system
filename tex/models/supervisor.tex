@@ -12,14 +12,22 @@ The supervisor has multiple different responsibilities among them are:
 
 
 \begin{alignat}{2}
-	& Max \sum_{o \in O} \sum_{w \in W} v_{ow}(t) * z_{ow}(t) \\ 
-	&\text{subject to:} \notag \\ 
-	&\sum_{w \in W} z_{ow}(t) \leq number_o \quad \quad \forall o \in O  \\
-	& z_{ow}(t) \leq feasible_{ow}(t) \quad \forall o \in O, \ w \in W \\
-	& z_{ow}(t) \in \{0, 1\} \quad \forall o \in O, w \in W \\ 
-    & t \in  [0, \infty] 
+	& Max \sum_{a \in \SetActivity{\VarTacticalWork}} \sum_{t \in \SetTechnician} \ParSupervisorValue * \VarSupervisorAssignment \\ 
+	& \text{subject to:} \notag \\ 
+	& \sum_{t \in \SetTechnician} \VarSupervisorAssignment = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople \quad \quad \forall o \in \SetOperation  \\
+	& \sum_{o \in \ParOperationsForWorkOrder} \VarSupervisorAssignmentWhole  \notag\\ 
+	& = \ParOperationsInWorkOrder \notag\\ 
+	& \forall w \in \SetWorkOrder \notag \\
+	& \sum_{a \in \ParActivitiesForOperation} \VarSupervisorAssignment = 1 \notag\\
+	& \forall o \in \SetOperation \forall t \in \SetTechnician \\  
+	& \VarSupervisorAssignment \leq \ParFeasible \quad \forall o \in \SetOperation, \ t \in \SetTechnician \\
+	& \VarSupervisorAssignment \in \{0, 1\} \quad \forall o \in \SetOperation, t \in \SetTechnician \\ 
+    & \VarMetaTime \in  [0, \infty] 
 \end{alignat}
 
 In the supervisor model shown in \ref{} the set $O$ and $W$ comes from the tactical algorithm
 and value $v$ and the information of whether or not the operation can be assigned to a 
 specific operational model comes from the operational model itself and is captured in the.
+
+Can this be done? What should the Supervisor have here? He should have what is necessary to
+handle the

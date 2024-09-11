@@ -10,22 +10,30 @@ out on each of the days of the work orders scheduled by the strategic agent.
 
 The tactical model is responsible for providing an initial suggestion for a weekly schedule, below we see the model for the tactical agent.
 \begin{alignat}{2}
-\text{Min}     & \sum_{o \in O} \sum_{d \in D} v_{do}(t) \cdot y_{do}(t)                                                      \\  
-	         + & \sum_{c \in C} \sum_{d \in D} pen \cdot p_{cd}(t)                                               \\  
-			                                                                                                  \\
+     &\text{Min} \sum_{o \in \SetOperation} \sum_{d \in \SetDays} \ParTacticalValue \cdot \VarTacticalWork{o}\notag\\  
+	          & + \sum_{r \in \SetResource} \sum_{d \in \SetDays} \ParTacticalPenalty \cdot \VarTacticalExcess                                               \\  
+               \notag\\
                &\text{subject to:}                                                          \notag                                                                   \\
-	           & \sum_{o \in O} w_{co} \cdot y_{do}(t)  \leq R_{dc} + p_{dc}(t)                                   \\ 
-			   & \quad \quad \forall  d \in D, \forall c \in C                              \notag                                    \\ 
-	           & \sum_{d \in D} d \cdot y_{do1}(t) + \delta_o  = \sum_{d \in D} d \cdot y_{do2}(t)                    \\ 
-			   & \quad \quad \forall (o1, o2) \in \text{finish-start}(t)                        \notag                                   \\ 
-	           & \sum_{d \in D} d \cdot y_{do1}(t) = \sum_{d \in D} d \cdot y_{do2}(t)                                \\ 
-			   & \quad \quad \forall (o1, o2) \in \text{start-start}(t)                          \notag                             \\ 
-			   & y_{do}(t) \leq number_o(t) * operating\_time_o                                                     \\ 
-			   & \quad \quad ,\forall d \in D, \forall o \in O                              \notag                                    \\
-			   & y_{do}(t) \in \{0, 1\} \quad ,\forall d \in D, o \in O                                          \\
-			   & p_{cd}(t) \in \mathbb{R} \quad ,\forall c \in C, d \in D                                        \\
-			   & \delta_o \in \{ duration\_lower_o(t),                                                           \\ 
-			   & \quad \quad duration\_upper_o \}(t) \quad, \forall o \in O \notag                                      \\
-			   & t \in  [0, \infty] 
+	           & \sum_{o \in \SetOperation} \ParOperationWork \cdot \VarTacticalWork{o}\notag\\
+			   & \leq \ParTacticalResource + \VarTacticalExcess\notag\\ 
+			   & \quad \quad \forall  d \in \SetDays, \forall r \in \SetResource\\ 
+			   & \sum_{o_a \in \ParDurationUpper} \VarTacticalWorkBinary{o_a} \notag\\
+			   & \geq \ParDurationLower \cdot \VarTacticalWorkBinaryConsecutive \notag\\ 
+			   & \quad \quad \forall o \in \SetOperation \forall d \in \SetDays \\
+			   & \sum_{o_a \in  \ParDurationUpper} \VarTacticalWorkBinary{o_a} \notag\\
+			   & \leq \ParDurationUpper \cdot \VarTacticalWorkBinaryConsecutive \notag\\ 
+			   & \forall o \in \SetOperation \forall d \in \SetDays \\
+			   & \sum_{o \in \SetOperation} \VarTacticalWorkBinaryConsecutive = 1, \forall d \in \SetDays \notag\\
+	           & \sum_{d \in \SetDays} d \cdot \VarTacticalWork{o1} + \delta_o  = \sum_{d \in \SetDays} d \cdot \VarTacticalWork{o2}                   \notag  \\ 
+			   & \quad \quad \forall (o1, o2) \in \ParFinishStart                                                           \\ 
+	           & \sum_{d \in \SetDays} d \cdot \VarTacticalWork{o1} = \sum_{d \in D} d \cdot \VarTacticalWork{o2}  \notag                               \\ 
+			   & \quad \quad \forall (o1, o2) \in \ParStartStart                                                       \\ 
+			   & \VarTacticalWork{o} \leq \ParNumberOfPeople \cdot \ParOperatingTime \notag                                                     \\ 
+			   & \quad \quad ,\forall d \in \SetDays \forall o \in \SetOperation                                                                  \\
+			   & \VarTacticalWork{o} \in \{0, 1\} \quad \forall d \in \SetDays \forall o \in \SetOperation                                         \\
+			   & \VarTacticalExcess \in \mathbb{R} \quad \forall r \in \SetResource \forall d \in \SetDays                                        \\
+			   & \delta_o \in \{ \ParDurationLower, \notag\\
+			   & \quad \quad \ParDurationUpper \} \forall o \in \SetOperation                                      \\
+			   & \VarMetaTime \in  [0, \infty] 
 \end{alignat}
 
