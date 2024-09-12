@@ -10,30 +10,38 @@ out on each of the days of the work orders scheduled by the strategic agent.
 
 The tactical model is responsible for providing an initial suggestion for a weekly schedule, below we see the model for the tactical agent.
 \begin{alignat}{2}
-     &\text{Min} \sum_{o \in \SetOperation} \sum_{d \in \SetDays} \ParTacticalValue \cdot \VarTacticalWork{o}\notag\\  
-	          & + \sum_{r \in \SetResource} \sum_{d \in \SetDays} \ParTacticalPenalty \cdot \VarTacticalExcess                                               \\  
-               \notag\\
-               &\text{subject to:}                                                          \notag                                                                   \\
-	           & \sum_{o \in \SetOperation} \ParOperationWork \cdot \VarTacticalWork{o}\notag\\
-			   & \leq \ParTacticalResource + \VarTacticalExcess\notag\\ 
-			   & \quad \quad \forall  d \in \SetDays, \forall r \in \SetResource\\ 
-			   & \sum_{o_a \in \ParDurationUpper} \VarTacticalWorkBinary{o_a} \notag\\
-			   & \geq \ParDurationLower \cdot \VarTacticalWorkBinaryConsecutive \notag\\ 
-			   & \quad \quad \forall o \in \SetOperation \forall d \in \SetDays \\
-			   & \sum_{o_a \in  \ParDurationUpper} \VarTacticalWorkBinary{o_a} \notag\\
-			   & \leq \ParDurationUpper \cdot \VarTacticalWorkBinaryConsecutive \notag\\ 
-			   & \forall o \in \SetOperation \forall d \in \SetDays \\
-			   & \sum_{o \in \SetOperation} \VarTacticalWorkBinaryConsecutive = 1, \forall d \in \SetDays \notag\\
-	           & \sum_{d \in \SetDays} d \cdot \VarTacticalWork{o1} + \delta_o  = \sum_{d \in \SetDays} d \cdot \VarTacticalWork{o2}                   \notag  \\ 
-			   & \quad \quad \forall (o1, o2) \in \ParFinishStart                                                           \\ 
-	           & \sum_{d \in \SetDays} d \cdot \VarTacticalWork{o1} = \sum_{d \in D} d \cdot \VarTacticalWork{o2}  \notag                               \\ 
-			   & \quad \quad \forall (o1, o2) \in \ParStartStart                                                       \\ 
-			   & \VarTacticalWork{o} \leq \ParNumberOfPeople \cdot \ParOperatingTime \notag                                                     \\ 
-			   & \quad \quad ,\forall d \in \SetDays \forall o \in \SetOperation                                                                  \\
-			   & \VarTacticalWork{o} \in \{0, 1\} \quad \forall d \in \SetDays \forall o \in \SetOperation                                         \\
-			   & \VarTacticalExcess \in \mathbb{R} \quad \forall r \in \SetResource \forall d \in \SetDays                                        \\
-			   & \delta_o \in \{ \ParDurationLower, \notag\\
-			   & \quad \quad \ParDurationUpper \} \forall o \in \SetOperation                                      \\
-			   & \VarMetaTime \in  [0, \infty] 
+	& \textbf{Minimize:} \notag\\
+	& \sum_{o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \sum_{d \in \SetDays{}} \ParTacticalValue \cdot \VarTacticalWork{d}{o}\notag\\  
+	& + \sum_{r \in \SetResource} \sum_{d \in \SetDays{}} \ParTacticalPenalty \cdot \VarTacticalExcess                                               \\  
+	& \textbf{Subject to:}                                                          \notag                                                                   \\
+	& \sum_{o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \ParOperationWork{o} \cdot \VarTacticalWork{d}{o}\notag\\
+	& \quad \leq \ParTacticalResource + \VarTacticalExcess\notag\\ 
+	& \quad \quad \forall  d \in \SetDays{}, \forall r \in \SetResource\\ 
+	& \sum_{d^* \in \SetDays{\ParDurationUpper}} \VarTacticalWorkBinary{d^*}{o} \notag\\
+	& \quad \geq \ParDurationLower \cdot \VarTacticalWorkBinaryConsecutive \notag\\ 
+	& \quad \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall d \in \SetDays{} \\
+	& \sum_{d^* \in  \SetDays{\ParDurationUpper}} \VarTacticalWorkBinary{d^*}{o} \notag\\
+	& \quad \leq \ParDurationUpper \cdot \VarTacticalWorkBinaryConsecutive \notag\\ 
+	& \quad \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \forall d \in \SetDays{} \\
+	& \sum_{o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \VarTacticalWorkBinaryConsecutive = 1, \notag\\
+	& \quad \forall d \in \SetDays{} \notag\\
+	& \sum_{d \in \SetDays{}} d \cdot \VarTacticalWork{d}{o1} + \VarTacticalOperationDifference  = \sum_{d \in \SetDays{}} d \cdot \VarTacticalWork{d}{o2}                   \notag  \\ 
+	& \quad \forall (o1, o2) \in \ParFinishStart                                                           \\ 
+	& \sum_{d \in \SetDays{}} d \cdot \VarTacticalWork{d}{o1} = \sum_{d \in D} d \cdot \VarTacticalWork{d}{o2}  \notag                               \\ 
+	& \quad \forall (o1, o2) \in \ParStartStart                                                       \\ 
+	& \VarTacticalWork{d}{o} \leq \ParNumberOfPeople \cdot \ParOperatingTime \notag                                                     \\ 
+	& \quad \forall d \in \SetDays{} \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}                                                                  \\
+	& \VarTacticalWork{d}{o} \in \{0, 1\} \quad \notag\\
+	& \quad \forall d \in \SetDays{} \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}                                         \\
+	& \VarTacticalExcess \in \mathbb{R} \quad\notag\\
+	& \quad  \forall r \in \SetResource \forall d \in \SetDays{}                                        \\
+	& \VarTacticalWorkBinary{d}{o} \in \{0, 1\}\quad \notag\\
+	& \quad \forall d \in \SetDays{} \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \\
+	& \VarTacticalWorkBinaryConsecutive \in \{0, 1\}\quad \notag\\
+	& \quad \forall d \in \SetDays{} \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \\
+	& \VarTacticalOperationDifference \in \{ \ParDurationLower, \notag\\
+	& \quad \ParDurationUpper \} \notag\\
+	& \quad \forall o \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}                                      \\
+	& \VarMetaTime \in  [0, \infty] 
 \end{alignat}
 

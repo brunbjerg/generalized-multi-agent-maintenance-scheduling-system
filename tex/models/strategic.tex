@@ -12,18 +12,24 @@ The Strategic model is responsible for grouping work orders into weekly or biwee
 This kind of model closely resembles a variant of the multi-compartment multi-knapsack problem. 
 
 \begin{alignat}{2}
-\text{Min} &\sum_{w \in \SetWorkOrder{}} \sum_{p \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{w}{p}                                                                                      \\ 
-	+ & \sum_{p \in \SetPeriod} \sum_{r = \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess                                                                                                                                  \\
-+ & \sum_{p \in \SetPeriod} \sum_{w1 \in \SetWorkOrder{}} \sum_{w2 \in \SetWorkOrder{}} \ParClusteringValue \notag                                                                                                   \\ 
-	& \cdot \VarStrategicWorkOrderAssignment{w1}{p} \cdot \VarStrategicWorkOrderAssignment{w2}{p}                                                                                 \label{eqn:objective_function_strategic} \\
-    & \text{subject to:} \notag                                                                                                                                                                                      \\
-& \sum_{w \in \SetWorkOrder{}} \ParStrategicWorkOrderWeight \cdot \VarStrategicWorkOrderAssignment{w}{p} \notag \\ 
-	& \leq \ \ParStrategicResource + \VarStrategicExcess \notag                                                                       \\ 
-	& \forall p \in \SetPeriod, \forall r \in \SetResource                                                                                                                  \label{eqn:capacity_constraint}          \\
-& \sum_{w \in \SetWorkOrder{}} \VarStrategicWorkOrderAssignment{w} = 1                                              , \quad \forall p \in \SetPeriod                      \label{eqn:single_workorder_constraint}  \\
-	& \VarStrategicWorkOrderAssignment{w}{p} = 0                                                             , \quad \forall (w, p) \in \ParStrategicExclude                          \label{eqn:exclusion_constraint}  \\
-	& \VarStrategicWorkOrderAssignment{w}{p} = 1                                                             , \quad \forall (w, p) \in \ParStrategicInclude                          \label{eqn:inclusion_constraint}  \\
-& \VarStrategicWorkOrderAssignment{w}{p} \in \{0, 1\}                                                    , \quad \forall w \in \SetWorkOrder{}, \forall p \in \SetPeriod     \label{eqn:x_integrality_constraint}     \\ 
-	& \VarStrategicExcess \in \mathbb{R}^{+}                                         , \quad \forall p \in \SetPeriod, \forall r \in \SetResource                           \label{eqn:p_non_negativity_constraint}  \\ 
-    & \VarMetaTime \in  [0, \infty] 
+	& \textbf{Minimize:} \notag\\
+	& \sum_{w \in \SetWorkOrder{}} \sum_{p \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{w}{p}                                                                                      \\ 
+	& + \sum_{p \in \SetPeriod} \sum_{r \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess                                                                                                                                  \\
+	& + \sum_{p \in \SetPeriod} \sum_{w1 \in \SetWorkOrder{}} \sum_{w2 \in \SetWorkOrder{}} \notag\\ 
+	& \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{w1}{p} \cdot \VarStrategicWorkOrderAssignment{w2}{p}                                                                                 \label{eqn:objective_function_strategic} \\
+	& \textbf{Subject to:} \notag                                                                                                                                                                                      \\
+	& \sum_{w \in \SetWorkOrder{}} \ParStrategicWorkOrderWeight \cdot \VarStrategicWorkOrderAssignment{w}{p} \notag \\ 
+	& \quad \leq \ \ParStrategicResource + \VarStrategicExcess \notag                                                                       \\ 
+	& \quad \forall p \in \SetPeriod, \forall r \in \SetResource                                                                                                                  \label{eqn:capacity_constraint}          \\
+	& \sum_{w \in \SetWorkOrder{}} \VarStrategicWorkOrderAssignment{w}{p} = 1 \notag\\
+	& \quad \forall p \in \SetPeriod                      \label{eqn:single_workorder_constraint}  \\
+	& \VarStrategicWorkOrderAssignment{w}{p} = 0 \notag\\
+	& \quad \forall (w, p) \in \ParStrategicExclude                          \label{eqn:exclusion_constraint}  \\
+	& \VarStrategicWorkOrderAssignment{w}{p} = 1 \notag\\ 
+	& \quad \forall (w, p) \in \ParStrategicInclude                          \label{eqn:inclusion_constraint}  \\
+	& \VarStrategicWorkOrderAssignment{w}{p} \in \{0, 1\} \notag\\
+	& \quad \forall w \in \SetWorkOrder{}, \forall p \in \SetPeriod     \label{eqn:x_integrality_constraint}     \\ 
+	& \VarStrategicExcess \in \mathbb{R}^{+} \notag\\ 
+	& \quad \forall p \in \SetPeriod, \forall r \in \SetResource                           \label{eqn:p_non_negativity_constraint}  \\ 
+	& \VarMetaTime \in  [0, \infty] 
 \end{alignat}

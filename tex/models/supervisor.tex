@@ -12,16 +12,24 @@ The supervisor has multiple different responsibilities among them are:
 
 
 \begin{alignat}{2}
-	& Max \sum_{a \in \SetActivity{\VarTacticalWork}} \sum_{t \in \SetTechnician} \ParSupervisorValue * \VarSupervisorAssignment \\ 
-	& \text{subject to:} \notag \\ 
-	& \sum_{t \in \SetTechnician} \VarSupervisorAssignment = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople \quad \quad \forall o \in \SetOperation  \\
-	& \sum_{o \in \ParOperationsForWorkOrder} \VarSupervisorAssignmentWhole  \notag\\ 
-	& = \ParOperationsInWorkOrder \notag\\ 
-	& \forall w \in \SetWorkOrder \notag \\
-	& \sum_{a \in \ParActivitiesForOperation} \VarSupervisorAssignment = 1 \notag\\
-	& \forall o \in \SetOperation \forall t \in \SetTechnician \\  
-	& \VarSupervisorAssignment \leq \ParFeasible \quad \forall o \in \SetOperation, \ t \in \SetTechnician \\
-	& \VarSupervisorAssignment \in \{0, 1\} \quad \forall o \in \SetOperation, t \in \SetTechnician \\ 
+	& \textbf{Maximize:} \notag\\
+	& \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{}} \sum_{t \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{a}{t} \\ 
+	& \textbf{Subject to:} \notag\\ 
+	& \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{o}} \VarActivityWork{a} = \ParOperationWork{o}   \notag\\
+	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}}\\
+	& \sum_{t \in \SetTechnician} \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{o}}\VarSupervisorAssignment{a}{t} = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople \notag\\
+	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}}  \\
+	& \sum_{o \in \SetOperation{w}{\VarTacticalWorkBinary{}{}}} \VarSupervisorAssignmentWhole  \notag\\ 
+	& \quad = \ParOperationsInWorkOrder \notag\\ 
+	& \quad \forall w \in \SetWorkOrder \notag\\
+	& \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{o}} \VarSupervisorAssignment{a}{t} \leq 1 \notag\\
+	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}} \forall t \in \SetTechnician \\  
+	& \VarSupervisorAssignment{a}{t} \leq \ParFeasible \notag\\
+	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}} \forall t \in \SetTechnician \\
+	& \VarSupervisorAssignment{a}{t} \in \{0, 1\} \notag\\
+	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}} \forall t \in \SetTechnician \\ 
+	& \VarActivityWork{a} \in [\ParLowerActivityWork, \ParOperationWork{a}] \notag\\
+	& \quad \forall a \in \SetActivity{\VarTacticalWork{}{}}{} \\
     & \VarMetaTime \in  [0, \infty] 
 \end{alignat}
 
@@ -30,4 +38,4 @@ and value $v$ and the information of whether or not the operation can be assigne
 specific operational model comes from the operational model itself and is captured in the.
 
 Can this be done? What should the Supervisor have here? He should have what is necessary to
-handle the
+handle the. 
