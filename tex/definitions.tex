@@ -1,79 +1,92 @@
 % Sets
-\newcommand{\SetWorkOrder}[1]{W(\VarMetaTime, \VarStrategicWorkOrderAssignment{}{})}
+\newcommand{\SetWorkOrder}[1]{W(\VarMetaTime#1)}
+\newcommand{\ElementWorkOrder}{w}
 \newcommand{\SetPeriod}{P(\VarMetaTime)}
-\newcommand{\SetResource}{R(\VarMetaTime)} %RECONSIDER | RELEVANT FOR BOTH STRATEGIC AND TACTICAL
-\newcommand{\SetOperation}[2]{O_{#1}(\VarMetaTime, #2 )}
+\newcommand{\ElementPeriod}{p}
+
+\newcommand{\SetResource}{R(\VarMetaTime)}
+\newcommand{\ElementResource}{r}
+\newcommand{\SetOperation}[2]{O_{#1}(\VarMetaTime, #2)}
+\newcommand{\ElementOperation}{o}
 
 \newcommand{\SetDays}[1]{D_{#1}(\VarMetaTime)}
+\newcommand{\ElementDays}{d}
 \newcommand{\SetActivity}[2]{A_{#2}(\VarMetaTime, #1)}
+\newcommand{\ElementActivity}{a}
+
 \newcommand{\SetTechnician}{T(\VarMetaTime)}
+\newcommand{\ElementTechnician}{t}
 \newcommand{\SetWorkSegment}{K(\VarSupervisorAssignment{}{})}
+\newcommand{\ElementWorkSegment}{k}
 
 \newcommand{\SetTimeInstance}{I(\VarMetaTime)}
+\newcommand{\ElementTimeInstance}{i}
 \newcommand{\SetEvent}{E(\VarMetaTime)}
+\newcommand{\ElementEvent}{e}
 
 % Parameters
-\newcommand{\ParStrategicValue}{strategic\_value_{wp}(\VarMetaTime)}
+\newcommand{\ParStrategicValue}{strategic\_value_{\ElementWorkOrder \ElementPeriod}(\VarMetaTime)}
 \newcommand{\ParStrategicPenalty}{strategic\_penalty}
-\newcommand{\ParClusteringValue}{clustering\_value_{w1, w2}}
-\newcommand{\ParStrategicResource}{resource_{pr}(\VarMetaTime)}
+\newcommand{\ParClusteringValue}{clustering\_value_{\ElementWorkOrder1, \ElementWorkOrder2}}
+\newcommand{\ParStrategicResource}{resource_{\ElementPeriod\ElementResource}(\VarMetaTime)}
 
-\newcommand{\ParStrategicWorkOrderWeight}{work\_order\_work_{wr}}
+\newcommand{\ParStrategicWorkOrderWeight}{work\_order\_work_{\ElementWorkOrder \ElementResource}}
 \newcommand{\ParStrategicInclude}{include(\VarMetaTime)}
 \newcommand{\ParStrategicExclude}{exclude(\VarMetaTime)}
-\newcommand{\ParTacticalValue}{tactical\_value_{do}(\VarMetaTime)}
+\newcommand{\ParTacticalValue}{tactical\_value_{\ElementDays\ElementOperation}(\VarMetaTime)}
 
 \newcommand{\ParTacticalPenalty}{tactical\_penalty}
 \newcommand{\ParOperationWork}[1]{work_{#1}(\VarMetaTime)}
-\newcommand{\ParTacticalResource}{tactical\_resource_{dr}(\VarMetaTime)}
-\newcommand{\ParStartStart}{start\_start_{o1, o2}}
+\newcommand{\ParTacticalResource}{tactical\_resource_{\ElementDays\ElementResource}(\VarMetaTime)}
+\newcommand{\ParStartStart}{start\_start_{\ElementOperation1, \ElementOperation2}}
 
-\newcommand{\ParFinishStart}{finish\_start_{o1, o2}}
-\newcommand{\ParNumberOfPeople}{number_{o}(\VarMetaTime)}
-\newcommand{\ParOperatingTime}{operating\_time_{o}}
-\newcommand{\ParDurationLower}{duration\_lower_{o}(\VarMetaTime)}
+\newcommand{\ParFinishStart}{finish\_start_{\ElementOperation1, \ElementOperation2}}
+\newcommand{\ParEarliestStart}{ES_{\ElementOperation}(\VarMetaTime)}
+\newcommand{\ParLatestFinish}{LF_{\ElementOperation}(\VarMetaTime)}
+\newcommand{\ParNumberOfPeople}{number_{\ElementOperation}(\VarMetaTime)}
 
-\newcommand{\ParDurationUpper}{duration\_upper_{o}(\VarMetaTime)}
-\newcommand{\ParSupervisorValue}{supervisor\_value_{at}(\VarMetaTime)} % We should determine if the supervisor should assign for each operation or for each activity. My guts say that it should be for each activity
+\newcommand{\ParOperatingTime}{operating\_time_{\ElementOperation}}
+\newcommand{\ParDuration}{duration_{\ElementOperation}(\VarMetaTime)}
+\newcommand{\ParSupervisorValue}{supervisor\_value_{\ElementActivity \ElementTechnician}(\VarMetaTime, \VarStartOfSegment{t}{}, \VarFinishOfSegment{t}{})} 
 \newcommand{\ParFeasible}{feasible_{at}(\VarIncludeActivity{})}
-\newcommand{\ParOperationsForWorkOrder}{work\_order\_to\_operations_{w}}
+\newcommand{\ParOperationsForWorkOrder}{work\_order\_to\_operations_{\ElementWorkOrder }}
 
-\newcommand{\ParOperationsInWorkOrder}{operations\_in\_work\_order_{w}}
-\newcommand{\ParActivitiesForOperation}{activities\_for\_operation_{o}}
-\newcommand{\ParLowerActivityWork}{lower\_activity\_work_{a}(\VarMetaTime)}
-\newcommand{\ParActivityWork}[1]{activity\_work_{a}(\VarMetaTime, \VarActivityWork{#1})}
-\newcommand{\ParPreparation}{preparation_{a1, a2}}
+\newcommand{\ParOperationsInWorkOrder}{operations\_in\_work\_order_{\ElementWorkOrder }}
+\newcommand{\ParActivitiesForOperation}{activities\_for\_operation_{\ElementOperation}}
+\newcommand{\ParLowerActivityWork}{lower\_activity\_work_{\ElementActivity}(\VarMetaTime)}
+\newcommand{\ParActivityWork}[1]{activity\_work_{\ElementActivity}(\VarMetaTime, \VarActivityWork{#1})}
 
-\newcommand{\ParEvent}{event_{ie}}
-\newcommand{\ParEventDuration}{duration_{ie}}
+\newcommand{\ParPreparation}{preparation_{\ElementActivity1, \ElementActivity2}}
+\newcommand{\ParEvent}{event_{\ElementTimeInstance \ElementEvent}}
+\newcommand{\ParEventDuration}{duration_{\ElementTimeInstance \ElementEvent}}
 \newcommand{\ParConstraintLimit}{constraint\_limit}
-\newcommand{\ParTimeWindowStart}{time\_window\_start_{a}(\VarTacticalWork{}{})}
 
-\newcommand{\ParTimeWindowFinish}{time\_window\_finish_{a}(\VarTacticalWork{}{})}
+\newcommand{\ParTimeWindowStart}{time\_window\_start_{\ElementActivity}(\VarTacticalWork{}{})}
+\newcommand{\ParTimeWindowFinish}{time\_window\_finish_{\ElementActivity}(\VarTacticalWork{}{})}
 \newcommand{\ParAvailabilityStart}{availability\_start(\VarMetaTime)}
 \newcommand{\ParAvailabilityFinish}{availability\_finish(\VarMetaTime)}
 
 % Variables
 \newcommand{\VarStrategicWorkOrderAssignment}[2]{\alpha_{#1#2}(\VarMetaTime)}
-\newcommand{\VarStrategicExcess}{\epsilon_{pr}(\VarMetaTime)}
+\newcommand{\VarStrategicExcess}{\epsilon_{\ElementPeriod\ElementResource}(\VarMetaTime)}
 \newcommand{\VarTacticalWork}[2]{\beta_{#1#2}(\VarMetaTime)}
-\newcommand{\VarTacticalExcess}{\mu_{rd}(\VarMetaTime)} : excess capacity for each day
+\newcommand{\VarTacticalExcess}{\mu_{\ElementResource \ElementDays}(\VarMetaTime)} 
 
 \newcommand{\VarTacticalWorkBinary}[2]{\sigma_{#1#2}(\VarMetaTime)}
-\newcommand{\VarTacticalWorkBinaryConsecutive}{\eta_{do}(\VarMetaTime)}
-\newcommand{\VarTacticalOperationDifference}{\Delta_{o}(\VarMetaTime)}
+\newcommand{\VarTacticalWorkBinaryConsecutive}{\eta_{\ElementDays\ElementOperation}(\VarMetaTime)}
+\newcommand{\VarTacticalOperationDifference}{\Delta_{\ElementOperation}(\VarMetaTime)}
 \newcommand{\VarSupervisorAssignment}[2]{\gamma_{#1#2}(\VarMetaTime)}
-\newcommand{\VarSupervisorAssignmentWhole}{\phi_{o}(\VarMetaTime)}
 
+\newcommand{\VarSupervisorAssignmentWhole}{\phi_{\ElementOperation}(\VarMetaTime)}
 \newcommand{\VarActivityWork}[1]{\rho_{#1}(\VarMetaTime)}
-
-\newcommand{\VarProcessingTime}{\delta_{ak}(\VarMetaTime)} 
+\newcommand{\VarProcessingTime}{\delta_{\ElementActivity\ElementWorkSegment}(\VarMetaTime)} 
 \newcommand{\VarActiveSegment}[2]{\pi_{#1#2}(\VarMetaTime)}
+
 \newcommand{\VarStartOfSegment}[2]{\lambda_{#1#2}(\VarMetaTime)}
 \newcommand{\VarFinishOfSegment}[2]{\Lambda_{#1#2}(\VarMetaTime)}
-
-\newcommand{\VarSegmentInRelation}{\omega_{akie}(\VarMetaTime)}
+\newcommand{\VarSegmentInRelation}{\omega_{\ElementActivity\ElementWorkSegment\ElementTimeInstance \ElementEvent}(\VarMetaTime)}
 \newcommand{\VarIncludeActivity}[1]{\theta_{#1}(\VarMetaTime)}
 
 % Meta variables
 \newcommand{\VarMetaTime}{\tau}
+

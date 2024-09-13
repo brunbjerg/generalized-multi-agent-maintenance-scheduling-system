@@ -8,42 +8,43 @@ The $\VarStartOfSegment{a}{k}$ is the start time of job $i$ in segment $k$ and $
 $\VarProcessingTime{a}{k}$ is the processing time of each segment. 
 \begin{alignat}{2}
 	& \textbf{Maximize:} \notag\\
-	& \sum_{a \in \SetActivity{\VarSupervisorAssignment{}{t}}{}} \sum_{k \in \SetWorkSegment} \VarProcessingTime                                                         \\
+	& \sum_{\ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}} \sum_{\ElementWorkSegment \in \SetWorkSegment} \VarProcessingTime                                                         \\
 	& \textbf{Subject to:} \notag                                                                                                                                       \\
-    & \sum_{k \in \SetWorkSegment} \VarProcessingTime \cdot \VarActiveSegment{a}{k} \notag\\ 
+    & \sum_{\ElementWorkSegment \in \SetWorkSegment} \VarProcessingTime \cdot \VarActiveSegment{\ElementActivity}{\ElementWorkSegment} \notag\\ 
 	& \quad = \ParActivityWork{} \cdot \VarIncludeActivity \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \\
-	& \VarStartOfSegment{a2}{1} \geq \VarFinishOfSegment{a1}{last(a1)} + \ParPreparation \notag                                                                       \\ 
-	& \quad \forall a1 \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall a2 \in \SetActivity{\VarSupervisorAssignment{}{t}}{}                                                     \\
-	& \VarStartOfSegment{a}{k} \geq \VarFinishOfSegment{a}{k-1} \notag\\
-	& \quad - \ParConstraintLimit \cdot (2 - \VarActiveSegment{a}{k} + \VarActiveSegment{a}{k-1})                \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{}\forall k \in \SetWorkSegment \\ 
-	& \VarProcessingTime = \VarFinishOfSegment{a}{k} - \VarStartOfSegment{a}{k}                                                                                       \\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment \notag                                                                        \\
-	& \VarStartOfSegment{a}{k} \geq \ParEvent + \ParEventDuration \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \\
+	& \VarStartOfSegment{\ElementActivity2}{1} \geq \VarFinishOfSegment{\ElementActivity1}{last(\ElementActivity1)} + \ParPreparation \notag                                                                       \\ 
+	& \quad \forall \ElementActivity1 \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad \forall \ElementActivity2 \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}                                                     \\
+	& \VarStartOfSegment{\ElementActivity}{\ElementWorkSegment} \geq \VarFinishOfSegment{\ElementActivity}{\ElementWorkSegment-1} \notag\\
+	& \quad - \ParConstraintLimit \cdot (2 - \VarActiveSegment{\ElementActivity}{\ElementWorkSegment} + \VarActiveSegment{\ElementActivity}{\ElementWorkSegment-1})                \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad\forall \ElementWorkSegment \in \SetWorkSegment \\ 
+	& \VarProcessingTime = \VarFinishOfSegment{\ElementActivity}{\ElementWorkSegment} - \VarStartOfSegment{\ElementActivity}{\ElementWorkSegment} \notag\\                                                                                       
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}  \quad\forall \ElementWorkSegment \in \SetWorkSegment \\
+	& \VarStartOfSegment{\ElementActivity}{\ElementWorkSegment} \geq \ParEvent + \ParEventDuration \notag\\
 	& \quad - \ParConstraintLimit \cdot (1 - \VarSegmentInRelation)                                             \notag\\ 
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment \notag\\
-	& \quad \forall i \in \SetTimeInstance \forall e \in \SetEvent                                \\
-	& \VarFinishOfSegment{a}{k} \leq \ParEvent + \ParConstraintLimit \cdot \VarSegmentInRelation                                                                      \notag\\ 
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment \notag\\
-	& \quad \forall i \in \SetTimeInstance \forall e \in \SetEvent                                \\
-	& \VarStartOfSegment{a}{1} \geq \ParTimeWindowStart \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{}                                                          \\
-	& \VarFinishOfSegment{a}{last(a)} \leq \ParTimeWindowFinish \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{}                                                  \\
-	& \VarActiveSegment{a}{k} \in \{0, 1\} \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment                                          \\
-	& \VarStartOfSegment{a}{k} \in [\ParAvailabilityStart, \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}  \quad\forall \ElementWorkSegment \in \SetWorkSegment \notag\\
+	& \quad \forall i \in \SetTimeInstance  \quad\forall \ElementEvent \in \SetEvent                                \\
+	& \VarFinishOfSegment{\ElementActivity}{\ElementWorkSegment} \leq \ParEvent + \ParConstraintLimit \cdot \VarSegmentInRelation                                                                      \notag\\ 
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}  \quad\forall \ElementWorkSegment \in \SetWorkSegment \notag\\
+	& \quad \forall i \in \SetTimeInstance  \quad\forall \ElementEvent \in \SetEvent                                \\
+	& \VarStartOfSegment{\ElementActivity}{1} \geq \ParTimeWindowStart \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}                                                          \\
+	& \VarFinishOfSegment{\ElementActivity}{last(\ElementActivity)} \leq \ParTimeWindowFinish \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}                                                  \\
+	& \VarActiveSegment{\ElementActivity}{\ElementWorkSegment} \in \{0, 1\} \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad \forall \ElementWorkSegment \in \SetWorkSegment                                          \\
+	& \VarStartOfSegment{\ElementActivity}{\ElementWorkSegment} \in [\ParAvailabilityStart, \notag\\
 	& \quad \ParAvailabilityFinish] \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment  \\
-	& \VarFinishOfSegment{a}{k} \in [\ParAvailabilityStart, \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad \forall \ElementWorkSegment \in \SetWorkSegment  \\
+	& \VarFinishOfSegment{\ElementActivity}{\ElementWorkSegment} \in [\ParAvailabilityStart, \notag\\
 	& \quad \ParAvailabilityFinish] \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment \\
-	& \VarProcessingTime \in [0, \ParOperationWork{a\_to\_o(a)} ] \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment                                               \\
-	& \VarSegmentInRelation \in \{0 , 1\}                                                                                                                              \\ 
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{} \forall k \in \SetWorkSegment \notag\\
-	& \quad \forall i \in \SetTimeInstance \forall e \in \SetEvent \notag                               \\
-	& \VarIncludeActivity{a} \in \{0, 1\} \notag\\
-	& \quad \forall a \in \SetActivity{\VarSupervisorAssignment{}{t}}{}                                                                                
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad \forall \ElementWorkSegment \in \SetWorkSegment \\
+	& \VarProcessingTime \in [0, \ParOperationWork{\ElementActivity\_to\_o(\ElementActivity)} ] \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad \forall \ElementWorkSegment \in \SetWorkSegment                                               \\
+	& \VarSegmentInRelation \in \{0 , 1\} \notag\\                                                                                                                                
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{} \quad \forall \ElementWorkSegment \in \SetWorkSegment \notag\\
+	& \quad \forall i \in \SetTimeInstance \quad \forall \ElementEvent \in \SetEvent \\
+	& \VarIncludeActivity{\ElementActivity} \in \{0, 1\} \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}\\
+	& \VarMetaTime \in [0, \infty] 
 \end{alignat}

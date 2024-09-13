@@ -13,23 +13,23 @@ This kind of model closely resembles a variant of the multi-compartment multi-kn
 
 \begin{alignat}{2}
 	& \textbf{Minimize:} \notag\\
-	& \sum_{w \in \SetWorkOrder{}} \sum_{p \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{w}{p}                                                                                      \\ 
-	& + \sum_{p \in \SetPeriod} \sum_{r \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess                                                                                                                                  \\
-	& + \sum_{p \in \SetPeriod} \sum_{w1 \in \SetWorkOrder{}} \sum_{w2 \in \SetWorkOrder{}} \notag\\ 
-	& \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{w1}{p} \cdot \VarStrategicWorkOrderAssignment{w2}{p}                                                                                 \label{eqn:objective_function_strategic} \\
+	& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}                                                                                      \\ 
+	& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess                                                                                                                                  \\
+	& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementWorkOrder1 \in \SetWorkOrder{}} \sum_{\ElementWorkOrder2 \in \SetWorkOrder{}} \notag\\ 
+	& \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder1}{\ElementPeriod} \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder2}{\ElementPeriod}                                                                                 \label{eqn:objective_function_strategic} \\
 	& \textbf{Subject to:} \notag                                                                                                                                                                                      \\
-	& \sum_{w \in \SetWorkOrder{}} \ParStrategicWorkOrderWeight \cdot \VarStrategicWorkOrderAssignment{w}{p} \notag \\ 
+	& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \ParStrategicWorkOrderWeight \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \notag \\ 
 	& \quad \leq \ \ParStrategicResource + \VarStrategicExcess \notag                                                                       \\ 
-	& \quad \forall p \in \SetPeriod, \forall r \in \SetResource                                                                                                                  \label{eqn:capacity_constraint}          \\
-	& \sum_{w \in \SetWorkOrder{}} \VarStrategicWorkOrderAssignment{w}{p} = 1 \notag\\
-	& \quad \forall p \in \SetPeriod                      \label{eqn:single_workorder_constraint}  \\
-	& \VarStrategicWorkOrderAssignment{w}{p} = 0 \notag\\
-	& \quad \forall (w, p) \in \ParStrategicExclude                          \label{eqn:exclusion_constraint}  \\
-	& \VarStrategicWorkOrderAssignment{w}{p} = 1 \notag\\ 
-	& \quad \forall (w, p) \in \ParStrategicInclude                          \label{eqn:inclusion_constraint}  \\
-	& \VarStrategicWorkOrderAssignment{w}{p} \in \{0, 1\} \notag\\
-	& \quad \forall w \in \SetWorkOrder{}, \forall p \in \SetPeriod     \label{eqn:x_integrality_constraint}     \\ 
+	& \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource                                                                                                                  \label{eqn:capacity_constraint}          \\
+	& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 1 \notag\\
+	& \quad \forall \ElementPeriod \in \SetPeriod                      \label{eqn:single_workorder_constraint}  \\
+	& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 0 \notag\\
+	& \quad \forall (\ElementWorkOrder, \ElementPeriod) \in \ParStrategicExclude                          \label{eqn:exclusion_constraint}  \\
+	& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 1 \notag\\ 
+	& \quad \forall (\ElementWorkOrder, \ElementPeriod) \in \ParStrategicInclude                          \label{eqn:inclusion_constraint}  \\
+	& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \in \{0, 1\} \notag\\
+	& \quad \forall \ElementWorkOrder \in \SetWorkOrder{} \quad \forall \ElementPeriod \in \SetPeriod     \label{eqn:x_integrality_constraint}     \\ 
 	& \VarStrategicExcess \in \mathbb{R}^{+} \notag\\ 
-	& \quad \forall p \in \SetPeriod, \forall r \in \SetResource                           \label{eqn:p_non_negativity_constraint}  \\ 
+	& \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource                           \label{eqn:p_non_negativity_constraint}  \\ 
 	& \VarMetaTime \in  [0, \infty] 
 \end{alignat}

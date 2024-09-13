@@ -13,23 +13,22 @@ The supervisor has multiple different responsibilities among them are:
 
 \begin{alignat}{2}
 	& \textbf{Maximize:} \notag\\
-	& \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{}} \sum_{t \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{a}{t} \\ 
+	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}} \sum_{\ElementTechnician \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \\ 
 	& \textbf{Subject to:} \notag\\ 
-	& \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{o}} \VarActivityWork{a} = \ParOperationWork{o}   \notag\\
-	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}}\\
-	& \sum_{t \in \SetTechnician} \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{o}}\VarSupervisorAssignment{a}{t} = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople \notag\\
-	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}}  \\
-	& \sum_{o \in \SetOperation{w}{\VarTacticalWorkBinary{}{}}} \VarSupervisorAssignmentWhole  \notag\\ 
-	& \quad = \ParOperationsInWorkOrder \notag\\ 
-	& \quad \forall w \in \SetWorkOrder \notag\\
-	& \sum_{a \in \SetActivity{\VarTacticalWork{}{}}{o}} \VarSupervisorAssignment{a}{t} \leq 1 \notag\\
-	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}} \forall t \in \SetTechnician \\  
-	& \VarSupervisorAssignment{a}{t} \leq \ParFeasible \notag\\
-	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}} \forall t \in \SetTechnician \\
-	& \VarSupervisorAssignment{a}{t} \in \{0, 1\} \notag\\
-	& \quad \forall o \in \SetOperation{}{\VarTacticalWorkBinary{}{}} \forall t \in \SetTechnician \\ 
-	& \VarActivityWork{a} \in [\ParLowerActivityWork, \ParOperationWork{a}] \notag\\
-	& \quad \forall a \in \SetActivity{\VarTacticalWork{}{}}{} \\
+	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarActivityWork{\ElementActivity} = \ParOperationWork{\ElementOperation}   \notag\\
+	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}\\
+	& \sum_{\ElementTechnician \in \SetTechnician} \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}}\VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople \notag\\
+	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}  \\
+	& \sum_{\ElementOperation \in \SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}} \VarSupervisorAssignmentWhole = !!!! |\SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}| \notag\\ 
+	& \quad \forall \ElementWorkOrder \in \SetWorkOrder{,\VarStrategicWorkOrderAssignment{}{}} \\
+	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq 1 \notag\\
+	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\  
+	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq \ParFeasible \notag\\
+	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\
+	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \in \{0, 1\} \notag\\
+	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\ 
+	& \VarActivityWork{\ElementActivity} \in [\ParLowerActivityWork, \ParOperationWork{\ElementActivity}] \notag\\
+	& \quad \forall \ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{} \\
     & \VarMetaTime \in  [0, \infty] 
 \end{alignat}
 
