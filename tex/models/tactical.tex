@@ -11,7 +11,7 @@ out on each of the days of the work orders scheduled by the strategic agent.
 The tactical model is responsible for providing an initial suggestion for a weekly schedule, below we see the model for the tactical agent.
 \begin{alignat}{2}
 	& \textbf{Minimize:} \notag\\
-	& \sum_{\ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \sum_{\ElementDays \in \SetDays{}} \ParTacticalValue \cdot \VarTacticalWork{\ElementDays}{\ElementOperation}\notag\\  
+	& \sum_{\ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \sum_{\ElementDays \in \SetDays{}} \ParTacticalValue!!!!!!!!!!!!! \cdot \VarTacticalWork{\ElementDays}{\ElementOperation}\notag\\  
 	& + \sum_{r \in \SetResource} \sum_{\ElementDays \in \SetDays{}} \ParTacticalPenalty \cdot \VarTacticalExcess                                               \\  
 	& \textbf{Subject to:}                                                          \notag                                                                   \\
 	& \sum_{\ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \ParOperationWork{\ElementOperation} \cdot \VarTacticalWork{\ElementDays}{\ElementOperation}\notag\\
@@ -24,9 +24,9 @@ The tactical model is responsible for providing an initial suggestion for a week
 	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementDays \in \SetDays{} \\
 	& \sum_{\ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}} \VarTacticalWorkBinaryConsecutive = 1, \notag\\
 	& \quad \forall \ElementDays \in \SetDays{} \notag\\
-	& \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWork{\ElementDays}{\ElementOperation1} + \VarTacticalOperationDifference  = \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWork{\ElementDays}{\ElementOperation2}                   \notag  \\ 
+	& \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWorkBinary{\ElementDays}{\ElementOperation1} + \VarTacticalOperationDifference  = \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWorkBinary{\ElementDays}{\ElementOperation2}                   \notag  \\ 
 	& \quad \forall (o1, \ElementOperation2) \in \ParFinishStart                                                           \\ 
-	& \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWork{\ElementDays}{\ElementOperation1} = \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWork{\ElementDays}{\ElementOperation2}  \notag                               \\ 
+	& \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWorkBinary{\ElementDays}{\ElementOperation1} = \sum_{\ElementDays \in \SetDays{}} \ElementDays \cdot \VarTacticalWorkBinary{\ElementDays}{\ElementOperation2}  \notag                               \\ 
 	& \quad \forall (o1, \ElementOperation2) \in \ParStartStart                                                       \\ 
 	& \VarTacticalWork{\ElementDays}{\ElementOperation} \leq \ParNumberOfPeople \cdot \ParOperatingTime \notag                                                     \\ 
 	& \quad \forall \ElementDays \in \SetDays{} \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}                                                                  \\
