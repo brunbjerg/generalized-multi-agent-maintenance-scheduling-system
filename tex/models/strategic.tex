@@ -11,6 +11,7 @@ The Strategic Model have multiple different purposes.
 The Strategic model is responsible for grouping work orders into weekly or biweekly periods depending on which kind of maintenance setup that one is running.
 This kind of model closely resembles a variant of the multi-compartment multi-knapsack problem. 
 
+
 \begin{alignat}{2}
 	& \textbf{Minimize:} \notag                                                                                                                                                                                                                                                                                \\
 	& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}                                                                                                                           \\ 
@@ -33,3 +34,4 @@ This kind of model closely resembles a variant of the multi-compartment multi-kn
 	& \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource                           \label{eqn:p_non_negativity_constraint}                                                                                                                                            \\ 
 	& \VarMetaTime \in  [0, \infty] 
 \end{alignat}
+
