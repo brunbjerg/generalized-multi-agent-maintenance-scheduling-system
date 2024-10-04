@@ -13,6 +13,9 @@ This kind of model closely resembles a variant of the multi-compartment multi-kn
 
 
 \begin{alignat}{2}
+	& \textbf{Meta variables:} \notag\\
+	& \ElementScheduler \in \SetScheduler \notag\\
+	& \tau \in [0, \infty] \notag\\
 	& \textbf{Minimize:} \notag                                                                                                                                                                                                                                                                                \\
 	& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}                                                                                                                           \\ 
 	& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess                                                                                                                                                                           \\

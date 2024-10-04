@@ -7,6 +7,11 @@ operations in.
 The $\VarStartOfSegment{a}{k}$ is the start time of job $i$ in segment $k$ and $\VarFinishOfSegment{a}{k}$ is the finish time of job $i$ in segment $k$.
 $\VarProcessingTime{a}{k}$ is the processing time of each segment. 
 \begin{alignat}{2}
+	& \textbf{Meta variables:} \notag\\
+	& \tau \in [0, \infty] \notag\\
+	& \ElementTechnician \in \SetTechnician \notag\\
+	& \VarStrategicWorkOrderAssignment{}{} \notag\\
+	& \VarSupervisorAssignment{}{}
 	& \textbf{Maximize:} \notag\\
 	& \sum_{\ElementActivity \in \SetActivity{\VarSupervisorAssignment{}{\ElementTechnician}}{}} \sum_{\ElementWorkSegment \in \SetWorkSegment} \VarProcessingTime                                                         \\
 	& \textbf{Subject to:} \notag                                                                                                                                       \\

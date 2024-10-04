@@ -12,6 +12,11 @@ The supervisor has multiple different responsibilities among them are:
 
 
 \begin{alignat}{2}
+	& \textbf{Meta variables:} \notag\\
+	& \tau \in [0, \infty] \notag\\
+	& \ElementSupervisor \in \SetSupervisor \notag\\
+	& \VarStrategicWorkOrderAssignment{}{} \notag\\
+	& \VarIncludeActivity{} \notag\\
 	& \textbf{Maximize:} \notag\\
 	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}} \sum_{\ElementTechnician \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \\ 
 	& \textbf{Subject to:} \notag\\ 
