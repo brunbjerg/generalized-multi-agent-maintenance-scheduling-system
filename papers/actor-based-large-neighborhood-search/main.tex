@@ -257,7 +257,30 @@ This allows us to be precise in the timing on the messages that are send to the 
 % 	& pen_{p\tau}(t) \in \mathbb{R}^{+}                                         && \forall p \in P, \forall \tau \in T                      \label{eqn:p_non_negativity_constraint}
 % \end{alignat}
 
-The objective function \eqref{eqn:objective_function_strategic} minimizes the total weight of all work order assignments together with the penalty $d$ for exceeding the capacity given in constraint \eqref{eqn:capacity_constraint}. Constraint \eqref{eqn:capacity_constraint} ensures that all the weights $c_{w\tau}$ for each activity in an work order, given that it has been assigned, is lower than the capacity for each period and for each trait $\tau$. $pen_{p\tau}$ is the amount of exceeded capacity that is needed for the current assignment of work order to be feasible. Constraint \eqref{eqn:single_workorder_constraint} makes sure that each work order is assigned to at least a single period. Constraint \eqref{eqn:exclusion_constraint} excludes a work order from a certain period and constraint \eqref{eqn:inclusion_constraint} forces a specific work order to be in a specific period. Constraint \eqref{eqn:x_integrality_constraint} and \eqref{eqn:p_non_negativity_constraint} specify the variable domain for $x_{wp}$ and $pen_{p\tau}$ respectively. The effects of changing $E$, $I$, $cap$, and $v$ in real-time will be examined to determine their effects on the weekly schedules and objective value.
+The objective function \eqref{eqn:objective_function_strategic_value}, \eqref{eqn:objective_function_strategic_penalty}, and
+\eqref{eqn:objective_function_strategic_clustering}
+minimizes the total weighted delay of all work order assignments together
+with the penalty $\ParStrategicPenalty$ for exceeding the resource capacity given in constraint
+\eqref{eqn:capacity_constraint}. The thrid term  
+of the model contains the $\ParClusteringValue$ which turns the model into a 
+quadratic problem. This term optimizes the value of putting two work orders
+in the same period, if they have share similarity like close proximity, 
+same functional location, etc. 
+
+Constraint \eqref{eqn:capacity_constraint}
+ensures that all the weights $\ParOperationWork{wr}$ for each activity in an work
+order, given that it has been assigned, is lower than the capacity for each
+period and for each trait $\tau$. $pen_{p\tau}$ is the amount of exceeded
+capacity that is needed for the current assignment of work order to be
+feasible. Constraint \eqref{eqn:single_workorder_constraint} makes sure
+that each work order is assigned to at least a single period. Constraint
+\eqref{eqn:exclusion_constraint} excludes a work order from a certain period
+and constraint \eqref{eqn:inclusion_constraint} forces a specific work order
+to be in a specific period. Constraint \eqref{eqn:x_integrality_constraint} and
+\eqref{eqn:p_non_negativity_constraint} specify the variable domain for $x_{wp}$
+and $pen_{p\tau}$ respectively. The effects of changing $E$, $I$, $cap$, and $v$
+in real-time will be examined to determine their effects on the weekly schedules
+and objective value.
 
 \section{Solution Method}
 \label{sec:2-solution-method}
