@@ -1,7 +1,7 @@
 % Sets
-\newcommand{\SetWorkOrder}[1]{W(\VarMetaTime#1)}
+\newcommand{\SetWorkOrder}[2][\VarMetaTime]{W(#1#2)}
 \newcommand{\ElementWorkOrder}{w}
-\newcommand{\SetPeriod}{P(\VarMetaTime)}
+\newcommand{\SetPeriod}[1][\VarMetaTime]{P(#1)}
 \newcommand{\ElementPeriod}{p}
 
 \newcommand{\SetResource}{R(\VarMetaTime)}
@@ -31,7 +31,7 @@
 \newcommand{\ElementTechnician}{t}
 
 % Parameters
-\newcommand{\ParStrategicValue}{strategic\_value_{\ElementWorkOrder \ElementPeriod}(\VarMetaTime)}
+\newcommand{\ParStrategicValue}[1][\VarMetaTime]{strategic\_value_{\ElementWorkOrder \ElementPeriod}(#1)}
 \newcommand{\ParStrategicPenalty}{strategic\_penalty}
 \newcommand{\ParClusteringValue}{clustering\_value_{\ElementWorkOrder1, \ElementWorkOrder2}}
 \newcommand{\ParStrategicResource}{resource_{\ElementPeriod\ElementResource}(\VarMetaTime)}

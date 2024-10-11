@@ -8,24 +8,12 @@ period capacities, and 4. show the effect of dynamically changing the value of t
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-           & \begin{tabular}[c]{@{}c@{}}Number of\\ Item Sets\end{tabular} & \begin{tabular}[c]{@{}c@{}}Number of\\ Compartments\end{tabular} & \begin{tabular}[c]{@{}c@{}}Number of\\ Knapsacks\end{tabular} \\ \hline
+           & \begin{tabular}[c]{@{}c@{}}Number of\\ Work Orders\end{tabular} & \begin{tabular}[c]{@{}c@{}}Number of\\ Resources\end{tabular} & \begin{tabular}[c]{@{}c@{}}Number of\\ Periods\end{tabular} \\ \hline
 Instance 1 & 3487                                                          & 16                                                               & 52                                                            \\ \hline
 \end{tabular}
 
 \caption{Table Caption} % \label{fig1}
 \end{table}
-% \begin{table}[t]%% placement specifier
-% %% Use tabular environment to tag the tabular data.
-% %% https://en.wikibooks.org/wiki/LaTeX/Tables#The_tabular_environment
-% \centering%% For centre alignment of tabular.
-% \begin{tabular}{l c r}%% Table column specifiers
-% %% Tabular cells are separated by &
-%   1 & 2 & 3 \\ %% A tabular row ends with \\
-%   4 & 5 & 6 \\
-%   7 & 8 & 9 \\
-% \end{tabular}
-% %% Use \caption command for table caption and label.
-% \end{table}
 
 \subsection{Response to Inclusion}
 The response to the inclusion of a work order is given by I parameter of the model which 
@@ -34,77 +22,62 @@ is constrained in \ref{eqn:inclusion_constraint} of model given in \ref{sub1sec2
 The inclusion is made of forcing certain allocations of work orders to be in specific periods. Below a table is provided 
 to show what changes will occur and at what and at what point in time.
 \begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-\begin{tabular}[c]{@{}c@{}}\end{tabular}     & \begin{tabular}[c]{@{}c@{}}At Time:\\ 01:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 02:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 03:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 04:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 05:00\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}c@{}}$\Delta |P|$\end{tabular} & 10                                                       & 20                                                       & 30                                                       & 40                                                       & 50                                                       \\ \hline
-\end{tabular}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	\begin{tabular}[c]{@{}c@{}}\end{tabular}     & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	\begin{tabular}[c]{@{}c@{}}$\Delta |\SetPeriod|$\end{tabular} & 10                                                       & 20                                                       & 30                                                       & 40                                                       & 50                                                       \\ \hline
+	\end{tabular}
 \end{table}
 
 With the inputs defined we will explain the main results which are shown in the figure below. 
-% Use figure environment to create figures
-% Refer following link for more details.
-% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
-\begin{figure}[H]%% placement specifier
-%% Use \includegraphics command to insert graphic files. Place graphics files in 
-%% working directory.
-\centering%% For centre alignment of image.
-\includegraphics[width=1.0\textwidth]{figures/objective.png}
-%% Use \caption command for figure caption and label.
-\caption{Figure Caption}\label{fig:response-to-inclusion}
-%% https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Importing_external_graphics
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figures/objective.png}
+	\caption{Figure Caption}\label{fig:response-to-inclusion}
 \end{figure}
 
 \subsection{Response to Exclusion}
-\begin{figure}[H]%% placement specifier
-%% Use \includegraphics command to insert graphic files. Place graphics files in 
-%% working directory.
-\centering%% For centre alignment of image.
-\includegraphics[width=1.0\textwidth]{figures/objective-400-exclusions.png}
-%% Use \caption command for figure caption and label.
-\caption{Figure Caption}\label{fig:objective-exclusion-400}
-%% https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Importing_external_graphics
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figures/objective-400-exclusions.png}
+	\caption{Figure Caption}\label{fig:objective-exclusion-400}
 \end{figure}
 
 \subsection{Response to Changes in Knapsack Capacities}
 The effects of changes to capacities will be illustrated in the same way as it was with the response to inclusion and below we see the table that shows which inputs that the AbLNS will be affected by.
 
 \begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-                      & \begin{tabular}[c]{@{}c@{}}At Time:\\ 01:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 02:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 03:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 04:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 05:00\end{tabular} \\ \hline
-$\Delta |p|$ & 16                                                       & 16                                                       & 16                                                       & 16                                                       & 16                                                       \\ \hline
-$\Delta |\tau|$ & 16                                                       & 16                                                       & 16                                                       & 16                                                       & 16                                                       \\ \hline
-$\Delta |cap|$& 100                                                      & 200                                                      & 400                                                      & 800                                                      & 1600                                                     \\ \hline
-\end{tabular}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	                      & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetPeriod|$ & 16                                                       & 16                                                       & 16                                                       & 16                                                       & 16                                                       \\ \hline
+	$\Delta |\SetResource|$ & 16                                                       & 16                                                       & 16                                                       & 16                                                       & 16                                                       \\ \hline
+	$\Delta |\ParStrategicResource|$& 100                                                      & 200                                                      & 400                                                      & 800                                                      & 1600                                                     \\ \hline
+	\end{tabular}
 \end{table}
 
 \begin{figure}[H]%% placement specifier
-%% Use \includegraphics command to insert graphic files. Place graphics files in 
-%% working directory.
-\centering%% For centre alignment of image.
-\includegraphics[width=1.0\textwidth]{figures/objective-resource-increases.png}
-%% Use \caption command for figure caption and label.
-\caption{Figure Caption}\label{fig:objective-resource-increases}
-%% https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Importing_external_graphics
+	\centering
+	\includegraphics[width=1.0\textwidth]{figures/objective-resource-increases.png}
+	\caption{Figure Caption}\label{fig:objective-resource-increases}
 \end{figure}
 
 Correspondingly we also have the figure below in which the resources are decreasing.
 
 \subsection{Response to Changes in Item Weights}
-The final parameter that will be changed is the work order value $v$. This section will be more elaborate as we have to show how that the
+The final parameter that will be changed is the work order value $\ParStrategicValue$. This section will be more elaborate as we have to show how that the
 work orders are rearranged due to the changes in their value across the different periods.
 
 \begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-             & \begin{tabular}[c]{@{}c@{}}At Time:\\ 01:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 02:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 03:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 04:00\end{tabular} & \begin{tabular}[c]{@{}c@{}}At Time:\\ 05:00\end{tabular} \\ \hline
-$\Delta |w|$ & 20                                                       & 40                                                       & 80                                                       & 160                                                      & 320                                                      \\ \hline
-$\Delta |p|$ & 26                                                       & 26                                                       & 26                                                       & 26                                                       & 26                                                       \\ \hline
-$\Delta |v|$ & $1 \cdot 10^{5}$                                         & $2 \cdot 10^{5}$                                         & $4 \cdot 10^{5}$                                         & $8 \cdot 10^{5}$                                         & $1.6 \cdot 10^{6}$                                       \\ \hline
-\end{tabular}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	             & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetWorkOrder[\VarMetaTime_{n}]{} \triangle \SetWorkOrder[\VarMetaTime_{n-1}]{}              |$         & 20                                                       & 40                                                       & 80                                                       & 160                                                      & 320                                                      \\ \hline
+	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$         & 26                                                       & 26                                                       & 26                                                       & 26                                                       & 26                                                       \\ \hline
+	\makecell{$\Delta |\ParStrategicValue[\VarMetaTime_{n}]| -$\\ $|\ParStrategicValue[\VarMetaTime_{n - 1}]|$}        & $1 \cdot 10^{5}$                                         & $2 \cdot 10^{5}$                                         & $4 \cdot 10^{5}$                                         & $8 \cdot 10^{5}$                                         & $1.6 \cdot 10^{6}$                                       \\ \hline
+	\end{tabular}
 \end{table}
 
