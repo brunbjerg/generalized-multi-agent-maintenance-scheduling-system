@@ -1,45 +1,25 @@
-\section{The Supervisor Model}
-The maintenance supervisor is considered the most central person in a maintenance scheduling system. 
-All the work of the planner and scheduler should be considered a service for the supervisor.
-
-The supervisor has multiple different responsibilities among them are: 
-
-\begin{itemize}
-	\item Assigning work orders
-	\item Creating a daily schedule
-	\item Keeping the schedule up-to-date
-\end{itemize}
 
 
+\newpage
 \begin{alignat}{2}
+	& \text{\rule{\linewidth}{0.4pt}} \notag\\
 	& \textbf{Meta variables:} \notag\\
-	& \tau \in [0, \infty] \notag\\
-	& \ElementSupervisor \in \SetSupervisor \notag\\
-	& \VarStrategicWorkOrderAssignment{}{} \notag\\
-	& \VarIncludeActivity{} \notag\\
+	& \ElementSupervisor \in \SetSupervisor \\
+	& \VarStrategicWorkOrderAssignment{}{} \\
+	& \VarIncludeActivity{} \\
+	& \tau \in [0, \infty] \\
+	& \text{\rule{\linewidth}{0.4pt}} \notag\\
 	& \textbf{Maximize:} \notag\\
 	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}} \sum_{\ElementTechnician \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \\ 
+	& \text{\rule{\linewidth}{0.4pt}} \notag\\
 	& \textbf{Subject to:} \notag\\ 
-	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarActivityWork{\ElementActivity} = \ParOperationWork{\ElementOperation}   \notag\\
-	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}\\
-	& \sum_{\ElementTechnician \in \SetTechnician} \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}}\VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople \notag\\
-	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}  \\
-	& \sum_{\ElementOperation \in \SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}} \VarSupervisorAssignmentWhole = !!!! |\SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}| \notag\\ 
-	& \quad \forall \ElementWorkOrder \in \SetWorkOrder{,\VarStrategicWorkOrderAssignment{}{}} \\
-	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq 1 \notag\\
-	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\  
-	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq \ParFeasible \notag\\
-	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\
-	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \in \{0, 1\} \notag\\
-	& \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\ 
-	& \VarActivityWork{\ElementActivity} \in [\ParLowerActivityWork, \ParOperationWork{\ElementActivity}] \notag\\
-	& \quad \forall \ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{} \\
-    & \VarMetaTime \in  [0, \infty] 
+	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarActivityWork{\ElementActivity} = \ParOperationWork{\ElementOperation}    \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}\\
+	& \sum_{\ElementTechnician \in \SetTechnician} \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}}\VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}  \\
+	& \sum_{\ElementOperation \in \SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}} \VarSupervisorAssignmentWhole = |\SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}| \ \quad \forall \ElementWorkOrder \in \SetWorkOrder{,\VarStrategicWorkOrderAssignment{}{}} \\
+	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq 1  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\  
+	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq \ParFeasible  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\
+	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \in \{0, 1\}  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\ 
+	& \VarActivityWork{\ElementActivity} \in [\ParLowerActivityWork, \ParOperationWork{\ElementActivity}]  \quad \forall \ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}\\ 
+	& \text{\rule{\linewidth}{0.4pt}} \notag
 \end{alignat}
-
-In the supervisor model shown in \ref{} the set $O$ and $W$ comes from the tactical algorithm
-and value $v$ and the information of whether or not the operation can be assigned to a 
-specific operational model comes from the operational model itself and is captured in the.
-
-Can this be done? What should the Supervisor have here? He should have what is necessary to
-handle the. 
+\newpage

@@ -1,0 +1,104 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc} % For encoding
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{booktabs} % For professional quality tables
+\usepackage{array}    % For better column alignment
+\usepackage{tabularx}
+\usepackage{tikz}
+
+% \usepackage[a4paper,width=175mm,top=20mm,bottom=20mm,bindingoffset=6mm]{geometry}
+\usepackage{fancyhdr}
+
+\title{Maintenance Scheduling System}
+\author{Christian Brunbjerg Jespersen}
+\institute{Your Institution}
+\date{\today}
+
+\begin{document}
+
+\input{../../tex/definitions.tex}
+
+
+
+
+\frame{\titlepage}
+
+\begin{frame}{Agenda}
+    \begin{itemize}
+        \item Introduction to Maintenance Scheduling
+        \item Architecture of a Scheduling System
+        \item Possible Contributions to Operation Research
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[t]{Strategic}
+	\scalebox{0.4}{
+		\begin{minipage}{2.5\textwidth}
+		\input{../../tex/models/strategic.tex}
+		\end{minipage}
+	}
+\end{frame}
+
+\begin{frame}[t]{Tactical}
+	\scalebox{0.4}{
+		\begin{minipage}{2.5\textwidth}
+	\input{../../tex/models/tactical.tex}
+		\end{minipage}
+	}
+\end{frame}
+
+\begin{frame}[t]{Supervisor}
+	\scalebox{0.4}{
+		\begin{minipage}{2.5\textwidth}
+	\input{../../tex/models/supervisor.tex}
+		\end{minipage}
+	}
+\end{frame}
+
+\begin{frame}[t]{Operational}
+	\scalebox{0.4}{
+		\begin{minipage}{2.5\textwidth}
+	\input{../../tex/models/operational.tex}
+		\end{minipage}
+	}
+\end{frame}
+
+
+
+\begin{frame}{Architecture}
+	\input{../../figures/ordinator-architecture.tex}
+	
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Possible Futures for Operation Research}
+        \begin{enumerate}
+            \item Business
+            \item Technical
+            \item Academic
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Business}
+        \begin{enumerate}
+            \item Business
+            \item Technical
+            \item Academic
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\end{document}

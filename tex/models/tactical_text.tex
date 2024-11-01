@@ -1,0 +1,11 @@
+\section{The Tactical Model}
+\begin{itemize}
+	\item Respect precedence constraints
+	\item Respect daily resource requirements for each trait
+	\item Penalize exceeded daily capacity
+\end{itemize}
+
+After the strategic model has optimized its schedule the tactical agent will continue scheduling the output at a more detailed level. This means that now the tactical agent will schedule 
+out on each of the days of the work orders scheduled by the strategic agent. 
+
+The tactical model is responsible for providing an initial suggestion for a weekly schedule, below we see the model for the tactical agent.

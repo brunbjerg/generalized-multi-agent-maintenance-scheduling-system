@@ -1,5 +1,8 @@
 set shell := ["fish", "-c"]
 
+compile PROJECT:
+    ls **.tex | entr tectonic -X compile {{PROJECT}}
+
 write-project PROJECT:
     tmux new -d -s {{PROJECT}} -n 'editor' 'hx {{PROJECT}}/main.tex'
     tmux new-window -t {{PROJECT}} -n "Compilation" 'ls **.tex | entr tectonic -X compile {{PROJECT}}/main.tex'

@@ -1,0 +1,93 @@
+\documentclass[portrait, a0paper]{tikzposter}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+% Title, Author, Institute
+\title{A Multi-Actor Approach to Operations Research}
+\author{Your Name}
+\institute{Your Institution}
+
+% Define custom colors (optional)
+\definecolor{maincolor}{RGB}{0, 102, 204} % A shade of blue
+\definecolor{secondarycolor}{RGB}{255, 102, 0} % A shade of orange
+
+% Theme and color style
+\usetheme{Basic}
+\usecolorstyle{Default}
+
+\begin{document}
+
+% Title block
+\maketitle
+
+% Start of poster content
+\begin{columns}
+
+% Column 1
+\column{0.33}
+\block{Introduction}{
+  Operations research (OR) traditionally focuses on optimizing processes within a single organization. However, many real-world problems involve multiple actors with diverse objectives and constraints. This poster explores a multi-actor approach to OR, emphasizing collaboration and conflict resolution among stakeholders.
+}
+
+\block{Objectives}{
+  \begin{enumerate}[label=\arabic*.]
+    \item Integrate multiple stakeholder perspectives into OR models.
+    \item Develop methods to handle conflicting objectives.
+    \item Propose collaborative optimization strategies.
+  \end{enumerate}
+}
+
+% Column 2
+\column{0.33}
+\block{Methodology}{
+  \begin{itemize}
+    \item \textbf{Game Theory}: Analyze strategic interactions between actors.
+    \item \textbf{Multi-Criteria Decision Making}: Evaluate alternatives based on multiple criteria.
+    \item \textbf{Agent-Based Modeling}: Simulate the actions and interactions of autonomous agents.
+    \item \textbf{Negotiation Models}: Facilitate agreement among parties with conflicting interests.
+  \end{itemize}
+}
+
+\block{Case Study}{
+  \textbf{Supply Chain Management} \\
+  A complex supply chain involving suppliers, manufacturers, distributors, and retailers. Each actor aims to optimize its own performance metrics, which may conflict with others. The multi-actor approach seeks a globally optimal solution that considers the objectives of all stakeholders.
+}
+
+% Column 3
+\column{0.33}
+\block{Results}{
+  \begin{itemize}
+    \item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
+    \item \textbf{Stakeholder Satisfaction}: Increased satisfaction scores among all actors by 20\%.
+    \item \textbf{Collaborative Strategies}: Developed joint policies that benefit all parties.
+  \end{itemize}
+}
+
+\block{Conclusion}{
+  Incorporating a multi-actor approach in operations research leads to more sustainable and acceptable solutions. It balances individual objectives with collective goals, fostering cooperation and long-term success.
+}
+
+\block{Future Work}{
+  \begin{itemize}
+    \item Extend the approach to international supply chains.
+    \item Incorporate real-time data analytics for dynamic decision-making.
+    \item Explore applications in other sectors like healthcare and transportation.
+  \end{itemize}
+}
+
+% % Contact Information
+% \block{Contact Information}{
+%   \begin{itemize}
+%     \item \textbf{Email}: \href{mailto:your.email@institution.edu}{your.email@institution.edu}
+%     \item \textbf{Phone}: +1 (234) 567-8901
+%     \item \textbf{Website}: \href{http://www.yourwebsite.com}{www.yourwebsite.com}
+%   \end{itemize}
+% }
+
+\end{columns}
+
+\end{document}
