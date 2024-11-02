@@ -6,19 +6,35 @@
 \usepackage{multicol}
 \usepackage{enumitem}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fontspec}
+
+% Set the main document font to Arial
+\setmainfont{Aerial}
+
 % Title, Author, Institute
-\title{A Multi-Actor Approach to Operations Research}
-\author{Your Name}
-\institute{Your Institution}
+\title{Multi-model Maintenance Scheduling}
+\author{Christian Brunbjerg Jespersen}
+\institute{Technical University of Denmark}
 
 % Define custom colors (optional)
-\definecolor{maincolor}{RGB}{0, 102, 204} % A shade of blue
-\definecolor{secondarycolor}{RGB}{255, 102, 0} % A shade of orange
+\definecolor{maincolor}{cmyk}{0, 91, 72, 23} % A shade of blue
+\definecolor{dtu}{RGB}{255, 102, 0} % A shade of orange
 
+% \colorlet{titlebgcolor}{maincolor}
+% \colorlet{titletitlefg}{maincolor}
+% \colorlet{titleauthorfg}{maincolor}
+
+\colorlet{blockbodycolor}{maincolor}
+\colorlet{blocktitlecolor}{dtu}
+\colorlet{blockbodybg}{maincolor}
+\colorlet{blocktitlefg}{dtu}
 % Theme and color style
-\usetheme{Basic}
-\usecolorstyle{Default}
+% \usetheme{Basic}
+% \usecolorstyle{Default}
 
+\input{../../tex/definitions.tex}
 \begin{document}
 
 % Title block
@@ -28,7 +44,7 @@
 \begin{columns}
 
 % Column 1
-\column{0.33}
+\column{0.60}
 \block{Introduction}{
   Operations research (OR) traditionally focuses on optimizing processes within a single organization. However, many real-world problems involve multiple actors with diverse objectives and constraints. This poster explores a multi-actor approach to OR, emphasizing collaboration and conflict resolution among stakeholders.
 }
@@ -41,24 +57,6 @@
   \end{enumerate}
 }
 
-% Column 2
-\column{0.33}
-\block{Methodology}{
-  \begin{itemize}
-    \item \textbf{Game Theory}: Analyze strategic interactions between actors.
-    \item \textbf{Multi-Criteria Decision Making}: Evaluate alternatives based on multiple criteria.
-    \item \textbf{Agent-Based Modeling}: Simulate the actions and interactions of autonomous agents.
-    \item \textbf{Negotiation Models}: Facilitate agreement among parties with conflicting interests.
-  \end{itemize}
-}
-
-\block{Case Study}{
-  \textbf{Supply Chain Management} \\
-  A complex supply chain involving suppliers, manufacturers, distributors, and retailers. Each actor aims to optimize its own performance metrics, which may conflict with others. The multi-actor approach seeks a globally optimal solution that considers the objectives of all stakeholders.
-}
-
-% Column 3
-\column{0.33}
 \block{Results}{
   \begin{itemize}
     \item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
@@ -78,6 +76,49 @@
     \item Explore applications in other sectors like healthcare and transportation.
   \end{itemize}
 }
+\block{Solution Method}{
+  
+  \input{../../figures/ordinator-architecture.tex}
+  \drawGraph{}
+}
+
+\block{Case Study}{
+  \textbf{Supply Chain Management} \\
+  A complex supply chain involving suppliers, manufacturers, distributors, and retailers. Each actor aims to optimize its own performance metrics, which may conflict with others. The multi-actor approach seeks a globally optimal solution that considers the objectives of all stakeholders.
+}
+% Column 2
+\column{0.40}
+\block{Methodology}{
+
+  \section{Strategic}
+	\scalebox{0.5}{
+		\begin{minipage}{0.68\textwidth}
+			\input{../../tex/models/strategic.tex}
+		\end{minipage}
+	}
+  \section{Tactical}
+	\scalebox{0.5}{
+		\begin{minipage}{0.68\textwidth}
+			\input{../../tex/models/tactical.tex}
+		\end{minipage}
+	}
+  \section{Supervisor}
+	\scalebox{0.5}{
+		\begin{minipage}{0.68\textwidth}
+			\input{../../tex/models/supervisor.tex}
+		\end{minipage}
+	}
+  \section{Operational}
+	\scalebox{0.5}{
+		\begin{minipage}{0.68\textwidth}
+			\input{../../tex/models/operational.tex}
+		\end{minipage}
+	}
+
+}
+
+% Column 3
+\column{0.50}
 
 % % Contact Information
 % \block{Contact Information}{

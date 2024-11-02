@@ -15,17 +15,21 @@
 \usepackage{tabularx}
 \usepackage{tikz}
 
+\usepackage{pgfkeys}
+\usepackage{ifthen}
+
 % \usepackage[a4paper,width=175mm,top=20mm,bottom=20mm,bindingoffset=6mm]{geometry}
 \usepackage{fancyhdr}
 
 \title{Maintenance Scheduling System}
 \author{Christian Brunbjerg Jespersen}
-\institute{Your Institution}
+\institute{Technical University of Denmark}
 \date{\today}
 
 \begin{document}
 
 \input{../../tex/definitions.tex}
+\input{../../figures/ordinator-architecture.tex}
 
 
 
@@ -34,18 +38,17 @@
 
 \begin{frame}{Agenda}
     \begin{itemize}
+		\item
         \item Introduction to Maintenance Scheduling
         \item Architecture of a Scheduling System
         \item Possible Contributions to Operation Research
     \end{itemize}
 \end{frame}
 
-
-
 \begin{frame}[t]{Strategic}
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
-		\input{../../tex/models/strategic.tex}
+			\input{../../tex/models/strategic.tex}
 		\end{minipage}
 	}
 \end{frame}
@@ -53,7 +56,7 @@
 \begin{frame}[t]{Tactical}
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
-	\input{../../tex/models/tactical.tex}
+			\input{../../tex/models/tactical.tex}
 		\end{minipage}
 	}
 \end{frame}
@@ -61,7 +64,7 @@
 \begin{frame}[t]{Supervisor}
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
-	\input{../../tex/models/supervisor.tex}
+			\input{../../tex/models/supervisor.tex}
 		\end{minipage}
 	}
 \end{frame}
@@ -69,20 +72,21 @@
 \begin{frame}[t]{Operational}
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
-	\input{../../tex/models/operational.tex}
+			\input{../../tex/models/operational.tex}
 		\end{minipage}
 	}
 \end{frame}
 
-
-
-\begin{frame}{Architecture}
-	\input{../../figures/ordinator-architecture.tex}
-	
+\begin{frame}[t]{Architecture}
+	\drawGraph{}
 \end{frame}
 
-\begin{frame}{}
-    \begin{block}{Possible Futures for Operation Research}
+\begin{frame}[t]{Architecture}
+	\drawGraph{show_orchestrator=true}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Possible contributions to Operation Research}
         \begin{enumerate}
             \item Business
             \item Technical
