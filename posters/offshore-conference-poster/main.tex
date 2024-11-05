@@ -5,13 +5,11 @@
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{enumitem}
-
-\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{fontspec}
 
 % Set the main document font to Arial
-\setmainfont{Aerial}
+\setmainfont{FiraCode Nerd Font}
 
 % Title, Author, Institute
 \title{Multi-model Maintenance Scheduling}
@@ -36,8 +34,32 @@
 
 \input{../../tex/definitions.tex}
 \begin{document}
-
+% Create header
+% \begin{tikzpicture}[remember picture,overlay]
+%     % \node[fill=maincolor, minimum width=\paperwidth, minimum height=10cm, text=white] (header) at (current page.north) {
+%     %     \begin{minipage}{0.9\paperwidth}
+%     %         % \centering
+%     %         % \vspace{1cm}
+%     %         % \huge \textbf{\@title} \\[0.5cm]
+%     %         % \Large \textit{\@author} - \@institute
+%     %         % \vspace{1cm}
+%     %     \end{minipage}
+%     % };
+% \end{tikzpicture}
 % Title block
+% \block{Header Block}{Header}
+% \begin{tikzpicture}[remember picture,overlay]
+    % \node[fill=maincolor, minimum width=\paperwidth, minimum height=10cm, text=white] at (current page.north) {
+    %     \begin{minipage}{0.9\paperwidth}
+    %         \centering
+    %         \vspace{1cm}
+    %         \scalebox{1.5}{\Huge \textbf{\textsf{\@title}}} \\[0.5cm]  % Larger, bold, sans-serif title
+    %         \Large \textit{\@author} \\
+    %         \Large \textit{\@institute}
+    %         \vspace{1cm}
+    %     \end{minipage}
+    % };
+% \end{tikzpicture}
 \maketitle
 
 % Start of poster content
@@ -46,17 +68,33 @@
 % Column 1
 \column{0.60}
 \block{Introduction}{
-  Operations research (OR) traditionally focuses on optimizing processes within a single organization. However, many real-world problems involve multiple actors with diverse objectives and constraints. This poster explores a multi-actor approach to OR, emphasizing collaboration and conflict resolution among stakeholders.
+	Operation 
 }
 
-\block{Objectives}{
+\block{Research Questions}{
   \begin{enumerate}[label=\arabic*.]
-    \item Integrate multiple stakeholder perspectives into OR models.
-    \item Develop methods to handle conflicting objectives.
-    \item Propose collaborative optimization strategies.
+    \item How to implement a scheduling system that can coordinate in real-time
+	\item 
+    \item Can you coordinate metaheuristics based on different mathematical models in real-time
   \end{enumerate}
 }
 
+\block{Solution Method}{
+	\input{../../figures/ordinator-architecture.tex}
+	\drawGraph{basis=2cm}
+}
+
+\block{Case Study: Total Energies}{
+	The proposed system has been developed in collaboration with Total Energies to help optimize there
+	maintenace scheduling operations.
+}
+\block{Future Work}{
+  \begin{itemize}
+    \item Extend the approach to international supply chains.
+    \item Incorporate real-time data analytics for dynamic decision-making.
+    \item Explore applications in other sectors like healthcare and transportation.
+  \end{itemize}
+}
 \block{Results}{
   \begin{itemize}
     \item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
@@ -66,30 +104,11 @@
 }
 
 \block{Conclusion}{
-  Incorporating a multi-actor approach in operations research leads to more sustainable and acceptable solutions. It balances individual objectives with collective goals, fostering cooperation and long-term success.
-}
 
-\block{Future Work}{
-  \begin{itemize}
-    \item Extend the approach to international supply chains.
-    \item Incorporate real-time data analytics for dynamic decision-making.
-    \item Explore applications in other sectors like healthcare and transportation.
-  \end{itemize}
-}
-\block{Solution Method}{
-  
-  \input{../../figures/ordinator-architecture.tex}
-  \drawGraph{}
-}
-
-\block{Case Study}{
-  \textbf{Supply Chain Management} \\
-  A complex supply chain involving suppliers, manufacturers, distributors, and retailers. Each actor aims to optimize its own performance metrics, which may conflict with others. The multi-actor approach seeks a globally optimal solution that considers the objectives of all stakeholders.
 }
 % Column 2
 \column{0.40}
 \block{Methodology}{
-
   \section{Strategic}
 	\scalebox{0.5}{
 		\begin{minipage}{0.68\textwidth}
