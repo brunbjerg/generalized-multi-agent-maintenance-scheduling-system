@@ -26,6 +26,10 @@
 \institute{Technical University of Denmark}
 \date{\today}
 
+\usepackage{fontspec}
+
+% Set the main document font to Arial
+\setmainfont{FiraCode Nerd Font}
 \begin{document}
 
 \input{../../tex/definitions.tex}
@@ -33,16 +37,62 @@
 
 
 
-
 \frame{\titlepage}
-
-\begin{frame}{Agenda}
+\begin{frame}{Agenda}{FiraCode Nerd Font}
     \begin{itemize}
-		\item
         \item Introduction to Maintenance Scheduling
         \item Architecture of a Scheduling System
         \item Possible Contributions to Operation Research
     \end{itemize}
+\end{frame}
+\begin{frame}{}
+    \begin{block}{Mathematical Notation: Sets }
+
+	$ a \in A_{b,c}^{m}(t, x, y)$
+
+	\begin{itemize}
+		\item a: set element
+		\item A: set itself
+		\item b: set element from set B
+		\item c: set element from set C
+		\item m: model formulation m
+		\item t: time
+		\item x: value of decision variable from a different model
+		\item y: value of decision variable from a different model
+	\end{itemize}
+	
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Mathematical Notation: Parameters}
+
+	$ name\_of\_parameter_{a, b}(t, x, y) $
+	\begin{itemize}
+		\item parameters are functions of set elements and input parameters
+		\item a: set element from A
+		\item b: set element from B
+		\item t: time
+		\item x: value of decision variable from another model
+		\item y: value of decision variable from another model
+	\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Mathematical Notation: Variables}
+	\par
+	$ x_{a, b}^{m}(t) $ \\ 
+	\begin{itemize}
+		\item variables are functions of set elements, specified model, and time
+		\item x: decision variable
+		\item a: set element from A
+		\item b: set element from B
+		\item m: specifing the model
+		\item t: time
+		\item Notice: decision variables cannot depend on other decision variables as it would make them belong to the same model.
+	\end{itemize}
+    \end{block}
 \end{frame}
 
 \begin{frame}[t]{Strategic}
@@ -78,20 +128,41 @@
 \end{frame}
 
 \begin{frame}[t]{Architecture}
-	\drawGraph{}
+	\drawGraph{basisinput=1cm}
 \end{frame}
 
 \begin{frame}[t]{Architecture}
-	\drawGraph{show_orchestrator=true}
+	\drawGraph{basisinput=1cm, show_orchestrator=true}
 \end{frame}
 
 \begin{frame}[t]{}
-    \begin{block}{Possible contributions to Operation Research}
+    \begin{block}{}
         \begin{enumerate}
+			\item Reactive Versus Static Constraints
+			\item Dynamic
             \item Business
             \item Technical
             \item Academic
         \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Dynamic versus Static Models}
+			\input{../../figures/reactive-versus-dynamic-constraints.tex}
+			\drawReactiveConstraints{}
+
+		\begin{itemize}
+
+			\item Mathematical models guide direction but does not provide direct solutions.
+			\item Static solutions are rarely fully executable.
+			\item Dynamic models are less constrained and ensure a contained optimal solution.
+		\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Dynamic }
     \end{block}
 \end{frame}
 

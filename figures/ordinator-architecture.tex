@@ -1,11 +1,6 @@
 \usetikzlibrary {positioning}
 
-
-\definecolor{red}{HTML}{8A3F3A}
-\definecolor{yellow}{HTML}{E0BB3C}
-\definecolor{blue}{HTML}{4569E0}
-\definecolor{green}{HTML}{17E561}
-\definecolor{other}{HTML}{6A939E}
+\input{../../styles/colors.tex}
 
 \newcommand{\ModelColor}{red}
 \newcommand{\UserInterfaceColor}{yellow}
@@ -13,6 +8,7 @@
 \newcommand{\PointerSwapColor}{green}
 \newcommand{\OrchestratorColor}{other}
 
+\newcommand{\basisinput}{4cm}  % Default value if not set by /graph/basis
 \pgfkeys{
 	/graph/.is family, /graph,
 	default/.style = {
@@ -20,31 +16,28 @@
 		show_orchestrator = false,
 		show_persistence = false,
 		show_user_interface = false,
-		basis/.estore in = 2cm,
+		basisinput/.estore in = \basisinput,
 	},
 	show_shared_pointer/.estore in = \ShowSharedSolutionCommunication,
 	show_orchestrator/.estore in = \ShowOrchestratorCommunication,
 	show_persistence/.estore in = \ShowPersistenceCommunication,
 	show_user_interface/.estore in = \ShowUserInterfaceCommunication,
-	basis/.estore in = \basisinput,
+	basisinput/.estore in = \basisinput,
 }
+
 \newlength{\basis}
 \tikzset{
   basis/.code={\setlength{\basis}{\basisinput}}, % TikZ assignment code
-  basis/.default=1cm,                   % Provide a default (\b@sis is undefined/unassigned)
+  basis/.default=3cm,                   % Provide a default (\b@sis is undefined/unassigned)
   basis,                                % Set initial Value (\b@sis is defined/assigned)
- }
+}
 
 \newcommand{\drawGraph}[1]{
 	\pgfkeys{/graph, default, #1}
-	
-	\begin{tikzpicture}[scale=0.75][
-		% Define styles and settings
-		node distance=2cm,
-		block/.style={rectangle, draw, fill=blue!20, text centered, minimum height=3em},
-		arrow/.style={-Stealth, thick}
-		]
+	\setlength{\basis}{\basisinput}
+	\begin{tikzpicture}[scale=0.75, line width=0.05\basis][
 
+	]
 
 		\ifthenelse{\equal{\ShowOrchestratorCommunication}{true}}{
 			\draw[color=other,-, ultra thick] (Strategic) -- (Orchestrator);
@@ -55,15 +48,16 @@
 			\draw[color=other,-, ultra thick] (Operational_3) -- (Orchestrator);
 		}{}
 		% \draw[help lines] (0\basis, 0\basis) grid (10\basis, 8\basis);
-		\draw (5\basis,4\basis) node[minimum height=5cm,minimum width=7.0cm,rounded corners=5pt] {};
+		\draw (5\basis,4\basis) node[minimum height=5\basis,minimum width=7.0\basis,rounded corners=0.1\basis] {};
 
-	    \draw (2.5\basis,5.5\basis) node[minimum height=1cm,minimum width=1cm,fill=\ModelColor,rounded corners=5pt] (Strategic) {Stra};
-	    \draw (5.0\basis,4.0\basis) node[minimum height=1cm,minimum width=1\basis,fill=\ModelColor,rounded corners=5pt] (Supervisor) {Sup};
-		\draw (7.5\basis,5.5\basis) node[minimum height=1cm,minimum width=1cm,fill=\ModelColor,rounded corners=5pt] (Tactical) {Tac};
+	    \draw[draw=black] (5.0\basis,4.0\basis) node[draw=black,minimum height=3.5\basis,minimum width=5\basis,rounded corners=0.1\basis] {} ;
+	    \draw (2.5\basis,5.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Strategic) {Stra};
+	    \draw (5.0\basis,4.0\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Supervisor) {Sup};
+		\draw (7.5\basis,5.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Tactical) {Tac};
 
-		\draw (2.5\basis,2.5\basis) node[minimum height=1cm,minimum width=1cm,fill=\ModelColor,rounded corners=5pt] (Operational_1) {$O_{1}$};
-		\draw (5.0\basis,2.5\basis) node[minimum height=1cm,minimum width=1cm,fill=\ModelColor,rounded corners=5pt] (Operational_2) {$O_{2}$};
-		\draw (7.5\basis,2.5\basis) node[minimum height=1cm,minimum width=1cm,fill=\ModelColor,rounded corners=5pt,rounded corners=5pt] (Operational_3) {$O_{3}$};
+		\draw (2.5\basis,2.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Operational_1) {$O_{1}$};
+		\draw (5.0\basis,2.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Operational_2) {$O_{2}$};
+		\draw (7.5\basis,2.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis,rounded corners=0.1\basis] (Operational_3) {$O_{3}$};
 	
 		\draw (Strategic) edge (Tactical);
 		\draw (Strategic) edge (Tactical);
@@ -71,26 +65,26 @@
 		\draw (Supervisor) edge (Operational_1);
 		\draw (Supervisor) edge (Operational_2);
 		\draw (Supervisor) edge (Operational_3);
-		\draw (5.0\basis,0.5\basis)   node[minimum height=1cm,minimum width=5.0cm,            fill=\PersistenceColor,rounded corners=5pt] {SchedulingEnvironment};
-		\draw (5.0\basis,7.5\basis)   node[minimum height=1cm,minimum width=5.0cm,            fill=\OrchestratorColor,rounded corners=5pt] (Orchestrator) {Orchestrator};
-		\draw (0.5\basis,4.0\basis)   node[rotate=90, minimum height=1cm, minimum width=3.25cm,fill=\PointerSwapColor,rounded corners=5pt] {SharedSolution};
-		\draw (9.5\basis,5.5\basis) node[rotate=90, minimum height=1cm, minimum width=1cm,fill=\UserInterfaceColor,rounded corners=5pt] {UI};
-		\draw (9.5\basis,4.0\basis)   node[rotate=90, minimum height=1cm, minimum width=1cm,fill=\UserInterfaceColor,rounded corners=5pt] {UI};
-		\draw (9.5\basis,2.5\basis) node[rotate=90, minimum height=1cm, minimum width=1cm,fill=\UserInterfaceColor,rounded corners=5pt] {UI};
+		\draw (5.0\basis,0.5\basis)   node[minimum height=1\basis,minimum width=5.0\basis,            fill=\PersistenceColor,rounded corners=0.1\basis] {persistence};
+		\draw (5.0\basis,7.5\basis)   node[minimum height=1\basis,minimum width=5.0\basis,            fill=\OrchestratorColor,rounded corners=0.1\basis] (Orchestrator) {Orchestrator};
+		\draw (0.5\basis,4.0\basis)   node[rotate=90, minimum height=1\basis, minimum width=3.5\basis,fill=\PointerSwapColor,rounded corners=0.1\basis] {decision variables};
+		\draw (9.5\basis,5.75\basis)  node[rotate=90, minimum height=1\basis, minimum width=1\basis,fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
+		\draw (9.5\basis,4.0\basis)   node[rotate=90, minimum height=1\basis, minimum width=1\basis,fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
+		\draw (9.5\basis,2.25\basis)  node[rotate=90, minimum height=1\basis, minimum width=1\basis,fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
 
 		% Legend
 		\begin{scope}[shift={(10.6\basis,5.7\basis)}]
 			\node at (-0.25\basis,1\basis) [right] {Communication Type};
-			\draw[color=\OrchestratorColor,fill] (0\basis,0.0\basis) rectangle (0.5cm, 0.5cm);
-			\node[anchor=west] at (0.5\basis, 0.25\basis) {\scriptsize Channels};
-			\draw[color=\PointerSwapColor,fill] (0\basis,-1.0\basis) rectangle(0.5cm, -0.5cm); 
-			\node[anchor=west] at (0.5\basis, -0.75\basis) {\scriptsize Atomic Pointer Swap};
-			\draw[color=\ModelColor,fill] (0\basis,-2.0\basis) rectangle(0.5cm, -1.5cm); 
-			\node[anchor=west] at (0.5\basis, -1.75\basis) {\scriptsize Metaheurics};
-			\draw[color=\PersistenceColor,fill] (0\basis,-3.0\basis) rectangle(0.5cm, -2.5cm); 
-			\node[anchor=west] at (0.5\basis, -2.75\basis) {\scriptsize Mutex lock};
-			\draw[color=\UserInterfaceColor,fill] (0\basis,-4.0\basis) rectangle(0.5cm, -3.5cm); 
-			\node[anchor=west] at (0.5\basis, -3.75\basis) {\scriptsize Channels};
+			\draw[color=\OrchestratorColor,fill] (0\basis,0.0\basis)   rectangle (0.5\basis, 0.5\basis);
+			\node[anchor=west] at (0.5\basis, 0.25\basis) { Channels};
+			\draw[color=\PointerSwapColor,fill] (0\basis,-1.0\basis)   rectangle(0.5\basis, -0.5\basis); 
+			\node[anchor=west] at (0.5\basis, -0.75\basis) { Atomic Pointer Swap};
+			\draw[color=\ModelColor,fill] (0\basis,-2.0\basis)         rectangle(0.5\basis, -1.5\basis); 
+			\node[anchor=west] at (0.5\basis, -1.75\basis) { Metaheurics};
+			\draw[color=\PersistenceColor,fill] (0\basis,-3.0\basis)   rectangle(0.5\basis, -2.5\basis); 
+			\node[anchor=west] at (0.5\basis, -2.75\basis) { Mutex lock};
+			\draw[color=\UserInterfaceColor,fill] (0\basis,-4.0\basis) rectangle(0.5\basis, -3.5\basis); 
+			\node[anchor=west] at (0.5\basis, -3.75\basis) { Channels};
 		\end{scope}
 		\ifthenelse{\equal{\ShowSharedSolutionCommunication}{true}}{
 			\draw[->, thick] (Strategic) -- (Orchestrator);
