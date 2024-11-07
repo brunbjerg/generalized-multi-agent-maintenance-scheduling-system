@@ -1,33 +1,48 @@
-\documentclass[portrait, a0paper]{tikzposter}
+\documentclass[20pt, portrait, a0paper]{tikzposter}
 
 % Packages
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{enumitem}
 \usepackage{amssymb}
 \usepackage{fontspec}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 
+\input{../../styles/colors.tex}
 % Set the main document font to Arial
 \setmainfont{FiraCode Nerd Font}
-
 % Title, Author, Institute
-\title{Multi-model Maintenance Scheduling}
-\author{Christian Brunbjerg Jespersen}
-\institute{Technical University of Denmark}
+\title{\textbf{Multi-model Maintenance Scheduling}}
+\author{\textbf{Christian Brunbjerg Jespersen}}
+\institute{\textbf{Technical University of Denmark}}
 
-% Define custom colors (optional)
 \definecolor{maincolor}{cmyk}{0, 91, 72, 23} % A shade of blue
 \definecolor{dtu}{RGB}{255, 102, 0} % A shade of orange
+\tikzposterlatexaffectionproofoff
+% Background
+\colorlet{backgroundcolor}{dtu-grey}
+\colorlet{framecolor}{black}
 
-% \colorlet{titlebgcolor}{maincolor}
-% \colorlet{titletitlefg}{maincolor}
-% \colorlet{titleauthorfg}{maincolor}
+% Title
+\colorlet{titlefgcolor}{white}
+\colorlet{titlebgcolor}{dtu-navy-blue}
 
-\colorlet{blockbodycolor}{maincolor}
-\colorlet{blocktitlecolor}{dtu}
-\colorlet{blockbodybg}{maincolor}
-\colorlet{blocktitlefg}{dtu}
+% Block
+\colorlet{blockbodycolor}{dtu-navy-blue}
+\colorlet{blocktitlecolor}{dtu-navy-blue}
+\colorlet{blocktitlebgcolor}{dtu-navy-blue}
+\colorlet{blocktitlefgcolor}{dtu-white}
+
+% Innerblock
+\colorlet{innerblocktitlebgcolor}{dtu-orange}
+\colorlet{innerblocktitlefgcolor}{white}
+\colorlet{innerblockbodybgcolor}{white}
+\colorlet{innerblockbodyfgcolor}{black}
+
 % Theme and color style
 % \usetheme{Basic}
 % \usecolorstyle{Default}
@@ -60,35 +75,40 @@
     %     \end{minipage}
     % };
 % \end{tikzpicture}
-\maketitle
+\maketitle[innersep=4cm, width=\textwidth, roundedcorners=0.2cm, titletotopverticalspace=0, titletoblockverticalspace=2cm]
 
 % Start of poster content
 \begin{columns}
 
 % Column 1
 \column{0.60}
-\block{Introduction}{
-	Operation 
+
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Introduction}{
+	Current Operation Research methods have proven difficult to implement in operational settings. The poster
+	presents a methodology to decompose a large-scale decision process into a series of modules that each represents
+	the decisions taken by each individual stakeholder making up the scheduling process. 
 }
 
-\block{Research Questions}{
-  \begin{enumerate}[label=\arabic*.]
-    \item How to implement a scheduling system that can coordinate in real-time
-	\item 
-    \item Can you coordinate metaheuristics based on different mathematical models in real-time
-  \end{enumerate}
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Research Questions}{
+	\input{../../tex/research_questions.tex}
 }
 
-\block{Solution Method}{
+\block[titleinnersep=0.5cm, bodyverticalshift=0cm, roundedcorners=0.2cm, titleleft]{Solution Method}{
+	\innerblock[roundedcorners=0.2cm, bodyinnersep=1.0cm]{Modular Scheduling System Architecture}{
 	\input{../../figures/ordinator-architecture.tex}
-	\drawGraph{basisinput=4cm}
+	\drawGraph{basisinput=3cm}
+	}
 }
+\begin{subcolumns}
 
-\block{Case Study: Total Energies}{
-	The proposed system has been developed in collaboration with Total Energies to help optimize there
-	maintenace scheduling operations.
+\subcolumn{0.5} \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm]{Algorithm: Actor based Large Neighborhood Search}{
+	\scalebox{0.9}{
+		\begin{minipage}{0.27\textwidth}
+			\input{../../tex/algorithms/actor-based-large-neighborhood-search.tex}
+		\end{minipage}
+	}
 }
-\block{Results}{
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Results}{
   \begin{itemize}
     \item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
     \item \textbf{Stakeholder Satisfaction}: Increased satisfaction scores among all actors by 20\%.
@@ -96,7 +116,8 @@
   \end{itemize}
 }
 
-\block{Future Work}{
+\subcolumn{0.5} 
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Future Work}{
   \begin{itemize}
     \item Extend the approach to international supply chains.
     \item Incorporate real-time data analytics for dynamic decision-making.
@@ -104,44 +125,53 @@
   \end{itemize}
 }
 
-\block{Conclusion}{
-
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Conclusion}{
+	
 }
+
+\end{subcolumns}
 % Column 2
 \column{0.40}
-\block{Methodology}{
-  \section{Strategic}
-	\scalebox{0.5}{
-		\begin{minipage}{0.68\textwidth}
-			\input{../../tex/models/strategic.tex}
-		\end{minipage}
+	\blockbodyinnersep=2cm
+\block[bodyinnersep=1cm, titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Methodology}{
+  	\innerblock[roundedcorners=0.2cm]{Strategic}{
+		\scalebox{0.5}{
+			\begin{minipage}{0.66\textwidth}
+				\input{../../tex/models/strategic.tex}
+			\end{minipage}
+		}
 	}
-  \section{Tactical}
-	\scalebox{0.5}{
-		\begin{minipage}{0.68\textwidth}
-			\input{../../tex/models/tactical.tex}
-		\end{minipage}
+	\vspace{1cm}
+	\innerblock[roundedcorners=0.2cm]{Tactical}{
+		\scalebox{0.5}{
+			\begin{minipage}{0.66\textwidth}
+				\input{../../tex/models/tactical.tex}
+			\end{minipage}
+		}
 	}
-  \section{Supervisor}
-	\scalebox{0.5}{
-		\begin{minipage}{0.68\textwidth}
-			\input{../../tex/models/supervisor.tex}
-		\end{minipage}
+	\vspace{1cm}
+	\innerblock[roundedcorners=0.2cm]{Supervisor}{
+		\scalebox{0.5}{
+			\begin{minipage}{0.66\textwidth}
+				\input{../../tex/models/supervisor.tex}
+			\end{minipage}
+		}
 	}
-  \section{Operational}
-	\scalebox{0.5}{
-		\begin{minipage}{0.68\textwidth}
-			\input{../../tex/models/operational.tex}
-		\end{minipage}
+	\vspace{1cm}
+	\innerblock[roundedcorners=0.2cm]{Operational}{
+		\scalebox{0.5}{
+			\begin{minipage}{0.66\textwidth}
+				\input{../../tex/models/operational.tex}
+			\end{minipage}
+		}
 	}
-
 }
 
 % Column 3
-\column{0.50}
+% \column{0.50}
 
 % % Contact Information
-% \block{Contact Information}{
+% \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Contact Information}{
 %   \begin{itemize}
 %     \item \textbf{Email}: \href{mailto:your.email@institution.edu}{your.email@institution.edu}
 %     \item \textbf{Phone}: +1 (234) 567-8901
@@ -150,6 +180,24 @@
 % }
 
 \end{columns}
+
+\block[roundedcorners=0.2cm, bodywidthscale=1.0, bodyverticalshift=0cm]{}{
+	\begin{minipage}{0.12\linewidth}
+		\includegraphics[width=9cm, trim={0mm, 200mm, 0mm, 200mm}, clip]{../../figures/picture_of_myself.jpg}
+
+		
+	\end{minipage}
+	\begin{minipage}[c][3in][t]{0.48\linewidth}
+			
+		Contact Information:
+		\begin{itemize}
+			\item \textbf{Email}: cbrje@dtu.dk
+			\item \textbf{Phone}: 0045 28 43 39 74
+			\item  %\textbf{Website}: \href{http://www.yourwebsite.com}{www.yourwebsite.com}
+		\end{itemize}
+		
+	\end{minipage}
+}
 
 \end{document}
 

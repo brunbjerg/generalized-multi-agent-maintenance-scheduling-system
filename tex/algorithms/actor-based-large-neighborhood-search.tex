@@ -1,29 +1,37 @@
+\newcommand{\MessageQueue}{Q}
+\newcommand{\Solution}{X}
+\newcommand{\ProblemInstance}{P}
+\newcommand{\SharedSolution}{S}
+
 \begin{algorithm}[H]
-\caption{Actor-based Large Neighborhood Search}  \label{algo1}
+\caption{Actor-based Large Neighborhood Search} 
 \begin{algorithmic}[1]
-\State \textbf{Input} queue = message queue
-\State \textbf{Input} P     = problem instance
-\State \textbf{Input} x     = initial schedule
-% \State $x^b = x$
-\While{true}
-	\While{queue.has\_message()}
+\State \textbf{Input} $\MessageQueue$    = message queue
+\State \textbf{Input} $\ProblemInstance$ = problem instance
+\State \textbf{Input} $\Solution$        = initial schedule
+\State \textbf{Input} $\SharedSolution$  = SharedSolution
+% \State $\Solution^b = \Solution$
+\Repeat
+	\State $\Solution^t = clone(\Solution)$
+	\While{$\MessageQueue.has\_message()$}
         % \State $m = queue.pop()$
-        % \State $m.destruct(x^b)$
-		\State $P.update(m)$
-        \State $x.destruct(m)$
+        % \State $m.destruct(\Solution^b)$
+		\State $\ProblemInstance.update(\SharedSolution, m)$
+        \State $\Solution^t.destruct(\SharedSolution, m)$
     \EndWhile
 	
-    \State $x^t = x.repair()$
-    % \If{accept($x^t$,\ $x$)}                       \label{alg:acceptance_criteria_start}
-    %     \State x = x$^t$
-    % \EndIf                                         \label{alg:acceptance_criteria_end}
-    \If{$c(x^t) < c(x)$}                             \label{alg:objective_start}
-        \State $x = x^t$
-		\State queue.send($x$)
-    \EndIf                                           \label{alg:objective_end}
-	\State queue.push($m_5$)
-\EndWhile\\
-\Return $x^b$
+    \State $\Solution^t.repair(\SharedSolution)$
+
+    \If{accept($\Solution^t, \Solution$)}                       
+        \State $\Solution.update(\Solution^t)$
+    \EndIf                                         
+
+    \If{$c(\Solution^t) < c(\Solution)$}                             
+        \State $\Solution.update(\Solution^t)$
+		\State $\SharedSolution.atomic\_pointer\_swap(\Solution)$
+    \EndIf                                           
+	\State $\MessageQueue.push(m)$
+\Until
 \end{algorithmic}
 \end{algorithm}
 
