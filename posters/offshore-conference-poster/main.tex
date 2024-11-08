@@ -1,6 +1,5 @@
 \documentclass[20pt, portrait, a0paper]{tikzposter}
 
-
 % Packages
 \usepackage{algorithmicx}
 \usepackage{algorithm}
@@ -15,8 +14,10 @@
 \usepackage{multicol}
 
 \addbibresource{/home/cbrje/projects/phd-program/generalized-multi-agent-maintenance-scheduling-system/bib/references.bib}
+
 \input{../../styles/colors.tex}
 \input{../../tex/definitions.tex}
+\input{../../figures/ordinator-architecture.tex}
 
 \setmainfont{FiraCode Nerd Font}
 
@@ -59,13 +60,17 @@
 \column{0.60}
 
 \block[titleinnersep=0.8cm, roundedcorners=0.2cm, titleleft]{Introduction}{
-	Current Operation Research methods have proven difficult to implement in operational settings. The poster
-	presents a methodology to decompose a large-scale decision process into a series of modules that each represents
-	the decisions taken by each individual stakeholder making up the scheduling process. Which is the most general 
-	form is composed of a Scheduler, a set of Supervisors, and groups of technicians that are lead by the supervisors. 
-	It is generally believe that maintenance efficiency can be increased by $~$35\%  \parencite{palmerMaintenancePlanningScheduling2019} by having a well organized maintenance
-	scheduling system in place. This project will provide an implementable architecture that is able to model and optimize
-	this system through the use of real-time optimization and user interactions.  
+	Current Operation Research methods have proven difficult to implement in
+	operational settings. The poster 	presents a methodology to decompose a
+	large-scale decision process into a series of modules that each represents 	the
+	decisions taken by each individual stakeholder making up the scheduling process.
+	The maintenance scheduling procees in its  	most general  form is composed of
+	a Scheduler, a set of Supervisors, and groups of technicians that are lead by
+	the supervisors.  	It is generally believed that maintenance efficiency can be
+	increased by up to $~$35\% \parencite{palmerMaintenancePlanningScheduling2019} by
+	having a well organized maintenance 	scheduling system in place. This project
+	will provide an implementable architecture that is able to model and optimize 	
+	this system through the use of real-time optimization and user interactions.
 }
 
 \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.8cm]{Research Questions}{
@@ -73,35 +78,40 @@
 }
 
 \block[titleinnersep=0.5cm, bodyverticalshift=0cm, roundedcorners=0.2cm, titleleft]{Solution Method}{
+	\centering
 	\innerblock[roundedcorners=0.2cm, bodyinnersep=1.0cm]{Modular Scheduling System Architecture}{
-		\input{../../figures/ordinator-architecture.tex}
-		\drawGraph{basisinput=3cm}
+		\centering
+		\scalebox{0.90}{
+			\begin{minipage}[c][21cm][c]{1.20\textwidth}
+				\drawGraph{basisinput=3cm}
+			\end{minipage}
+		}
 	}
 }
 \begin{subcolumns}
 
-\subcolumn{0.5} \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm]{Algorithm: Actor based Large Neighborhood Search}{
-	\scalebox{0.9}{
-		\begin{minipage}{0.27\textwidth}
+\subcolumn{0.5} \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.8cm]{Algorithm: Actor based Large Neighborhood Search}{
+	\scalebox{1.12}{
+		\begin{minipage}{0.20\textwidth}
 			\input{../../tex/algorithms/actor-based-large-neighborhood-search.tex}
 		\end{minipage}
 	}
 }
 
 \subcolumn{0.5} 
-\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm]{Future Work}{
-	\begin{itemize}
-		\item Test Scheduling Application with case company
-		\item 
-	\end{itemize}
-}
 
 \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm]{Results}{
-	\begin{itemize}
-		\item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
-		\item \textbf{Stakeholder Satisfaction}: Increased satisfaction scores among all actors by 20\%.
-		\item \textbf{Collaborative Strategies}: Developed joint policies that benefit all parties.
-	\end{itemize}
+
+	\begin{tikzfigure}
+		\includegraphics[width=0.25\textwidth]{./figures/result.pdf}	
+	\end{tikzfigure}
+
+}
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm, bodyverticalshift=-0.3cm]{Future Work}{
+	\begin{enumerate}
+		\item Validate effectiveness user-inputs into the Scheduling Application with case company
+		\item Assess feasibility of  atomic pointer swaps to share state between meta-heuristics
+	\end{enumerate}
 }
 
 \end{subcolumns}
@@ -109,7 +119,7 @@
 \column{0.40}
 	\blockbodyinnersep=2cm
 \block[bodyinnersep=1cm, titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Methodology}{
-  	\innerblock[roundedcorners=0.2cm]{Strategic}{
+  	\innerblock[roundedcorners=0.2cm]{Strategic: Variant of the knapsack problem}{
 		\scalebox{0.5}{
 			\begin{minipage}{0.66\textwidth}
 				\input{../../tex/models/strategic.tex}
@@ -117,7 +127,7 @@
 		}
 	}
 	\vspace{1cm}
-	\innerblock[roundedcorners=0.2cm]{Tactical}{
+	\innerblock[roundedcorners=0.2cm]{Tactical: Variant of the project scheduling problem}{
 		\scalebox{0.5}{
 			\begin{minipage}{0.66\textwidth}
 				\input{../../tex/models/tactical.tex}
@@ -125,7 +135,7 @@
 		}
 	}
 	\vspace{1cm}
-	\innerblock[roundedcorners=0.2cm]{Supervisor}{
+	\innerblock[roundedcorners=0.2cm]{Supervisor: Varient of the assignment problem}{
 		\scalebox{0.5}{
 			\begin{minipage}{0.66\textwidth}
 				\input{../../tex/models/supervisor.tex}
@@ -133,7 +143,7 @@
 		}
 	}
 	\vspace{1cm}
-	\innerblock[roundedcorners=0.2cm]{Operational}{
+	\innerblock[roundedcorners=0.2cm]{Operational: Variant of the sequencing problem}{
 		\scalebox{0.5}{
 			\begin{minipage}{0.66\textwidth}
 				\input{../../tex/models/operational.tex}
@@ -148,18 +158,30 @@
 	\begin{minipage}{0.12\linewidth}
 		\includegraphics[width=9cm, trim={0mm, 200mm, 0mm, 200mm}, clip]{../../figures/picture_of_myself.jpg}
 	\end{minipage}
-	\begin{minipage}[c][3in][t]{0.71\linewidth}
-		Contact Information:
+	\begin{minipage}[c][8cm][t]{0.22\linewidth}
+		\textbf{Contact Information:}
 		\begin{itemize}
+			\item \textbf{name}: Christian Brunbjerg Jespersen
 			\item \textbf{Email}: cbrje@dtu.dk
 			\item \textbf{Phone}: 0045 28 43 39 74
-			\item  %\textbf{Website}: \href{http://www.yourwebsite.com}{www.yourwebsite.com}
+			\item \textbf{Website}: %\href{http://www.yourwebsite.com}{www.yourwebsite.com}
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{0.20\linewidth}
-
+	\begin{minipage}[c][8cm][t]{0.31\linewidth}
+		\textbf{Supervisors:}
+		\begin{itemize}
+			\item Niels Henrik Mortensen, DTU Construct
+			\item Thomas Riis Stidsen, DTU Management
+		\end{itemize}
+		\textbf{Date of Completion:}
+		\begin{itemize}
+			\item 2026-02-01
+		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{0.38\linewidth}		
+	\begin{minipage}{0.16\linewidth}
+		\includegraphics[width=10cm]{./figures/logo-total-energies.png}
+	\end{minipage}
+	\begin{minipage}{0.30\linewidth}		
 		\includegraphics[width=7cm, trim={0mm, 25mm, 20mm, 25mm}, clip]{../../pictures/Blue_RGB.pdf}
 	\end{minipage}
 }

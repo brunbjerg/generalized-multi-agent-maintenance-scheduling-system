@@ -7,9 +7,9 @@
 	& \VarTacticalWork{}{} \\ 
 	& \tau \in [0, \infty] \\
 	& \text{\rule{\linewidth}{0.4pt}} \notag\\
-	& \textbf{Minimize:} \notag                                                                                                                                                        \\
+	& \textbf{Maximize:} \notag                                                                                                                                                        \\
 	& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}  \notag\\ 
-	& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess     \notag                                              \\
+	& - \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess     \notag                                              \\
 	& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementWorkOrder1 \in \SetWorkOrder{}} \sum_{\ElementWorkOrder2 \in \SetWorkOrder{}} 	 \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder1}{\ElementPeriod} \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder2}{\ElementPeriod}  \\
 	& \text{\rule{\linewidth}{0.4pt}} \notag\\
 	& \textbf{Subject to:} \notag                                                                                                                                                      \\
