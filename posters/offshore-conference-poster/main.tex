@@ -1,28 +1,34 @@
 \documentclass[20pt, portrait, a0paper]{tikzposter}
 
+
 % Packages
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{multicol}
-\usepackage{enumitem}
 \usepackage{amssymb}
+\usepackage{enumitem}
 \usepackage{fontspec}
-\usepackage{algorithm}
-\usepackage{algorithmicx}
-\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage[style=authoryear]{biblatex}
+\usepackage{multicol}
 
+\addbibresource{/home/cbrje/projects/phd-program/generalized-multi-agent-maintenance-scheduling-system/bib/references.bib}
 \input{../../styles/colors.tex}
-% Set the main document font to Arial
+\input{../../tex/definitions.tex}
+
 \setmainfont{FiraCode Nerd Font}
-% Title, Author, Institute
+
 \title{\textbf{Multi-model Maintenance Scheduling}}
 \author{\textbf{Christian Brunbjerg Jespersen}}
 \institute{\textbf{Technical University of Denmark}}
 
 \definecolor{maincolor}{cmyk}{0, 91, 72, 23} % A shade of blue
 \definecolor{dtu}{RGB}{255, 102, 0} % A shade of orange
+
 \tikzposterlatexaffectionproofoff
+
 % Background
 \colorlet{backgroundcolor}{dtu-grey}
 \colorlet{framecolor}{black}
@@ -43,60 +49,33 @@
 \colorlet{innerblockbodybgcolor}{white}
 \colorlet{innerblockbodyfgcolor}{black}
 
-% Theme and color style
-% \usetheme{Basic}
-% \usecolorstyle{Default}
-
-\input{../../tex/definitions.tex}
 \begin{document}
-% Create header
-% \begin{tikzpicture}[remember picture,overlay]
-%     % \node[fill=maincolor, minimum width=\paperwidth, minimum height=10cm, text=white] (header) at (current page.north) {
-%     %     \begin{minipage}{0.9\paperwidth}
-%     %         % \centering
-%     %         % \vspace{1cm}
-%     %         % \huge \textbf{\@title} \\[0.5cm]
-%     %         % \Large \textit{\@author} - \@institute
-%     %         % \vspace{1cm}
-%     %     \end{minipage}
-%     % };
-% \end{tikzpicture}
-% Title block
-% \block{Header Block}{Header}
-% \begin{tikzpicture}[remember picture,overlay]
-    % \node[fill=maincolor, minimum width=\paperwidth, minimum height=10cm, text=white] at (current page.north) {
-    %     \begin{minipage}{0.9\paperwidth}
-    %         \centering
-    %         \vspace{1cm}
-    %         \scalebox{1.5}{\Huge \textbf{\textsf{\@title}}} \\[0.5cm]  % Larger, bold, sans-serif title
-    %         \Large \textit{\@author} \\
-    %         \Large \textit{\@institute}
-    %         \vspace{1cm}
-    %     \end{minipage}
-    % };
-% \end{tikzpicture}
+
 \maketitle[innersep=4cm, width=\textwidth, roundedcorners=0.2cm, titletotopverticalspace=0, titletoblockverticalspace=2cm]
 
-% Start of poster content
 \begin{columns}
 
 % Column 1
 \column{0.60}
 
-\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Introduction}{
+\block[titleinnersep=0.8cm, roundedcorners=0.2cm, titleleft]{Introduction}{
 	Current Operation Research methods have proven difficult to implement in operational settings. The poster
 	presents a methodology to decompose a large-scale decision process into a series of modules that each represents
-	the decisions taken by each individual stakeholder making up the scheduling process. 
+	the decisions taken by each individual stakeholder making up the scheduling process. Which is the most general 
+	form is composed of a Scheduler, a set of Supervisors, and groups of technicians that are lead by the supervisors. 
+	It is generally believe that maintenance efficiency can be increased by $~$35\%  \parencite{palmerMaintenancePlanningScheduling2019} by having a well organized maintenance
+	scheduling system in place. This project will provide an implementable architecture that is able to model and optimize
+	this system through the use of real-time optimization and user interactions.  
 }
 
-\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Research Questions}{
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.8cm]{Research Questions}{
 	\input{../../tex/research_questions.tex}
 }
 
 \block[titleinnersep=0.5cm, bodyverticalshift=0cm, roundedcorners=0.2cm, titleleft]{Solution Method}{
 	\innerblock[roundedcorners=0.2cm, bodyinnersep=1.0cm]{Modular Scheduling System Architecture}{
-	\input{../../figures/ordinator-architecture.tex}
-	\drawGraph{basisinput=3cm}
+		\input{../../figures/ordinator-architecture.tex}
+		\drawGraph{basisinput=3cm}
 	}
 }
 \begin{subcolumns}
@@ -108,25 +87,21 @@
 		\end{minipage}
 	}
 }
-\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Results}{
-  \begin{itemize}
-    \item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
-    \item \textbf{Stakeholder Satisfaction}: Increased satisfaction scores among all actors by 20\%.
-    \item \textbf{Collaborative Strategies}: Developed joint policies that benefit all parties.
-  \end{itemize}
-}
 
 \subcolumn{0.5} 
-\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Future Work}{
-  \begin{itemize}
-    \item Extend the approach to international supply chains.
-    \item Incorporate real-time data analytics for dynamic decision-making.
-    \item Explore applications in other sectors like healthcare and transportation.
-  \end{itemize}
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm]{Future Work}{
+	\begin{itemize}
+		\item Test Scheduling Application with case company
+		\item 
+	\end{itemize}
 }
 
-\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Conclusion}{
-	
+\block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm]{Results}{
+	\begin{itemize}
+		\item \textbf{Improved Efficiency}: Achieved a 15\% reduction in total costs across the supply chain.
+		\item \textbf{Stakeholder Satisfaction}: Increased satisfaction scores among all actors by 20\%.
+		\item \textbf{Collaborative Strategies}: Developed joint policies that benefit all parties.
+	\end{itemize}
 }
 
 \end{subcolumns}
@@ -167,38 +142,30 @@
 	}
 }
 
-% Column 3
-% \column{0.50}
-
-% % Contact Information
-% \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft]{Contact Information}{
-%   \begin{itemize}
-%     \item \textbf{Email}: \href{mailto:your.email@institution.edu}{your.email@institution.edu}
-%     \item \textbf{Phone}: +1 (234) 567-8901
-%     \item \textbf{Website}: \href{http://www.yourwebsite.com}{www.yourwebsite.com}
-%   \end{itemize}
-% }
-
 \end{columns}
 
 \block[roundedcorners=0.2cm, bodywidthscale=1.0, bodyverticalshift=0cm]{}{
 	\begin{minipage}{0.12\linewidth}
 		\includegraphics[width=9cm, trim={0mm, 200mm, 0mm, 200mm}, clip]{../../figures/picture_of_myself.jpg}
-
-		
 	\end{minipage}
-	\begin{minipage}[c][3in][t]{0.48\linewidth}
-			
+	\begin{minipage}[c][3in][t]{0.71\linewidth}
 		Contact Information:
 		\begin{itemize}
 			\item \textbf{Email}: cbrje@dtu.dk
 			\item \textbf{Phone}: 0045 28 43 39 74
 			\item  %\textbf{Website}: \href{http://www.yourwebsite.com}{www.yourwebsite.com}
 		\end{itemize}
-		
+	\end{minipage}
+	\begin{minipage}{0.20\linewidth}
+
+	\end{minipage}
+	\begin{minipage}{0.38\linewidth}		
+		\includegraphics[width=7cm, trim={0mm, 25mm, 20mm, 25mm}, clip]{../../pictures/Blue_RGB.pdf}
 	\end{minipage}
 }
 
+% \bibliographystyle{plain}
+% \bibliography{/home/cbrje/projects/phd-program/generalized-multi-agent-maintenance-scheduling-system/bib/references.bib}
 \end{document}
 
 

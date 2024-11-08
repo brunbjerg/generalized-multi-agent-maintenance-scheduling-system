@@ -1,0 +1,8 @@
+[doc]
+name = "general repo for journal writing"
+bundle = "./build_temp"
+
+[[output]]
+name = "output"
+type = "pdf"
+
