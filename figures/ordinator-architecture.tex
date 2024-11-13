@@ -2,11 +2,11 @@
 
 \input{../../styles/colors.tex}
 
-\newcommand{\ModelColor}{red}
-\newcommand{\UserInterfaceColor}{yellow}
-\newcommand{\PersistenceColor}{blue}
-\newcommand{\PointerSwapColor}{green}
-\newcommand{\OrchestratorColor}{other}
+\newcommand{\ModelColor}{dtu-red}
+\newcommand{\UserInterfaceColor}{dtu-yellow}
+\newcommand{\PersistenceColor}{dtu-blue}
+\newcommand{\PointerSwapColor}{dtu-green}
+\newcommand{\OrchestratorColor}{dtu-bright-green}
 
 \newcommand{\basisinput}{4cm}  % Default value if not set by /graph/basis
 \pgfkeys{
@@ -32,7 +32,7 @@
   basis,                                % Set initial Value (\b@sis is defined/assigned)
 }
 
-\newcommand{\drawGraph}[1]{
+\newcommand{\drawOrdinatorArchitecture}[1]{
 	\pgfkeys{/graph, default, #1}
 	\setlength{\basis}{\basisinput}
 	\begin{tikzpicture}[scale=0.75, line width=0.05\basis][
@@ -62,15 +62,15 @@
 		\draw (Strategic) edge (Tactical);
 		\draw (Strategic) edge (Tactical);
 		\draw (5\basis,5.5\basis) edge (Supervisor);
-		\draw (Supervisor) edge (Operational_1);
+		\draw (Supervisor) -- (2.5\basis,4.0\basis) -- (Operational_1);
 		\draw (Supervisor) edge (Operational_2);
-		\draw (Supervisor) edge (Operational_3);
-		\draw (5.0\basis,0.5\basis)   node[minimum height=1\basis,minimum width=5.0\basis,            fill=\PersistenceColor,rounded corners=0.1\basis] {persistence};
-		\draw (5.0\basis,7.5\basis)   node[minimum height=1\basis,minimum width=5.0\basis,            fill=\OrchestratorColor,rounded corners=0.1\basis] (Orchestrator) {Orchestrator};
-		\draw (0.5\basis,4.0\basis)   node[rotate=90, minimum height=1\basis, minimum width=3.5\basis,fill=\PointerSwapColor,rounded corners=0.1\basis] {decision variables};
-		\draw (9.5\basis,5.75\basis)  node[rotate=90, minimum height=1\basis, minimum width=1\basis,fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
-		\draw (9.5\basis,4.0\basis)   node[rotate=90, minimum height=1\basis, minimum width=1\basis,fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
-		\draw (9.5\basis,2.25\basis)  node[rotate=90, minimum height=1\basis, minimum width=1\basis,fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
+		\draw (Supervisor) -- (7.5\basis,4.0\basis) -- (Operational_3);
+		\draw (5.0\basis,0.5\basis)   node[minimum height=1\basis,minimum width=5.0\basis,                fill=\PersistenceColor,rounded corners=0.1\basis] {persistence};
+		\draw (5.0\basis,7.5\basis)   node[minimum height=1\basis,minimum width=5.0\basis,                fill=\OrchestratorColor,rounded corners=0.1\basis] (Orchestrator) {Orchestrator};
+		\draw (0.5\basis,4.0\basis)   node[rotate=90, minimum height=1.0\basis, minimum width=3.5\basis,  fill=\PointerSwapColor,rounded corners=0.1\basis] {decision variables};
+		\draw (9.5\basis,5.75\basis)  node[rotate=90, minimum height=1.0\basis, minimum width=1.0\basis,  fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
+		\draw (9.5\basis,4.0\basis)   node[rotate=90, minimum height=1.0\basis, minimum width=1.0\basis,  fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
+		\draw (9.5\basis,2.25\basis)  node[rotate=90, minimum height=1.0\basis, minimum width=1.0\basis,  fill=\UserInterfaceColor,rounded corners=0.1\basis] {UI};
 
 		% Legend
 		\begin{scope}[shift={(10.6\basis,5.7\basis)}]

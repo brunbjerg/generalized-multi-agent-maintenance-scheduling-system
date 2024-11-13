@@ -11,27 +11,28 @@
 \State \textbf{Input} $\Solution$        = initial schedule
 \State \textbf{Input} $\SharedSolution$  = SharedSolution
 % \State $\Solution^b = \Solution$
-\Repeat
-	\State $\Solution^t = clone(\Solution)$
-	\While{$\MessageQueue.has\_message()$}
+\Repeat \label{alg:actor-based-large-neighborhood-search:main-optimization-loop}
+	\State $\Solution^t = clone(\Solution)$ \label{alg:actor-based-large-neighborhood-search:clone-solution}
+	\While{$\MessageQueue.has\_message()$} \label{alg:actor-based-large-neighborhood-search:message-loop}
         % \State $m = queue.pop()$
         % \State $m.destruct(\Solution^b)$
 		\State $\ProblemInstance.update(\SharedSolution, m)$
         \State $\Solution^t.destruct(\SharedSolution, m)$
     \EndWhile
 	
-    \State $\Solution^t.repair(\SharedSolution)$
+    \State $\Solution^t.repair(\SharedSolution)$ \label{alg:actor-based-large-neighborhood-search:repair}
 
-    \If{accept($\Solution^t, \Solution$)}                       
+    \If{accept($\Solution^t, \Solution$)} \label{alg:actor-based-large-neighborhood-search:accept}                       
         \State $\Solution.update(\Solution^t)$
     \EndIf                                         
 
-    \If{$c(\Solution^t) < c(\Solution)$}                             
+    \If{$c(\Solution^t) < c(\Solution)$} \label{alg:actor-based-large-neighborhood-search:better-solution}                             
         \State $\Solution.update(\Solution^t)$
 		\State $\SharedSolution.atomic\_pointer\_swap(\Solution)$
     \EndIf                                           
-	\State $\MessageQueue.push(m)$
+	\State $\MessageQueue.push(m)$ \label{alg:actor-based-large-neighborhood-search:schedule-message}
 \Until
 \end{algorithmic}
+\label{alg:actor-based-large-neighborhood-search}
 \end{algorithm}
 

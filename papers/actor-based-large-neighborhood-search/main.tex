@@ -57,6 +57,7 @@
 \usepackage{hyperref}
 \usepackage{booktabs} % For professional quality tables
 \usepackage{array}    % For better column alignment
+\usepackage{tikz}
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
@@ -135,10 +136,28 @@
 
 %% Abstract
 \begin{abstract}
-Many planning problems facing the operations research field have proven difficult to solve due to their inherent uncertainty and highly dynamic nature. Stochastic Programming~\citep{birge2011introduction}, fuzzy logic~\citep{zadeh1988fuzzy}, and robust optimization~\citep{ben2009robust} are some of the methods that have been proposed to solve these issues. These methods make an implicit assumption of a static data setting and a static problem setting. Maintenance scheduling is one such problem where the best available information continually updates and then therefore the scheduling continuously needs to be updated. Maintenance scheduling is a complex process often more associated with operation management, but here we will argue that is possible to implement general maintenance scheduling approaches, if the solution approach is designed to be integrated into a business
-process of the kind that are usually developed by the principles of operation management. 
-
-This paper proposes a novel optimization method that is capable to optimizing a scheduling problem in the following setting:  Primary data source is changing in real-time; external inputs affects the optimization process; multiple actors are making interdependent decision whose objectives may differ significantly. The proposed solution approach is an actor-based framework including a large neighborhood search metaheuristic implementation. The framework is tested on the real-world problem of maintaining scheduling of oil platforms for Total in the North Sea, but the approach is very general and can be applied to a wide variety of other planning problems.
+Many planning problems facing the operations research field have proven
+difficult to solve due to their inherent uncertainty and highly dynamic
+nature. Stochastic Programming~\citep{birge2011introduction}, fuzzy
+logic~\citep{zadeh1988fuzzy}, and robust optimization~\citep{ben2009robust}
+are some of the methods that have been proposed to solve these issues. These
+methods make an implicit assumption of a static data setting and a static
+problem setting. Maintenance scheduling is one such problem where the best
+available information continually updates and then therefore the scheduling
+continuously needs to be updated. Maintenance scheduling is a complex process
+often more associated with operation management, but here we will argue that is
+possible to implement general maintenance scheduling approaches, if the solution
+approach is designed to be integrated into a business process of the kind that
+are usually developed by the principles of operation management.  This paper
+proposes a novel optimization method that is capable to optimizing a scheduling
+problem in the following setting:  Primary data source is changing in real-time;
+external inputs affects the optimization process; multiple actors are making
+interdependent decision whose objectives may differ significantly. The proposed
+solution approach is an actor-based framework including a large neighborhood
+search metaheuristic implementation. The framework is tested on the real-world
+problem of maintaining scheduling of oil platforms for Total in the North Sea,
+but the approach is very general and can be applied to a wide variety of other
+planning problems.
 \end{abstract}
 
 %%Graphical abstract
@@ -155,7 +174,14 @@ This paper proposes a novel optimization method that is capable to optimizing a 
 %% Keywords
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-Large Neighborhood Search \sep Actor Framework \sep Maintenance scheduling \sep Real-time Optimization \sep Human-centered Computing \sep Interactive Systems and Tools \sep Decision Support Systems \sep Interactive Optimization.
+Large Neighborhood Search
+\sep Actor Framework
+\sep Maintenance scheduling
+\sep Real-time Optimization
+\sep Human-centered Computing
+\sep Interactive Systems and Tools
+\sep Decision Support Systems
+\sep Interactive Optimization.
 
 
 %% PACS codes here, in the form: \PACS code \sep code

@@ -1,7 +1,4 @@
 \section{Introduction}
-\label{sec:1-introduction}
-%% Labels are used to cross-reference an item using \ref command.
-
 Maintenance scheduling is part of a class of operational problems that have proven hard to solve in practive (NP-hard~\citep{garey1979computers}).
 Furthermore, for optimization to be useful in dynamic and uncertain environments where maintenance scheduling 
 is performed requires tight integration into existing IT infrastructure to allow the  tacit knowledge of decision makers to influence
@@ -62,78 +59,78 @@ during planning or execution, work orders are rescheduled by moving between
 the different actors, meaning that the stochastic elements of maintenance
 scheduling are handled by \textbf{dynamic rescheduling between the actors}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{figures/Scheduling Process Integrated.png}
-\caption{Simple overview of the scheduling process with its primary types of actors. The planner, the scheduler, the supervisor(s), and the technicians. 
-The green color highlights the scheduler as it the actor in the maintenance scheduling process that is the foundation for the paper.}
-\label{fig:simple-maintenance-process}
+\begin{figure}
+	\input{../../figures/maintenance_actor_architecture.tex}
+	\caption{Simple overview of the scheduling process with its primary types of actors. The planner, the scheduler, the supervisor(s), and the technicians. 
+	The green color highlights the scheduler as it the actor in the maintenance scheduling process that is the foundation for the paper.}
 \end{figure}
 
-This article has one clear contribution:
+
+This article has the following contribution:
 \begin{itemize}
-	\item To provide a scalable algorithmic component based on the large neighborhood search metaheuristic that will allow business processes to be composed from smaller units of mathematical model implementation, instead of relying of integrated formulations.
+	\item To provide a modular scalable optimization component based on the large neighborhood search metaheuristic that will allow business processes to be composed from smaller units of implementing mathematical models, instead of larger integrated formulations.
 \end{itemize}
 
 The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains the weekly maintenance scheduling model in detail and forms the fundation of the paper. Section \ref{sec:3-results} shows that results coming from the implemented system where the implementation will be affected by simulated user-interaction. Section \ref{sec:4-discussion} will discuss the implications of the research and possible future research directions.
 
-\subsection{A weekly maintenance scheduling model}
-\label{sub2sec2}
-A company needs to create a weekly maintenance plan for the next $\ElementPeriod \in \SetPeriod$
-weeks. The weekly schedule is created centrally and consists of scheduling the
-$\ElementWorkOrder \in \SetWorkOrder$ work orders, i.e. maintenance tasks, such that all are scheduled into
-different weeks. Each work order requires some resourses to be carried out, e.g.
-man-power with different qualifications, equipment etc. all of these resourses
-are available in limited amounts and are called traits $\ElementResource \in \SetResource$.
-To correct for possible manual interventions that can make the problem infeasible 
-$\ParStrategicPenalty$. The urgency of the different maintenance operations varies and
-is reflected in a penalty for carrying out a maintenance work order in a certain
-week $\ParStrategicValue$. Urgent tasks have quickly increasing penalties for the later
-weeks week $\ElementPeriod$. Furthermore, two sets exists which will either require the
-work order to be carried out in week $\ElementPeriod$, i.e. $(\ElementWorkOrder,\ElementPeriod) \in \ParStrategicInclude$ and a set which
-forbids a work order to carried out in week $\ElementPeriod$, i.e. $(\ElementWorkOrder, \ElementPeriod) \in \ParStrategicExclude$. The model
-for the problem is the Multi-compartment Multi-knapsack Problem with capacity
-penalties MCMKP.
-
-The notation used in the model is based on the notation
-from the dynamic metaheuristics literature as found in
-\cite{yangMetaheuristicsDynamicCombinatorial2013}, where $\VarMetaTime$ is added as a time
-variable on all sets, parameters, and variables that are subject to change.
-This allows us to be precise in the timing on the messages that are send to
-the Ab-LNS.
-
-%\subsection{The Weekly Schedule: Multi-compartment Multi-knapsack Problem with capacity penalties}
-%\label{sub2sec2}
-%The actor-based large neighborhood search is implemented on the MCMKP which models that weekly schedule in maintenance. The model is comprised of five different sets. $P$ is the number of weekly periods; $W$ is the number of work orders; $\tau$ is the number of different traits; $E$ is a set that defines which work orders should be excluded from a specific weekly period; $I$ is an inclusion set that defines the allocation of specific work orders which should be included in a specific weekly period. The model has four parameters. $v_{pw}$ is the value of work order $w$ in weekly period $p$; $d$ is the penalty for exceeding a specific trait capacity; $c_{w\tau}$ is the capacity requirement for work order $w$ for trait $t$; $cap_{p\tau}$ is the total amount of capacity available in for weekly period p for for trait t. The model has 2 decision variables. $x_{wp}$, is a binary decision variable equal to one if work order w is in weekly period p and zero otherwise; $pen_{p\tau}$ is non-negative decision variable equal to the amount of excess capacity above the $cap_{p\tau}$ in weekly period p for trait $\tau$. The parameters $v$, $cap$, $Q$, and $P$ are functions of time, $\tau$, in this case as they will be subject to change during the solution process.
+\subsection{The Weekly Maintenance Scheduling Model}
+A company performing maintenance needs to create weekly maintenance plans for
+the next $\ElementPeriod \in \SetPeriod$ weeks. The weekly schedule is created
+centrally and consists of scheduling the $\ElementWorkOrder \in \SetWorkOrder$
+work orders, i.e. maintenance tasks, such that all $\ElementWorkOrder$
+are scheduled into a specific week $\ElementPeriod$. Each work order $
+\ElementWorkOrder$ requires some resourses $\ElementResource \in \SetResource$
+to be carried out, e.g. man-power with different qualifications. Each of these
+resourses are available in limited amounts $\ParStrategicResource$. To correct
+for possible manual interventions that can make the problem infeasible a penalty
+$\ParStrategicPenalty$ is introduced. The urgency of the different maintenance operations
+varies and is reflected in a penalty for carrying out a maintenance work
+order in a certain week given by $\ParStrategicValue$. The $\ParStrategicValue$ also 
+captures the tardiness of the individual work orders $\ElementWorkOrder$, meaning that
+the value gained from scheduling work orders late is decreasing. Urgent tasks have
+increasingly less value the the larger that the week $\ElementPeriod$ becomes. 
+Furthermore, two sets exists which will either require work order $\ElementWorkOrder$ to be carried
+out in week $\ElementPeriod$ or not carried out in week $\ElementPeriod$ 
+These sets are $(\ElementWorkOrder,\ElementPeriod) \in
+\ParStrategicInclude$ for inclusion and  $(\ElementWorkOrder, \ElementPeriod) \in
+\ParStrategicExclude$ for exclusion. The weekly maintenance scheduling model for the problem 
+is a variant of the  Multi-compartment Multi-knapsack Problem with capacity penalties MCMKP. 
+The notation used to describe the dynamical aspects in the model is based on the notation 
+from the dynamic metaheuristics literature as found in \cite{yangMetaheuristicsDynamicCombinatorial2013}. 
+Here the $\VarMetaTime$ is added as a time variable on all sets, parameters, and variables that are
+subject to change while the metaheuristic is running. This enables us to be precise in the timing on 
+the messages that are send to the Ab-LNS and understand how it reacts in real-time
 
 \input{../../tex/models/strategic.tex}
 
-% TODO start here
-The objective function 
-\eqref{eqn:objective_function_strategic_value}, 
-\eqref{eqn:objective_function_strategic_penalty}, and
-\eqref{eqn:objective_function_strategic_clustering}
-maximizes the total weighted delay of all work order assignments together
-with the penalty $\ParStrategicPenalty$ for exceeding the resource capacity given in constraint
-\eqref{eqn:capacity_constraint}. The thrid term  
-of the model contains the $\ParClusteringValue$ which turns the model into a 
-quadratic problem. This term optimizes the value of putting two work orders
-in the same period, if they have share similarity like close proximity, 
-same functional location, etc. 
+The meta variables defines the broader setting that the model in implemented in.
+\eqref{eqn:meta:scheduler:strategic} specicies that the model is
+implemented for scheduler s. \eqref{eqn:meta:tactical:strategic} is the value
+of a decision variable coming from a differnent model, here the supervisor. 
+\eqref{eqn:meta:time:strategic} is the time variable that binds the whole 
+system together. 
 
-Constraint \eqref{eqn:capacity_constraint}
-ensures that all the weights $\ParOperationWork{wr}$ for each activity in an work
+The objective function \eqref{eqn:objective:strategic},  maximizes the total
+weighted delay of all work order assignments together with the penalty $
+\ParStrategicPenalty$ for exceeding the resource capacity given in constraint
+\eqref{eqn:constraint:strategic:resource}. The thrid term   of the model
+contains the $\ParClusteringValue$ which turns the model into a  quadratic
+problem. This term optimizes the value of putting two work orders in the same
+period, if they have share similarity like close proximity,  same functional
+location, etc.  Constraint \eqref{eqn:constraint:strategic:resource} ensures
+that all the weights $\ParOperationWork{wr}$ for each activity in an work
 order, given that it has been assigned, is lower than the capacity for each
-period and for each trait $\tau$. $pen_{p\tau}$ is the amount of exceeded
-capacity that is needed for the current assignment of work order to be
-feasible. Constraint \eqref{eqn:single_workorder_constraint} makes sure
-that each work order is assigned to at least a single period. Constraint
-\eqref{eqn:exclusion_constraint} excludes a work order from a certain period
-and constraint \eqref{eqn:inclusion_constraint} forces a specific work order
-to be in a specific period. Constraint \eqref{eqn:x_integrality_constraint} and
-\eqref{eqn:p_non_negativity_constraint} specify the variable domain for $x_{wp}$
-and $pen_{p\tau}$ respectively. The effects of changing $E$, $I$, $cap$, and $v$
-in real-time will be examined to determine their effects on the weekly schedules
-and objective value.
-
-The objective function \eqref{eqn:objective_function_strategic} minimizes the total weight of all work order assignments together with the penalty $d$ for exceeding the capacity given in constraint \eqref{eqn:capacity_constraint}. Constraint \eqref{eqn:capacity_constraint} ensures that all the weights $c_{w\tau}$ for each activity in an work order, given that it has been assigned, is lower than the capacity for each period and for each trait $\tau$. $pen_{p\tau}$ is the amount of exceeded capacity that is needed for the current assignment of work order to be feasible. Constraint \eqref{eqn:single_workorder_constraint} makes sure that each work order is assigned to at least a single period. Constraint \eqref{eqn:exclusion_constraint} excludes a work order from a certain period and constraint \eqref{eqn:inclusion_constraint} forces a specific work order to be in a specific period. Constraint \eqref{eqn:x_integrality_constraint} and \eqref{eqn:p_non_negativity_constraint} specify the variable domain for $x_{wp}$ and $pen_{p\tau}$ respectively. The effects of changing $E$, $I$, $cap$, and $v$ in real-time will be examined to determine their effects on the weekly schedules and objective value.
+period and for each resources $\ElementResource$. $\ParStrategicPenalty$ is the
+amount of exceeded capacity that is needed for the current assignment of work
+order to be feasible. Constraint \eqref{eqn:constraint:strategic:schedule_once}
+makes sure that each work order is assigned to at least a single
+period. Constraint \eqref{eqn:constraint:strategic:exclude}
+excludes a work order from a certain period and constraint
+\eqref{eqn:constraint:strategic:include} forces a specific work order to be
+in a specific period. Constraint \eqref{eqn:variable:strategic:assignment}
+and \eqref{eqn:variable:strateigc:penalty} specify the variable domain
+for $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
+and $\ParStrategicPenalty$ respectively. The effects of changing $
+\ParStrategicInclude$, $\ParStrategicExclude$, $\ParStrategicResource$, and $
+\ParStrategicValue$ in real-time will be examined to determine their effects on
+the weekly schedules and objective value.

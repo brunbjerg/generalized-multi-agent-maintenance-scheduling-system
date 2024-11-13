@@ -2,20 +2,26 @@
 \label{sec:2-solution-method}
 
 \subsection{Actor-based Large Neighborhood Search}
-A problem which is affected by user-interaction and requires real-time feedback needs an optimization approach that is able to repair infeasible schedules and while also 
-converging quickly. For this the large neighborhood search metaheuristic has been shown satisfy these requirements in the literature \cite{gendreauHandbookMetaheuristics2019}. 
-
-The LNS metaheuristic is defined for static problems, meaning that the parameters that make up the problem instance is not subject to change 
-after the algorithm has been started. To make the LNS able adapt to changing parameters in real-time a message system have been implemented into the existing framework. This 
-extension is shown in algorithm \ref{algo1}.  
+A problem formulation that is affected by the end user and requires real-time feedback
+inherrently requires an optimization approach that is able to repair infeasible solution
+and while also converging quickly. For this the large neighborhood search (LNS)
+metaheuristic has been shown satisfy these requirements in the literature
+\cite{gendreauHandbookMetaheuristics2019}. The most general form of the LNS metaheuristic
+is defined for static problems, meaning that the parameters that make up the problem instance
+is not subject to change after the algorithm has been started. To make the
+LNS able adapt to changing parameters in real-time a message system have been
+implemented into the existing framework. This  extension is shown in algorithm
+\ref{alg:actor-based-large-neighborhood-search}.
 
 \subsubsection{Messages And Destructors}
-LNS in its most basic form has one constructor and one destructor which repeatedly destroy and rebuild the schedule. For the AbLNS we will generalize on this concept by 
-including messages as destructors of the classic LNS implementation. This generalization can be seen as being somewhat similar to how the adaptive LNS (ALNS) is formulated,
-but where the different constructors and destructors are chosen externally as well. 
+LNS in its basic form has one constructor and one destructor which
+repeatedly destroy and rebuild the solution. For the AbLNS we will generalize
+on this concept by including messages as destructors of the classic LNS
+implementation. This generalization can be seen as being somewhat similar to how
+the adaptive LNS (ALNS) is formulated, but where the different constructors and
+destructors are also chosen from sources external to the algorithm.
 
-Extending on the classic setup we define the following set of destructors, $M$:
-
+Extending on the classic setup we define the following set of destructors, $\ElementMessage{}{} \in \SetMessageQueue$.
 \begin{itemize}
 	\item $m_1$: Inclusion destruct message	
 	\item $m_2$: Exclusion destruct message	
@@ -24,29 +30,38 @@ Extending on the classic setup we define the following set of destructors, $M$:
 	\item $m_5$: Random destruct message
 \end{itemize}
 
-Each of these messages affect different parts of the MCMK problem (weekly schedule). Notice
-here that the first four messages destruct the solution by changing the parameter space and the last message is 
-a random destructor.
 
-Generalizing the destructors from being static structures into messages
-allows the solution to change in real-time to a changing paramenter space meaning
-that the algorithm does not need to restart to handle changes in data. 
+Each of these messages affect different parts of the weekly maintenance scheduling 
+problem. Notice here that the first four messages destruct the solution by
+changing the parameter space and the last message is a random destructor.
+
+For correct implementation it is critical that the that destruct messages are 
+handled one by one, and are not allowed to simply write to the solution and
+problem instance whenever they appear.
+Generalizing the destructors from being static structures into messages allows
+the solution to change in real-time to a changing paramenter space. This means
+that the algorithm does not need to restart to handle changes in data.
 
 \input{../../tex/algorithms/actor-based-large-neighborhood-search}
 
-The basic LNS setup have here been extended with a `message queue`. This message queue will be read from on every iteration of the LNS's main iteration loop. Here we notice that the 
-incoming message is able to change both the solution but also the problem instance itself. Here we see one of the defining features of the LNS metaheuristic in play, that due to its inherent property of being able to optimize a solution that have become infeasible which is something that is very likely to happen when you change the parameter of the problem instance itself. 
-
-Another less obvious property the message queue allows is for the algorithm to run indefinitely and instead of restarting the algorithm you instead pass 
-messages to it to allow it be adjust both the solution space and the parameter space.
-This property avoid the issue of time consuming initial convergence as the algorithm will be found in an optimimal state when the solution is perturbed.
-
-Notice that:
+The basic LNS setup have here been extended with a `message queue` $\MessageQueue$. The message
+queue will be read from on every iteration of the LNS's main iteration loop.
+Here we notice that the incoming message is able to change both the solution $\Solution$
+but also the problem instance $\ProblemInstance$ itself. Here we see the defining feature
+of the LNS metaheuristic, that due to its inherent property of being
+able to optimize a solution that have become infeasible. This is something
+that is going happen when you change the parameter of the problem
+instance $\ProblemInstance$ itself. Another less obvious property of the message queue is 
+that the algorithm can run indefinitely and opposed to restarting the algorithm you
+instead pass messages to it to allow it be adjust both the solution space and
+the parameter space. This property avoid the issue of time consuming initial
+convergence as the algorithm will be found in an optimimal state when the
+solution is perturbed. Notice that:
 
 \begin{itemize}
-    \item The algorithm responds to changes very quickly, in each iteration (line 5-8. We call this a fine-grained response algorithm
-    \item If an improved solution is found, it is immediately being pushed to the data (base). (line 12)
-    \item That the optimization occurs in the repair function (line 9), which inserts operations, not scheduled yet in a greedy fashion. While not being an optimal insertion, it is fast
+    \item The algorithm responds to changes very quickly, in each iteration line~\ref{alg:actor-based-large-neighborhood-search:message-loop}. We call this a fine-grained response algorithm
+    \item If an improved solution is found, it is immediately being pushed to the data (base) on line~\ref{alg:actor-based-large-neighborhood-search:better-solution}
+    \item That the optimization occurs in the repair function on line~\ref{alg:actor-based-large-neighborhood-search:repair}, which inserts operations in a greedy fashion. 
 \end{itemize}
 
 

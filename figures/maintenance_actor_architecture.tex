@@ -1,0 +1,32 @@
+\usetikzlibrary{positioning}
+\input{../../styles/colors.tex}
+
+\newlength{\basisa}
+\setlength{\basisa}{1cm}
+\centering
+\begin{tikzpicture}[line width=0.0\basisa]
+    \draw (4.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,rounded corners=0.1\basisa] 
+			(Planner) {Planner};
+    \draw (12.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,rounded corners=0.1\basisa] 
+			(Supervisor) {Supervisor};
+
+			
+    \draw (8.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-green,minimum width=3\basisa,rounded corners=0.1\basisa] 
+			(Scheduler) {Scheduler};
+	
+    \draw (8.0\basisa,1.5\basisa) 
+		node[minimum height=1\basisa,fill=dtu-blue,minimum width=3\basisa,rounded corners=0.1\basisa] 
+			(Database) {Database};
+
+    \draw (8.0\basisa,6.5\basisa) 
+		node[minimum height=1\basisa,fill=dtu-yellow,minimum width=3\basisa,rounded corners=0.1\basisa] 
+			(UserInterface) {User Interface};
+
+	\draw[<->, thick, line width=0.1\basisa] (Planner) -- (Scheduler);
+	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (Supervisor);
+	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (Database);
+	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (UserInterface);
+\end{tikzpicture}

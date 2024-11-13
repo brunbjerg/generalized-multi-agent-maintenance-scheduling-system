@@ -1,23 +1,27 @@
 \section{Results}
 \label{sec:3-results}
-The results section will: 1. introduce the real-world data instance; 2. show the effect of forcing item set in the specific weekly schedules; 3. show the effect of changing the 
-period capacities, and 4. show the effect of dynamically changing the value of the work orders $v$. 
+The results section will: 1. introduce the data instance from the case company;
+2. show the effect of forcing work orders into specific weekly schedules $
+\ElementPeriod \in \SetPeriod$; 3. show the effect of changing the  period
+capacities $\ParStrategicResource$, and 4. show the effect of dynamically
+changing the $\ParStrategicValue$ associated with $\ElementPeriod \in
+\SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$.
 
 \subsection{Data Instance}
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-           & \begin{tabular}[c]{@{}c@{}}Number of\\ Work Orders\end{tabular} & \begin{tabular}[c]{@{}c@{}}Number of\\ Resources\end{tabular} & \begin{tabular}[c]{@{}c@{}}Number of\\ Periods\end{tabular} \\ \hline
+           & \begin{tabular}[c]{@{}c@{}}$|\SetWorkOrder{}|$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$|\SetResource|$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$|\SetPeriod|$\end{tabular} \\ \hline
 Instance 1 & 3487                                                          & 16                                                               & 52                                                            \\ \hline
 \end{tabular}
 
-\caption{Table Caption} % \label{fig1}
+\caption{List of data instances from the case company. Here $\SetWorkOrder$ is the set of work orders, $\SetResource$ is the set of resources, and $\SetPeriod$ is the set of weekly periods.} % \label{fig1}
 \end{table}
 
 \subsection{Response to Inclusion}
 The response to the inclusion of a work order is given by I parameter of the model which 
-is constrained in \ref{eqn:inclusion_constraint} of model given in \ref{sub1sec2}.
+is constrained in \ref{eqn:constraint:strategic:include} of model given in .
 
 The inclusion is made of forcing certain allocations of work orders to be in specific periods. Below a table is provided 
 to show what changes will occur and at what and at what point in time.
@@ -34,14 +38,16 @@ With the inputs defined we will explain the main results which are shown in the 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{figures/objective.png}
-	\caption{Figure Caption}\label{fig:response-to-inclusion}
+	\caption{Figure Caption}
+	\label{fig:response-to-inclusion}
 \end{figure}
 
 \subsection{Response to Exclusion}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{figures/objective-400-exclusions.png}
-	\caption{Figure Caption}\label{fig:objective-exclusion-400}
+	\caption{Figure Caption}
+	\label{fig:objective-exclusion-400}
 \end{figure}
 
 \subsection{Response to Changes in Knapsack Capacities}
