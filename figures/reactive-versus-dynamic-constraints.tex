@@ -2,24 +2,24 @@
 \input{../../styles/colors.tex}
 
 \newcommand{\drawReactiveConstraints}[1]{
-	\begin{tikzpicture}[scale=0.6, line width=1.05][
-
-	]
+	\begin{tikzpicture}[scale=0.6, line width=1.05][]
 
 	\node at (0.0 , 1) [above] {Static};
     \draw (-3.0,  -2.0) -- ( 3.0,  -2.0);
 	\draw ( 0.0, -5.0) -- ( 0.0,  1.0);
 	\draw ( 0.0,  -2.0) circle [radius=2cm];
+	\draw[dashed] ( 0.0,  -2.0) circle [radius=3.0cm];
 	\node[blue] at (1.8, 0.5) [circle, fill, inner sep=2pt]{};
-	\draw[red] (0.0, -2.0) -- ++(45:2.5);
+	\draw[red] (0.0, -2.0) -- ++(45:2.0);
 
 	\node at (7.0 , 1) [above] {Dynamic};
     \draw ( 4.0,  -2.0) -- (10.0, -2.0);
 	\draw ( 7.0, -5.0) -- ( 7.0, 1.0);
 	\draw ( 7.0,  -2.0) circle [radius=2cm];
+	\draw[dashed] ( 7.0,  -2.0) circle [radius=3.0cm];
 	\node[blue] at (8.8, 0.5) [circle, fill, inner sep=2pt]{};
-	\filldraw[fill=green!20,draw=green!50!black] (7,-2) -- ++(30:2.5cm)
-	        arc [start angle=30, end angle=68, radius=2.5cm] -- cycle;
+	\filldraw[fill=green!20,draw=green!50!black] (7,-2) -- ++(30:2.cm)
+	        arc [start angle=30, end angle=68, radius=2.cm] -- cycle;
 
 	
 	\begin{scope}[shift={(10.5,0.5)}]
@@ -35,6 +35,9 @@
 
 		\draw[color=black] (0.25,-3.25)  circle  (0.25);
 		\node[anchor=west] at (0.5, -3.25) { Solution Space };
+
+		\draw[color=black,dashed] (0.25,-4.25)  circle  (0.25);
+		\node[anchor=west] at (0.5, -4.25) { Unknown Solution Space };
 
 		
 	\end{scope}
