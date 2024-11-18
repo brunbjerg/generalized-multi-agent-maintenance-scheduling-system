@@ -36,10 +36,8 @@
 \input{../../tex/definitions.tex}
 \input{../../figures/ordinator-architecture.tex}
 
-
-
 \frame{\titlepage}
-\begin{frame}{Agenda}{FiraCode Nerd Font}
+\begin{frame}{Agenda}
     \begin{itemize}
         \item Introduction to Maintenance Scheduling
         \item Architecture of a Scheduling System
@@ -49,7 +47,9 @@
 \begin{frame}{}
     \begin{block}{Mathematical Notation: Sets }
 
-	$ a \in A_{b,c}^{m}(t, x, y)$
+	\begin{minipage}
+		$ a \in A_{b,c}^{m}(t, x, y)$
+	\end{minipage}
 
 	\begin{itemize}
 		\item a: set element
@@ -89,7 +89,7 @@
 		\item x: decision variable
 		\item a: set element from A
 		\item b: set element from B
-		\item m: specifing the model
+		\item m: specifying the model
 		\item t: time
 		\item Notice: decision variables cannot depend on other decision variables as it would make them belong to the same model.
 	\end{itemize}
@@ -157,7 +157,7 @@
 			\item Mathematical models guide direction but does not provide direct solutions.
 			\item Static solutions are rarely fully executable.
 			\item Dynamic models are less constrained and ensure a contained optimal solution.
-			\item Remember: The real optimial solution is ever knowable at time = 0
+			\item Remember: The real optimal solution is ever knowable at time = 0
 		\end{itemize}
     \end{block}
 \end{frame}

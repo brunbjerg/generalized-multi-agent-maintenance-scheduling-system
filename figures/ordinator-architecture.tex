@@ -50,7 +50,7 @@
 		% \draw[help lines] (0\basis, 0\basis) grid (10\basis, 8\basis);
 		\draw (5\basis,4\basis) node[minimum height=5\basis,minimum width=7.0\basis,rounded corners=0.1\basis] {};
 
-	    \draw[draw=black] (5.0\basis,4.0\basis) node[draw=black,minimum height=3.5\basis,minimum width=5\basis,rounded corners=0.1\basis] {} ;
+	    \draw[draw=black] (4.125\basis,4.0\basis) node[opacity=0.5, minimum height=3.5\basis,minimum width=6.25\basis,rounded corners=0.1\basis,fill=\PointerSwapColor] {} ;
 	    \draw (2.5\basis,5.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Strategic) {Stra};
 	    \draw (5.0\basis,4.0\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Supervisor) {Sup};
 		\draw (7.5\basis,5.5\basis) node[minimum height=1\basis,minimum width=1\basis,fill=\ModelColor,rounded corners=0.1\basis] (Tactical) {Tac};
@@ -74,17 +74,18 @@
 
 		% Legend
 		\begin{scope}[shift={(10.6\basis,5.7\basis)}]
-			\node at (-0.25\basis,1\basis) [right] {Communication Type};
-			\draw[color=\OrchestratorColor,fill] (0\basis,0.0\basis)   rectangle (0.5\basis, 0.5\basis);
-			\node[anchor=west] at (0.5\basis, 0.25\basis) { Channels};
-			\draw[color=\PointerSwapColor,fill] (0\basis,-1.0\basis)   rectangle(0.5\basis, -0.5\basis); 
-			\node[anchor=west] at (0.5\basis, -0.75\basis) { Atomic Pointer Swap};
-			\draw[color=\ModelColor,fill] (0\basis,-2.0\basis)         rectangle(0.5\basis, -1.5\basis); 
-			\node[anchor=west] at (0.5\basis, -1.75\basis) { Metaheurics};
-			\draw[color=\PersistenceColor,fill] (0\basis,-3.0\basis)   rectangle(0.5\basis, -2.5\basis); 
-			\node[anchor=west] at (0.5\basis, -2.75\basis) { Mutex lock};
-			\draw[color=\UserInterfaceColor,fill] (0\basis,-4.0\basis) rectangle(0.5\basis, -3.5\basis); 
-			\node[anchor=west] at (0.5\basis, -3.75\basis) { Channels};
+			\node at (-0.25\basis,1\basis) [right] {};
+			\draw[color=\OrchestratorColor,fill,rounded corners=0.1\basis] (0\basis,0.0\basis)   rectangle (0.5\basis, 0.5\basis);
+			\node[anchor=west] at (0.5\basis, 0.25\basis) { Managing metaheuristic lifetimes };
+			\draw[color=\PointerSwapColor,fill,rounded corners=0.1\basis] (0\basis,-1.0\basis)   rectangle(0.5\basis, -0.5\basis); 
+			\node[anchor=west] at (0.5\basis, -0.75\basis) { Solution sharing (Atomic pointer swaps) };
+			\draw[color=\ModelColor,fill,rounded corners=0.1\basis] (0\basis,-2.0\basis)         rectangle(0.5\basis, -1.5\basis); 
+			\node[anchor=west] at (0.5\basis, -1.75\basis) { Metaheurics (Mathematical Models) };
+			\draw[color=\PersistenceColor,fill,rounded corners=0.1\basis] (0\basis,-3.0\basis)   rectangle(0.5\basis, -2.5\basis); 
+			\node[anchor=west] at (0.5\basis, -2.75\basis) { Data storage (Memory locks)};
+			\draw[color=\UserInterfaceColor,fill,rounded corners=0.1\basis] (0\basis,-4.0\basis) rectangle(0.5\basis, -3.5\basis); 
+			\node[anchor=west] at (0.5\basis, -3.75\basis) { Message passing (Memory channels) };
+
 		\end{scope}
 		\ifthenelse{\equal{\ShowSharedSolutionCommunication}{true}}{
 			\draw[->, thick] (Strategic) -- (Orchestrator);

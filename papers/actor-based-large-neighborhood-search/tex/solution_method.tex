@@ -3,7 +3,7 @@
 
 \subsection{Actor-based Large Neighborhood Search}
 A problem formulation that is affected by the end user and requires real-time feedback
-inherrently requires an optimization approach that is able to repair infeasible solution
+inherently requires an optimization approach that is able to repair infeasible solution
 and while also converging quickly. For this the large neighborhood search (LNS)
 metaheuristic has been shown satisfy these requirements in the literature
 \cite{gendreauHandbookMetaheuristics2019}. The most general form of the LNS metaheuristic
@@ -39,7 +39,7 @@ For correct implementation it is critical that the that destruct messages are
 handled one by one, and are not allowed to simply write to the solution and
 problem instance whenever they appear.
 Generalizing the destructors from being static structures into messages allows
-the solution to change in real-time to a changing paramenter space. This means
+the solution to change in real-time to a changing parameter space. This means
 that the algorithm does not need to restart to handle changes in data.
 
 \input{../../tex/algorithms/actor-based-large-neighborhood-search}
@@ -55,7 +55,7 @@ instance $\ProblemInstance$ itself. Another less obvious property of the message
 that the algorithm can run indefinitely and opposed to restarting the algorithm you
 instead pass messages to it to allow it be adjust both the solution space and
 the parameter space. This property avoid the issue of time consuming initial
-convergence as the algorithm will be found in an optimimal state when the
+convergence as the algorithm will be found in an optimal state when the
 solution is perturbed. Notice that:
 
 \begin{itemize}

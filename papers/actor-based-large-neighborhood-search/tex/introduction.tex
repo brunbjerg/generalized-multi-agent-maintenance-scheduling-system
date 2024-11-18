@@ -1,5 +1,5 @@
 \section{Introduction}
-Maintenance scheduling is part of a class of operational problems that have proven hard to solve in practive (NP-hard~\citep{garey1979computers}).
+Maintenance scheduling is part of a class of operational problems that have proven hard to solve in practice (NP-hard~\citep{garey1979computers}).
 Furthermore, for optimization to be useful in dynamic and uncertain environments where maintenance scheduling 
 is performed requires tight integration into existing IT infrastructure to allow the  tacit knowledge of decision makers to influence
 the planning process easily. Often a number of different decision makers at different company levels take part in the
@@ -71,7 +71,7 @@ This article has the following contribution:
 	\item To provide a modular scalable optimization component based on the large neighborhood search metaheuristic that will allow business processes to be composed from smaller units of implementing mathematical models, instead of larger integrated formulations.
 \end{itemize}
 
-The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains the weekly maintenance scheduling model in detail and forms the fundation of the paper. Section \ref{sec:3-results} shows that results coming from the implemented system where the implementation will be affected by simulated user-interaction. Section \ref{sec:4-discussion} will discuss the implications of the research and possible future research directions.
+The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains the weekly maintenance scheduling model in detail and forms the foundation of the paper. Section \ref{sec:3-results} shows that results coming from the implemented system where the implementation will be affected by simulated user-interaction. Section \ref{sec:4-discussion} will discuss the implications of the research and possible future research directions.
 
 \subsection{The Weekly Maintenance Scheduling Model}
 A company performing maintenance needs to create weekly maintenance plans for
@@ -79,9 +79,9 @@ the next $\ElementPeriod \in \SetPeriod$ weeks. The weekly schedule is created
 centrally and consists of scheduling the $\ElementWorkOrder \in \SetWorkOrder$
 work orders, i.e. maintenance tasks, such that all $\ElementWorkOrder$
 are scheduled into a specific week $\ElementPeriod$. Each work order $
-\ElementWorkOrder$ requires some resourses $\ElementResource \in \SetResource$
+\ElementWorkOrder$ requires some resources $\ElementResource \in \SetResource$
 to be carried out, e.g. man-power with different qualifications. Each of these
-resourses are available in limited amounts $\ParStrategicResource$. To correct
+resources are available in limited amounts $\ParStrategicResource$. To correct
 for possible manual interventions that can make the problem infeasible a penalty
 $\ParStrategicPenalty$ is introduced. The urgency of the different maintenance operations
 varies and is reflected in a penalty for carrying out a maintenance work
@@ -106,14 +106,14 @@ the messages that are send to the Ab-LNS and understand how it reacts in real-ti
 The meta variables defines the broader setting that the model in implemented in.
 \eqref{eqn:meta:scheduler:strategic} specicies that the model is
 implemented for scheduler s. \eqref{eqn:meta:tactical:strategic} is the value
-of a decision variable coming from a differnent model, here the supervisor. 
+of a decision variable coming from a different model, here the supervisor. 
 \eqref{eqn:meta:time:strategic} is the time variable that binds the whole 
 system together. 
 
 The objective function \eqref{eqn:objective:strategic},  maximizes the total
 weighted delay of all work order assignments together with the penalty $
 \ParStrategicPenalty$ for exceeding the resource capacity given in constraint
-\eqref{eqn:constraint:strategic:resource}. The thrid term   of the model
+\eqref{eqn:constraint:strategic:resource}. The third term   of the model
 contains the $\ParClusteringValue$ which turns the model into a  quadratic
 problem. This term optimizes the value of putting two work orders in the same
 period, if they have share similarity like close proximity,  same functional

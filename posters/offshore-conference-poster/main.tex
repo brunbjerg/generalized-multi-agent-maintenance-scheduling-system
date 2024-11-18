@@ -45,7 +45,7 @@
 \colorlet{blocktitlefgcolor}{dtu-white}
 
 % Innerblock
-\colorlet{innerblocktitlebgcolor}{dtu-orange}
+\colorlet{innerblocktitlebgcolor}{dtu-red}
 \colorlet{innerblocktitlefgcolor}{white}
 \colorlet{innerblockbodybgcolor}{white}
 \colorlet{innerblockbodyfgcolor}{black}
@@ -64,7 +64,7 @@
 	operational settings. The poster 	presents a methodology to decompose a
 	large-scale decision process into a series of modules that each represents 	the
 	decisions taken by each individual stakeholder making up the scheduling process.
-	The maintenance scheduling procees in its  	most general  form is composed of
+	The maintenance scheduling process in its most general  form is composed of
 	a Scheduler, a set of Supervisors, and groups of technicians that are lead by
 	the supervisors.  	It is generally believed that maintenance efficiency can be
 	increased by up to $~$35\% \parencite{palmerMaintenancePlanningScheduling2019} by
@@ -83,11 +83,12 @@
 		\centering
 		\scalebox{0.90}{
 			\begin{minipage}[c][21cm][c]{1.20\textwidth}
-				\drawGraph{basisinput=3cm}
+				\drawOrdinatorArchitecture{basisinput=3cm}
 			\end{minipage}
 		}
 	}
 }
+
 \begin{subcolumns}
 
 \subcolumn{0.5} \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.8cm]{Algorithm: Actor based Large Neighborhood Search}{
@@ -110,7 +111,7 @@
 \block[titleinnersep=0.5cm, roundedcorners=0.2cm, titleleft, bodyinnersep=0.5cm, bodyverticalshift=-0.3cm]{Future Work}{
 	\begin{enumerate}
 		\item Validate effectiveness user-inputs into the Scheduling Application with case company
-		\item Assess feasibility of  atomic pointer swaps to share state between meta-heuristics
+		\item Assess effectiveness of modular metaheuristics with atomic pointer swaps to share state
 	\end{enumerate}
 }
 
@@ -135,7 +136,7 @@
 		}
 	}
 	\vspace{1cm}
-	\innerblock[roundedcorners=0.2cm]{Supervisor: Varient of the assignment problem}{
+	\innerblock[roundedcorners=0.2cm]{Supervisor: Variant of the assignment problem}{
 		\scalebox{0.5}{
 			\begin{minipage}{0.66\textwidth}
 				\input{../../tex/models/supervisor.tex}
