@@ -1,63 +1,37 @@
 \usetikzlibrary {positioning}
 \input{../../styles/colors.tex}
 
-
-
-\newcommand{\drawHexagon}[4]{
-	\draw[fill=#3] (#1,#2) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- ++(30:2);
-	\node at (#1,#2) {#4};
+\pgfkeys{
+	/uncertaintyComplexity/.is family,
+	/uncertaintyComplexity,
+	show_useless_operation_research/.initial = false,
+	show_simplistic_heuristics/.initial = false,
 }
 
-\newcommand{\drawUncertaintyComplexityValue}{
+\newcommand{\drawUncertaintyComplexityValue}[1][]{
+	\pgfkeys{\uncertaintyComplexity, #1}
+
 	\begin{tikzpicture}[scale=0.6, line width=1.05][]
 
-	% We should parameterize this! I think that is the best approach!
-	\drawHexagon{2}{2}{dtu-red}{Strategic}
-	\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-red}{Strategic}
-	\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Strategic}
+	\draw[-] (0,0) -- (15,0); 
+	\node at (7.5,-0.5) {Time horizon}; 
+	\draw[->,dtu-red] (0,0) -- (0,9) node[above] {\begin{minipage}{0.1\textwidth}Meaningful\\Model\\Complexity\end{minipage}};
+	\draw[->,dtu-blue] (15,0) -- (15,9) node[above] {\begin{minipage}{0.1\textwidth}Actual\\Uncertainty\end{minipage}};
 
-	\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Strategic}
-	\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-red}{Strategic}
+	\draw[domain=0:15,samples=100,smooth,variable=\x,thick,dtu-blue]
+		plot ({\x}, {exp(\x/7) - 1 }) node[right] {};
 
-	% \node at (0.0 , 1) [above] {Static};
-    % \draw (-3.0,  -2.0) -- ( 3.0,  -2.0);
-	% \draw ( 0.0, -5.0) -- ( 0.0,  1.0);
-	% \draw ( 0.0,  -2.0) circle [radius=2cm];
-	% \draw[dashed] ( 0.0,  -2.0) circle [radius=3.0cm];
-	% \node[blue] at (1.8, 0.5) [circle, fill, inner sep=2pt]{};
-	% \draw[red] (0.0, -2.0) -- ++(45:2.0);
+	\draw[domain=0:15,samples=100,smooth,variable=\x,thick,dtu-red]
+		plot ({\x}, {exp(-(\x - 15)/7) - 1 }) node[right] {};
 
-	% \node at (7.0 , 1) [above] {Dynamic};
-    % \draw ( 4.0,  -2.0) -- (10.0, -2.0);
-	% \draw ( 7.0, -5.0) -- ( 7.0, 1.0);
-	% \draw ( 7.0,  -2.0) circle [radius=2cm];
-	% \draw[dashed] ( 7.0,  -2.0) circle [radius=3.0cm];
-	% \node[blue] at (8.8, 0.5) [circle, fill, inner sep=2pt]{};
-	% \filldraw[fill=green!20,draw=green!50!black] (7,-2) -- ++(30:2.cm)
-	%         arc [start angle=30, end angle=68, radius=2.cm] -- cycle;
-
+	\fill[dtu-green] (7.5, 1.91954) circle (0.2cm);
+	\node[above] at (7.5, 1.91954) {Correct Model for that business process};
 	
-	% \begin{scope}[shift={(10.5,0.5)}]
-	% 	% \node at (-0.25,1) [right] {};
-	% 	\draw[color=red,fill] (0,0.0)  rectangle  (0.5, -0.5);
-	% 	\node[anchor=west] at (0.5, -0.25) { Static Solution };
+	% \ifthenelse{/uncertaintyComplexity/show_useless_operational_research}{
 
-	% 	\draw[color=green,fill] (0,-1.0)  rectangle  (0.5, -1.5);
-	% 	\node[anchor=west] at (0.5, -1.25) { Dynamic Solution };
+	% 	\node at (0,0) {aKLSDJASDJlk}
+	% }
 
-	% 	\draw[color=blue,fill] (0,-2.0)  rectangle  (0.5, -2.5);
-	% 	\node[anchor=west] at (0.5, -2.25) { Unknown Optimal };
-
-	% 	\draw[color=black] (0.25,-3.25)  circle  (0.25);
-	% 	\node[anchor=west] at (0.5, -3.25) { Solution Space };
-
-	% 	\draw[color=black,dashed] (0.25,-4.25)  circle  (0.25);
-	% 	\node[anchor=west] at (0.5, -4.25) { Unknown Solution Space };
-
-		
-	% \end{scope}
-
-    % \shade[ball color=red!50!white,opacity=0.8] (0,0) -- (90:\radius) arc (90:-90:\height) -- cycle;
 
 	\end{tikzpicture}
 }
