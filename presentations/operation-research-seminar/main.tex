@@ -44,11 +44,12 @@
         \item Possible Contributions to Operation Research
     \end{itemize}
 \end{frame}
+
 \begin{frame}{}
     \begin{block}{Mathematical Notation: Sets }
 
-	\begin{minipage}
-		$ a \in A_{b,c}^{m}(t, x, y)$
+	\begin{minipage}{0.20\textwidth}
+		$a \in A_{b,c}^{m}(t, x, y)$
 	\end{minipage}
 
 	\begin{itemize}
@@ -163,8 +164,32 @@
 \end{frame}
 
 \begin{frame}[t]{}
-    \begin{block}{Uncertainty, Complexity, and Value}
-		\input{}
+    \begin{block}{}
+
+		\input{../../figures/uncertainty-complexity-value.tex}
+
+		\drawUncertaintyComplexityValue[
+			show_useless_operation_research =true,			
+			show_simplistic_heuristics=true,
+		]
+		% \only<1>{}
+		% \only<2>{
+
+		% 	\begin{itemize}
+		% 		\item An engineering trade off will have to be made
+		% 	\end{itemize}
+		% }
+
+
+		
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Model setup}
+		\input{../../figures/model-setup-hexagon.tex}
+		\drawModelSetupHexagon
+
     \end{block}
 \end{frame}
 

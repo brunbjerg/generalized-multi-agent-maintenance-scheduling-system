@@ -23,6 +23,7 @@
             pkgs.entr
             pkgs.gnuplot
             pkgs.xfig
+            pkgs.python312Packages.sympy
           ];
         };
     });
