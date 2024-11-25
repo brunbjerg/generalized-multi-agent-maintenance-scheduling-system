@@ -10,3 +10,12 @@ write-project PROJECT:
     tmux new-window -t {{PROJECT}} -n "command line" 
     tmux attach
 
+nushell-strategic-data-extract: 
+    #!/usr/bin/env nu
+    let ordinator_log = open ../ordinator-api/logging/logs/ordinator.developer.log | from json -o
+    let ordinator_strategic_data = $ordinator_log | each { |row| { time: ($row.timestamp | into datetime | format date '%s'), strategic_objective_value: $row.fields.strategic_objective_value?} } | where { |row| $row.strategic_objective_value != null}
+    $ordinator_strategic_data | to csv | gnuplot -p gnuplot/strategic_objective_value_plot.gp
+
+    
+    
+

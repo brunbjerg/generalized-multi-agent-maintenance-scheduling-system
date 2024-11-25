@@ -1,5 +1,6 @@
-set terminal lua tikz tex standalone size 6cm,4cm
+set terminal lua tikz tex size 16cm,12cm
 set output 'test_plot.tex'
 set title
-plot '<cat'
+set datafile separator ','
+plot '<cat' using 1:2 with lines
 print "all done!"
