@@ -12,6 +12,8 @@
         pkgs = import nixpkgs {
           inherit system;
         };
+        
+
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = [
@@ -19,9 +21,14 @@
             pkgs.deno
             pkgs.typst
             pkgs.tectonic
+            pkgs.texlivePackages.epstopdf
             pkgs.zathura
             pkgs.entr
-            pkgs.gnuplot
+            (pkgs.gnuplot.override {
+              withLua = true;
+              lua = pkgs.lua;
+            })
+            pkgs.lua
             pkgs.xfig
             pkgs.python312Packages.sympy
           ];
