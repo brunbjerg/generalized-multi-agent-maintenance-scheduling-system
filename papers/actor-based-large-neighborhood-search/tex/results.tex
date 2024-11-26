@@ -37,7 +37,21 @@ to show what changes will occur and at what and at what point in time.
 With the inputs defined we will explain the main results which are shown in the figure below. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{figures/objective.png}
+	\pgfplotsset{compat=1.18}
+	\pgfplotsset{
+	    every axis/.append style={
+	        font=\small, % Use document font size
+	        axis line style={dtu-red}, % Axis lines
+	        tick label style={dtu-green}, % Tick labels
+	        label style={myblue}, % Axis labels
+	        title style={myred} % Title in custom red
+	    },
+	    grid style={dashed,gray}, % Customize gridlines
+	    every axis plot/.append style={very thick} % Thick lines
+	}
+	\resizebox{\linewidth}{!}{
+		\input{figures/strategic_objective_value_plot.tex}
+	}
 	\caption{Figure Caption}
 	\label{fig:response-to-inclusion}
 \end{figure}
@@ -45,7 +59,11 @@ With the inputs defined we will explain the main results which are shown in the 
 \subsection{Response to Exclusion}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{figures/objective-400-exclusions.png}
+
+	\resizebox{\linewidth}{!}{
+		\input{figures/strategic_objective_value_exclusion_plot.tex}
+	}
+	% \includegraphics[width=1.0\textwidth]{figures/objective-400-exclusions.png}
 	\caption{Figure Caption}
 	\label{fig:objective-exclusion-400}
 \end{figure}
@@ -88,4 +106,3 @@ work orders are rearranged due to the changes in their value across the differen
 \end{table}
 
 
-\input{figures/test_plot.tex}

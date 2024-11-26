@@ -1,5 +1,5 @@
 set terminal lua tikz tex size 16cm,12cm color
-set output 'strategic_objective_value_plot.tex'
+set output 'strategic_objective_value_exclusion_plot.tex'
 
 set title 'Objective value for Weekly Schedule'
 set xlabel "Absolute time"
