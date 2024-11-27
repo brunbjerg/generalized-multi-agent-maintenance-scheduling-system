@@ -75,20 +75,32 @@ The effects of changes to capacities will be illustrated in the same way as it w
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	                      & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
-	$\Delta |\SetPeriod|$ & 16                                                       & 16                                                       & 16                                                       & 16                                                       & 16                                                       \\ \hline
-	$\Delta |\SetResource|$ & 16                                                       & 16                                                       & 16                                                       & 16                                                       & 16                                                       \\ \hline
-	$\Delta |\ParStrategicResource|$& 100                                                      & 200                                                      & 400                                                      & 800                                                      & 1600                                                     \\ \hline
+	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetPeriod|$           & 16                                                            & 16                                                             & 16                                                             & 16                                                             & 16                                                       \\ \hline
+	$\Delta |\SetResource|$         & 16                                                            & 16                                                             & 16                                                             & 16                                                             & 16                                                       \\ \hline
+	$\Delta |\ParStrategicResource|$& 100                                                           & 200                                                            & 400                                                            & 800                                                            & 1600                                                     \\ \hline
 	\end{tabular}
 \end{table}
 
 \begin{figure}[H]%% placement specifier
 	\centering
-	\includegraphics[width=1.0\textwidth]{figures/objective-resource-increases.png}
-	\caption{Figure Caption}\label{fig:objective-resource-increases}
+	\resizebox{\linewidth}{!}{
+		\input{figures/strategic_objective_value_resource_addition_plot.tex}
+	}
+	\caption{Figure Caption}\label{fig:results:objective-resource-increases}
 \end{figure}
 
 Correspondingly we also have the figure below in which the resources are decreasing.
+
+\begin{figure}[H]%% placement specifier
+	\centering
+	\resizebox{\linewidth}{!}{
+		\input{figures/strategic_objective_value_resource_subtraction_plot.tex}
+	}
+	\caption{Figure Caption}\label{fig:results:objective-resource-decreases}
+\end{figure}
+
+
 
 \subsection{Response to Changes in Item Weights}
 The final parameter that will be changed is the work order value $\ParStrategicValue$. This section will be more elaborate as we have to show how that the
@@ -106,3 +118,12 @@ work orders are rearranged due to the changes in their value across the differen
 \end{table}
 
 
+
+
+\begin{figure}[H]%% placement specifier
+	\centering
+	\resizebox{\linewidth}{!}{
+		\input{figures/strategic_objective_value_weight_change_plot.tex}
+	}
+	\caption{Figure Caption}\label{fig:results:objective-weight-change}
+\end{figure}
