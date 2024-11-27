@@ -14,7 +14,9 @@ nushell-strategic-data-extract GNUPLOT_FILE:
     #!/usr/bin/env nu
     let ordinator_log = open ../ordinator-api/logging/logs/ordinator.developer.log | from json -o
     let ordinator_strategic_data = $ordinator_log | each { |row| { time: ($row.timestamp | into datetime | format date '%s'), strategic_objective_value: $row.fields.strategic_objective_value?} } | where { |row| $row.strategic_objective_value != null}
-    $ordinator_strategic_data | to csv | gnuplot -p gnuplot/{{GNUPLOT_FILE}}.gp
+    $ordinator_strategic_data | to csv | save gnuplot_data.csv 
+    gnuplot -p gnuplot/{{GNUPLOT_FILE}}.gp
+    rm gnuplot_data.csv
     mv {{GNUPLOT_FILE}}.tex papers/actor-based-large-neighborhood-search/figures/
 
     

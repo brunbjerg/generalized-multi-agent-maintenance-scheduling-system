@@ -6,7 +6,7 @@ The results section will: 1. introduce the data instance from the case company;
 capacities $\ParStrategicResource$, and 4. show the effect of dynamically
 changing the $\ParStrategicValue$ associated with $\ElementPeriod \in
 \SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$.
-
+\input{../../styles/colors.tex}
 \subsection{Data Instance}
 \begin{table}[H]
 \centering
@@ -117,11 +117,9 @@ work orders are rearranged due to the changes in their value across the differen
 	\end{tabular}
 \end{table}
 
-
-
-
 \begin{figure}[H]%% placement specifier
 	\centering
+	\definecolor{gp lt color}{named}{dtu-red}
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_weight_change_plot.tex}
 	}
