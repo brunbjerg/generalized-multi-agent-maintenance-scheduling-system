@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{fontspec}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage{makecell}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{parskip}
+\usepackage{pifont}
+\usepackage{pgfkeys}
+\usepackage{tikz}
+\usepackage{titlesec}
+
+\input{../../tex/definitions.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Memo: Decision-Brain External Stay}
+\rhead{Christian Brunbjerg Jespersen}
+
+\cfoot{\thepage}
+
+
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\title{
+	Memo: Application for External Stay at Decision-Brain
+}
+
+\begin{document}
+	\input{./summary.tex}
+	\input{./goals-of-external-stay.tex}
+	\input{./roadmap.tex}
+	\input{./personal.tex}
+	\input{./technical.tex}
+	\input{./academic.tex}
+	% \input{./../../curriculum-vitae.tex}
+\end{document}
+
+\bibliography{../../papers/actor-based-large-neighborhood-search/refs}
+
+\bibliographystyle{elsarticle-harv}
