@@ -1,23 +1,68 @@
+\newpage
 \section*{Technical}
 \label{sec:technical}
 
 I will provide a high-level overview of what it is that the current application is doing. I believe that 
-this will make it more clear why I need help and guidance to make the project succeed.
+this will make it clear how Decision Brain can help to make the project succeed.
+
 
 \subsection*{Architecture of the Scheduling System}
-\input{../../figures/ordinator-architecture.tex}
+I have spend a significant part of my Ph.D. program refining and testing different architectures to enable
+meta-heuristics to coordinator state in real-time. The latest version is shown below.
 
-\drawOrdinatorArchitecture{basisinput=1cm}
+\begin{figure}[H]
+	\centering
+	\input{../../figures/ordinator-architecture.tex}
+	\drawOrdinatorArchitecture{basisinput=1cm}
+
+	\caption{
+		High level overview of the architecture of the scheduling system. Persistance holds
+		all data whether from SAP, user-input, or other systems; the Orchestrator is the part of the 
+		system that manages the lifetimes of the metaheuristics that does the actual optimization;
+		the decision variable are all store together are are shared among all optimization meta-heuristics, 
+		each algorithm can write to its own state but only read the state of its neighbors; the UI components
+		each communicate with the algorithms that correspond to the individual stakeholder
+	}
+\end{figure}
+
+\textbf{Key Lessons:}
+\begin{itemize}
+	\item Message passing between metaheuristics are unworkable, e.g. a microservice architecture is bad approach
+	\item Optimization problems are difficult due to large and complex solution spaces. Allowing models/meta-heuristics
+		  to use each others solutions as parameters allows you to keep solution spaces small while preserving the 
+		  ability to model the system. 
+	\item The operational setting is much more complex than you think and changes faster than think. Developing large integrated models 
+		  is a nightmare as changes become more and more difficult the larger a model gets.
+\end{itemize}
+
+The key feature that this architecture enables it that we can move away from hierarchical approachs and 
+instead model each stakeholder individually with the responsibilities that exactly that person is responsible 
+for. 
+
+\begin{figure}[H]
+	\input{../../figures/model-setup-hexagon.tex}
+	\centering
+	\drawModelSetupHexagon
+	\caption{
+		Each meta-heuristic (Actor-based Large Neighborhood Search, see algorithm~\ref{alg:actor-based-large-neighborhood-search} on page \pageref{alg:actor-based-large-neighborhood-search}) is here shown as a hexagon.
+		Each meta-heuristic is based on a mathematical model each of which are found in the appendix. \textbf{Notice}: this system is not 
+		hierarchical each metaheuristics reads the solutions of the other metaheuristic but they are not dependent on them for their 
+		function.
+	}
+\end{figure}
+
+\textbf{Key Lessons:}
+\begin{itemize}
+	\item 
+	\item 
+	\item 
+\end{itemize}
 
 \subsection*{Pertually Running Optimization}
 \input{../../figures/asynchronous_setup.tex}
 
-\subsection*{Novel Approach}
-\input{../../figures/model-setup-hexagon.tex}
-
-\drawModelSetupHexagon
-
 \subsection*{Pseudo Code}
+
 \begin{figure}
-\input{../../tex/algorithms/actor-based-large-neighborhood-search.tex}
+	\input{../../tex/algorithms/actor-based-large-neighborhood-search.tex}
 \end{figure}
