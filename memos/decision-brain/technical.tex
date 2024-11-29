@@ -23,19 +23,21 @@ meta-heuristics to coordinator state in real-time. The latest version is shown b
 		each algorithm can write to its own state but only read the state of its neighbors; the UI components
 		each communicate with the algorithms that correspond to the individual stakeholder
 	}
+
 \end{figure}
 
 \textbf{Key Lessons:}
 \begin{itemize}
-	\item Message passing between metaheuristics are unworkable, e.g. a microservice architecture is bad approach
+	\item Message passing between metaheuristics are unworkable, e.g. a microservice architecture is difficult approach. Usable scheduling
+	      system needs to be implemented on a single CPU with multi-threading, "normal" best practice for system horizontal scaling is very difficult. 
 	\item Optimization problems are difficult due to large and complex solution spaces. Allowing models/meta-heuristics
-		  to use each others solutions as parameters allows you to keep solution spaces small while preserving the 
+			  to use each others solutions as parameters allows you to keep solution spaces smaller while preserving the 
 		  ability to model the system. 
-	\item The operational setting is much more complex than you think and changes faster than think. Developing large integrated models 
-		  is a nightmare as changes become more and more difficult the larger a model gets.
+	\item The operational setting is more complex than you think and changes faster than think. Developing large integrated models 
+		  is a difficult as model changes become more difficult the larger a model gets.
 \end{itemize}
 
-The key feature that this architecture enables it that we can move away from hierarchical approachs and 
+The key feature that this architecture enable is that we can move away from hierarchical approachs and 
 instead model each stakeholder individually with the responsibilities that exactly that person is responsible 
 for. 
 
@@ -46,23 +48,72 @@ for.
 	\caption{
 		Each meta-heuristic (Actor-based Large Neighborhood Search, see algorithm~\ref{alg:actor-based-large-neighborhood-search} on page \pageref{alg:actor-based-large-neighborhood-search}) is here shown as a hexagon.
 		Each meta-heuristic is based on a mathematical model each of which are found in the appendix. \textbf{Notice}: this system is not 
-		hierarchical each metaheuristics reads the solutions of the other metaheuristic but they are not dependent on them for their 
+		hierarchical, each metaheuristic reads the solutions of the other metaheuristic but they are not dependent on them for their 
 		function.
 	}
 \end{figure}
 
 \textbf{Key Lessons:}
 \begin{itemize}
-	\item 
-	\item 
-	\item 
+	\item Modelling each responsible decision maker with its own model makes stakeholder integration much easier.
+	\item Extending a smaller model/meta-heuristic is much easier than extending a model that goes across multiple decision-making stakeholders.
+	\item Model setup have both horizontal and vertical scaling, within the limits of a single CPU. 
 \end{itemize}
 
+
 \subsection*{Pertually Running Optimization}
-\input{../../figures/asynchronous_setup.tex}
+One of core principles found doing my interviews is that very complex model constraints should be modeled reactively, instead 
+of being encoded into static constraints. What is meant by this is that there are so many constraints in the real world that 
+encoding them into a model is a lost cause. So the approach that I have taken here is different, instead of modelling every
+detail that is needed to make the output of each metaheuristic useful you instead model the basic constraints and then let 
+the stakeholder himself adjust the solution (in Operation Research called "interactive operation reserach; in the metaheuristic literature called
+"human-guided search"; and in operation management called "Human-in-the-loop"). In the figure below I have tried to show the issues 
+that seems to me to often arise when you in practice try to implement operation research approaches in practice.
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/multimodel-setup.tex}
+	\caption{
+		Here we see one of the reasons why hierarchical approaches usually occur when researchers or practitioners try to create a 
+		maintenance scheduling sysytem. When you try to model each process as separate entities you will often get a setup where each
+		process is dependent on getting results from the previous model. This works fine going down, but it is simply a horrible solution
+		when information has to go up again.  
+	}
+\end{figure}
+
+This project takes a different approach as shown in figure~\ref{fig:asynchronus_model_setup}. Instead of running an optimization algorithm once and then providing a stakeholder with a single 
+solution, each algorithm runs in perpetuity always optimizing against the latest available information. This means that each algorithm will
+be able to optimize based on the solutions that the other meta-heuristics finds. Also, through UI components stakeholder can interact with the
+optimization process that corresponds to his part of the larger maintenance scheduling process. 
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/asynchronous_setup.tex}
+	\caption{
+		Having meta-heuristics continually running and coordinating state you can make a setup that is more robust to 
+	}
+	\label{
+		fig:asynchronus_model_setup
+	}
+\end{figure}
+
+\textbf{Key Lessons:}
+\begin{itemize}
+	\item Hierarchical appraochs are problematic in practice, as the knowledge and information required for a high-quality and functioning maintenance 
+		  scheduling process are usually found "lower in the hierarchy" rather than at higher levels, as managers sometimes implicitly believe.
+	\item Having metaheuristics continuously running saves alot of computations as you only need to reach initial convergence once. Making the 
+	      user experience more responsive for the end user and consecutive solutions will look similar.
+	\item  
+\end{itemize}
 
 \subsection*{Pseudo Code}
 
-\begin{figure}
+All implemented algorithms are based the a variant of the Large Neighborhood Search metaheuristic with some modification to enable both message
+passing and solution state shared through atomic pointer swapping. 
+
+\begin{figure}[H]
 	\input{../../tex/algorithms/actor-based-large-neighborhood-search.tex}
 \end{figure}
+
+
+
