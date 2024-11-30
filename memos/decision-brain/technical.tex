@@ -16,7 +16,7 @@ meta-heuristics to coordinator state in real-time. The latest version is shown b
 	\drawOrdinatorArchitecture{basisinput=1cm}
 
 	\caption{
-		High level overview of the architecture of the scheduling system. Persistance holds
+		High level overview of the architecture of the scheduling system. Persistence holds
 		all data whether from SAP, user-input, or other systems; the Orchestrator is the part of the 
 		system that manages the lifetimes of the metaheuristics that does the actual optimization;
 		the decision variable are all store together are are shared among all optimization meta-heuristics, 
@@ -37,7 +37,7 @@ meta-heuristics to coordinator state in real-time. The latest version is shown b
 		  is a difficult as model changes become more difficult the larger a model gets.
 \end{itemize}
 
-The key feature that this architecture enable is that we can move away from hierarchical approachs and 
+The key feature that this architecture enable is that we can move away from hierarchical approaches and 
 instead model each stakeholder individually with the responsibilities that exactly that person is responsible 
 for. 
 
@@ -66,7 +66,7 @@ One of core principles found doing my interviews is that very complex model cons
 of being encoded into static constraints. What is meant by this is that there are so many constraints in the real world that 
 encoding them into a model is a lost cause. So the approach that I have taken here is different, instead of modelling every
 detail that is needed to make the output of each metaheuristic useful you instead model the basic constraints and then let 
-the stakeholder himself adjust the solution (in Operation Research called "interactive operation reserach; in the metaheuristic literature called
+the stakeholder himself adjust the solution (in Operation Research called "interactive operation research; in the metaheuristic literature called
 "human-guided search"; and in operation management called "Human-in-the-loop"). In the figure below I have tried to show the issues 
 that seems to me to often arise when you in practice try to implement operation research approaches in practice.
 
@@ -75,13 +75,13 @@ that seems to me to often arise when you in practice try to implement operation 
 	\input{../../figures/multimodel-setup.tex}
 	\caption{
 		Here we see one of the reasons why hierarchical approaches usually occur when researchers or practitioners try to create a 
-		maintenance scheduling sysytem. When you try to model each process as separate entities you will often get a setup where each
+		maintenance scheduling system. When you try to model each process as separate entities you will often get a setup where each
 		process is dependent on getting results from the previous model. This works fine going down, but it is simply a horrible solution
 		when information has to go up again.  
 	}
 \end{figure}
 
-This project takes a different approach as shown in figure~\ref{fig:asynchronus_model_setup}. Instead of running an optimization algorithm once and then providing a stakeholder with a single 
+This project takes a different approach as shown in figure~\ref{fig:asynchronous_model_setup}. Instead of running an optimization algorithm once and then providing a stakeholder with a single 
 solution, each algorithm runs in perpetuity always optimizing against the latest available information. This means that each algorithm will
 be able to optimize based on the solutions that the other meta-heuristics finds. Also, through UI components stakeholder can interact with the
 optimization process that corresponds to his part of the larger maintenance scheduling process. 
@@ -93,7 +93,7 @@ optimization process that corresponds to his part of the larger maintenance sche
 		Having meta-heuristics continually running and coordinating state you can make a setup that is more robust to 
 	}
 	\label{
-		fig:asynchronus_model_setup
+		fig:asynchronous_model_setup
 	}
 \end{figure}
 

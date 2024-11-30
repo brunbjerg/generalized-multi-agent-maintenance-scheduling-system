@@ -293,7 +293,7 @@
 \def\elsaddress{}
 \def\addsep{\par\vskip6pt}
 
-\def\@alph#1{%
+\def\@alpha#1{%
   \ifcase#1\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or k\or
   l\or m\or n\or o\or p\or q\or r\or s\or t\or u\or v\or w\or x\or
   y\or z%
@@ -1349,11 +1349,11 @@
   \setcounter{section}{0}%
   \setcounter{subsection}{0}%
   \setcounter{equation}{0}
-  \gdef\thefigure{\@Alph\c@section.\arabic{figure}}%
-  \gdef\thetable{\@Alph\c@section.\arabic{table}}%
-  \gdef\thesection{\appendixname~\@Alph\c@section}%
+  \gdef\thefigure{\@Alpha\c@section.\arabic{figure}}%
+  \gdef\thetable{\@Alpha\c@section.\arabic{table}}%
+  \gdef\thesection{\appendixname~\@Alpha\c@section}%
   \@addtoreset{equation}{section}%
-  \gdef\theequation{\@Alph\c@section.\arabic{equation}}%
+  \gdef\theequation{\@Alpha\c@section.\arabic{equation}}%
   \addtocontents{toc}{\string\let\string\numberline\string\tmptocnumberline}{}{}
 }
 
