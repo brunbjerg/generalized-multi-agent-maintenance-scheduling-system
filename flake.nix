@@ -18,6 +18,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.fish
+            pkgs.just
             pkgs.deno
             pkgs.typst
             pkgs.tectonic
