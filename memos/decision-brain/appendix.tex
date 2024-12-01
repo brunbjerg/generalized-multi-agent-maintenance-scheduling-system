@@ -1,12 +1,33 @@
 \newpage
-\subsection*{Strategic Model}
+\section*{Appendix}
+This appendix contains the pseudo-code and mathematical models associated with each metaheuristic implementation. 
+
+The mathematical models here are only guiding, as everything is implemented as metaheuristics a one-to-one mapping
+between the mathematical models and the actual implementation can lose some nuances.
+
+\subsection*{Pseudo Code}
+
+All implemented algorithms are based on a variant of the Large Neighborhood Search metaheuristic with some modification to enable both message
+passing and solution state shared through atomic pointer swapping. 
+
+\begin{figure}[H]
+	\input{../../tex/algorithms/actor-based-large-neighborhood-search.tex}
+\end{figure}
+
+I have decided to include the mathematical models of the four different models. It is not meant to provide a through understanding
+but show how the larger process can be modelled through a series of smaller models. \textbf{Notice:} the "meta variables" sections are
+the decision variables (and time $\tau$) from other models that are being used in the respective model as a parameters (meaning they are 
+not variables in that specific model and that model cannot then change the value of the variable).
+
+\newpage
+\subsection*{Strategic Model: A Knapsack Variant}
 \input{../../tex/models/strategic.tex}
 \newpage
-\subsection*{Tactical Model}
+\subsection*{Tactical Model: A Resource Constrained Project Scheduling Problem Variant}
 \input{../../tex/models/tactical.tex}
 \newpage
-\subsection*{Supervisor Model}
+\subsection*{Supervisor Model: An Assignment Problem Variant}
 \input{../../tex/models/supervisor.tex}
 \newpage
-\subsection*{Operational Model}
+\subsection*{Technician Model: Single Machine Scheduling Problem Variant}
 \input{../../tex/models/operational.tex}
