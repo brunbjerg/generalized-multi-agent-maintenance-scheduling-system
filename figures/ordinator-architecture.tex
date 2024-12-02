@@ -36,9 +36,7 @@
 \newcommand{\drawOrdinatorArchitecture}[1]{
 	\pgfkeys{/graph, default, #1}
 	\setlength{\basis}{\basisinput}
-	\begin{tikzpicture}[scale=0.75, line width=0.05\basis][
-
-	]
+	\begin{tikzpicture}[scale=0.75, line width=0.05\basis]
 
 		\ifthenelse{\equal{\ShowOrchestratorCommunication}{true}}{
 			\draw[color=other,-, ultra thick] (Strategic) -- (Orchestrator);

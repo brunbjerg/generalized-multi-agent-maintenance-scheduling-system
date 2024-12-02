@@ -30,7 +30,8 @@ to show what changes will occur and at what and at what point in time.
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}     & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
-	\begin{tabular}[c]{@{}c@{}}$\Delta |\SetPeriod|$\end{tabular} & 10                                                       & 20                                                       & 30                                                       & 40                                                       & 50                                                       \\ \hline
+
+	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicInclude|$\end{tabular} & 50                                                       & 50                                                       & 50                                                       & 50                                                       & 50                                                       \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -57,6 +58,15 @@ With the inputs defined we will explain the main results which are shown in the 
 \end{figure}
 
 \subsection{Response to Exclusion}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	\begin{tabular}[c]{@{}c@{}}\end{tabular}     & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicExclude|$\end{tabular} & 500                                                       & 500                                                       & 500                                                       & 500                                                       & 500                                                       \\ \hline
+	\end{tabular}
+\end{table}
+
 \begin{figure}[H]
 	\centering
 
@@ -68,17 +78,16 @@ With the inputs defined we will explain the main results which are shown in the 
 	\label{fig:objective-exclusion-400}
 \end{figure}
 
-\subsection{Response to Changes in Knapsack Capacities}
+\subsection{Response to Additional Weekly Capacity}
 The effects of changes to capacities will be illustrated in the same way as it was with the response to inclusion and below we see the table that shows which inputs that the AbLNS will be affected by.
-
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
-	$\Delta |\SetPeriod|$           & 16                                                            & 16                                                             & 16                                                             & 16                                                             & 16                                                       \\ \hline
-	$\Delta |\SetResource|$         & 16                                                            & 16                                                             & 16                                                             & 16                                                             & 16                                                       \\ \hline
-	$\Delta |\ParStrategicResource|$& 100                                                           & 200                                                            & 400                                                            & 800                                                            & 1600                                                     \\ \hline
+	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetPeriod|$           & 52                                                             & 52                                                              & 52                                                             \\ \hline
+	$\Delta |\SetResource|$         & 16                                                             & 16                                                              & 16                                                             \\ \hline
+	$\Delta |\ParStrategicResource|$& 4756                                                           & 8560                                                            & 13315                                                          \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -91,6 +100,18 @@ The effects of changes to capacities will be illustrated in the same way as it w
 \end{figure}
 
 Correspondingly we also have the figure below in which the resources are decreasing.
+\subsection{Response to Reduced Weekly Capacity}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetPeriod|$           & 52                                                            & 52                                                              & 52                                                             \\ \hline
+	$\Delta |\SetResource|$         & 16                                                            & 16                                                              & 16                                                             \\ \hline
+	$\Delta |\ParStrategicResource|$& 13315                                                         & 8560                                                            & 4756                                                           \\ \hline
+	\end{tabular}
+\end{table}
 
 \begin{figure}[H]%% placement specifier
 	\centering
@@ -110,10 +131,10 @@ work orders are rearranged due to the changes in their value across the differen
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	             & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
-	$\Delta |\SetWorkOrder[\VarMetaTime_{n}]{} \triangle \SetWorkOrder[\VarMetaTime_{n-1}]{}              |$         & 20                                                       & 40                                                       & 80                                                       & 160                                                      & 320                                                      \\ \hline
-	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$         & 26                                                       & 26                                                       & 26                                                       & 26                                                       & 26                                                       \\ \hline
-	\makecell{$\Delta |\ParStrategicValue[\VarMetaTime_{n}]| -$\\ $|\ParStrategicValue[\VarMetaTime_{n - 1}]|$}        & $1 \cdot 10^{5}$                                         & $2 \cdot 10^{5}$                                         & $4 \cdot 10^{5}$                                         & $8 \cdot 10^{5}$                                         & $1.6 \cdot 10^{6}$                                       \\ \hline
+	                                                                                                                   & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetWorkOrder[\VarMetaTime_{n}]{} \triangle \SetWorkOrder[\VarMetaTime_{n-1}]{}              |$           & 500                                                           & 500                                                            & 500                                                            & 500                                                            & 500                                                      \\ \hline
+	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$           & 52                                                            & 52                                                             & 52                                                             & 52                                                             & 52                                                       \\ \hline
+	\makecell{$\Delta |\ParStrategicValue[\VarMetaTime_{n}]| -$\\ $|\ParStrategicValue[\VarMetaTime_{n - 1}]|$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
 	\end{tabular}
 \end{table}
 

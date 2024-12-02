@@ -1,5 +1,5 @@
 \newpage
-\section*{Technical}
+\section{Technical}
 \label{sec:technical}
 This section provides a high-level overview of my current application's
 architecture and methodologies. It highlights areas where collaboration with
@@ -9,7 +9,7 @@ benefit Decision Brain's own practices.
 This section assumes that the reader is familiar with:
 \begin{itemize}
 	\item Fundamentals of software architecture
-	\item Metaheuristic approaches to Optimization
+	\item Metaheuristic approaches to optimization
 	\item Expertise in programming and application development
 \end{itemize}
 
@@ -35,16 +35,21 @@ meta-heuristics to coordinator state in real-time. The latest version is shown i
 \end{figure}
 
 \textbf{Key Lessons:}
-\begin{itemize}
-	\item Message passing between metaheuristics are unworkable, e.g. a microservice architecture is difficult approach. A usable scheduling
-	      system needs to be implemented on a single CPU with multi-threading, "normal" best practice for horizontal scaling is difficult as 
-		  state changes quickly in metaheuristics. 
-	\item Optimization problems are difficult due to large and complex solution spaces. Allowing models/meta-heuristics
-		  to use each others solutions as parameters allows you to keep solution spaces smaller while preserving the 
-		  ability to model the larger system (sacrificing global optimization which is usually meaningless in practice).
-	\item The operational setting is more complex than it appears and changes faster than you think. Developing large integrated models 
-		  is difficult as model changes become both more difficult and frequent the larger the model gets. This tends to make
-		  such scheduling systems fragile.
+\begin{itemize}[leftmargin=*, labelsep=0.5em]
+	\item Message passing between metaheuristics are unworkable, e.g. a microservice
+		architecture is difficult approach. A usable scheduling system needs to
+		be implemented on a single CPU with multi-threading, "normal" best practice for
+		horizontal scaling is difficult as state changes quickly in metaheuristics.  	
+	\item Optimization problems are difficult due to large and complex solution
+		spaces. Allowing models/meta-heuristics to use each others solutions as
+		parameters allows you to keep solution spaces smaller while preserving the
+		ability to model the larger system (sacrificing global optimization which
+		is usually meaningless in practice). 	
+	\item The operational setting is more
+		complex than it appears and changes faster than you think. Developing large
+		integrated models is difficult as model changes become both more difficult
+		and frequent the larger the model gets. This tends to make such scheduling
+		systems fragile.
 \end{itemize}
 
 The key feature that this architecture enable is that we can move away from hierarchical approaches and 

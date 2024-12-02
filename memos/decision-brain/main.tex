@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
 \usepackage{algorithmicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -18,8 +19,8 @@
 \usepackage{pifont}
 \usepackage{pgfkeys}
 \usepackage{tikz}
-\usepackage{titlesec}
-
+% \usepackage{titlesec}
+\setcounter{secnumdepth}{3}
 \input{../../tex/definitions.tex}
 
 \pagestyle{fancy}
@@ -30,10 +31,10 @@
 \cfoot{\thepage}
 
 
-\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
-\title{
-	Project Plan: Application for External Stay at Decision Brain
-}
+% \titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+% \title{
+% 	Project Plan: Application for External Stay at Decision Brain
+% }
 
 \begin{document}
 	\input{./summary.tex}
@@ -46,6 +47,7 @@
 	% \input{./../../curriculum-vitae.tex}
 \end{document}
 
+\bibliographystyle{plainnat}
 \bibliography{../../papers/actor-based-large-neighborhood-search/refs}
 
 \bibliographystyle{elsarticle-harv}
