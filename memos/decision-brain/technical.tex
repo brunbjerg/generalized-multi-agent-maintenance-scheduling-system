@@ -9,13 +9,13 @@ benefit Decision Brain's own practices.
 This section assumes that the reader is familiar with:
 \begin{itemize}
 	\item Fundamentals of software architecture
-	\item Metaheuristic approaches to optimization
+	\item Meta-heuristic approaches to optimization
 	\item Expertise in programming and application development
 \end{itemize}
 
 \subsection*{Architecture of the Scheduling System}
 I have spent a significant part of my Ph.D. program refining and testing different architectures to enable
-meta-heuristics to coordinator state in real-time. The latest version is shown in figure~\ref{fig:ordinator:architecture}.
+meta-heuristics to coordinate state in real-time. The program is named Ordinator and the latest version is shown in figure~\ref{fig:ordinator:architecture}.
 
 \begin{figure}[H]
 	\centering
@@ -37,7 +37,7 @@ meta-heuristics to coordinator state in real-time. The latest version is shown i
 \textbf{Key Lessons:}
 \begin{itemize}[leftmargin=*, labelsep=0.5em]
 	\item Message passing between metaheuristics are unworkable, e.g. a microservice
-		architecture is difficult approach. A usable scheduling system needs to
+		architecture is a difficult approach. A usable scheduling system needs to
 		be implemented on a single CPU with multi-threading, "normal" best practice for
 		horizontal scaling is difficult as state changes quickly in metaheuristics.  	
 	\item Optimization problems are difficult due to large and complex solution
@@ -52,7 +52,7 @@ meta-heuristics to coordinator state in real-time. The latest version is shown i
 		systems fragile.
 \end{itemize}
 
-The key feature that this architecture enable is that we can move away from hierarchical approaches and 
+The key feature this architecture enables is that we can move away from hierarchical approaches and 
 instead model each stakeholder individually with the responsibilities that exactly that person is responsible 
 for. In figure~\ref{fig:model-setup:hexagon} we see that the system can initialize many instances of each metaheuristic, each corresponding to a stakeholder. 
 
@@ -64,7 +64,7 @@ for. In figure~\ref{fig:model-setup:hexagon} we see that the system can initiali
 		Each meta-heuristic (Actor-based Large Neighborhood Search, see algorithm~\ref{alg:actor-based-large-neighborhood-search} on page \pageref{alg:actor-based-large-neighborhood-search}) is here shown as a hexagon.
 		Each meta-heuristic is based on a mathematical model each of which are found in the appendix. \textbf{Notice}: this system is not 
 		hierarchical, each metaheuristic reads the solutions of the other metaheuristic but they are not dependent on them for their 
-		function. Note here that there are two different models for the scheduler with the weekly and daily scheduling are treated differently.
+		function. Note here that there are two different models for the scheduler, tactical and strategic, where the weekly and daily scheduling are treated separately.
 	}
 	\label{fig:model-setup:hexagon}
 \end{figure}
@@ -78,13 +78,13 @@ for. In figure~\ref{fig:model-setup:hexagon} we see that the system can initiali
 \end{itemize}
 
 \subsection*{Pertually Running Optimization}
-One of the core principles found doing my interviews is that very complex model constraints should be modeled reactively, instead 
+One of the core principles found doing my interviews with Total Energies employees is that very complex model constraints should be modeled reactively, instead 
 of being encoded into static constraints. There are so many constraints in the real world that 
-encoding them into a model is a lost cause. So the approach taken here is different, instead of modelling every
+encoding them into a model is a lost cause. So the approach taken here is different. Instead of modelling every
 detail that is needed to make the output of each metaheuristic useful you instead model the basic constraints and then let 
 the stakeholder himself adjust the solution (in Operation Research called "interactive operation research; in the metaheuristic literature called
-"human-guided search"; and in operation management called "Human-in-the-loop"). In figure~\ref{fig:model-setup:classic-hierarchical} I have tried to show the issues 
-that seems to arise when you in practice try to implement operation research approaches in maintenance scheduling.
+"human-guided search"; and in operation management called "Human-in-the-loop"). In figure~\ref{fig:model-setup:classic-hierarchical}
+I have tried to show the issues that seems to arise when you in practice try to implement operation research approaches in maintenance scheduling.
 
 \begin{figure}[H]
 	\centering
@@ -114,7 +114,7 @@ optimization process that corresponds to his part of the larger maintenance sche
 
 \textbf{Key Lessons:}
 \begin{itemize}
-	\item Hierarchical appraochs are problematic in practice, as the knowledge and information required for a high-quality and functioning maintenance 
+	\item Hierarchical approaches are problematic in practice, as the knowledge and information required for a high-quality and functioning maintenance 
 		  scheduling process are usually found "lower in the hierarchy" rather than at higher levels, as managers sometimes implicitly believe.
 	% \item Limitations of Hierarchical Approaches: Hierarchical models often fail because critical operational knowledge resides at lower levels.
 	\item Having metaheuristics continuously running computational overhead as you only need to reach initial convergence once. Making the 
