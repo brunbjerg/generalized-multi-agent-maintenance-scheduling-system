@@ -4,7 +4,14 @@
 This section provides a high-level overview of my current application's
 architecture and methodologies. It highlights areas where collaboration with
 Decision Brain can enhance the project's success and offers insights that may
-benefit Decision Brain's own practices.
+benefit Decision Brain's own practices. 
+
+This section assumes that the reader is familiar with:
+\begin{itemize}
+	\item Fundamentals of software architecture
+	\item Metaheuristic approaches to Optimization
+	\item Expertise in programming and application development
+\end{itemize}
 
 \subsection*{Architecture of the Scheduling System}
 I have spent a significant part of my Ph.D. program refining and testing different architectures to enable
@@ -19,7 +26,7 @@ meta-heuristics to coordinator state in real-time. The latest version is shown i
 		High level architecture of the scheduling system. Persistence stores
 		all data, whether from SAP, user input, or other systems; the Orchestrator manages the lifetimes of the 
 		metaheuristics; the metaheuristics does the actual optimization;
-		the decision variable are all stored together and are shared among all optimizating meta-heuristics, 
+		the decision variable are all stored together and are shared among all optimizing meta-heuristics, 
 		each algorithm can write to its own state but only read the state of its neighbors; the UI components
 		each communicate with the algorithms that correspond to the individual stakeholder, meaning that the 
 		models also specify what each stakeholder is allowed to modify.
