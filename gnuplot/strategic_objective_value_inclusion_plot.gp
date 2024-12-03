@@ -1,5 +1,5 @@
 set terminal lua tikz tex size 16cm,12cm color
-set output 'strategic_objective_value_resource_subtraction_plot.tex'
+set output 'strategic_objective_value_inclusion_plot.tex'
 
 set title 'Objective value for Weekly Schedule'
 set timefmt "%Y-%m-%dT%H:%M:%S"

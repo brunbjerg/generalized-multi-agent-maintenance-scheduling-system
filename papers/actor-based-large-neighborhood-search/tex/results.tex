@@ -12,7 +12,7 @@ changing the $\ParStrategicValue$ associated with $\ElementPeriod \in
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-           & \begin{tabular}[c]{@{}c@{}}$|\SetWorkOrder{}|$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$|\SetResource|$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$|\SetPeriod|$\end{tabular} \\ \hline
+           & \begin{tabular}[c]{@{}c@{}}$|\SetWorkOrder{}|$\end{tabular}   & \begin{tabular}[c]{@{}c@{}}$|\SetResource|$\end{tabular}         & \begin{tabular}[c]{@{}c@{}}$|\SetPeriod|$\end{tabular} \\ \hline
 Instance 1 & 3487                                                          & 16                                                               & 52                                                            \\ \hline
 \end{tabular}
 
@@ -29,9 +29,8 @@ to show what changes will occur and at what and at what point in time.
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	\begin{tabular}[c]{@{}c@{}}\end{tabular}     & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
-
-	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicInclude|$\end{tabular} & 50                                                       & 50                                                       & 50                                                       & 50                                                       & 50                                                       \\ \hline
+	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicInclude|$\end{tabular} & 50                                                            & 50                                                               & 50                                                             & 50                                                             & 50                                                       \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -51,7 +50,7 @@ With the inputs defined we will explain the main results which are shown in the 
 	    every axis plot/.append style={very thick} % Thick lines
 	}
 	\resizebox{\linewidth}{!}{
-		\input{figures/strategic_objective_value_plot.tex}
+		\input{figures/strategic_objective_value_inclusion_plot.tex}
 	}
 	\caption{Figure Caption}
 	\label{fig:response-to-inclusion}
@@ -62,8 +61,8 @@ With the inputs defined we will explain the main results which are shown in the 
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	\begin{tabular}[c]{@{}c@{}}\end{tabular}     & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
-	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicExclude|$\end{tabular} & 500                                                       & 500                                                       & 500                                                       & 500                                                       & 500                                                       \\ \hline
+	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
+	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicExclude|$\end{tabular} & 500                                                           & 500                                                              & 500                                                            & 500                                                            & 500                                                       \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -146,3 +145,4 @@ work orders are rearranged due to the changes in their value across the differen
 	}
 	\caption{Figure Caption}\label{fig:results:objective-weight-change}
 \end{figure}
+ 
