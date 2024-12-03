@@ -29,7 +29,7 @@ metaheuristics to coordinate state in real-time. The applications working title 
 		the decision variable are all stored together and are shared among all optimizing metaheuristics, 
 		each algorithm can write to its own state but only read the state of its neighbors; the UI components
 		each communicate with the algorithms that correspond to the individual stakeholder, meaning that the 
-		models also specify what each stakeholder is allowed to modify.
+		models also specify what each stakeholder is allowed to modify which is crucial for businesses. \citep{barthelemyHumanCenteredProcesses2002}
 	}
 	\label{fig:ordinator:architecture}
 \end{figure}
@@ -39,7 +39,7 @@ metaheuristics to coordinate state in real-time. The applications working title 
 	\item Message passing between metaheuristics are unworkable, e.g. a microservice
 		architecture is a difficult approach. A usable scheduling system needs to
 		be implemented on a single CPU with multi-threading, "normal" best practice for
-		horizontal scaling is difficult as state changes quickly in metaheuristics.  	
+		horizontal scaling is difficult as state changes quickly in metaheuristics. 
 	\item Optimization problems are difficult due to large and complex solution
 		spaces. Allowing models/metaheuristics to use each others solutions as
 		parameters allows you to keep solution spaces smaller while preserving the
@@ -84,7 +84,7 @@ encoding them into a model is a lost cause. So the approach taken here is differ
 detail that is needed to make the output of each metaheuristic useful you instead model the basic constraints and then let 
 the stakeholder himself adjust the solution (in Operation Research called "interactive operation research; in the metaheuristic literature called
 "human-guided search"; and in operation management called "Human-in-the-loop"). In figure~\ref{fig:model-setup:classic-hierarchical}
-I have tried to show the issues that seems to arise when you in practice try to implement operation research approaches in maintenance scheduling.
+I have tried to show the issues that seems to arise when you in practice try to implement operation research approaches in maintenance scheduling. \citep{meignan_review_2015}
 
 \begin{figure}[H]
 	\centering
@@ -107,9 +107,7 @@ optimization process that corresponds to his part of the larger maintenance sche
 	\caption{
 		Having metaheuristics continually running and coordinating state you can make a setup that is more robust by dynamically accepting inputs from the relevant stakeholder.  
 	}
-	\label{
-		fig:asynchronous_model_setup
-	}
+	\label{fig:asynchronous_model_setup}
 \end{figure}
 
 \textbf{Key Lessons:}
@@ -118,7 +116,7 @@ optimization process that corresponds to his part of the larger maintenance sche
 		  scheduling process are usually found "lower in the hierarchy" rather than at higher levels, as managers sometimes implicitly believe.
 	% \item Limitations of Hierarchical Approaches: Hierarchical models often fail because critical operational knowledge resides at lower levels.
 	\item Having metaheuristics continuously running computational overhead as you only need to reach initial convergence once. Making the 
-	      user experience more responsive and consecutive solutions will look more similar.
+	      user experience more responsive and consecutive solutions will look more similar. \citep{albaMetaheuristicsDynamicOptimization2013a} \citep{yangEvolutionaryComputationDynamic2015}
 	\item Designing continuously running metaheuristics means that you have to think carefully about software architecture. Everything has to
 		  be scalable, responsive, and dynamic. 
 \end{itemize}
