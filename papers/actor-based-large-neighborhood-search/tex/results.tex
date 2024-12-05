@@ -2,12 +2,18 @@
 \label{sec:3-results}
 The results section will: 1. introduce the data instance from the case company;
 2. show the effect of forcing work orders into specific weekly schedules $
-\ElementPeriod \in \SetPeriod$; 3. show the effect of changing the  period
+\ElementPeriod \in \SetPeriod$; 3. show the effect of changing the period resource
 capacities $\ParStrategicResource$, and 4. show the effect of dynamically
-changing the $\ParStrategicValue$ associated with $\ElementPeriod \in
-\SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$.
-\input{../../styles/colors.tex}
+changing the $\ParStrategicValue$ for period $\ElementPeriod \in
+\SetPeriod$ and for $\ElementWorkOrder \in \SetWorkOrder$.
+
+
 \subsection{Data Instance}
+This data instance comes from Total Energies, where data is extracted from their SAP ERP system. The data instance used in this paper is
+associated with a specific offshore platform that for the period that we are looking at contains 3487 outstanding work orders, have 16 
+different resource skill sets (e.g. mechanics, electricians, turbine specialists, etc.), and finally the scheduling horizon stretches over
+a 52 bi-weekly periods meaning approximately 2 years.
+ 
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|}
@@ -16,15 +22,16 @@ changing the $\ParStrategicValue$ associated with $\ElementPeriod \in
 Instance 1 & 3487                                                          & 16                                                               & 52                                                            \\ \hline
 \end{tabular}
 
-\caption{List of data instances from the case company. Here $\SetWorkOrder$ is the set of work orders, $\SetResource$ is the set of resources, and $\SetPeriod$ is the set of weekly periods.} % \label{fig1}
+\caption{specific data instances from the case company. Here $\SetWorkOrder$ is the set of work orders, $\SetResource$ is the set of resources, and $\SetPeriod$ is the set of weekly periods.} % \label{fig1}
 \end{table}
 
-\subsection{Response to Inclusion}
-The response to the inclusion of a work order is given by I parameter of the model which 
-is constrained in \ref{eqn:constraint:strategic:include} of model given in .
+\subsection{Response to Inclusion of Work Orders}
+The $\ParStrategicInclude$ parameter specifies whether a work order should be scheduled into a specific period.
+As the parameter has the time variable $\VarMetaTime$ it means that this parameter can change at any time while
+the metaheuristic is running. The $\ParStrategicInclude$ parameter constrains the model in equation~\ref{eqn:constraint:strategic:include}.
+Table~\ref{tab:responses:inclusion} shows the responses that the model will be subject to while it is running for different 
+points in time $\VarMetaTime$. 
 
-The inclusion is made of forcing certain allocations of work orders to be in specific periods. Below a table is provided 
-to show what changes will occur and at what and at what point in time.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -32,31 +39,36 @@ to show what changes will occur and at what and at what point in time.
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicInclude|$\end{tabular} & 50                                                            & 50                                                               & 50                                                             & 50                                                             & 50                                                       \\ \hline
 	\end{tabular}
+	\caption{The pertubations of including work orders into the weekly scheduling that the AbLNS is affected by. 
+	Pertubations occur at 60 second time intervals affecting 50 randomly chosen work orders included into random periods.}
+	\label{tab:responses:inclusion}
 \end{table}
 
-With the inputs defined we will explain the main results which are shown in the figure below. 
+In figure~\ref{fig:responses:inclusion} the effects of changing the $
+\ParStrategicInclude$ parameter in real-time. It shows that the model quickly
+converges and when the system is pertubed by an input response the objective
+value \ref{eqn:objective:strategic} converges again to a new solution. This can
+be understood as the model optimizing around the pertubation and finding a new converged solution.
+
 \begin{figure}[H]
 	\centering
-	\pgfplotsset{compat=1.18}
-	\pgfplotsset{
-	    every axis/.append style={
-	        font=\small, % Use document font size
-	        axis line style={dtu-red}, % Axis lines
-	        tick label style={dtu-green}, % Tick labels
-	        label style={myblue}, % Axis labels
-	        title style={myred} % Title in custom red
-	    },
-	    grid style={dashed,gray}, % Customize gridlines
-	    every axis plot/.append style={very thick} % Thick lines
-	}
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_inclusion_plot.tex}
 	}
 	\caption{Figure Caption}
-	\label{fig:response-to-inclusion}
+	\label{fig:responses:inclusion}
 \end{figure}
+Figure~\ref{fig:responses:inclusion} show 5 pertubations with the first at time = 60s where the objective value 
+slightly drops in response to the inclusion, the objective value drop due to the inclusion breaking previous constraints given by the 
+$\ParStrategicExclude$ parameter making the AbLNS able to find better solutions. The remaining 4 pertubations all show the same 
+response, an increase in the objective value followed by a subsequent convergence. 
 
 \subsection{Response to Exclusion}
+The response to exclusion is associated with the $\ParStrategicExclude$ parameter and is found in equation~\ref{eqn:constraint:strategic:exclude}.
+Here specific work orders ($\ElementWorkOrder \in \SetWorkOrder{}$) are being excluded for specific periods ($\ElementPeriod \in \SetPeriod$).
+The responses that the AbLNS will be perturbed with are shown in table~\ref{tab:responses:exclusion} with the setup being very similar to the 
+one in table~\ref{tab:responses:inclusion}. The main distinction being that the pertubation affects many more work orders.
+
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -64,17 +76,21 @@ With the inputs defined we will explain the main results which are shown in the 
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicExclude|$\end{tabular} & 500                                                           & 500                                                              & 500                                                            & 500                                                            & 500                                                       \\ \hline
 	\end{tabular}
+	\caption{The pertubations of excludion work order from specific periods in the weekly schedule. 
+	Pertubations occur at 60 second time intervals affecting 500 work orders each time.}
+	\label{tab:responses:exclusion}
 \end{table}
+
+Figure~\ref{fig:responses:exclusion} shows the effects of apply the inputs in table~\ref{tab:responses:exclusion}. 
+
 
 \begin{figure}[H]
 	\centering
-
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_exclusion_plot.tex}
 	}
-	% \includegraphics[width=1.0\textwidth]{figures/objective-400-exclusions.png}
 	\caption{Figure Caption}
-	\label{fig:objective-exclusion-400}
+	\label{fig:responses:exclusion}
 \end{figure}
 
 \subsection{Response to Additional Weekly Capacity}
@@ -117,7 +133,7 @@ Correspondingly we also have the figure below in which the resources are decreas
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_resource_subtraction_plot.tex}
 	}
-	\caption{Figure Caption}\label{fig:results:objective-resource-decreases}
+	\caption{Figure Caption}\label{fig:responses:resource-subtraction}
 \end{figure}
 
 
@@ -143,6 +159,6 @@ work orders are rearranged due to the changes in their value across the differen
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_weight_change_plot.tex}
 	}
-	\caption{Figure Caption}\label{fig:results:objective-weight-change}
+	\caption{Figure Caption}\label{fig:responses:value_change}
 \end{figure}
  
