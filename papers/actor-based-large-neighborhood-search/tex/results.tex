@@ -81,8 +81,8 @@ one in table~\ref{tab:responses:inclusion}. The main distinction being that the 
 	\label{tab:responses:exclusion}
 \end{table}
 
-Figure~\ref{fig:responses:exclusion} shows the effects of apply the inputs in table~\ref{tab:responses:exclusion}. 
-
+In figure~\ref{fig:responses:exclusion} a shows a substantial spike in the objective value to the effects 
+of excluding work orders as given in table~\ref{tab:responses:exclusion}. 
 
 \begin{figure}[H]
 	\centering
@@ -93,8 +93,16 @@ Figure~\ref{fig:responses:exclusion} shows the effects of apply the inputs in ta
 	\label{fig:responses:exclusion}
 \end{figure}
 
+From figure~\ref{fig:responses:inclusion} and figure~\ref{fig:responses:exclusion} it is now
+clear that the AbLNS method can handle dynamic entries of work order. The next section will discuss the effects of dynamically changing the 
+resource capacities. 
+
 \subsection{Response to Additional Weekly Capacity}
-The effects of changes to capacities will be illustrated in the same way as it was with the response to inclusion and below we see the table that shows which inputs that the AbLNS will be affected by.
+Table~\ref{tab:responses:resource-addition} shows the pertubations that the AbLNS will be subject to during its 360 second execution. 
+Pertubing the resources $\ParStrategicResource$ affects the solution significantly more than $\ParStrategicExclude$ and 
+$\ParStrategicInclude$ and therefore 100 second intervals are specified instead of 60 second intervals.
+
+
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -104,14 +112,20 @@ The effects of changes to capacities will be illustrated in the same way as it w
 	$\Delta |\SetResource|$         & 16                                                             & 16                                                              & 16                                                             \\ \hline
 	$\Delta |\ParStrategicResource|$& 4756                                                           & 8560                                                            & 13315                                                          \\ \hline
 	\end{tabular}
+	\caption{}
+	\label{tab:responses:resource-addition}
 \end{table}
+
+In figure~\ref{fig:responses:resources-addition} the effects of progressively increasing 
+resources is highlighted. 
 
 \begin{figure}[H]%% placement specifier
 	\centering
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_resource_addition_plot.tex}
 	}
-	\caption{Figure Caption}\label{fig:results:objective-resource-increases}
+	\caption{Figure Caption}
+	\label{fig:responses:resources-addition}
 \end{figure}
 
 Correspondingly we also have the figure below in which the resources are decreasing.

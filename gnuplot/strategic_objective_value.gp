@@ -1,4 +1,3 @@
-
 set terminal lua tikz tex size 16cm,12cm color
 
 set title 'Objective value for Weekly Schedule'
