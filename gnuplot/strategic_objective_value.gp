@@ -5,7 +5,7 @@ set timefmt "%Y-%m-%dT%H:%M:%S"
 
 set style line 1 lc "#000000" lt 1 lw 2
 
-set xlabel "Relative time [S]" offset 0,-2
+set xlabel "Relative time ($\tau$) [S]" offset 0,-2
 set ylabel "Objective value" offset -6,0
 
 set xtics rotate by 270

@@ -110,14 +110,17 @@ $\ParStrategicInclude$ and therefore 100 second intervals are specified instead 
 	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
 	$\Delta |\SetPeriod|$           & 52                                                             & 52                                                              & 52                                                             \\ \hline
 	$\Delta |\SetResource|$         & 16                                                             & 16                                                              & 16                                                             \\ \hline
-	$\Delta |\ParStrategicResource|$& 4756                                                           & 8560                                                            & 13315                                                          \\ \hline
+	$ |\ParStrategicResource|$ (hours)& 61816                                                           & 111268                                                            & 173083                                                          \\ \hline
 	\end{tabular}
 	\caption{}
 	\label{tab:responses:resource-addition}
 \end{table}
 
 In figure~\ref{fig:responses:resources-addition} the effects of progressively increasing 
-resources is highlighted. 
+resources is highlighted. The AbLNS starts with a base load which is then reduced at time = 100 seconds causing the objective value by
+increase as $\ParStrategicPenalty$ in equation~\ref{eqn:constraint:strategic:resource} absorbes the
+exceeded capacity. At time = 200 the resources are increased to the base load again, and at time = 300 seconds the resources are 
+increased to their maximum value. 
 
 \begin{figure}[H]%% placement specifier
 	\centering
@@ -128,9 +131,9 @@ resources is highlighted.
 	\label{fig:responses:resources-addition}
 \end{figure}
 
-Correspondingly we also have the figure below in which the resources are decreasing.
 \subsection{Response to Reduced Weekly Capacity}
-
+Table~\ref{tab:resources:resource-subtraction} shows the pertubations that the AbLNS will affected by. Starting from a base load of the 
+amount of available resources are progressively decreased. 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -138,23 +141,28 @@ Correspondingly we also have the figure below in which the resources are decreas
 	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
 	$\Delta |\SetPeriod|$           & 52                                                            & 52                                                              & 52                                                             \\ \hline
 	$\Delta |\SetResource|$         & 16                                                            & 16                                                              & 16                                                             \\ \hline
-	$\Delta |\ParStrategicResource|$& 13315                                                         & 8560                                                            & 4756                                                           \\ \hline
+	$ |\ParStrategicResource|$ (hours)& 173083                                                         & 111268                                                            & 61816                                                           \\ \hline
 	\end{tabular}
+	\label{tab:resources:resource-subtraction}
 \end{table}
+
+Figure~\ref{fig:responses:resource-subtraction} shows the effects of perturbing the AbLNS by starting from a base load 
+and then progressively reducing capacity.
 
 \begin{figure}[H]%% placement specifier
 	\centering
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_resource_subtraction_plot.tex}
 	}
-	\caption{Figure Caption}\label{fig:responses:resource-subtraction}
+	\caption{Figure Caption}
+	\label{fig:responses:resource-subtraction}
 \end{figure}
 
 
-
 \subsection{Response to Changes in Item Weights}
-The final parameter that will be changed is the work order value $\ParStrategicValue$. This section will be more elaborate as we have to show how that the
-work orders are rearranged due to the changes in their value across the different periods.
+The final parameter that will be changed is the work order value $\ParStrategicValue$. Table~\ref{tab:responses:value_change} shows
+the pertubations that the AbLNS will by affected with. On each iteration 500 work orders are having their values changed by the amount 
+shown in the 4th row of table~\ref{tab:responses:value_change}.
 
 \begin{table}[H]
 	\centering
@@ -165,7 +173,13 @@ work orders are rearranged due to the changes in their value across the differen
 	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$           & 52                                                            & 52                                                             & 52                                                             & 52                                                             & 52                                                       \\ \hline
 	\makecell{$\Delta |\ParStrategicValue[\VarMetaTime_{n}]| -$\\ $|\ParStrategicValue[\VarMetaTime_{n - 1}]|$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
 	\end{tabular}
+	\label{tab:responses:value_change}
 \end{table}
+
+Figure~\ref{fig:responses:value_change} shows the effects of pertubing the AbLNS by changing the 
+parameter in the objective function~\ref{eqn:objective:strategic} that controls the value of assigning a work
+order to a specific period.  
+% FIX: You have to pick them at random everytime! I do not see another way around it.
 
 \begin{figure}[H]%% placement specifier
 	\centering
@@ -173,6 +187,7 @@ work orders are rearranged due to the changes in their value across the differen
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_weight_change_plot.tex}
 	}
-	\caption{Figure Caption}\label{fig:responses:value_change}
+	\caption{Figure Caption}
+	\label{fig:responses:value_change}
 \end{figure}
  
