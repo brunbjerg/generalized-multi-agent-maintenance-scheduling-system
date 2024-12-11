@@ -12,12 +12,25 @@
         pkgs = import nixpkgs {
           inherit system;
         };
+
+        emacsWithPackages = pkgs.emacs.pkgs.emacsWithPackages (epkgs: with epkgs; [
+          auctex             # Advanced LaTeX editing
+          magit              # Git interface
+          org                # Org-mode for organization
+          company            # Auto-completion framework
+          flycheck           # On-the-fly syntax checking
+          yasnippet          # Snippet management
+          which-key          # Displays available keybindings
+          ivy                # Enhanced completion framework
+          counsel            # Collection of Ivy-enhanced commands
+          swiper             # Powerful search tool
+        ]);
         
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.fish
-            pkgs.emacs
+            emacsWithPackages
             pkgs.just
             pkgs.deno
             pkgs.typst
