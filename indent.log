@@ -1,0 +1,34 @@
+INFO:  latexindent.pl version 3.21, 2023-05-01, a script to indent .tex files
+       latexindent.pl lives here: /nix/store/0s8y8i780ml2hqg5hyl8nnsfwfhsswzn-perl5.40.0-latexindent.pl-3.21/bin/
+       Wed Dec 11 16:35:15 2024
+       Reading input from STDIN
+INFO:  Processing switches:
+INFO:  Directory for backup files and indent.log:
+       .
+INFO:  Perl modules are being loaded from the following directories:
+       /nix/store/mnnp3qlmkwgzl3lbnz7qlaqddwjjwa7v-perl-5.40.0/lib/perl5/5.40.0/FindBin.pm
+       /nix/store/66sz3576r0064b4ma7p40d8m8ci1fla5-perl5.40.0-YAML-Tiny-1.74/lib/perl5/site_perl/5.40.0/YAML/Tiny.pm
+       /nix/store/mnnp3qlmkwgzl3lbnz7qlaqddwjjwa7v-perl-5.40.0/lib/perl5/5.40.0/File/Copy.pm
+       /nix/store/mnnp3qlmkwgzl3lbnz7qlaqddwjjwa7v-perl-5.40.0/lib/perl5/5.40.0/File/Basename.pm
+       /nix/store/mnnp3qlmkwgzl3lbnz7qlaqddwjjwa7v-perl-5.40.0/lib/perl5/5.40.0/Getopt/Long.pm
+       /nix/store/rg588hd91q2028z2xc6khpyb6j4nwqnd-perl5.40.0-File-HomeDir-1.006/lib/perl5/site_perl/5.40.0/File/HomeDir.pm
+INFO:  LatexIndent perl modules are being loaded from, for example:
+       /nix/store/0s8y8i780ml2hqg5hyl8nnsfwfhsswzn-perl5.40.0-latexindent.pl-3.21/lib/perl5/site_perl/5.40.0/LatexIndent/Document.pm
+INFO:  YAML settings read: defaultSettings.yaml
+       Reading defaultSettings.yaml from /nix/store/0s8y8i780ml2hqg5hyl8nnsfwfhsswzn-perl5.40.0-latexindent.pl-3.21/bin/defaultSettings.yaml
+       Reading defaultSettings.yaml (2nd attempt) from /nix/store/0s8y8i780ml2hqg5hyl8nnsfwfhsswzn-perl5.40.0-latexindent.pl-3.21/bin/../../texmf-dist/scripts/latexindent/defaultSettings.yaml
+       and then, if necessary, /nix/store/0s8y8i780ml2hqg5hyl8nnsfwfhsswzn-perl5.40.0-latexindent.pl-3.21/bin/LatexIndent/defaultSettings.yaml
+INFO:  YAML reading settings
+       Home directory is /home/cbrje
+       latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
+       see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
+INFO:  Phase 1: searching for objects
+       No objects found.
+INFO:  Phase 2: finding surrounding indentation
+INFO:  Phase 3: indenting objects
+INFO:  Phase 4: final indentation check
+INFO:  Output routine:
+       Not outputting to file; see -w and -o switches for more options.
+       --------------
+INFO:  Please direct all communication/issues to:
+        https://github.com/cmhughes/latexindent.pl

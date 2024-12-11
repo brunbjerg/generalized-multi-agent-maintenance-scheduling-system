@@ -17,10 +17,12 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.fish
+            pkgs.emacs
             pkgs.just
             pkgs.deno
             pkgs.typst
             pkgs.tectonic
+            pkgs.perl540Packages.LatexIndent
             pkgs.texlivePackages.epstopdf
             pkgs.zathura
             pkgs.entr

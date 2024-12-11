@@ -1,7 +1,7 @@
 \section{Introduction}
 Maintenance scheduling is part of a class of operational problems that have proven hard to solve in practice (NP-hard~\citep{garey1979computers}).
 % TODO, reformulate
-Furthermore, for optimization to be useful in dynamic and uncertain environments where maintenance scheduling
+Furthermore, for optimization to be useful in dynamic and uncertain environments where maintenance scheduling 
 is performed requires tight integration into existing IT infrastructure to allow the tacit knowledge of decision makers to easily influence
 the planning process. Often a number of different decision makers at different company levels take part in the
 planning process. In this way the industry usually assigns responsibility for decision-making to an individual
@@ -13,29 +13,29 @@ allow for integration with dynamic data sources such as databases and APIs~\cite
 aspects of operation research, as opposed to higher level strategic and tactical ones, are characterized by extensive
 amounts coordination and negotiation on proposed schedules often in a short amount of time~\citep{palmerMaintenancePlanningScheduling2019}.
 
-The lack of integration into the schedulers and supervisors workflow and lack of responsiveness can lead to a situation
+The lack of integration into the schedulers and supervisors workflow and lack of responsiveness can lead to a situation 
 where solutions are not directly implemented in practice but instead only provides initial suggestions~\citep{meignan_review_2015}.
-Theses initial suggestions are then iterated on elsewhere in the scheduling process usually through much more manual means.
+Theses initial suggestions are then iterated on elsewhere in the scheduling process usually through much more manual means. 
 In~\citep{barthelemy2002human} the authors argue that many problems that operation research aim to solve are often composed
 of a group of individuals whose decisions are consolidated into an "epistemic subject" for which a mathematical model can be formulated
 and solved, with many scheduling problems being good examples. However, often multiple actors have different
 views on what constitutes an optimal schedule hence resulting in multiple-objectives. Even if multi-objective
 optimization~\citep{ehrgott2002multiple} is applied to find a Pareto Front~\citep{Pareto1897} a negotiating process
-still is needed between the actors to select the final schedule.
+still is needed between the actors to select the final schedule. 
 
 This paper proposes a solution method that will allow for real-time optimization
 based on actor/user interaction and a connection to a dynamic data source,
 effectively managing the changes to the parameter space as they occur. The proposed solution
-method will be tested on the weekly maintenance scheduling problem \citet{palmerMaintenancePlanningScheduling2019}
+method will be tested on the weekly maintenance scheduling problem \citet{palmerMaintenancePlanningScheduling2019} 
 which closely resembles a variant of the multi-compartment multi-knapsack problem (MCMKP). It
 should be noted that the scientific maintenance scheduling literature can deviate
 significantly from its practical implementation which is also detailed in
 \citep{palmerMaintenancePlanningScheduling2019}. The solution method is
-based on the large neighborhood search (LNS) metaheuristic and is in this
-paper describes as actor-based large neighborhood search (AbLNS). LNS
+based on the large neighborhood search (LNS) metaheuristic and is in this 
+paper describes as actor-based large neighborhood search (AbLNS). LNS 
 was chosen due to its properties of naturally being able to work with and fix
 infeasible solutions and its state of the art performance on various scheduling
-problems \citep{gendreauHandbookMetaheuristics2019}.
+problems \citep{gendreauHandbookMetaheuristics2019}. 
 
 To understand the need for actor-based methods some
 background knowledge will be required about the maintenance scheduling process.
@@ -43,13 +43,13 @@ background knowledge will be required about the maintenance scheduling process.
 Figure~\ref{fig:integrated:maintenance-process} illustrates the general setup
 of a maintenance planning and scheduling system. The system's actors
 have the following responsibilities: the planner generates the work orders that
-are to be scheduled; the scheduler creates weekly schedules of work orders that are
+are to be scheduled; the scheduler creates weekly schedules of work orders that are 
 usually based on a knapsack
 formulation; based on the weekly schedule the supervisor assigns work order
 activities to technicians (modelled as an assignment problem); the
 technicians executes the work in sequential pattern (modelled as a single machine scheduling).
 
-The idea of ownership of a work order is crucial to understand the necessity of
+The idea of ownership of a work order is crucial to understand the necessity of 
 actor-based approaches. Throughout the scheduling process a
 work order is always owned by a specific actor and he alone is allow to modify/execute it. This
 means that a single model approach is very difficult to implement in practice
@@ -66,8 +66,8 @@ scheduling are handled by \textbf{dynamic rescheduling between the actors}.
 % FIX: Make a tikz figure.
 \begin{figure}
 	\input{../../figures/maintenance_actor_architecture.tex}
-	\caption{Simple overview of the scheduling process with its primary types of actors. The planner, the scheduler, the supervisor(s), and the technicians.
-		The green color highlights the scheduler as it the actor in the maintenance scheduling process that is the foundation for the paper.}
+	\caption{Simple overview of the scheduling process with its primary types of actors. The planner, the scheduler, the supervisor(s), and the technicians. 
+	The green color highlights the scheduler as it the actor in the maintenance scheduling process that is the foundation for the paper.}
 \end{figure}
 
 
@@ -79,33 +79,33 @@ This article has the following contribution:
 The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains the weekly maintenance scheduling model in detail and forms the foundation of the paper. Section \ref{sec:3-results} shows the results coming from the implemented metaheuristic where it will be affected by simulated user-interaction. Section \ref{sec:4-discussion} will discuss the implications of the research and set a future research direction.
 % DEBUG: What is tau her
 \subsection{The Weekly (Period) Maintenance Scheduling Model}
-The weekly maintenance scheduling model for the problem
-is a variant of the  Multi-compartment Multi-knapsack Problem with capacity penalties MCMKP.
-The notation used to describe the dynamical aspects in the model is based on the notation
-from the dynamic metaheuristics literature as found in \cite{yangMetaheuristicsDynamicCombinatorial2013}.
+The weekly maintenance scheduling model for the problem 
+is a variant of the  Multi-compartment Multi-knapsack Problem with capacity penalties MCMKP. 
+The notation used to describe the dynamical aspects in the model is based on the notation 
+from the dynamic metaheuristics literature as found in \cite{yangMetaheuristicsDynamicCombinatorial2013}. 
 Here the $\VarMetaTime$ is added as a time variable on all sets, parameters, and variables that are
-subject to change while the metaheuristic is running. This enables us to be precise in the timing on
+subject to change while the metaheuristic is running. This enables us to be precise in the timing on 
 the messages that are send to the Ab-LNS and understand how it reacts in real-time.
 A company performing maintenance usually creates weekly maintenance plans for
 the next $\ElementPeriod \in \SetPeriod$ period. The weekly schedule is created
 centrally and consists of scheduling the $\ElementWorkOrder \in \SetWorkOrder$
 work orders, i.e. maintenance tasks, such that all $\ElementWorkOrder$
 are scheduled into a specific period $\ElementPeriod$. Each work order $
-	\ElementWorkOrder$ requires some resources $\ElementResource \in \SetResource$
+\ElementWorkOrder$ requires some resources $\ElementResource \in \SetResource$
 to be carried out, e.g. man-power with different qualifications. Each of these
 resources are available in limited amounts given by $\ParStrategicResource$. To correct
 for possible manual interventions that can make the problem infeasible a penalty (
 $\ParStrategicPenalty$) is introduced. The urgency of the different maintenance work order ($\ElementWorkOrder$)
 varies and is reflected in a "tardiness" for carrying out a maintenance work
-order in a certain period given by $\ParStrategicValue$. The $\ParStrategicValue$ also
+order in a certain period given by $\ParStrategicValue$. The $\ParStrategicValue$ also 
 captures the tardiness of the individual work orders ($\ElementWorkOrder$), meaning that
 the value gained from scheduling work orders late is decreasing. Urgent tasks have
-decresing value the further out the period $\ElementPeriod$ becomes.
+decresing value the further out the period $\ElementPeriod$ becomes. 
 Furthermore, two sets exists which will either require work order $\ElementWorkOrder$ to be carried
-out in period $\ElementPeriod$ or not carried out in a period $\ElementPeriod$.
+out in period $\ElementPeriod$ or not carried out in a period $\ElementPeriod$. 
 These sets are $(\ElementWorkOrder,\ElementPeriod) \in
-	\ParStrategicInclude$ for inclusion and  $(\ElementWorkOrder, \ElementPeriod) \in
-	\ParStrategicExclude$ for exclusion.
+\ParStrategicInclude$ for inclusion and  $(\ElementWorkOrder, \ElementPeriod) \in
+\ParStrategicExclude$ for exclusion. 
 
 % TODO: Explain the metavariables.
 % TODO: Format the model correctly.
@@ -115,9 +115,9 @@ These sets are $(\ElementWorkOrder,\ElementPeriod) \in
 The meta variables defines the broader setting that the model in implemented in.
 Equation~\eqref{eqn:meta:scheduler:strategic} specicies that the model is
 implemented for scheduler \ElementScheduler. Equation~\eqref{eqn:meta:tactical:strategic} is the value
-of a decision variable coming from a different model, here the supervisor.
-Equation~\eqref{eqn:meta:time:strategic} is the time variable that binds the whole
-system together.
+of a decision variable coming from a different model, here the supervisor. 
+Equation~\eqref{eqn:meta:time:strategic} is the time variable that binds the whole 
+system together. 
 
 The objective function~\eqref{eqn:objective:strategic},  maximizes the total
 weighted assignment of all work order subtractied by the penalty $\ParStrategicPenalty$
@@ -140,6 +140,6 @@ included in a specific period. Constraint \eqref{eqn:variable:strategic:assignme
 and \eqref{eqn:variable:strateigc:penalty} specify the variable domain
 for $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
 and $\ParStrategicPenalty$ respectively. The effects of changing $
-	\ParStrategicInclude$, $\ParStrategicExclude$, $\ParStrategicResource$, and $
-	\ParStrategicValue$ in real-time will be examined in the results section~\ref{sec:3-results} to
+\ParStrategicInclude$, $\ParStrategicExclude$, $\ParStrategicResource$, and $
+\ParStrategicValue$ in real-time will be examined in the results section~\ref{sec:3-results} to 
 determine their effects on the weekly schedules and the objective value.

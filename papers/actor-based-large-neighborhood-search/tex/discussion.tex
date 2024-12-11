@@ -1,26 +1,29 @@
 \section{Discussion}
 \label{sec:4-discussion}
-The maintenance scheduling effectively solves a complex scheduling problem by
-using multiple actors. Through the use of actors the scheduling process handles
-uncertainty that is difficult to reason about in a single mathematical model are
-easily solved through coordination. Each stakeholder in the process has his own
+The maintenance scheduling process effectively solves a complex scheduling problem by
+relying in multiple actors. Through the use of actors the scheduling process handles
+uncertainty that is difficult to reason about in a single mathematical model. These 
+uncertainties are solved through coordination. Each stakeholder in the process has his own
 model each with different levels of aggregation, where each actor understands 
 how to exploit his own model.
-To further understand the approach
-the discussion will be divided into three sections: \ref{sec:discussion:actors_and_integration} 
+The discussion will be divided into three sections: 
+\ref{sec:discussion:actors_and_integration} 
 actors and integration;
-\ref{sec:discussion:continuous_optimization} continuous optimization allows asynchronous optimization; 
+\ref{sec:discussion:continuous_optimization} 
+continuous optimization allows asynchronous optimization; 
 and \ref{sec:discussion:future_research} future research.
 
 \subsection{Actors \& Integration}
 \label{sec:discussion:actors_and_integration}
-Often in operation research the failure to reliably solve operational problems in 
-industry are not due to the problems being computationally intractable \cite{gendreauHandbookMetaheuristics2019} but a
-practical problem of connecting data streams so that the solution approach continually
-receives dynamic data to handle changes and then providing the resulting solutions
-to the relevant actors (stakeholders) through a relevant interface \cite{meignanReviewTaxonomyInteractive2015}.
-The actor-based approach proposed in this paper makes integration easier by
-naturally encapsulating a model with a reliable interface. 
+Often in operation research the failure to reliably solve operational
+problems in  industry are not due to the problems being computationally
+intractable \cite{gendreauHandbookMetaheuristics2019} but a practical
+problem of connecting data streams so that the solution approach continually
+receives dynamic data to handle changes and then providing the resulting
+solutions to the relevant actors (stakeholders) through a relevant interface
+\cite{meignanReviewTaxonomyInteractive2015}. The actor-based approach proposed
+in this paper makes integration easier by naturally encapsulating a model with a
+reliable interface.
 
 \subsection{Continuous Optimization}
 \label{sec:discussion:continuous_optimization}
@@ -38,19 +41,20 @@ to the hierarchical model setup.
 	\input{../../figures/multimodel-setup.tex}
 	\label{fig:discussion:hierarchical_model_setup}
 	\caption{Effects us using hierarchical models setups in human-guided search metaheuristics.
-	Due to the dependent nature of each metaheuristics it becomes crucial that the running of 
+	Due to the dependent nature of each metaheuristic it becomes crucial that the running of 
 	the metaheuristics are well coordinated between the metaheuristics.}
 \end{figure}
 
 In practice there are multiple problems with using a hierarchical setup.
-Usually the largest one is that the information and knowledge needed to 
+Usually the biggest one is that the information and knowledge needed to 
 perform a feasible schedule is usually found in the lower levels of the 
-hierarchicy. In maintenance scheduling the operational setting, where the
+hierarchicy. The operational setting, where the
 technicians are working, is usually so complex that it not feasible to 
 centralize the knowledge that is required to create and execute a 
 schedule. Figure~\ref{fig:discussion:asynchronous_setup}
 shows the kind of non-hierarchical setup that an actor-based approach 
 allows for.
+% DEBUG: Should you mention "hierarchical" here? I am not really sure. I think that is would be best to avoid it.
 
 \begin{figure}[H]
 	\input{../../figures/asynchronous_setup.tex}
@@ -61,11 +65,11 @@ allows for.
 	\label{fig:discussion:asynchronous_setup}
 \end{figure}
 
-When the optimization approaches, optimize continuously it becomes possible
-to enable tight integration between the different model implementations. Where 
-instead of running models to completion you simply handle changes in model 
+When the optimization approache optimize continuously it becomes possible
+to enable tight integration between the different model implementations. 
+Instead of running models to completion you simply handle changes in model 
 parameters, model solutions, user inputs, and in the dynamic data source as 
-they occur instead of making restarts.
+they occur opposed to restarting the metaheuristics.
 
 \subsection{Future Research}
 \label{sec:discussion:future_research}
@@ -91,6 +95,7 @@ the orchestrator through message passing.
 	}
 	\label{fig:ordinator-architecture}
 \end{figure}
-The next step in this research direction will be to model the remaining stakeholder as their own 
+
+The next step in this research direction will be to model the remaining stakeholders as their own 
 AbLNS metaheuristics, and then make them communicate together. Each exposing solutions to each 
-other in real-time.
+other in real-time providing each other with high quality parameters.

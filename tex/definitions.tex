@@ -39,8 +39,8 @@
 \newcommand{\ParStrategicResource}{resource_{\ElementPeriod\ElementResource}(\VarMetaTime, \VarTacticalWork{}{})}
 
 \newcommand{\ParStrategicWorkOrderWeight}{work\_order\_work_{\ElementWorkOrder \ElementResource}}
-\newcommand{\ParStrategicInclude}{include(\VarMetaTime)}
-\newcommand{\ParStrategicExclude}{exclude(\VarMetaTime)}
+\newcommand{\ParStrategicInclude}{include_{\ElementWorkOrder\ElementPeriod}(\VarMetaTime)}
+\newcommand{\ParStrategicExclude}{exclude_{\ElementWorkOrder\ElementPeriod}(\VarMetaTime)}
 \newcommand{\ParTacticalValue}{tactical\_value_{\ElementDays\ElementOperation}(\VarMetaTime)}
 
 \newcommand{\ParTacticalPenalty}{tactical\_penalty}
