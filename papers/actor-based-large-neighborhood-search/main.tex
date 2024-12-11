@@ -147,25 +147,28 @@
 Many planning problems facing the operations research field have proven
 difficult to solve due to their inherent uncertainty and highly dynamic
 nature. Stochastic Programming~\citep{birge2011introduction}, fuzzy
-logic~\citep{zadeh1988fuzzy}, and robust optimization~\citep{ben2009robust}
-are some of the methods that have been proposed to solve these issues. These
+logic~\citep{zadeh1988fuzzy}, robust optimization~\citep{ben2009robust}, and
+dynamic optimization~\citep{yangMetaheuristicsDynamicCombinatorial2013}, and 
+human-in-loop optimization~\citep{talbiMetaheuristicsDesignImplementation2009}.
+These are some of the methods that have been proposed to solve these issues. These
 methods make an implicit assumption of a static data setting and a static
 problem setting. Maintenance scheduling is one such problem where the best
-available information continually updates and then therefore the scheduling
+available information is continually updated and therefore the scheduling
 continuously needs to be updated. Maintenance scheduling is a complex process
 often more associated with operation management, but here we will argue that is
 possible to implement general maintenance scheduling approaches, if the solution
 approach is designed to be integrated into a business process of the kind that
-are usually developed by the principles of operation management.  This paper
+are usually developed by the principles of operation management (plan-do-check-act, etc.).  
+This paper
 proposes a novel optimization method that is capable to optimizing a scheduling
-problem in the following setting:  Primary data source is changing in real-time;
+problem in the following setting: Primary data source is changing in real-time;
 external inputs affects the optimization process; multiple actors are making
-interdependent decision whose objectives may differ significantly. The proposed
-solution approach is an actor-based framework including a large neighborhood
+interdependent decisions whose objectives may differ significantly. The proposed
+solution approach is an actor-based framework based on a large neighborhood
 search metaheuristic implementation. The framework is tested on the real-world
-problem of maintaining scheduling of oil platforms for Total in the North Sea,
-but the approach is very general and can be applied to a wide variety of other
-planning problems.
+problem of maintaining scheduling of offshore platforms for Total Energies in the North Sea.
+The approach is general and can be applied to a wide variety of other
+planning problems where LNS have been effective.
 \end{abstract}
 
 %%Graphical abstract
@@ -184,6 +187,7 @@ planning problems.
 %% keywords here, in the form: keyword \sep keyword
 Large Neighborhood Search
 \sep Actor Framework
+\sep Parallel Metaheuristics
 \sep Maintenance scheduling
 \sep Real-time Optimization
 \sep Human-centered Computing
