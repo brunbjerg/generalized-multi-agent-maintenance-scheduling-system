@@ -28,7 +28,7 @@
 
     \If{$c(\Solution^t) < c(\Solution)$} \label{alg:actor-based-large-neighborhood-search:better-solution}                             
         \State $\Solution.update(\Solution^t)$
-		\State $\SharedSolution.atomic\_pointer\_swap(\Solution)$
+		\State $\SharedSolution.atomic\_pointer\_swap(\Solution)$ \label{alg:actor-based-large-neighborhood-search:atomic-pointer-swap}
     \EndIf                                           
 	\State $\MessageQueue.push(m)$ \label{alg:actor-based-large-neighborhood-search:schedule-message}
 \Until

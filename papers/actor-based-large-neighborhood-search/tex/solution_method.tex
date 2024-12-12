@@ -43,6 +43,7 @@ the solution to change in real-time to a changing parameter space. This means
 that the algorithm does not need to restart to handle changes in data.
 
 % FIX: Parameterize the pseudo code. It should be generalized to the paper.
+
 \input{../../tex/algorithms/actor-based-large-neighborhood-search}
 
 The basic LNS setup have here been extended with a `message queue` $\MessageQueue$. The message
@@ -51,7 +52,7 @@ Here we notice that the incoming message is able to change both the solution $\S
 but also the problem instance $\ProblemInstance$ itself. Due to the inherent property of LNS being
 able to optimize a solution that have become infeasible, LNS is well suited to handle changing parameters 
 in the problem instance $\ProblemInstance$ itself. Another property of the message queue is 
-that the algorithm can run indefinitely and opposed to restarting the algorithm you
+that the algorithm can run indefinitely and as opposed to restarting the algorithm you
 pass messages containing new data and or state. This property avoid the time consuming initial
 convergence as the algorithm will be found in an optimal state when the
 solution is perturbed. Notice that:
@@ -60,6 +61,7 @@ solution is perturbed. Notice that:
     \item The algorithm responds quickly to changes. In each iteration line~\ref{alg:actor-based-large-neighborhood-search:message-loop}. We call this a fine-grained response algorithm
     \item If an improved solution is found, it is immediately being pushed to the persistence on line~\ref{alg:actor-based-large-neighborhood-search:better-solution}
     \item That the optimization occurs in the repair function on line~\ref{alg:actor-based-large-neighborhood-search:repair}, which inserts operations in a greedy fashion. 
+	\item The pointer swapping that is performed on line~\ref{alg:actor-based-large-neighborhood-search:atomic-pointer-swap} when a new best solution is found instantaneously makes the solution available to other actors. The pointer swapping is crucial as it allows non-hierarchical model setups. 
 \end{itemize}
 
 

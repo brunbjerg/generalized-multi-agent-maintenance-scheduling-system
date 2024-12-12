@@ -3,30 +3,52 @@
 
 \newlength{\basisa}
 \setlength{\basisa}{1cm}
-\centering
-\begin{tikzpicture}[line width=0.0\basisa]
-    \draw (4.0\basisa,4.0\basisa) 
-		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,rounded corners=0.1\basisa] 
+\begin{tikzpicture}[xshift=-3cm]
+    \draw (-4.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
 			(Planner) {Planner};
-    \draw (12.0\basisa,4.0\basisa) 
-		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,rounded corners=0.1\basisa] 
-			(Supervisor) {Supervisor};
 
-			
-    \draw (8.0\basisa,4.0\basisa) 
-		node[minimum height=2\basisa,fill=dtu-green,minimum width=3\basisa,rounded corners=0.1\basisa] 
+    \draw (0.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-green,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
 			(Scheduler) {Scheduler};
+
+    \draw (4.4\basisa,3.6\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Supervisor_1) {Supervisor};
+    \draw (4.2\basisa,3.8\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Supervisor_2) {Supervisor};
+    \draw (4.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Supervisor_3) {Supervisors};
+
+    \draw (8.8\basisa,3.2\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Technician_1) {Technician};
+    \draw (8.6\basisa,3.4\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Technician_2) {Technician};
+    \draw (8.4\basisa,3.6\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Technician_3) {Technician};
+    \draw (8.2\basisa,3.8\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Technician_4) {Technician};
+    \draw (8.0\basisa,4.0\basisa) 
+		node[minimum height=2\basisa,fill=dtu-grey,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
+			(Technician_5) {Technicians};
 	
-    \draw (8.0\basisa,1.5\basisa) 
-		node[minimum height=1\basisa,fill=dtu-blue,minimum width=3\basisa,rounded corners=0.1\basisa] 
+    \draw (0.0\basisa,1.5\basisa) 
+		node[minimum height=1\basisa,fill=dtu-blue,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
 			(Database) {Database};
 
-    \draw (8.0\basisa,6.5\basisa) 
-		node[minimum height=1\basisa,fill=dtu-yellow,minimum width=3\basisa,rounded corners=0.1\basisa] 
+    \draw (0.0\basisa,6.5\basisa) 
+		node[minimum height=1\basisa,fill=dtu-yellow,minimum width=3\basisa,draw, rounded corners=0.1\basisa] 
 			(UserInterface) {User Interface};
 
 	\draw[<->, thick, line width=0.1\basisa] (Planner) -- (Scheduler);
-	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (Supervisor);
+	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (Supervisor_3);
+	\draw[<->, thick, line width=0.1\basisa] (Supervisor_3) -- (Technician_5);
 	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (Database);
 	\draw[<->, thick, line width=0.1\basisa] (Scheduler) -- (UserInterface);
 \end{tikzpicture}
