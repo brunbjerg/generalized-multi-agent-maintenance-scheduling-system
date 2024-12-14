@@ -1,6 +1,8 @@
+\documentclass{standalone}
+\usepackage{tikz}
 \usetikzlibrary {positioning}
-\input{../../styles/colors.tex}
 
+\begin{document}
 \newcommand{\drawHexagon}[4]{
 	\draw[fill=#3] (#1,#2) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
 	\node at (#1,#2+2) {#4};
@@ -70,3 +72,9 @@
 	\end{tikzpicture}
 }
 
+\ifstandalone
+	\input{../styles/colors.tex}
+	\drawModelSetupHexagon
+\fi
+
+\end{document}
