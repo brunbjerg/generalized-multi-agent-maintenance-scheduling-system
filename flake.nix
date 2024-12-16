@@ -33,6 +33,7 @@
             emacsWithPackages
             pkgs.just
             pkgs.deno
+            pkgs.pdf2svg
             pkgs.typst
             pkgs.tectonic
             pkgs.perl540Packages.LatexIndent
