@@ -1,72 +1,83 @@
 \usetikzlibrary {positioning}
-\input{../../styles/colors.tex}
 
-\newcommand{\drawHexagon}[4]{
-	\draw[fill=#3] (#1,#2) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
-	\node at (#1,#2+2) {#4};
+\newcommand{\drawHexagon}[5][draw=black]{
+	\draw[#1, fill=#4, ] (#2,#3) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
+	\node at (#2,#3+2) {#5};
 }
 
-\newcommand{\drawModelSetupHexagon}{
+\newif\ifuserinterfacelayer
+\newif\ifpersistencelayer
+\newif\ifmetaheuristicslayer
+\newif\ifatomicpointerswaplayer
+
+\pgfkeys{
+	/hexagon/.is family, /hexagon,
+	default/.style = {
+		persistence=false,
+		userinterface=false,
+		metaheuristics=true,
+	},
+	persistence/.is if=persistencelayer,
+	userinterface/.is if=userinterfacelayer,
+	metaheuristics/.is if=metaheuristicslayer,
+}
+\newcommand{\drawModelSetupHexagon}[1][]{
+	\pgfkeys{/hexagon, default, #1}
+
 	\begin{tikzpicture}[scale=0.6, line width=1.05]
+	
+	\ifuserinterfacelayer
+		\drawHexagon{ 2                      }{ 2}{dtu-yellow}{UI}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-yellow}{UI}
+		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
+		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
+		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
 
-	% We should parameterize this! I think that is the best approach!
-	\drawHexagon{ 2                      }{ 2}{dtu-blue}         {Strategic}
-	\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-green}        {Tactical}
-	\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}          {Supervisor}
-	\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}          {Supervisor}
-	\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-red}          {Supervisor}
+		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
 
-	\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
-	\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
 
-	\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
-	\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
+	\fi
 
-	\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
-	\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
+	\ifpersistencelayer
+		\drawHexagon[draw=none]{ 2                      }{ 2}{dtu-blue}{}
+		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-blue}{}
+		\drawHexagon[draw=none]{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-blue}{Database}
+		\drawHexagon[draw=none]{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
+		\drawHexagon[draw=none]{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
+
+		\drawHexagon[draw=none]{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
+		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
+
+		\drawHexagon[draw=none]{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
+		\drawHexagon[draw=none]{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
+
+		\drawHexagon[draw=none]{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
+		\drawHexagon[draw=none]{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
+	\fi
+
+	\ifmetaheuristicslayer
+		\drawHexagon{ 2                      }{ 2}{dtu-blue}{Strategic}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-green}{Tactical}
+		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}
+		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}
+		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}
+
+		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+
+		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+
+		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
+	\fi
 
 	
-
-	% \node at (0.0 , 1) [above] {Static};
-    % \draw (-3.0,  -2.0) -- ( 3.0,  -2.0);
-	% \draw ( 0.0, -5.0) -- ( 0.0,  1.0);
-	% \draw ( 0.0,  -2.0) circle [radius=2cm];
-	% \draw[dashed] ( 0.0,  -2.0) circle [radius=3.0cm];
-	% \node[blue] at (1.8, 0.5) [circle, fill, inner sep=2pt]{};
-	% \draw[red] (0.0, -2.0) -- ++(45:2.0);
-
-	% \node at (7.0 , 1) [above] {Dynamic};
-    % \draw ( 4.0,  -2.0) -- (10.0, -2.0);
-	% \draw ( 7.0, -5.0) -- ( 7.0, 1.0);
-	% \draw ( 7.0,  -2.0) circle [radius=2cm];
-	% \draw[dashed] ( 7.0,  -2.0) circle [radius=3.0cm];
-	% \node[blue] at (8.8, 0.5) [circle, fill, inner sep=2pt]{};
-	% \filldraw[fill=green!20,draw=green!50!black] (7,-2) -- ++(30:2.cm)
-	%         arc [start angle=30, end angle=68, radius=2.cm] -- cycle;
-
-	
-	% \begin{scope}[shift={(10.5,0.5)}]
-	% 	% \node at (-0.25,1) [right] {};
-	% 	\draw[color=red,fill] (0,0.0)  rectangle  (0.5, -0.5);
-	% 	\node[anchor=west] at (0.5, -0.25) { Static Solution };
-
-	% 	\draw[color=green,fill] (0,-1.0)  rectangle  (0.5, -1.5);
-	% 	\node[anchor=west] at (0.5, -1.25) { Dynamic Solution };
-
-	% 	\draw[color=blue,fill] (0,-2.0)  rectangle  (0.5, -2.5);
-	% 	\node[anchor=west] at (0.5, -2.25) { Unknown Optimal };
-
-	% 	\draw[color=black] (0.25,-3.25)  circle  (0.25);
-	% 	\node[anchor=west] at (0.5, -3.25) { Solution Space };
-
-	% 	\draw[color=black,dashed] (0.25,-4.25)  circle  (0.25);
-	% 	\node[anchor=west] at (0.5, -4.25) { Unknown Solution Space };
-
-		
-	% \end{scope}
-
-    % \shade[ball color=red!50!white,opacity=0.8] (0,0) -- (90:\radius) arc (90:-90:\height) -- cycle;
-
 	\end{tikzpicture}
 }
 

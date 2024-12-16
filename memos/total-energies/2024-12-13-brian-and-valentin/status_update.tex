@@ -1,0 +1,81 @@
+\section{Status Update}
+
+\begin{itemize}
+	\item Writing to SAP
+	\item Coding the on the server side
+	\item Academic Papers
+	\item External Stay
+\end{itemize}
+
+% FIX: MENTION THE NAME OF THE SAP PERSON.
+\subsection{Writing to SAP}
+I have had disscussions with people in Paris about writing to SAP. Specificially 
+asked if it would be possible to write to table AFVC column ABLAD which is the 
+column called "Unloading Point". This is posible but it will require all
+my source code to be uploaded to Total Energies servers, which I is a little 
+bit at odds with the research part of the project as I will lose control over it.
+
+\subsection{Coding on the server side}
+Since out last meeting I have done a significant amount of coding on the server side
+of the application, most of it is related to the tactical model (The one that schedules)
+on the days, to make it dynamic and provide results that are satisfactory. (I think that
+Brian can quickly test this when it works as I have basically copied the previous project
+for this algorithm).
+
+To reiterate the long term goal here refer to figure~\ref{fig:hexagon:persistence}, \ref{fig:hexagon:metaheuristics}, and \ref{fig:hexagon:userinterfaces}. 
+
+	\input{../../../figures/model-setup-hexagon.tex}
+\begin{figure}[H]
+	\centering
+    \drawModelSetupHexagon[userinterface=false, persistence=true, metaheuristics=false]
+	\caption{The proposed model setup. The server creates one \textbf{Strategic} algorithm as shown in section~\ref{sec:model:strategic}, 
+	on \textbf{Tactical} algorithm as shown in section~\ref{sec:model:tactical}, and 
+	one for each \textbf{Supervisor} as shown in section~\ref{sec:model:supervisor}, 
+	finally there one model for each \textbf{Technician} as shown in section~\ref{sec:model:technician}}
+	\label{fig:hexagon:persistence}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \drawModelSetupHexagon[userinterface=false, persistence=false, metaheuristics=true]
+	\caption{The proposed model setup. The server creates one \textbf{Strategic} algorithm as shown in section~\ref{sec:model:strategic}, 
+	on \textbf{Tactical} algorithm as shown in section~\ref{sec:model:tactical}, and 
+	one for each \textbf{Supervisor} as shown in section~\ref{sec:model:supervisor}, 
+	finally there one model for each \textbf{Technician} as shown in section~\ref{sec:model:technician}}
+	\label{fig:hexagon:metaheuristics}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \drawModelSetupHexagon[userinterface=true, persistence=false, metaheuristics=false]
+	\caption{The proposed model setup. The server creates one \textbf{Strategic} algorithm as shown in section~\ref{sec:model:strategic}, 
+	on \textbf{Tactical} algorithm as shown in section~\ref{sec:model:tactical}, and 
+	one for each \textbf{Supervisor} as shown in section~\ref{sec:model:supervisor}, 
+	finally there one model for each \textbf{Technician} as shown in section~\ref{sec:model:technician}}
+	\label{fig:hexagon:userinterfaces}
+\end{figure}
+
+Figure~\ref{fig:hexagon} shows a setup where each hexagon is a mathematical model that is optimizing
+a certain part of the scheduling process. Where you both have seen a little of the \textbf{Strategic}.
+and the \textbf{Tactical}. These models will never be able of their own to model the system as such user-interfaces are 
+created for each of these stakeholders.
+
+% FIX MAKE THE UI FIGURE
+
+\subsection{Separating Responsibilites}
+
+
+\subsection{}
+
+\section{Academic Papers}
+I unfortunately have to write academic papers even though we do not have solid results yet.
+I do not like to do it that way but I need to do it do get my Ph.D. degree. The first paper
+is called \textbf{Actor-based Large Neighborhood Search}, and I am trying to finish it as 
+quickly as possible so that we can get back to testing.
+
+
+\section{External Stay}
+I am going of external stay in Paris at a company called \textbf{Decision Brain} it is a 
+company that creates maintenance scheduling software that resembles the kind of system 
+that we are trying to develop. I am going there with the intention of learning how to
+best proceed with implementing the system that we are working on here at Total.
