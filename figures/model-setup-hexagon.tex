@@ -1,28 +1,12 @@
-\documentclass{standalone}
-\usepackage{tikz}
 \usetikzlibrary {positioning}
-
-<<<<<<< HEAD
 \newcommand{\drawHexagon}[5][draw=black]{
-	\draw[#1, fill=#4, ] (#2,#3) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
+	\draw[#1, fill=#4] (#2,#3) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
 	\node at (#2,#3+2) {#5};
-||||||| 2d4327a
-\newcommand{\drawHexagon}[4]{
-	\draw[fill=#3] (#1,#2) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
-	\node at (#1,#2+2) {#4};
-=======
-\begin{document}
-\newcommand{\drawHexagon}[4]{
-	\draw[fill=#3] (#1,#2) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
-	\node at (#1,#2+2) {#4};
->>>>>>> 023797133fb426c1bb01f920d8f5635c343d11a6
 }
-
 \newif\ifuserinterfacelayer
 \newif\ifpersistencelayer
 \newif\ifmetaheuristicslayer
 \newif\ifatomicpointerswaplayer
-
 \pgfkeys{
 	/hexagon/.is family, /hexagon,
 	default/.style = {
@@ -89,14 +73,6 @@
 		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
 		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
 	\fi
-
 	
 	\end{tikzpicture}
 }
-
-\ifstandalone
-	\input{../styles/colors.tex}
-	\drawModelSetupHexagon
-\fi
-
-\end{document}
