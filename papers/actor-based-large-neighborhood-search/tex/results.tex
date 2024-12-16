@@ -1,18 +1,21 @@
 \section{Results}
 \label{sec:3-results}
-The results section will: 1. introduce the data instance from the case company;
-2. show the effect of forcing work orders into specific weekly schedules $
-\ElementPeriod \in \SetPeriod$; 3. show the effect of changing the period resource
-capacities $\ParStrategicResource$, and 4. show the effect of dynamically
-changing the $\ParStrategicValue$ for period $\ElementPeriod \in
-\SetPeriod$ and for $\ElementWorkOrder \in \SetWorkOrder$.
+To test the AbLNS algorithm in a framework setup a number of tests, where the data are disrupted
+during the AbLNS algorithm is tested in this section. The data and company setup is presented in
+Section~\ref{sec:data_instance}. Then the effect of forcing work orders into specific weekly 
+$\ElementPeriod \in \SetPeriod$ schedules is presented in Section~\ref{sec:response_work_orders} 
+and excluding them from periods is shown in Section~\ref{sec:exclusion}.
+Afterwards, the effect of reducing the period resource capacities $\ParStrategicResource$ is 
+tested in Section~\ref{sec:reduced_weekly_capacity} and increasing them is tested in 
+Section~\ref{sec:increase_week_cap}. Finally the effect of changing item weights, i.e. workorder resource requirements, is tested in Section~\ref{sec:weight_changes}.
 
-
-\subsection{Data Instance}
-This data instance comes from Total Energies, where data is extracted from their SAP ERP system. The data instance used in this paper is
-associated with a specific offshore platform that for the time horizon that we are looking at contains 3487 outstanding work orders ($\SetWorkOrder{}$), have 16 
-different resource skill sets ($\SetResource$) (e.g. mechanics, electricians, turbine specialists, etc.), and finally the scheduling horizon stretches over
-a 52 bi-weekly periods ($\SetPeriod$) meaning approximately 2 years.
+\subsection{Data Instance}\label{sec:data_instance}
+This data instance comes from Total Energies~\cite{???}, where data is extracted from their SAP ERP system. 
+The data instance used in this paper is associated with a specific offshore platform that for 
+the time horizon (which is ???) that we are looking at contains 3487 outstanding work orders ($\SetWorkOrder{}$), 
+have 16 different resource skill sets ($\SetResource$) (e.g. mechanics, electricians, 
+turbine specialists, etc.), and finally the scheduling horizon stretches over a 52 bi-weekly 
+periods ($\SetPeriod$) meaning approximately 2 years.
  
 \begin{table}[H]
 \centering
@@ -25,7 +28,7 @@ Instance 1 & 3487                                                          & 16 
 \caption{specific data instances from the case company. Here $\SetWorkOrder$ is the set of work orders, $\SetResource$ is the set of resources, and $\SetPeriod$ is the set of weekly periods.} % \label{fig1}
 \end{table}
 
-\subsection{Response to Inclusion of Work Orders}
+\subsection{Response to Inclusion of Work Orders}\label{sec:response_work_orders}
 The $\ParStrategicInclude$ parameter specifies whether a work order should be scheduled into a specific period.
 As the parameter has the time variable $\VarMetaTime$ it means that this parameter can change at any time while
 the metaheuristic is running. The $\ParStrategicInclude$ parameter constrains the model in equation~\ref{eqn:constraint:strategic:include}.
@@ -66,7 +69,7 @@ the capacity to be exceeded or the inclusion resulting in a selected $
 all show the same  pattern, an increase in the objective value followed by a
 subsequent convergence.
 
-\subsection{Response to Exclusion}
+\subsection{Response to Exclusion}\label{sec:exclusion}
 The response to exclusion is associated with the $\ParStrategicExclude$
 parameter and is found in equation~\ref{eqn:strategic:constraint:exclude}.
 Here specific work orders ($\ElementWorkOrder \in \SetWorkOrder{}$) are
@@ -106,7 +109,7 @@ From figure~\ref{fig:responses:inclusion} and figure~\ref{fig:responses:exclusio
 clear that the AbLNS method can handle dynamic entries of work orders. The next section will discuss the effects of dynamically changing the 
 resource capacities $\ParStrategicResource$. 
 
-\subsection{Response to Additional Weekly Capacity}
+\subsection{Response to Additional Weekly Capacity}\label{sec:increase_week_cap}
 Table~\ref{tab:responses:resource-addition} details the pertubations that the
 AbLNS will be subject to during its 360 second execution. Pertubing the
 resources $\ParStrategicResource$ affects the solution considerably more than
@@ -143,7 +146,7 @@ maximum value.
 	\label{fig:responses:resources-addition}
 \end{figure}
 
-\subsection{Response to Reduced Weekly Capacity}
+\subsection{Response to Reduced Weekly Capacity}\label{sec:reduced_weekly_capacity}
 Table~\ref{tab:resources:resource-subtraction} details the pertubations that the
 AbLNS will affected by. Starting from a base load of the amount of available
 resources are progressively decreased.
@@ -173,7 +176,7 @@ capacity.
 \end{figure}
 
 
-\subsection{Response to Changes in Item Weights}
+\subsection{Response to Changes in Item Weights}\label{sec:weight_changes}
 The final parameter that will be changed is the work order value $
 \ParStrategicValue$. Table~\ref{tab:responses:value_change} details the
 pertubations that the AbLNS will by affected by. On each iteration 100 work
