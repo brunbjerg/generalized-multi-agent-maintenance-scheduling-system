@@ -4,7 +4,7 @@
 \subsection{Actor-based Large Neighborhood Search}
 A metaheuristic that is affected by the end user and requires real-time feedback
 inherently requires an optimization approach that is able to repair infeasible solutions
-while also converging quickly. The large neighborhood search (LNS)
+while also converging quickly. The large neighborhood search (LNS)~\cite{shaw1998using}
 metaheuristic has been shown satisfy these requirements in the literature
 \cite{gendreauHandbookMetaheuristics2019}. The most general form of the LNS metaheuristic
 is defined for static problems, meaning that the parameters that make up the problem instance
@@ -18,7 +18,7 @@ LNS in its most basic form has one constructor and one destructor which
 repeatedly destroy and rebuild the solution. For the AbLNS we will generalize
 on this concept by including messages as destructors. This generalization can
 be seen as being somewhat similar to how
-the adaptive LNS (ALNS) is formulated, but where the different constructors and
+the adaptive LNS (ALNS)~\cite{pisinger2007general} is formulated, but where the different constructors and
 destructors are also chosen from sources external to the algorithm.
 
 Extending on the classic setup we define the following set of destructors, $\ElementMessage{}{} \in \SetMessageQueue$.
@@ -64,4 +64,6 @@ solution is perturbed. Notice that:
 	\item The pointer swapping that is performed on line~\ref{alg:actor-based-large-neighborhood-search:atomic-pointer-swap} when a new best solution is found instantaneously makes the solution available to other actors. The pointer swapping is crucial as it allows non-hierarchical model setups. 
 \end{itemize}
 
-
+The AbLNS algorithm will continuously run either optimizing the current plan or updating the plan 
+with new external input. Since the effects of a message is considered in every iteration, changing 
+conditions will immediately get acted upon. Since a fast response is paramount, exact optimization algorithms are deemed un-s 

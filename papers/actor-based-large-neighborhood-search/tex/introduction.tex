@@ -2,7 +2,7 @@
 Maintenance scheduling is part of a class of operational problems that have proven hard to solve in practice as they
 are usually modelled as resource-constrained project scheduling problems, knapsack formulations, machine scheduling problems, etc. (NP-hard~\citep{garey1979computers}).
 Furthermore, for optimization to be useful in dynamic and uncertain environments where maintenance scheduling
-is performed requires tight integration into existing IT infrastructure to allow the tacit knowledge of decision makers to easily influence
+is performed it requires tight integration into existing IT infrastructure to allow the tacit knowledge of decision makers to easily influence
 the planning process. Often a number of different decision makers at different company levels take part in the
 planning process. In this way the industry usually assigns responsibility for decision-making to an individual
 representing only a small part of the complete process. These multiple smaller planning processes are often difficult
@@ -27,14 +27,14 @@ This paper proposes a solution method that will allow for real-time optimization
 based on actor/user interaction and a connection to a dynamic data source,
 effectively managing the changes to the parameter space as they occur. The proposed solution
 method will be tested on the weekly maintenance scheduling problem \citet{palmerMaintenancePlanningScheduling2019}
-which closely resembles a variant of the multi-compartment multi-knapsack problem (MCMKP). It
+which closely resembles a variant of the multi-compartment multi-knapsack problem (MCMKP)~\cite{do2007constrained}. It
 should be noted that the scientific maintenance scheduling literature can deviate
 significantly from its practical implementation which is also detailed in
 \citep{palmerMaintenancePlanningScheduling2019}. The solution method is
-based on the large neighborhood search (LNS) metaheuristic and is in this
+based on the large neighborhood search (LNS~\cite{shaw1998using}) metaheuristic and is in this
 paper describes as actor-based large neighborhood search (AbLNS). LNS
 was chosen due to its properties of naturally being able to work with and fix
-infeasible solutions and its state of the art performance on various scheduling
+infeasible solutions and because of its state of the art performance on various scheduling
 problems \citep{gendreauHandbookMetaheuristics2019}.
 
 To understand the need for actor-based methods some
@@ -42,11 +42,13 @@ background knowledge will be required about the maintenance scheduling process.
 Figure~\ref{fig:integrated:maintenance-process} illustrates the general setup
 of a maintenance planning and scheduling system. The system's actors
 have the following responsibilities: the planner generates the work orders that
-are to be scheduled; the scheduler creates weekly schedules of work orders that are
-usually based on a knapsack
-formulation; based on the weekly schedule the supervisor assigns work order
-activities to technicians (modelled as an assignment problem); the
-technicians executes the work in sequential pattern (modelled as a single machine scheduling).
+are to be scheduled; each scheduler creates weekly schedules for a set of work orders ; 
+based on the weekly schedule the supervisors assign work order
+activities to technicians; the
+technicians executes the work in sequential pattern. Each planning problem is matched 
+by a corresponding optimization problem, for the scheduler, it is a variation of the
+multi-compartment multi-knapsack problem, for the supervisor it is a variation of the 
+assignment problem and for the technicians it is a single machine scheduling problem.
 
 The idea of ownership of a work order is crucial to understand the necessity of
 actor-based approaches. Throughout the scheduling process a
@@ -74,13 +76,16 @@ scheduling are handled by \textbf{dynamic rescheduling between the actors}.
 	\end{center}
 \end{figure}
 
+The main contribution of this article is to provide a modular scalable optimization component, 
+based on a proven metaheuristic to support a business process composed from smaller mathematical 
+models in a framework, instead of a larger integrated mathematical model.
 
-This article has the following contribution:
-\begin{itemize}
-	\item To provide a modular scalable optimization component based on a proven metaheuristic to allow business processes to be composed from smaller mathematical models, instead of larger integrated formulations.
-\end{itemize}
+The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains
+the weekly maintenance scheduling model in detail and forms the foundation of the paper. 
+Section \ref{sec:3-results} shows the results that come from the metaheuristic implemented,
+where it will be affected by the simulated user interaction. Section \ref{sec:4-discussion} 
+will discuss the implications of the research and estabslish a future research direction.
 
-The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains the weekly maintenance scheduling model in detail and forms the foundation of the paper. Section \ref{sec:3-results} shows the results coming from the implemented metaheuristic where it will be affected by simulated user-interaction. Section \ref{sec:4-discussion} will discuss the implications of the research and set a future research direction.
 \subsection{The Weekly (Period) Maintenance Scheduling Model}
 The weekly maintenance scheduling model for the problem
 is a variant of the  Multi-compartment Multi-knapsack Problem with capacity penalties MCMKP.
