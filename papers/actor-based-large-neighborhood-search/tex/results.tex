@@ -6,8 +6,10 @@ Section~\ref{sec:data_instance}. Then the effect of forcing work orders into spe
 $\ElementPeriod \in \SetPeriod$ schedules is presented in Section~\ref{sec:response_work_orders} 
 and excluding them from periods is shown in Section~\ref{sec:exclusion}.
 Afterwards, the effect of reducing the period resource capacities $\ParStrategicResource$ is 
-tested in Section~\ref{sec:reduced_weekly_capacity} and increasing them is tested in 
-Section~\ref{sec:increase_week_cap}. Finally the effect of changing item weights, i.e. workorder resource requirements, is tested in Section~\ref{sec:weight_changes}.
+tested in Section~\ref{sec:results:reduced_weekly_capacity} and increasing them is tested in 
+Section~\ref{sec:increase_week_cap}. 
+Finally the effect of changing the work order values $\ParStrategicValue$, 
+is tested in Section~\ref{sec:results:strategic_value_changes}.
 
 \subsection{Data Instance}\label{sec:data_instance}
 This data instance comes from Total Energies~\cite{???}, where data is extracted from their SAP ERP system. 
@@ -146,7 +148,7 @@ maximum value.
 	\label{fig:responses:resources-addition}
 \end{figure}
 
-\subsection{Response to Reduced Weekly Capacity}\label{sec:reduced_weekly_capacity}
+\subsection{Response to Reduced Weekly Capacity}\label{sec:results:reduced_weekly_capacity}
 Table~\ref{tab:resources:resource-subtraction} details the pertubations that the
 AbLNS will affected by. Starting from a base load of the amount of available
 resources are progressively decreased.
@@ -176,7 +178,7 @@ capacity.
 \end{figure}
 
 
-\subsection{Response to Changes in Item Weights}\label{sec:weight_changes}
+\subsection{Response to Changes in Work Order Values}\label{sec:results:strategic_value_changes}
 The final parameter that will be changed is the work order value $
 \ParStrategicValue$. Table~\ref{tab:responses:value_change} details the
 pertubations that the AbLNS will by affected by. On each iteration 100 work
