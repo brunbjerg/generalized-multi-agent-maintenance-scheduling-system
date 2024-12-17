@@ -13,6 +13,7 @@ stats 'gnuplot_data.csv' using 1 nooutput
 unset key
 set datafile separator ','
 
-set grid 
+set grid linetype 1 linecolor "grey" lw 2 
+
 plot 'gnuplot_data.csv' using ($1 - STATS_min):2 with lines linestyle 1
 print "all done!"
