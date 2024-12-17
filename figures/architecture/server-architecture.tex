@@ -1,0 +1,39 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{backgrounds}
+
+\input{../../styles/colors.tex}
+\begin{document}
+
+	\begin{tikzpicture}
+
+    \draw (0.0,1.0) 
+		node[minimum height=4cm,fill=dtu-red,minimum width=6cm,rounded corners=0.4cm] 
+			(DTU network) {DTU network};
+
+    \draw (0.0,2.0) 
+		node[minimum height=1cm,fill=dtu-green,minimum width=4cm,rounded corners=0.4cm, yshift=0cm] 
+			(Basement Server) {Basement Server};
+
+    \draw (-2.5,6.0) 
+		node[minimum height=1cm,fill=dtu-green,minimum width=4cm,rounded corners=0.4cm] 
+			(My Machine) {My Machine};
+
+    \draw (2.5,6.0) 
+		node[minimum height=1cm,fill=dtu-green,minimum width=4cm,rounded corners=0.4cm, align=center] 
+			(Other Stakeholder Machine) {Other\\Stakeholder Machine};
+
+	\draw[color=other,-, ultra thick] (My Machine) -- (Basement Server) 
+		node[midway, above, rotate=301, fill=none, inner sep=0.2cm] {Zero-trust}
+		node[midway, below, rotate=301, fill=none, inner sep=0.2cm] {VPN};
+
+	\draw[color=other,-, ultra thick] (Other Stakeholder Machine) -- (Basement Server) 
+		node[midway, above, rotate=59, fill=none, inner sep=0.2cm] {Zero-trust}
+		node[midway, below, rotate=59, fill=none, inner sep=0.2cm] {VPN};
+
+	
+	\end{tikzpicture}
+\end{document}

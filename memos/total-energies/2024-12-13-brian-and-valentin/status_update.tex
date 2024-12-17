@@ -2,36 +2,35 @@
 
 \begin{itemize}
 	\item Writing to SAP
-	\item Coding the on the server side
+	\item Coding on the server side
+	\item Coding on the frontend side
 	\item Academic Papers
 	\item External Stay
 \end{itemize}
 
 % FIX: MENTION THE NAME OF THE SAP PERSON.
-\subsection{Writing to SAP}
+\section{Writing to SAP}
 I have had disscussions with people in Paris about writing to SAP. Specificially 
 asked if it would be possible to write to table AFVC column ABLAD which is the 
 column called "Unloading Point". This is posible but it will require all
-my source code to be uploaded to Total Energies servers, which I is a little 
-bit at odds with the research part of the project as I will lose control over it.
+my source code to be uploaded to Total Energies servers, which I are a little 
+reluctant to do as I will lose control over the research project.
 
-\subsection{Coding on the server side}
+\section{Coding on the server side}
 Since out last meeting I have done a significant amount of coding on the server side
-of the application, most of it is related to the tactical model (The one that schedules)
-on the days, to make it dynamic and provide results that are satisfactory. (I think that
-Brian can quickly test this when it works as I have basically copied the previous project
-for this algorithm).
+of the application, most of it is related to the tactical model, the algorithm that schedules
+on the days, to make it dynamic and provide results that are satisfactory.
 
-To reiterate the long term goal here refer to figure~\ref{fig:hexagon:persistence}, \ref{fig:hexagon:metaheuristics}, and \ref{fig:hexagon:userinterfaces}. 
+To reiterate the long term goal here refer to figure~\ref{fig:hexagon:persistence}, \ref{fig:hexagon:metaheuristics}, and \ref{fig:hexagon:userinterfaces}.
+Figure~\ref{fig:hexagon:persistence} holds all the data
+needed to make the system function as well as capture all the changes that the end-users make based on the results of the algorithms.
 
 \input{../../../figures/model-setup-hexagon.tex}
 \begin{figure}[H]
 	\centering
     \drawModelSetupHexagon[userinterface=false, persistence=true, metaheuristics=false]
-	\caption{The proposed model setup. The server creates one \textbf{Strategic} algorithm as shown in section~\ref{sec:model:strategic}, 
-	on \textbf{Tactical} algorithm as shown in section~\ref{sec:model:tactical}, and 
-	one for each \textbf{Supervisor} as shown in section~\ref{sec:model:supervisor}, 
-	finally there one model for each \textbf{Technician} as shown in section~\ref{sec:model:technician}}
+	\caption{Common database layer for all algorithms in the system. The database layer is initialized from
+	the SAP, and the also receives inputs from the user for \textbf{Resources} and \textbf{Timehorizons}.}
 	\label{fig:hexagon:persistence}
 \end{figure}
 
@@ -44,35 +43,33 @@ To reiterate the long term goal here refer to figure~\ref{fig:hexagon:persistenc
 	finally there one model for each \textbf{Technician} as shown in section~\ref{sec:model:technician}}
 	\label{fig:hexagon:metaheuristics}
 \end{figure}
+Figure~\ref{fig:hexagon:metaheuristics} 
+shows the setup where each hexagon is a mathematical algorithm that is optimizing
+a certain part of the scheduling process. Here you both have seen a little of the \textbf{Strategic}
+and the \textbf{Tactical}. These models will never be able of their own to model the scheduling process therefore user-interfaces are 
+created for each of these stakeholders which is illustrated in figure~\ref{fig:hexagon:userinterfaces}.
 
 \begin{figure}[H]
 	\centering
     \drawModelSetupHexagon[userinterface=true, persistence=false, metaheuristics=false]
-	\caption{The proposed model setup. The server creates one \textbf{Strategic} algorithm as shown in section~\ref{sec:model:strategic}, 
-	on \textbf{Tactical} algorithm as shown in section~\ref{sec:model:tactical}, and 
-	one for each \textbf{Supervisor} as shown in section~\ref{sec:model:supervisor}, 
-	finally there one model for each \textbf{Technician} as shown in section~\ref{sec:model:technician}}
+	\caption{Every algorithm has its own user interface. This means that there will be a view into the system that is 
+	unique for each kind of stakeholder.}
 	\label{fig:hexagon:userinterfaces}
 \end{figure}
 
-Figure~\ref{fig:hexagon} shows a setup where each hexagon is a mathematical model that is optimizing
-a certain part of the scheduling process. Where you both have seen a little of the \textbf{Strategic}.
-and the \textbf{Tactical}. These models will never be able of their own to model the system as such user-interfaces are 
-created for each of these stakeholders.
-
-% FIX MAKE THE UI FIGURE
+There are more than these three layers, but I hope that they convey that it conveys what the code is trying to do.
 
 \subsection{Separating Responsibilites}
-
-
-\subsection{}
+Brian mentioned at the previous meeting that for this kind of system it would be crucial that
+each stakeholder that we want to be part of the system has clearly defined boundaries for what
+they can and cannot change. Below I have included a small piece of code from the program to 
+highlight what I mean. 
 
 \section{Academic Papers}
 I unfortunately have to write academic papers even though we do not have solid results yet.
-I do not like to do it that way but I need to do it do get my Ph.D. degree. The first paper
-is called \textbf{Actor-based Large Neighborhood Search}, and I am trying to finish it as 
-quickly as possible so that we can get back to testing.
-
+The first paper
+is titled \textbf{Actor-based Large Neighborhood Search}, I am trying to complete it as 
+soon as possible that we can get back to testing.
 
 \section{External Stay}
 I am going of external stay in Paris at a company called \textbf{Decision Brain} it is a 
