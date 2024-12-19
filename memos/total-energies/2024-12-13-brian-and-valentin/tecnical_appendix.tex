@@ -1,63 +1,41 @@
 \newpage
 \section{Appendix}
 \subsection{Illustrative Code Parts}
-\texttt{\detokenize{pub struct UserStatusCodes {
-    pub appr: bool, 
-    pub smat: bool, 
-    pub init: bool, 
-    pub rdbl: bool, 
-    pub qcap: bool, 
-    pub rfrz: bool, 
-    pub wmat: bool, 
-    pub cmat: bool, 
-    pub pmat: bool, 
-    pub apog: bool, 
-    pub prok: bool, 
-    pub wrea: bool, 
-    pub exdo: bool, 
-    pub swe: bool, 
-    pub awdo: bool, 
-    pub rout: bool, 
-    pub wta: bool, 
-    pub sch: bool, 
-    pub sece: bool, 
-    pub rel: bool, 
-    pub rees: bool, 
-    pub reap: bool, 
-    pub wrel: bool, 
-    pub awsd: bool, 
-    pub sraa: bool, 
-    pub qcrj: bool, 
-    pub awsc: bool, 
-    pub lprq: bool, 
-    pub rrev: bool, 
-    pub awca: bool, 
-    pub rreq: bool, 
-    pub vfal: bool, 
-    pub sreq: bool, 
-    pub amcr: bool, 
-    pub dfrj: bool, 
-    pub vpas: bool, 
-    pub dfcr: bool, 
-    pub ireq: bool, 
-    pub atvd: bool, 
-    pub awmd: bool, 
-    pub dfex: bool, 
-    pub dfap: bool, 
-    pub awpr: bool, 
-}
-pub struct StrategicUserStatusCodes {
-    /// Provide the work order number for the work order that you want to change.
-    pub work_order_numbers: Vec<WorkOrderNumber>,
-    pub sch: Option<bool>,
-    pub awsc: Option<bool>,
-    pub cmat: Option<bool>,
-    pub wmat: Option<bool>,
-    pub pmat: Option<bool>,
-    pub snmat: Option<bool>,
-}
-}}
+\begin{alignat*}{1}
+struct\ & UserStatusCodes \\
+    & appr: bool, \\
+    & smat: bool, \\
+    & init: bool, \\
+    & rdbl: bool, \\
+    & qcap: bool, \\
+    & rfrz: bool, \\
+    & wmat: bool, \\
+    & cmat: bool, \\
+    & pmat: bool, \\
+    & ... \\
+    & dfrj: bool, \\
+    & vpas: bool, \\
+    & dfcr: bool, \\
+    & ireq: bool, \\
+    & atvd: bool, \\
+    & awmd: bool, \\
+    & dfex: bool, \\
+    & dfap: bool, \\
+    & awpr: bool, \\
+\} \ \ &\\
+\end{alignat*}
 
+\begin{alignat*}{1}
+struct\ & StrategicUserStatusCodes \ \{ \\
+    & work\_order\_numbers: Vec<WorkOrderNumber>,\\
+    & sch: Option<bool>,\\
+    & awsc: Option<bool>,\\
+    & cmat: Option<bool>,\\
+    & wmat: Option<bool>,\\
+    & pmat: Option<bool>,\\
+    & smat: Option<bool>,\\
+\}\ \ &\\
+\end{alignat*}
 \newpage
 \subsection{Mathematical Models}
 \subsection{Strategic Model: A Knapsack Variant}

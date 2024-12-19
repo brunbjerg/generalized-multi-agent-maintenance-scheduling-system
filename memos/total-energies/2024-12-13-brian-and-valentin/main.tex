@@ -21,6 +21,7 @@
 \usepackage{pgfkeys}
 \usepackage{tikz}
 \usepackage{import}
+\usepackage{lastpage}
 % \usepackage{titlesec}
 \setcounter{secnumdepth}{3}
 \input{../../../tex/definitions.tex}
@@ -28,16 +29,16 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Memo: Ordinator Progress}
+\lhead{Memo: Ordinator Status}
 \rhead{Christian Brunbjerg Jespersen - cbrje@dtu.dk}
 
-\cfoot{\thepage}
+\rfoot{Recipients: \textbf{Brian Friis Nielsen} \& \textbf{Valentin Ispas}}
+\lfoot{page \thepage\ of\ \pageref{LastPage}}
 
 \begin{document}
 	\section{Introduction}
-	Hello Brian and Valentin,
-
-	I have created a memo for the project to help get us all in sync.
+	This memo is for the Ordinator scheduling project with the goal
+	of getting primary stakeholders in sync.
 	\input{status_update.tex}
 	\input{problems_and_issues.tex}
 	\input{tecnical_appendix.tex}

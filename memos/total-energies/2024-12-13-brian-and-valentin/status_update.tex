@@ -3,9 +3,9 @@
 \begin{itemize}
 	\item Writing to SAP
 	\item Coding on the server side
-	\item Coding on the frontend side
 	\item Academic Papers
 	\item External Stay
+	\item Problems and Issues
 \end{itemize}
 
 % FIX: MENTION THE NAME OF THE SAP PERSON.
@@ -30,7 +30,7 @@ needed to make the system function as well as capture all the changes that the e
 	\centering
     \drawModelSetupHexagon[userinterface=false, persistence=true, metaheuristics=false]
 	\caption{Common database layer for all algorithms in the system. The database layer is initialized from
-	the SAP, and the also receives inputs from the user for \textbf{Resources} and \textbf{Timehorizons}.}
+	the \textbf{SAP}, and the also receives inputs from the user for \textbf{Resources} and \textbf{Timehorizons}.}
 	\label{fig:hexagon:persistence}
 \end{figure}
 
@@ -57,13 +57,13 @@ created for each of these stakeholders which is illustrated in figure~\ref{fig:h
 	\label{fig:hexagon:userinterfaces}
 \end{figure}
 
-There are more than these three layers, but I hope that they convey that it conveys what the code is trying to do.
+There are more than these three layers, they serve to provide a high level visualization of what the code is aiming to do.
 
 \subsection{Separating Responsibilites}
-Brian mentioned at the previous meeting that for this kind of system it would be crucial that
-each stakeholder that we want to be part of the system has clearly defined boundaries for what
-they can and cannot change. Below I have included a small piece of code from the program to 
-highlight what I mean. 
+Brian mentioned at the previous meeting that for this kind of system it will be crucial that
+each stakeholder (Scheduler, Supervisor, Technician) that we want to be part of the system has 
+clearly defined boundaries for what they can and cannot change. This means that there are internally
+in the server clear boundaries for what each user of the system can change.
 
 \section{Academic Papers}
 I unfortunately have to write academic papers even though we do not have solid results yet.
