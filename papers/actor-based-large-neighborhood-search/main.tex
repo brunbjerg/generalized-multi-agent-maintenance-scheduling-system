@@ -36,7 +36,7 @@
 \usepackage{gnuplottex}
 \usepackage{gnuplot-lua-tikz}
 
-\renewcommand{\figurename}{Fig}
+\renewcommand{\figurename}{\textbf{Fig}}
 
 %% For including figures, graphicx.sty has been loaded in
 %% elsarticle.cls. If you prefer to use the old commands
@@ -147,35 +147,26 @@
 
 %% Abstract
 \begin{abstract}
-Many planning problems facing the operations research field have proven
-difficult to solve due to their inherent uncertainty and highly dynamic
-nature. Stochastic Programming~\citep{birge2011introduction}, fuzzy
-logic~\citep{zadeh1988fuzzy}, robust optimization~\citep{ben2009robust}, and
-dynamic optimization~\citep{yangMetaheuristicsDynamicCombinatorial2013}, and 
-human-in-loop optimization~\citep{talbiMetaheuristicsDesignImplementation2009}.
-These are some of the methods that have been proposed to solve these issues. These
-methods make an implicit assumption of a static data setting and a static
-problem setting.
-
-Maintenance scheduling is one such problem where the best
-available information is continually updated and therefore the scheduling
-continuously needs to be updated. Maintenance scheduling is a complex process
-often more associated with operation management, but here we will argue that is
-possible to implement general maintenance scheduling approaches, if the solution
-approach is designed to be integrated into a business process of the kind that
-are usually developed by the principles of operation management (plan-do-check-act, etc.)~\cite{w.edwardsdemingOutCrisis}.  
-This paper
-proposes a novel optimization method that is capable to optimizing a scheduling
-problem in the following setting: Primary data source is changing in real-time;
-external inputs affects the optimization process; multiple actors are making
-interdependent decisions whose objectives may differ significantly. The proposed
-solution approach is an actor-based framework based on a large neighborhood
-search metaheuristic implementation. 
-
-The framework is tested on the real-world
-problem of maintaining scheduling of offshore platforms for Total Energies in the North Sea.
-The approach is general and can be applied to a wide variety of other
-operational planning problems.
+Many planning problems in operations research are challenging due
+to their inherent uncertainty and dynamic nature. Methods such
+as Stochastic Programming~\citep{birge2011introduction}, fuzzy
+logic~\citep{zadeh1988fuzzy}, robust optimization~\citep{ben2009robust},
+dynamic optimization~\citep{yangMetaheuristicsDynamicCombinatorial2013}, and
+human-in-loop optimization~\citep{talbiMetaheuristicsDesignImplementation2009}
+have been proposed to address these issues. However, these methods often
+assume static data and problem settings. Maintenance scheduling exemplifies a
+dynamic problem where information is continually updated, requiring frequent
+rescheduling. While traditionally viewed as an operations management task, this
+paper argues that general maintenance scheduling approaches can be developed by
+integrating optimization solutions into business processes guided by operations
+management principles (e.g., plan-do-check-act)~\cite{w.edwardsdemingOutCrisis}.
+This paper proposes a novel actor-based optimization framework using a large
+neighborhood search metaheuristic to address dynamic scheduling problems
+characterized by real-time data updates, external inputs influencing
+optimization, and interdependent decisions by multiple actors with differing
+objectives. The framework is tested on real-world maintenance scheduling for
+offshore platforms operated by Total Energies in the North Sea and demonstrates
+general applicability to a wide range of operational planning problems.
 \end{abstract}
 
 %%Graphical abstract
@@ -194,11 +185,9 @@ operational planning problems.
 %% keywords here, in the form: keyword \sep keyword
 Large Neighborhood Search
 \sep Actor Framework
-\sep Parallel Metaheuristics
 \sep Maintenance scheduling
 \sep Real-time Optimization
 \sep Human-centered Computing
-\sep Interactive Systems and Tools
 \sep Decision Support Systems
 \sep Interactive Optimization.
 

@@ -45,8 +45,8 @@ points in time $\VarMetaTime$.
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicInclude|$\end{tabular} & 50                                                            & 50                                                               & 50                                                             & 50                                                             & 50                                                       \\ \hline
 	\end{tabular}
-	\caption{The pertubations of including work orders into the weekly scheduling that the AbLNS is affected by. 
-	Pertubations occur at 60 second time intervals affecting 50 randomly chosen work orders included into random periods.}
+	\caption{The perturbations of including work orders into the weekly scheduling that the AbLNS is affected by. 
+	Perturbations occur at 60 second time intervals affecting 50 randomly chosen work orders included into random periods.}
 	\label{tab:responses:inclusion}
 \end{table}
 
@@ -60,15 +60,15 @@ value \ref{eqn:objective:strategic} shows a small spike and then quickly converg
 	\resizebox{10cm}{!}{
 		\input{figures/strategic_objective_value_inclusion_plot.tex}
 	}
-	\caption{Effects of pertubing the solution by forcing work orders into specific periods.}
+	\caption{Effects of perturbing the solution by forcing work orders into specific periods.}
 	\label{fig:responses:inclusion}
 \end{figure}
 Figure~\ref{fig:responses:inclusion} 
-show 5 pertubations with the first at
+show 5 perturbations with the first at
 time = 60s where the objective value  slightly increases in response to the
 inclusion, the objective value increases due to the inclusion either causing
 the capacity to be exceeded or the inclusion resulting in a selected $
-\ParStrategicValue$ that has a lower value. The remaining 4 pertubations
+\ParStrategicValue$ that has a lower value. The remaining 4 perturbations
 all show the same  pattern, an increase in the objective value followed by a
 subsequent convergence.
 
@@ -77,11 +77,11 @@ The response to exclusion is associated with the $\ParStrategicExclude$
 parameter and is found in equation~\ref{eqn:strategic:constraint:exclude}.
 Here specific work orders ($\ElementWorkOrder \in \SetWorkOrder{}$) are
 being excluded from specific periods ($\ElementPeriod \in \SetPeriod$).
-The pertubations that the AbLNS will be affected by are shown in
+The perturbations that the AbLNS will be affected by are shown in
 table~\ref{tab:responses:exclusion}
 with the setup being very similar to the
 one in table~\ref{tab:responses:inclusion}.
-The main distinction being that the pertubation affects 500 instead of 50 work orders, the higher number 
+The main distinction being that the perturbation affects 500 instead of 50 work orders, the higher number 
 of affected work orders is chosen as many exclusions of do not affect the assignment of a work order.
 
 \begin{table}[H]
@@ -91,20 +91,22 @@ of affected work orders is chosen as many exclusions of do not affect the assign
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicExclude|$\end{tabular} & 500                                                           & 500                                                              & 500                                                            & 500                                                            & 500                                                       \\ \hline
 	\end{tabular}
-	\caption{The pertubations of excluding a work order from specific periods in the weekly schedule. 
-	Pertubations occur at 60 second time intervals affecting 500 work orders each time.}
+	\caption{The perturbations of excluding a work order from specific periods in the weekly schedule. 
+	Perturbations occur at 60 second time intervals affecting 500 work orders each time.}
 	\label{tab:responses:exclusion}
 \end{table}
 
 Figure~\ref{fig:responses:exclusion}  show a substantial spike in the objective value  
-after a pertubation as given in table~\ref{tab:responses:exclusion}. 
+after a perturbation as given in table~\ref{tab:responses:exclusion}. 
 
 \begin{figure}[H]
 	\centering
 	\resizebox{10cm}{!}{
 		\input{figures/strategic_objective_value_exclusion_plot.tex}
 	}
-	\caption{Figure Caption}
+	\caption{At each 60 second interval the objective value experiences a 
+	large spike as the exclusion of work orders make the current best
+	assignment of work orders infeasible}
 	\label{fig:responses:exclusion}
 \end{figure}
 
@@ -113,10 +115,10 @@ clear that the AbLNS method can handle dynamic entries of work orders. The next 
 resource capacities $\ParStrategicResource$. 
 
 \subsection{Response to Additional Weekly Capacity}\label{sec:increase_week_cap}
-Table~\ref{tab:responses:resource-addition} details the pertubations that the
-AbLNS will be subject to during its 360 second execution. Pertubing the
+Table~\ref{tab:responses:resource-addition} details the perturbations that the
+AbLNS will be subject to during its 360 second execution. Perturbing the
 resources $\ParStrategicResource$ affects the solution considerably more than
-pertubing $\ParStrategicExclude$ and $\ParStrategicInclude$ and therefore 100
+perturbing $\ParStrategicExclude$ and $\ParStrategicInclude$ and therefore 100
 second intervals are specified instead of 60 second intervals.
 
 \begin{table}[H]
@@ -136,7 +138,7 @@ Figure~\ref{fig:responses:resources-addition} shows the effects of progressively
 increasing  available resources. The AbLNS starts with a base load which is
 then reduced at time = 100 seconds causing the objective value by increase
 as $\ParStrategicPenalty$ in equation~\ref{eqn:strategic:constraint:resource}
-absorbes the exceeded capacity. At time = 200 the resources are increased to the
+absorbs the exceeded capacity. At time = 200 the resources are increased to the
 base load again, and at time = 300 seconds the resources are  increased to their
 maximum value.
 
@@ -145,12 +147,16 @@ maximum value.
 	\resizebox{10cm}{!}{
 		\input{figures/strategic_objective_value_resource_addition_plot.tex}
 	}
-	\caption{Figure Caption}
+	\caption{Starting from a base load of 111268 hours (the same amount of 
+	hours as in the second perturbation). The resources are first reduced
+	causing a spike in the objective value. Then at each 100 second interval
+	resources are added and the objective value decreases and the AbLNS 
+	optimize around the perturbation}
 	\label{fig:responses:resources-addition}
 \end{figure}
 
 \subsection{Response to Reduced Weekly Capacity}\label{sec:results:reduced_weekly_capacity}
-Table~\ref{tab:resources:resource-subtraction} details the pertubations that the
+Table~\ref{tab:resources:resource-subtraction} details the perturbations that the
 AbLNS will affected by. Starting from a base load of the amount of available
 resources are progressively decreased.
 \begin{table}[H]
@@ -174,15 +180,19 @@ capacity.
 	\resizebox{10cm}{!}{
 		\input{figures/strategic_objective_value_resource_subtraction_plot.tex}
 	}
-	\caption{Figure Caption}
+	\caption{Starting from a baseload of 111628 hours of total hours the AbLNS is 
+	progressively affected by decreasing levels of resources. At the first 
+	100 seconds the objective value decreases in response to the perturbation
+	as resources are added, after which the AbLNS is pertubed by two decreases
+	in resources causing an initial spike in the objective value followed 
+	by the AbLNS optimizing around the perturbation}
 	\label{fig:responses:resource-subtraction}
 \end{figure}
-
 
 \subsection{Response to Changes in Work Order Values}\label{sec:results:strategic_value_changes}
 The final parameter that will be changed is the work order value $
 \ParStrategicValue$. Table~\ref{tab:responses:value_change} details the
-pertubations that the AbLNS will by affected by. On each iteration 100 work
+perturbations that the AbLNS will by affected by. On each iteration 100 work
 orders are having their values changed by the amount  shown in the 4th row of
 table~\ref{tab:responses:value_change}.
 
@@ -193,13 +203,13 @@ table~\ref{tab:responses:value_change}.
 	                                                                                                                   & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	$\Delta |\SetWorkOrder[\VarMetaTime_{n}]{} \triangle \SetWorkOrder[\VarMetaTime_{n-1}]{}              |$           & 100                                                           & 100                                                            & 100                                                            & 100                                                            & 100                                                      \\ \hline
 	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$           & 52                                                            & 52                                                             & 52                                                             & 52                                                             & 52                                                       \\ \hline
-	\makecell{$\Delta |\ParStrategicValue[\VarMetaTime_{n}]| -$\\ $|\ParStrategicValue[\VarMetaTime_{n - 1}]|$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
+	\makecell{$ \ParStrategicValue[\VarMetaTime_{n}] -$\\ $\ParStrategicValue[\VarMetaTime_{n - 1}]$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
 	\end{tabular}
 	\label{tab:responses:value_change}
 \end{table}
 
 Figure~\ref{fig:responses:value_change} shows the effects of
-pertubing the AbLNS by changing the $\ParStrategicValue$ parameter in the objective
+perturbing the AbLNS by changing the $\ParStrategicValue$ parameter in the objective
 function~\ref{eqn:objective:strategic} which specifies the value of assigning a
 work order to a specific period.
 
@@ -209,7 +219,10 @@ work order to a specific period.
 	\resizebox{\linewidth}{!}{
 		\input{figures/strategic_objective_value_weight_change_plot.tex}
 	}
-	\caption{Figure Caption}
+	\caption{The effects of perturbing the AbLNS by dynamically changing the
+	$\ParStrategicValue$ in the objective function. The objective value
+	is increasing in response to the higher cost associated with a late
+	scheduling, after which it optimizes around the perturbation}
 	\label{fig:responses:value_change}
 \end{figure}
  

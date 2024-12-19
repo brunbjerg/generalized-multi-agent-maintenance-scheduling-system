@@ -32,7 +32,7 @@ Extending on the classic setup we define the following set of destructors, $\Ele
 
 Each of these messages affect different parts of the weekly maintenance scheduling 
 problem. Notice here that the first four messages destruct the solution by
-changing the parameter space and the last message is a random destructor. That destroyes
+changing the parameter space and the last message is a random destructor. That destroys
 the solution space.
 
 For a correct implementation it is critical that the that destruct messages are 
@@ -67,3 +67,121 @@ solution is perturbed. Notice that:
 The AbLNS algorithm will continuously run either optimizing the current plan or updating the plan 
 with new external input. Since the effects of a message is considered in every iteration, changing 
 conditions will immediately get acted upon. Since a fast response is paramount, exact optimization algorithms are deemed unworkable.
+
+\subsection{Atomic Pointer Swapping and Software Architecture}
+There is an novel point in using atomic pointer swapping for when the 
+AbLNS finds a new best solution. In a usual LNS setup the best solution is 
+cloned and there after the search continues. But to make the solution available
+to other components of the larger system this best solution can be made available
+by the use of atomic pointer swapping. The reason that it is called atomic is
+that the pointers that are being swapped are being pointed to from different 
+threads. Keeping the pointer swap atomic means that the pointed to solution
+can be swapped without causing dataraces. To understand the importance of this
+approach it is required to understand some fundamentals of software architecture.
+
+Usually in software architecture you achieve vertical scaling (meaning making the 
+dataflow process longer) and horizontal scaling (increasing throughput of the
+same dataflow process) by the use of message passing. This approach is difficult
+to apply when you want to scale metaheuristics as the metaheuristics function
+by mutating state (changing solutions) quickly and finding improvements. 
+
+Making modular components using message passing causes the system to generate 
+a lot of messages whose behavior on the system is hard to predict especially
+if the message topology between metaheuristics is bidirectional.
+
+The limitations of the are well-known with both \citep{talbiMetaheuristicsDesignImplementation2009} 
+in the section on parallel metaheuristics, but also from multi-agent metaheuristic
+literature where the results from making optimization system based on message 
+passing between optimizing components generally do not show great results.
+Few of these systems have been successfully implemented in practice, with
+there being a general tendency that the metaheuristics flood the system with
+messages. The adverse effects of this is further exacerbated by three causes
+\begin{itemize}
+	\item The randomized nature of metaheuristics makes massage passing highly
+		stochastic 
+	\item If you want to avoid hierarchical setup with unidirectional message flow
+		you very easily generate cycles
+	\item The effects of adding additional messages to a system can be very 
+		difficult to understand
+\end{itemize}
+
+Using atomic pointer swapping as the interface between metaheuristics removes 
+state duplication, avoids the pitfalls and complexity 
+of message passing, and enables a way to modularize metaheuristics in a way
+that is not possible with general modern software architecture principles
+\citep{richards_fundamentals_2020}. 
+
+\subsection{Atomic Pointer Swapping and Software Architecture}
+There is an novel point in using atomic pointer swapping for when the 
+AbLNS finds a new best solution. In a usual LNS setup the best solution is 
+cloned and there after the search continues. But to make the solution available
+to other components of the larger system this best solution can be made available
+by the use of atomic pointer swapping. The reason that it is called atomic is
+that the pointers that are being swapped are being pointed to from different 
+threads. Keeping the pointer swap atomic means that the pointed to solution
+can be swapped without causing dataraces. To understand the importance of this
+approach it is required to understand some fundamentals of software architecture.
+
+Usually in software architecture you achieve vertical scaling (meaning making the 
+dataflow process longer) and horizontal scaling (increasing throughput of the
+same dataflow process) by the use of message passing. This approach is difficult
+to apply when you want to scale metaheuristics as the metaheuristics function
+by mutating state (changing solutions) quickly and finding improvements. 
+
+Making modular components using message passing causes the system to generate 
+a lot of messages whose behavior on the system is hard to predict especially
+if the message topology between metaheuristics is bidirectional.
+
+The limitations of the are well-known with both \citep{talbiMetaheuristicsDesignImplementation2009} 
+in the section on parallel metaheuristics, but also from multi-agent metaheuristic
+literature where the results from making optimization system based on message 
+passing between optimizing components generally do not show great results.
+Few of these systems have been successfully implemented in practice, with
+there being a general tendency that the metaheuristics flood the system with
+messages. The adverse effects of this is further exacerbated by three causes
+\begin{itemize}
+	\item The randomized nature of metaheuristics makes massage passing highly
+		stochastic 
+	\item If you want to avoid hierarchical setup with unidirectional message flow
+		you very easily generate cycles
+	\item The effects of adding additional messages to a system can be very 
+		difficult to understand
+\end{itemize}
+
+Using atomic pointer swapping as the interface between metaheuristics removes 
+state duplication, avoids the pitfalls and complexity 
+of message passing, and enables a way to modularize metaheuristics in a way
+that is not possible with general modern software architecture principles
+\citep{richards_fundamentals_2020}. 
+
+% Mentioning the object first
+% 
+\subsection{Atomic Pointer Swapping and Software Architecture}
+Atomic pointer swapping offers a novel approach for managing the best
+solution found by the Actor-based Large Neighborhood Search (AbLNS) algorithm.
+Traditionally, in a metaheuristics such as Large Neighborhood Search (LNS) setup, 
+the best solution
+is cloned before the search continues. However, atomic pointer swapping enables
+the best solution to be shared across system components without introducing data
+races. This technique is essential in multithreaded environments, as it ensures
+the integrity of the solution during swaps. In software architecture, scaling
+is often achieved through vertical scaling (lengthening the dataflow) and
+horizontal scaling (increasing throughput) via message passing. While effective
+in many domains, this approach poses challenges for metaheuristics, which
+rely on rapid state mutations and solution improvements. 
+
+Message passing in metaheuristics can create unpredictable behaviors,
+especially with bidirectional communication between components. The
+limitations of message-passing systems in metaheuristics are well-documented,
+particularly in the context of parallel and multi-agent metaheuristics
+\citep{talbiMetaheuristicsDesignImplementation2009}. These systems often
+suffer from excessive message generation, leading to poor scalability and
+performance. Key issues include: \begin{itemize} \item The stochastic nature
+of metaheuristics makes message-passing behavior unpredictable. \item Avoiding
+hierarchical, unidirectional message flows often results in cycles. \item The
+impact of increased messaging is difficult to analyze and manage. \end{itemize}
+Atomic pointer swapping addresses these challenges by eliminating state
+duplication, reducing system complexity, and bypassing the inefficiencies of
+message passing. This method provides a streamlined, modular way to integrate
+metaheuristics, aligning with modern software architecture principles while
+avoiding their typical pitfalls \citep{richards_fundamentals_2020}.
