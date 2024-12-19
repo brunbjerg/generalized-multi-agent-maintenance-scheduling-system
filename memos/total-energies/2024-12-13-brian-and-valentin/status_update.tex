@@ -10,9 +10,9 @@
 
 % FIX: MENTION THE NAME OF THE SAP PERSON.
 \section{Writing to SAP}
-I have had disscussions with people in Paris about writing to SAP. Specificially 
+I have had discussions with people in Paris about writing to SAP. Specifically 
 asked if it would be possible to write to table AFVC column ABLAD which is the 
-column called "Unloading Point". This is posible but it will require all
+column called "Unloading Point". This is possible but it will require all
 my source code to be uploaded to Total Energies servers, which I are a little 
 reluctant to do as I will lose control over the research project.
 
@@ -45,7 +45,7 @@ needed to make the system function as well as capture all the changes that the e
 \end{figure}
 Figure~\ref{fig:hexagon:metaheuristics} 
 shows the setup where each hexagon is a mathematical algorithm that is optimizing
-a certain part of the scheduling process. Here you both have seen a little of the \textbf{Strategic}
+a certain part of the scheduling process. Here you both have seen the \textbf{Strategic}
 and the \textbf{Tactical}. These models will never be able of their own to model the scheduling process therefore user-interfaces are 
 created for each of these stakeholders which is illustrated in figure~\ref{fig:hexagon:userinterfaces}.
 
@@ -59,22 +59,23 @@ created for each of these stakeholders which is illustrated in figure~\ref{fig:h
 
 There are more than these three layers, they serve to provide a high level visualization of what the code is aiming to do.
 
-\subsection{Separating Responsibilites}
+\subsection{Separating Responsibilities}
 Brian mentioned at the previous meeting that for this kind of system it would be crucial that
 each stakeholder that we want to be part of the system has clearly defined boundaries for what
-they can and cannot change. In appendix \
-
- This means that there are internally
-in the server clear boundaries for what each user of the system can change.
+they can and cannot change. In appendix \ref{sec:separating-concerns}
+I have taken out some code that makes the server only accept changes to certain status codes from the 
+Strategic model (Scheduler).
+This means that there are internally in the server, clear boundaries for 
+what each user of the system can change, for which work orders.
 
 \section{Academic Papers}
-I unfortunately have to write academic papers even though we do not have solid results yet.
+I have to write academic papers even though we do not have solid results yet.
 The first paper
-is titled \textbf{Actor-based Large Neighborhood Search}, I am trying to complete it as 
-soon as possible that we can get back to testing.
+is titled \textbf{Actor-based Large Neighborhood Search}. I am trying to complete it as 
+soon as possible so that we can get back to testing.
 
 \section{External Stay}
 I am going of external stay in Paris at a company called \textbf{Decision Brain} it is a 
 company that creates maintenance scheduling software that resembles the kind of system 
-that we are trying to develop. I am going there with the intention of learning how to
-best proceed with implementing the system that we are working on here at Total.
+that we are trying to develop. It is my intention to learn how to
+best proceed with implementing the system that we are developing.
