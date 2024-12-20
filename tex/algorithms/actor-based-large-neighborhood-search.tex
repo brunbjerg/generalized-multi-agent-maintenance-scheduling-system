@@ -12,12 +12,12 @@
 \State \textbf{Input} $\SharedSolution$  = shared solution
 % \State $\Solution^b = \Solution$
 \Repeat \label{alg:actor-based-large-neighborhood-search:main-optimization-loop}
-	\State $\Solution^t = clone(\Solution)$ \label{alg:actor-based-large-neighborhood-search:clone-solution}
+	\State $\Solution^t = \Solution$ \label{alg:actor-based-large-neighborhood-search:clone-solution}
 	\While{$\MessageQueue.has\_message()$} \label{alg:actor-based-large-neighborhood-search:message-loop}
         % \State $m = queue.pop()$
         % \State $m.destruct(\Solution^b)$
-		\State $\ProblemInstance.update(\SharedSolution, m)$
-        \State $\Solution^t.destruct(\SharedSolution, m)$
+		\State $\ProblemInstance.update(\SharedSolution, m_n(\VarMetaTime))$
+        \State $\Solution^t.destruct(\SharedSolution, m_n(\VarMetaTime))$
     \EndWhile
 	
     \State $\Solution^t.repair(\SharedSolution)$ \label{alg:actor-based-large-neighborhood-search:repair}
@@ -30,7 +30,7 @@
         \State $\Solution.update(\Solution^t)$
 		\State $\SharedSolution.atomic\_pointer\_swap(\Solution)$ \label{alg:actor-based-large-neighborhood-search:atomic-pointer-swap}
     \EndIf                                           
-	\State $\MessageQueue.push(m)$ \label{alg:actor-based-large-neighborhood-search:schedule-message}
+	\State $\MessageQueue.push(m_5(\VarMetaTime))$ \label{alg:actor-based-large-neighborhood-search:schedule-message}
 \Until
 \end{algorithmic}
 \label{alg:actor-based-large-neighborhood-search}
