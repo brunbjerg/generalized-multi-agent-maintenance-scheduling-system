@@ -100,12 +100,15 @@ work orders, i.e. maintenance tasks, such that all $\ElementWorkOrder$
 are scheduled into a specific period $\ElementPeriod$. Each work order $
 \ElementWorkOrder$ requires some resources $\ElementResource \in \SetResource$
 to be carried out, e.g. man-power with different qualifications. Each of these
-resources are available in limited amounts given by $\ParStrategicResource$. To correct
-for possible manual interventions that can make the problem infeasible a penalty (
-$\ParStrategicPenalty$) is introduced. The urgency of the different maintenance work order ($\ElementWorkOrder$)
-varies and is reflected in a "tardiness" for carrying out a maintenance work
-order in a certain period given by $\ParStrategicValue$. The $\ParStrategicValue$ also
-captures the tardiness of the individual work orders ($\ElementWorkOrder$), meaning that
+resources are available in limited amounts given by $\ParStrategicResource$. 
+To correct for possible manual interventions that can make the problem 
+infeasible a penalty ($\ParStrategicPenalty$) is introduced. The urgency of 
+the different maintenance work order ($\ElementWorkOrder$) varies the tardiness 
+of work orders is included into the model thorough the $\ParStrategicValue$ 
+parameters. Work orders which needs to be and is reflected in a "tardiness" 
+for carrying out a maintenance work order in a certain period given by 
+$\ParStrategicValue$. The $\ParStrategicValue$ also captures the tardiness of the
+individual work orders ($\ElementWorkOrder$), meaning that
 the value gained from scheduling work orders late is decreasing. Urgent tasks have
 decreasing value the further out the period $\ElementPeriod$ becomes.
 Furthermore, two sets exists which will either require work order $\ElementWorkOrder$ to be carried
