@@ -100,27 +100,25 @@ AbLNS metaheuristics, and then make them communicate together. Each exposing sol
 other in real-time providing each other with high quality parameters.
 
 \section{Conclusion}
-Many current problems that industry faces are combinatorial in nature, and the combinatorial 
-problems have to be solved continuously to make operations run efficiently. For operation research (OR)
-to be helpful in this process the solution methods should be a minimally invasive as possible in 
-the workflow of the working stakeholders. The AbLNS solution approach detailed in this paper aligns
+Many current planning problems that industry faces are combinatorial by nature, 
+and many of the combinatorial problems have to be solved continuously to make operations 
+run efficiently. For operation research (OR) to be helpful in this process, the solution methods 
+should be a minimally invasive in the workflow of the working stakeholders. 
+The AbLNS solution approach detailed in this paper aligns
 closely with both the known problems in operation research of the lack of integration and the issues of 
-coordinating stakeholders. 
+coordinating stakeholders. For these reasons we argue that the standard Operations Research approach of 
+first collecting data, then creating a model and optimizing it and then finally providing the solution
+to the planners in the company workflow, is not a sound approach in many situations.
 
-FOR THOMAS! (Hvad synes du om det nedenstående?)
-
-It seems that de facto approach for doing research in operation research is based on the idea of 
-1. collecting data, 2. develop a model based on the data, and then 3. provide the solution to a stakeholder.
-
-In todays IT landscape you can solve much more complex operational problems by instead hosting the 
-solution approach on a server and have the solution approach continuously optimize operations and 
-then handling pertubations by message passing. \textbf{(Note this also aligns with the general
-perception that small quick and dirty models often work better in practice)}. This paper argues
-that making a system of numerous smaller "quick and dirty" models in an well thought out
-software architecture is much more effective in practice than large integrated
-models.
+We have here demonstrated AbLNS approach works in a practical setting, maintenance scheduling at 
+Total Energies and we are convinced that this approach, combining a number of smaller 
+planning/optimization problems with different actors/stakeholders responsible for their part of the 
+overall solution. This paper argues that making a system of numerous smaller 
+"quick and dirty" models in an well thought out software architecture is much more effective 
+in practice than large integrated models.
 
 The fundamental problem with the "old" paradigm is that optimizing across actors/stakeholders is 
 very difficult, leading to a literature that prefers large integrated models instead of decomposing the
 model by each of the processes that make up an operational setting. This paper argues that this is 
-mainly due to an outdated understanding of software architecture in the mateheuristic community. 
+mainly due to an outdated understanding of software architecture available today in industry, 
+but the Operations Research community. 
