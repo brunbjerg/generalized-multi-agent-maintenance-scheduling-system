@@ -102,9 +102,9 @@ are scheduled into a specific period $\ElementPeriod$. Each work order $
 to be carried out, e.g. man-power with different qualifications. Each of these
 resources are available in limited amounts given by $\ParStrategicResource$. To correct
 for possible manual interventions that can make the problem infeasible a penalty (
-$\ParStrategicPenalty$) is introduced. The urgency of the different maintenance work order ($\ElementWorkOrder$)
+$\ParStrategicResourcePenalty$) is introduced. The urgency of the different maintenance work order ($\ElementWorkOrder$)
 varies and is reflected in a "tardiness" for carrying out a maintenance work
-order in a certain period given by $\ParStrategicValue$. The $\ParStrategicValue$ also
+order in a certain period given by $\ParStrategicUrgency$. The $\ParStrategicUrgency$ also
 captures the tardiness of the individual work orders ($\ElementWorkOrder$), meaning that
 the value gained from scheduling work orders late is decreasing. Urgent tasks have
 decreasing value the further out the period $\ElementPeriod$ becomes.
@@ -124,7 +124,7 @@ Equation~\eqref{eqn:meta:time:strategic} is the time variable that binds the who
 system together.
 
 The objective function~\eqref{eqn:objective:strategic},  maximizes the total
-weighted assignment of all work order subtractied by the penalty $\ParStrategicPenalty$
+weighted assignment of all work order subtractied by the penalty $\ParStrategicResourcePenalty$
 for exceeding the resource capacity given in equation
 \eqref{eqn:strategic:constraint:resource}. The third term of the objective
 function handles the $\ParClusteringValue$ which turns the model into a quadratic
@@ -133,7 +133,7 @@ period, if they have share similarity like close proximity, same piece of equipm
 , etc.  Equation \eqref{eqn:strategic:constraint:resource} ensures
 that all the $\ParOperationWork{wr}$ for each activity in a work
 order, given that it has been assigned, is lower than the $\ParStrategicResource$ for each
-$\ElementPeriod$ and for each resources $\ElementResource$. $\ParStrategicPenalty$ is the
+$\ElementPeriod$ and for each resources $\ElementResource$. $\ParStrategicResourcePenalty$ is the
 amount of exceeded capacity that is needed for the current assignment of work
 order to be feasible. Equation \eqref{eqn:constraint:strategic:schedule_once}
 makes sure that each work order is assigned to at least a one
@@ -143,7 +143,7 @@ excludes a work order from a certain period and equation
 included in a specific period. Constraint \eqref{eqn:variable:strategic:assignment}
 and \eqref{eqn:variable:strateigc:penalty} specify the variable domain
 for $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
-and $\ParStrategicPenalty$ respectively. The effects of changing $
-	\ParStrategicInclude$, $\ParStrategicExclude$, $\ParStrategicResource$, and $
-	\ParStrategicValue$ in real-time will be examined in the results section~\ref{sec:3-results} to
+and $\ParStrategicResourcePenalty$ respectively. The effects of changing $
+\ParStrategicInclude$, $\ParStrategicExclude$, $\ParStrategicResource$, and $
+\ParStrategicUrgency$ in real-time will be examined in the results section~\ref{sec:3-results} to
 determine their effects on the weekly schedules and the objective value.

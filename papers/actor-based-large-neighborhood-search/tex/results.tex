@@ -8,12 +8,12 @@ and excluding them from periods is shown in Section~\ref{sec:exclusion}.
 Afterwards, the effect of reducing the period resource capacities $\ParStrategicResource$ is 
 tested in Section~\ref{sec:results:reduced_weekly_capacity} and increasing them is tested in 
 Section~\ref{sec:increase_week_cap}. 
-Finally the effect of changing the work order values $\ParStrategicValue$, 
+Finally the effect of changing the work order values $\ParStrategicUrgency$, 
 is tested in Section~\ref{sec:results:strategic_value_changes}.
 
 \subsection{Data Instance}\label{sec:data_instance}
 % TODO: What should be cited here?
-This data instance comes from Total Energies~\cite{} , where data is extracted from their SAP ERP system. 
+This data instance comes from Total Energies~\cite{total-energies} , where data is extracted from their SAP ERP system. 
 The data instance used in this paper is from a specific offshore platform that for 
 the 2 year time horizon contains 3487 outstanding work orders ($\SetWorkOrder{}$), 
 have 16 different resource skill sets ($\SetResource$) (e.g. mechanics, electricians, 
@@ -68,7 +68,7 @@ show 5 perturbations with the first at
 time = 60s where the objective value  slightly increases in response to the
 inclusion, the objective value increases due to the inclusion either causing
 the capacity to be exceeded or the inclusion resulting in a selected $
-\ParStrategicValue$ that has a lower value. The remaining 4 perturbations
+\ParStrategicUrgency$ that has a lower value. The remaining 4 perturbations
 all show the same  pattern, an increase in the objective value followed by a
 subsequent convergence.
 
@@ -137,7 +137,7 @@ second intervals are specified instead of 60 second intervals.
 Figure~\ref{fig:responses:resources-addition} shows the effects of progressively
 increasing  available resources. The AbLNS starts with a base load which is
 then reduced at time = 100 seconds causing the objective value by increase
-as $\ParStrategicPenalty$ in equation~\ref{eqn:strategic:constraint:resource}
+as $\ParStrategicResourcePenalty$ in equation~\ref{eqn:strategic:constraint:resource}
 absorbs the exceeded capacity. At time = 200 the resources are increased to the
 base load again, and at time = 300 seconds the resources are  increased to their
 maximum value.
@@ -191,7 +191,7 @@ capacity.
 
 \subsection{Response to Changes in Work Order Values}\label{sec:results:strategic_value_changes}
 The final parameter that will be changed is the work order value $
-\ParStrategicValue$. Table~\ref{tab:responses:value_change} details the
+\ParStrategicUrgency$. Table~\ref{tab:responses:value_change} details the
 perturbations that the AbLNS will by affected by. On each iteration 100 work
 orders are having their values changed by the amount  shown in the 4th row of
 table~\ref{tab:responses:value_change}.
@@ -203,13 +203,13 @@ table~\ref{tab:responses:value_change}.
 	                                                                                                                   & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 120$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	$\Delta |\SetWorkOrder[\VarMetaTime_{n}]{} \triangle \SetWorkOrder[\VarMetaTime_{n-1}]{}              |$           & 100                                                           & 100                                                            & 100                                                            & 100                                                            & 100                                                      \\ \hline
 	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$           & 52                                                            & 52                                                             & 52                                                             & 52                                                             & 52                                                       \\ \hline
-	\makecell{$ \ParStrategicValue[\VarMetaTime_{n}] -$\\ $\ParStrategicValue[\VarMetaTime_{n - 1}]$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
+	\makecell{$ \ParStrategicUrgency[\VarMetaTime_{n}] -$\\ $\ParStrategicUrgency[\VarMetaTime_{n - 1}]$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
 	\end{tabular}
 	\label{tab:responses:value_change}
 \end{table}
 
 Figure~\ref{fig:responses:value_change} shows the effects of
-perturbing the AbLNS by changing the $\ParStrategicValue$ parameter in the objective
+perturbing the AbLNS by changing the $\ParStrategicUrgency$ parameter in the objective
 function~\ref{eqn:objective:strategic} which specifies the value of assigning a
 work order to a specific period.
 
@@ -220,7 +220,7 @@ work order to a specific period.
 		\input{figures/strategic_objective_value_weight_change_plot.tex}
 	}
 	\caption{The effects of perturbing the AbLNS by dynamically changing the
-	$\ParStrategicValue$ in the objective function. The objective value
+	$\ParStrategicUrgency$ in the objective function. The objective value
 	is increasing in response to the higher cost associated with a late
 	scheduling, after which it optimizes around the perturbation}
 	\label{fig:responses:value_change}

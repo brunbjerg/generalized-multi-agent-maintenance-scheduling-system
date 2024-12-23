@@ -3,9 +3,9 @@
 The maintenance scheduling process effectively solves a complex scheduling problem by
 relying in multiple actors. Through the use of actors the scheduling process handles
 uncertainty that is difficult to reason about in a single mathematical model. These 
-uncertainties are solved through coordination. Each stakeholder in the process has his own
-model each with different levels of aggregation, where each actor understands 
-how to exploit his own model.
+uncertainties are solved through coordination. Each type of stakeholder in the process 
+acts according to a  model each with different levels of aggregation and features where
+each actor understands how to exploit his own model.
 The discussion will be divided into three sections: 
 \ref{sec:discussion:actors_and_integration} 
 actors and integration;
@@ -40,14 +40,14 @@ to the hierarchical model setup.
 \begin{figure}[H]
 	\input{../../figures/multimodel-setup.tex}
 	\label{fig:discussion:hierarchical_model_setup}
-	\caption{Effects us using hierarchical models setups in human-guided search metaheuristics.
+	\caption{Effects of using hierarchical models setups in human-guided search metaheuristics.
 	Due to the dependent nature of each metaheuristic it becomes crucial that the running of 
-	the metaheuristics are well coordinated between the metaheuristics.}
+	the metaheuristics are well coordinated between the stakeholders.}
 \end{figure}
 
 In practice there are multiple problems with using a hierarchical setup.
 Usually the biggest one is that the information and knowledge needed to 
-perform a feasible schedule is usually found in the lower levels of the 
+execute a feasible schedule is usually found in the lower levels of the 
 hierarchicy. The operational setting, where the
 technicians are working, is usually so complex that it not feasible to 
 centralize the knowledge that is required to create and execute a 
@@ -64,11 +64,11 @@ allows for.
 	\label{fig:discussion:asynchronous_setup}
 \end{figure}
 
-When the optimization approache optimize continuously it becomes possible
-to enable tight integration between the different model implementations. 
-Instead of running models to completion you simply handle changes in model 
-parameters, model solutions, user inputs, and in the dynamic data source as 
-they occur opposed to restarting the metaheuristics.
+When the optimization approach optimize continuously it enables tight
+integration between the different model implementations. Instead of running
+models to completion you simply handle changes in model parameters, model
+solutions, user inputs, and in the dynamic data source as they occur opposed to
+restarting the metaheuristics.
 
 \subsection{Future Research}
 \label{sec:discussion:future_research}
@@ -79,9 +79,9 @@ Figure~\ref{fig:ordinator-architecture}
 shows a scheduling system architecture where each of the actors run an actor-based metaheuristic
 and that each metaheuristic will share its solutions with the other
 metaheuristics through atomic pointer swapping. Communicate with the end-user
-through message passing, integrate with a persistence storage through mutex
+through message passing, integrate with a persistent storage through mutex
 locks, and the lifecycle of each of the metaheuristics will be controlled by
-the orchestrator through message passing. 
+the orchestrator also through message passing. 
 
 \begin{figure}[H]
 	\centering
@@ -98,3 +98,29 @@ the orchestrator through message passing.
 The next step in this research direction will be to model the remaining stakeholders as their own 
 AbLNS metaheuristics, and then make them communicate together. Each exposing solutions to each 
 other in real-time providing each other with high quality parameters.
+
+\section{Conclusion}
+Many current problems that industry faces are combinatorial in nature, and the combinatorial 
+problems have to be solved continuously to make operations run efficiently. For operation research (OR)
+to be helpful in this process the solution methods should be a minimally invasive as possible in 
+the workflow of the working stakeholders. The AbLNS solution approach detailed in this paper aligns
+closely with both the known problems in operation research of the lack of integration and the issues of 
+coordinating stakeholders. 
+
+FOR THOMAS! (Hvad synes du om det nedenstående?)
+
+It seems that de facto approach for doing research in operation research is based on the idea of 
+1. collecting data, 2. develop a model based on the data, and then 3. provide the solution to a stakeholder.
+
+In todays IT landscape you can solve much more complex operational problems by instead hosting the 
+solution approach on a server and have the solution approach continuously optimize operations and 
+then handling pertubations by message passing. \textbf{(Note this also aligns with the general
+perception that small quick and dirty models often work better in practice)}. This paper argues
+that making a system of numerous smaller "quick and dirty" models in an well thought out
+software architecture is much more effective in practice than large integrated
+models.
+
+The fundamental problem with the "old" paradigm is that optimizing across actors/stakeholders is 
+very difficult, leading to a literature that prefers large integrated models instead of decomposing the
+model by each of the processes that make up an operational setting. This paper argues that this is 
+mainly due to an outdated understanding of software architecture in the mateheuristic community. 

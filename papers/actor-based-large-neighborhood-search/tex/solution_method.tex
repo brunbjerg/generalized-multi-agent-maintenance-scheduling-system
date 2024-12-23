@@ -29,7 +29,7 @@ message hits the system at time $\VarMetaTime$.
 	\item $m_1(\VarMetaTime)$: Inclusion destruct message, modifies $\ParStrategicInclude$	
 	\item $m_2(\VarMetaTime)$: Exclusion destruct message, modifies $\ParStrategicExclude$
 	\item $m_3(\VarMetaTime)$: Capacities destruct message, modifies $\ParStrategicResource$
-	\item $m_4(\VarMetaTime)$: Weights destruct messags, modifies $\ParStrategicValue$
+	\item $m_4(\VarMetaTime)$: Weights destruct messags, modifies $\ParStrategicUrgency$
 	\item $m_5(\VarMetaTime)$: Random destruct message, modifies $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
 \end{itemize}
 
@@ -86,12 +86,12 @@ in many domains, this approach poses challenges for metaheuristics, which
 rely on rapid state mutations and solution improvements. 
 
 Message passing in metaheuristics can create unpredictable behaviors,
-especially with bidirectional communication between components. The
+especially with bidirectional communication between components and metaheuristics. The
 limitations of message-passing systems in metaheuristics are well-documented,
 particularly in the context of parallel and multi-agent metaheuristics
 \citep{talbiMetaheuristicsDesignImplementation2009}. These systems often
-suffer from excessive message generation, leading to poor scalability and
-performance. Key issues include: 
+suffer from excessive message generation, leading to poor scalability,
+explainability, extendability, and performance. Key issues include: 
 
 \begin{itemize} 
 	\item The stochastic nature
@@ -106,4 +106,8 @@ Atomic pointer swapping addresses these challenges by eliminating state
 duplication, reducing system complexity, and bypassing the inefficiencies of
 message passing. This method provides a streamlined, modular way to integrate
 metaheuristics, aligning with modern software architecture principles while
-avoiding their typical pitfalls \citep{richards_fundamentals_2020}.
+avoiding their typical pitfalls \citep{richards_fundamentals_2020}. It should
+be noted that message passing is exceptional at dealing with one-off events that
+have varied and sporatic nature such as interfacing with stakeholders and external
+systems.
+

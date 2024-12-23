@@ -33,12 +33,12 @@
 \newcommand{\ElementMessage}[2]{m_{#1}^{#2}}
 
 % Parameters
-\newcommand{\ParStrategicValue}[1][\VarMetaTime]{strategic\_value_{\ElementWorkOrder \ElementPeriod}(#1)}
-\newcommand{\ParStrategicPenalty}{strategic\_penalty}
+\newcommand{\ParStrategicUrgency}[1][\VarMetaTime]{strategic\_urgency_{\ElementWorkOrder \ElementPeriod}(#1)}
+\newcommand{\ParStrategicResourcePenalty}{strategic\_resource\_penalty}
 \newcommand{\ParClusteringValue}{clustering\_value_{\ElementWorkOrder1, \ElementWorkOrder2}}
 \newcommand{\ParStrategicResource}[1]{resource_{\ElementPeriod\ElementResource}(\VarMetaTime#1)}
 
-\newcommand{\ParStrategicWorkOrderWeight}{work\_order\_work_{\ElementWorkOrder \ElementResource}}
+\newcommand{\ParStrategicWorkOrderWorkLoad}{work\_order\_workload_{\ElementWorkOrder \ElementResource}}
 \newcommand{\ParStrategicInclude}{include_{\ElementWorkOrder\ElementPeriod}(\VarMetaTime)}
 \newcommand{\ParStrategicExclude}{exclude_{\ElementWorkOrder\ElementPeriod}(\VarMetaTime)}
 \newcommand{\ParTacticalValue}{tactical\_value_{\ElementDays\ElementOperation}(\VarMetaTime)}
