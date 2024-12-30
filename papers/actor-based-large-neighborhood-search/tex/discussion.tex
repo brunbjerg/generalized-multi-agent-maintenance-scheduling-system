@@ -1,4 +1,4 @@
-\section{Discussion}
+section{Discussion}
 \label{sec:4-discussion}
 The maintenance scheduling process effectively solves a complex scheduling problem by
 relying in multiple actors. Through the use of actors the scheduling process handles
@@ -115,7 +115,7 @@ a robust foundation for solving increasingly complex optimization tasks.
 The future research direction is is to demonstrate that
 the actor-based approach described here can be used to model and optimize 
 multi-actor/multi-level scheduling processes. 
-Figure~\ref{fig:ordinator-architecture}
+Figure~\ref{fig:ordinator-hexagon:metaheuristics}
 shows a scheduling system architecture where each of the actors run an actor-based metaheuristic
 and that each metaheuristic will share its solutions with the other
 metaheuristics through atomic pointer swapping. Communicate with the end-user
@@ -123,16 +123,68 @@ through message passing, integrate with a persistent storage through mutex
 locks, and the lifecycle of each of the metaheuristics will be controlled by
 the orchestrator also through message passing. 
 
+% \begin{figure}[H]
+% 	\centering
+% 	\input{../../figures/ordinator-architecture.tex}
+% 	\drawOrdinatorArchitecture{basisinput=1cm}
+% 	\label{fig:ordinator-architecture}
+% \end{figure}
 \begin{figure}[H]
 	\centering
-	\input{../../figures/ordinator-architecture.tex}
-	\drawOrdinatorArchitecture{basisinput=1cm}
+	\input{../../figures/model-setup-hexagon.tex}
+	\drawModelSetupHexagon[persistence=true]
 	\caption{
 		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
 		is an actor it becomes possible to optimize parts of a large process individually instead of 
 		optimizing the scheduling problem globally from a single model implementation.
 	}
-	\label{fig:ordinator-architecture}
+	\label{fig:ordinator-hexagon:persistence}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\drawModelSetupHexagon[atomicpointerswap=true]
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:atomicpointerswap}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\drawModelSetupHexagon[metaheuristics=true]
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:metaheuristics}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\drawModelSetupHexagon[orchestrator=true]
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:orchestrator}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\drawModelSetupHexagon[userinterface=true]
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:userinterfaces}
 \end{figure}
 
 The next step in this research direction will be to model the remaining stakeholders as their own 
@@ -163,6 +215,8 @@ The fundamental problem with the "older" paradigm is that optimizing across
 actors/stakeholders is very difficult, leading the literature to prefer
 integrated models instead of decomposing the model by each of the
 processes that make up a business process such as maintenance scheduling.
-This paper argues that this is mainly due to an outdated understanding of
-software architecture that is available today in industry, but not acknowledged by broader the Operations Research
-and Metaheuristic communities.
+This paper argues that this is mainly due to an dated understanding of
+software architecture that is available today in industry, but not
+acknowledged by broader the Operations Research and Metaheuristic
+communities \citep{talbiMetaheuristicsDesignImplementation2009},
+\citep{gendreauHandbookMetaheuristics2019}.

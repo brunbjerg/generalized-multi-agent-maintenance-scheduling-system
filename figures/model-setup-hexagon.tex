@@ -1,77 +1,177 @@
 \usetikzlibrary {positioning}
-\newcommand{\drawHexagon}[5][draw=black]{
-	\draw[#1, fill=#4] (#2,#3) ++(30:2) -- ++(90:2) -- ++(150:2) -- ++(210:2) -- ++(270:2) -- ++(330:2) -- cycle;
-	\node at (#2,#3+2) {#5};
+\newcommand{\drawHexagon}[6][draw=black]{
+	\draw[#1, fill=#4] (#2,#3) ++(30:#6) -- ++(90:#6) -- ++(150:#6) -- ++(210:#6) -- ++(270:#6) -- ++(330:#6) -- cycle;
+	\node[align=center] at (#2,#3+2) {#5};
 }
-\newif\ifuserinterfacelayer
+
 \newif\ifpersistencelayer
-\newif\ifmetaheuristicslayer
 \newif\ifatomicpointerswaplayer
+\newif\ifmetaheuristicslayer
+\newif\ifuserinterfacelayer
+\newif\iforchestratorlayer
+
 \pgfkeys{
 	/hexagon/.is family, /hexagon,
 	default/.style = {
 		persistence=false,
+		atomicpointerswap=false,
+		metaheuristics=false,
+		orchestrator=false,
 		userinterface=false,
-		metaheuristics=true,
 	},
 	persistence/.is if=persistencelayer,
-	userinterface/.is if=userinterfacelayer,
+	atomicpointerswap/.is if=atomicpointerswaplayer,
 	metaheuristics/.is if=metaheuristicslayer,
+	orchestrator/.is if=orchestratorlayer,
+	userinterface/.is if=userinterfacelayer,
 }
 \newcommand{\drawModelSetupHexagon}[1][]{
 	\pgfkeys{/hexagon, default, #1}
 
-	\begin{tikzpicture}[scale=0.6, line width=1.05]
+	\begin{tikzpicture}[font=\footnotesize, scale=0.5, line width=1.05]
 	
-	\ifuserinterfacelayer
-		\drawHexagon{ 2                      }{ 2}{dtu-yellow}{UI}
-		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-yellow}{UI}
-		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
-		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
-		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
-
-		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
-		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
-
-		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
-		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}
-
-		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
-		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}
-	\fi
 
 	\ifpersistencelayer
-		\drawHexagon[draw=none]{ 2                      }{ 2}{dtu-blue}{}
-		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-blue}{}
-		\drawHexagon[draw=none]{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-blue}{Database}
-		\drawHexagon[draw=none]{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
-		\drawHexagon[draw=none]{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
+		\drawHexagon[draw=none]{ 2                      }{ 2}{dtu-blue}{}{2}
+		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-blue}{}{2}
+		\drawHexagon[draw=none]{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-blue}{Persistence}{2}
+		\drawHexagon[draw=none]{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}{2}
+		\drawHexagon[draw=none]{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}{2}
 
-		\drawHexagon[draw=none]{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
-		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
+		\drawHexagon[draw=none]{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}{2}
+		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}{2}
 
-		\drawHexagon[draw=none]{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
-		\drawHexagon[draw=none]{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}
+		\drawHexagon[draw=none]{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}{2}
+		\drawHexagon[draw=none]{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-blue}{}{2}
 
-		\drawHexagon[draw=none]{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
-		\drawHexagon[draw=none]{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}
+		\drawHexagon[draw=none]{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}{2}
+		\drawHexagon[draw=none]{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-blue}{}{2}
+		% Legend for each layer
+		\drawHexagon{{14.0  }}{+3.0}{dtu-blue}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +3.75) {Persistence};
+		\drawHexagon{{14.0  }}{+1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +2.25) {Atomic Pointer};
+		\drawHexagon{{14.0  }}{+0.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +0.75) {Metaheuristics};
+		\drawHexagon{{14.0  }}{-1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -0.75) {Orchestration};
+		\drawHexagon{{14.0  }}{-3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -2.25) {User interfaces};
+	\fi
+
+
+	\ifatomicpointerswaplayer
+		\drawHexagon[]{ 2                      }{ 2}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-green}{Shared\\solution\\pointer}{2}
+
+		\drawHexagon[]{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-green}{Shared\\solution\\pointer}{2}
+
+		\drawHexagon[]{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-green}{Shared\\solution\\pointer}{2}
+
+		\drawHexagon[]{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-green}{Shared\\solution\\pointer}{2}
+		\drawHexagon[]{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-green}{Shared\\solution\\pointer}{2}
+		% Legend for each layer
+		\drawHexagon{{14.0  }}{+3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +3.75) {Persistence};
+		\drawHexagon{{14.0  }}{+1.5}{dtu-green}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +2.25) {Atomic Pointer};
+		\drawHexagon{{14.0  }}{+0.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +0.75) {Metaheuristics};
+		\drawHexagon{{14.0  }}{-1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -0.75) {Orchestration};
+		\drawHexagon{{14.0  }}{-3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -2.25) {User interfaces};
 	\fi
 
 	\ifmetaheuristicslayer
-		\drawHexagon{ 2                      }{ 2}{dtu-blue}{Strategic}
-		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-green}{Tactical}
-		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}
-		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}
-		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}
+		\drawHexagon{ 2                      }{ 2}{dtu-blue}{Strategic}{2}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-green}{Tactical}{2}
+		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
+		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
+		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
 
-		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
-		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
 
-		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
-		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}
+		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
 
-		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
-		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}
+		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}{2}
+
+		% Legend for each layer
+		\drawHexagon{{14.0  }}{+3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +3.75) {Persistence};
+		\drawHexagon{{14.0  }}{+1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +2.25) {Atomic Pointer};
+		\drawHexagon{{14.0  }}{+0.0}{dtu-corporate-red}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +0.75) {Metaheuristics};
+		\drawHexagon{{14.0  }}{-1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -0.75) {Orchestration};
+		\drawHexagon{{14.0  }}{-3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -2.25) {User interfaces};
+	\fi
+
+	\iforchestratorlayer
+		\drawHexagon{ 2                      }{ 2}{dtu-orange}{}{2}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-orange}{}{2}
+		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-orange}{Orche-\\strator}{2}
+		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-orange}{}{2}
+		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-orange}{}{2}
+
+		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-orange}{}{2}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-orange}{}{2}
+
+		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-orange}{}{2}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-orange}{}{2}
+
+		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-orange}{}{2}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-orange}{}{2}
+		% Legend for each layer
+		\drawHexagon{{14.0  }}{+3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +3.75) {Persistence};
+		\drawHexagon{{14.0  }}{+1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +2.25) {Atomic Pointer};
+		\drawHexagon{{14.0  }}{+0.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +0.75) {Metaheuristics};
+		\drawHexagon{{14.0  }}{-1.5}{dtu-orange}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -0.75) {Orchestration};
+		\drawHexagon{{14.0  }}{-3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -2.25) {User interfaces};
+	\fi
+
+	
+	\ifuserinterfacelayer
+		\drawHexagon{ 2                      }{ 2}{dtu-yellow}{UI}{2}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-yellow}{UI}{2}
+		\drawHexagon{{4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		\drawHexagon{{0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		\drawHexagon{{8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+
+		\drawHexagon{{2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+		\drawHexagon{{6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+
+		\drawHexagon{{10 - 4 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+
+		\drawHexagon{{12 - 5 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		% Legend for each layer
+		\drawHexagon{{14.0  }}{+3.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +3.75) {Persistence};
+		\drawHexagon{{14.0  }}{+1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +2.25) {Atomic Pointer};
+		\drawHexagon{{14.0  }}{+0.0}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, +0.75) {Metaheuristics};
+		\drawHexagon{{14.0  }}{-1.5}{dtu-white}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -0.75) {Orchestration};
+		\drawHexagon{{14.0  }}{-3.0}{dtu-yellow}{}{0.75}
+		\node[align=right, anchor=west] at ({15.0}, -2.25) {User interfaces};
 	\fi
 	
 	\end{tikzpicture}

@@ -101,6 +101,7 @@
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
 			\input{../../tex/models/strategic.tex}
+			\strategicmodel
 		\end{minipage}
 	}
 \end{frame}
@@ -188,8 +189,35 @@
 \begin{frame}[t]{}
     \begin{block}{Model setup}
 		\input{../../figures/model-setup-hexagon.tex}
-		\drawModelSetupHexagon
+		\drawModelSetupHexagon[persistence=true]
+    \end{block}
+\end{frame}
 
+\begin{frame}[t]{}
+    \begin{block}{Model setup}
+		\input{../../figures/model-setup-hexagon.tex}
+		\drawModelSetupHexagon[atomicpointerswap=true]
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Model setup}
+		\input{../../figures/model-setup-hexagon.tex}
+		\drawModelSetupHexagon[metaheuristics=true]
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Model setup}
+		\input{../../figures/model-setup-hexagon.tex}
+		\drawModelSetupHexagon[orchestrator=true]
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{}
+    \begin{block}{Model setup}
+		\input{../../figures/model-setup-hexagon.tex}
+		\drawModelSetupHexagon[userinterface=true]
     \end{block}
 \end{frame}
 
