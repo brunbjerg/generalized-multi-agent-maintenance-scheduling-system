@@ -66,16 +66,23 @@ scheduling are handled by \textbf{dynamic rescheduling between the actors}.
 
 \begin{figure}
 	\input{../../figures/maintenance_actor_architecture.tex}
-	\caption{Simple overview of the scheduling process with its primary types of actors. The planner, the scheduler, the supervisor(s), and the technicians.
-		The green color highlights the scheduler as it the actor in the maintenance scheduling process that is the foundation for the paper.}
+	\caption{Simple overview of the scheduling process with its primary types of
+		actors. The planner, the scheduler, the supervisor(s), and the technicians. 		
+		The green color highlights the scheduler as it the actor in the maintenance
+		scheduling process that is the foundation for the paper.}
 	\label{fig:integrated:maintenance-process}
 \end{figure}
 
 The main contribution of this article is to provide a
 modular scalable optimization component,  based on a proven
 metaheuristic to support a business process composed from
-smaller mathematical  models in a framework, instead of a
+smaller mathematical models in a framework, instead of a
 larger integrated mathematical model.
+
+This can be seen as a more general approach of modelling bilevel/multilevel
+problems \citep{camacho-vallejo_metaheuristics_2024}  where each level can
+modeled as its own metaheuristic communicating solutions in real-time in between
+themselves.
 
 The paper is divided into four different sections. Section \ref{sec:2-solution-method} explains
 the weekly maintenance scheduling model in detail and forms the foundation of the paper. 

@@ -71,10 +71,50 @@ solutions, user inputs, and in the dynamic data source as they occur opposed to
 restarting the metaheuristics.
 
 \subsection{Future Research}
+% TODO 
+By structuring system state changes as atomic pointer swaps, one can modularize
+concurrency at each layer and ensure real-time synchronization across multiple
+optimization levels.
+
+% TODO 
+By structuring system state changes as atomic pointer swaps, one can modularize
+concurrency at each layer and ensure real-time synchronization across multiple
+optimization levels.
+
+% TODO 
+Designing lock-free non-message-passing frameworks that handle
+real-time atomic pointer updates across multiple actor layers. 
+
+% TODO 
+Exploring specialized hardware or runtime support for ultra-low-latency
+coordination.
+
+% TODO
+Roadmap. Provide a short bullet list of concrete next steps—for instance, “(1)
+building a robust pointer-swap concurrency library, (2) testing multi-level
+coordination on standard benchmarks, (3) validating performance in real-time
+scheduling applications.”
+
+% TODO 
+8. Future Research
+While this paper details our initial development of an actor-based large
+neighborhood search strategy, a range of exciting directions remain open. In
+particular, the lock-free coordination mechanisms used here—implemented via
+atomic pointer swaps—could be extended to n-level optimization problems where
+multiple decision layers must operate asynchronously. Future research will delve
+into both the theoretical aspects (e.g., convergence proofs for multi-level
+actor systems) and practical considerations (e.g., specialized data structures
+and memory-management schemes) to ensure real-time performance. Furthermore,
+exploring hybrid models that integrate machine learning heuristics or advanced
+decomposition methods can significantly broaden the applicability of our
+actor-based framework. We anticipate that these developments, coupled with
+extensive benchmarking on large-scale and time-critical scenarios, will provide
+a robust foundation for solving increasingly complex optimization tasks.
+
 \label{sec:discussion:future_research}
-The future research of this project is to demonstrate that
+The future research direction is is to demonstrate that
 the actor-based approach described here can be used to model and optimize 
-multi-actor scheduling processes. 
+multi-actor/multi-level scheduling processes. 
 Figure~\ref{fig:ordinator-architecture}
 shows a scheduling system architecture where each of the actors run an actor-based metaheuristic
 and that each metaheuristic will share its solutions with the other
@@ -101,24 +141,28 @@ other in real-time providing each other with high quality parameters.
 
 \section{Conclusion}
 Many current planning problems that industry faces are combinatorial by nature, 
-and many of the combinatorial problems have to be solved continuously to make operations 
+and many combinatorial problems have to be solved continuously to make operations 
 run efficiently. For operation research (OR) to be helpful in this process, the solution methods 
 should be a minimally invasive in the workflow of the working stakeholders. 
 The AbLNS solution approach detailed in this paper aligns
 closely with both the known problems in operation research of the lack of integration and the issues of 
-coordinating stakeholders. For these reasons we argue that the standard Operations Research approach of 
-first collecting data, then creating a model and optimizing it and then finally providing the solution
-to the planners in the company workflow, is not a sound approach in many situations.
+coordination in multi-stakeholder processes. For these reasons we argue that the
+standard Operations Research approach of  first collecting data, then creating a
+model and optimizing it and then finally providing the solution to the planners
+in the company workflow, is not a sound approach in many situations.
 
-We have here demonstrated AbLNS approach works in a practical setting, maintenance scheduling at 
-Total Energies and we are convinced that this approach, combining a number of smaller 
-planning/optimization problems with different actors/stakeholders responsible for their part of the 
-overall solution. This paper argues that making a system of numerous smaller 
-"quick and dirty" models in an well thought out software architecture is much more effective 
-in practice than large integrated models.
+We have here demonstrated AbLNS approach works in a practical setting,
+maintenance scheduling at  Total Energies and we are convinced that this
+approach, combining a number of smaller planning/optimization problems with
+different actors/stakeholders responsible for their part of the overall
+solution. This paper argues that making a system of numerous smaller  "quick
+and dirty" models in an well thought out software architecture is much more
+effective in practice than large integrated models.
 
-The fundamental problem with the "old" paradigm is that optimizing across actors/stakeholders is 
-very difficult, leading to a literature that prefers large integrated models instead of decomposing the
-model by each of the processes that make up an operational setting. This paper argues that this is 
-mainly due to an outdated understanding of software architecture available today in industry, 
-but the Operations Research community. 
+The fundamental problem with the "older" paradigm is that optimizing across
+actors/stakeholders is very difficult, leading the literature to prefer
+integrated models instead of decomposing the model by each of the
+processes that make up a business process such as maintenance scheduling.
+This paper argues that this is mainly due to an outdated understanding of
+software architecture that is available today in industry, but not acknowledged by broader the Operations Research
+and Metaheuristic communities.

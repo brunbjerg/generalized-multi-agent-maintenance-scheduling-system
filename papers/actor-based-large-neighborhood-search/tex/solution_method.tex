@@ -23,19 +23,42 @@ destructors are also chosen from sources external to the algorithm.
 
 Extending on the classic setup we define the following set of 
 destructor messages, $\ElementMessage{}{} \in \SetMessageQueue$. Each
-message hits the system at time $\VarMetaTime$.
+message is received by the system at time $\VarMetaTime \in \mathbb{R}$.
 
 \begin{itemize}
 	\item $m_1(\VarMetaTime)$: Inclusion destruct message, modifies $\ParStrategicInclude$	
+	\begin{itemize}
+		\item Each instance of this message forces a particular work order to be scheduled into
+			a specific period. If a specific work order was already assigned to a period then this 
+			parameter is set to zero, making sure that equation~\ref{eqn:constraint:strategic:schedule_once}
+			is not violated.
+	\end{itemize}
 	\item $m_2(\VarMetaTime)$: Exclusion destruct message, modifies $\ParStrategicExclude$
+	\begin{itemize}
+		\item Each instance of this message excludes a work order from a specific set of periods.
+			If a specific message is already included in a specific period by equation~\ref{eqn:constraint:strategic:include}
+			this message will set that specific parameter to zero removing the effect of the constraint. 
+	\end{itemize}
 	\item $m_3(\VarMetaTime)$: Capacities destruct message, modifies $\ParStrategicResource$
-	\item $m_4(\VarMetaTime)$: Weights destruct messags, modifies $\ParStrategicUrgency$
+	\begin{itemize}
+		\item Each instance of this message perturbes the value of available hours of a given resource $\ElementResource \in \SetResource$ for
+			a given $\ElementPeriod \in \SetPeriod$.
+	\end{itemize}
+	\item $m_4(\VarMetaTime)$: Strategic urgency destruct message, modifies $\ParStrategicUrgency$
+	\begin{itemize}
+		\item Each instance of this message perturbes the strategic urgency of a work order. Here it should be noted that the
+			message changes the $\ParStrategicUrgency$ of every $\ElementPeriod$ for a given $\ElementWorkOrder$. 
+	\end{itemize}
 	\item $m_5(\VarMetaTime)$: Random destruct message, modifies $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
+	\begin{itemize}
+		\item Each instance of this message modifies the main decision variable, $\VarStrategicWorkOrderAssignment{}{}$. This destroys the 
+			solution space similar to a usual destruct method in an LNS setup.
+	\end{itemize}
 \end{itemize}
 
 Each of these messages affect different parts of the weekly maintenance scheduling 
 problem. Notice here that the first four messages destruct the solution by
-changing the parameter space and the last message is a random destructor. That destroys
+changing the parameter space and the last message is a random destructor that destroys
 the solution space.
 
 For a correct implementation it is critical that the that destruct messages are 
@@ -44,8 +67,6 @@ problem instance whenever they appear.
 Generalizing the destructors from being static structures into messages allows
 the solution to change in real-time to a changing parameter space. This means
 that the algorithm does not need to restart to handle changes in data.
-
-% FIX: Parameterize the pseudo code. It should be generalized to the paper.
 
 \input{../../tex/algorithms/actor-based-large-neighborhood-search}
 
