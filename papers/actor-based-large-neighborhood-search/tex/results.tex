@@ -1,24 +1,24 @@
-\section{Results}
-\label{sec:3-results}
-To test the AbLNS algorithm in a framework setup a number of tests, where the data are disrupted
-during the AbLNS algorithm is tested in this section. The data and company setup is presented in
-Section~\ref{sec:data_instance}. Then the effect of forcing work orders into specific weekly 
-$\ElementPeriod \in \SetPeriod$ schedules is presented in Section~\ref{sec:response_work_orders} 
-and excluding them from periods is shown in Section~\ref{sec:exclusion}.
-Afterwards, the effect of reducing the period resource capacities $\ParStrategicResource$ is 
-tested in Section~\ref{sec:results:reduced_weekly_capacity} and increasing them is tested in 
-Section~\ref{sec:increase_week_cap}. 
-Finally the effect of changing the work order values $\ParStrategicUrgency$, 
-is tested in Section~\ref{sec:results:strategic_value_changes}.
+\section{Results}\label{sec:3-results}
+To test the AbLNS algorithm a number of simulations are performed where the
+data are perturbed during the AbLNS algorithm execution The data from the
+company is presented in Section~\ref{sec:data_instance}. Then the effect of
+forcing work orders into specific weekly  $\ElementPeriod \in \SetPeriod$
+schedules is presented in Section~\ref{sec:response_work_orders}  and excluding
+work orders from periods is presented in Section~\ref{sec:exclusion}. The
+effects of reducing the period resource capacities $\ParStrategicResource$ is
+tested in section~\ref{sec:results:reduced_weekly_capacity} and increasing $
+\ElementResource$ is tested in  Section~\ref{sec:increase_week_cap}.  Finally
+the effect of changing the work order values $\ParStrategicUrgency$,  is tested
+in section~\ref{sec:results:strategic_value_changes}.
 
 \subsection{Data Instance}\label{sec:data_instance}
-% TODO: What should be cited here?
-This data instance comes from Total Energies~\cite{total-energies} , where data is extracted from their SAP ERP system. 
-The data instance used in this paper is from a specific offshore platform that for 
-the 2 year time horizon contains 3487 outstanding work orders ($\SetWorkOrder{}$), 
-have 16 different resource skill sets ($\SetResource$) (e.g. mechanics, electricians, 
-turbine specialists, etc.), and finally the scheduling horizon stretches over a 52 bi-weekly 
-periods ($\SetPeriod$) meaning approximately 2 years.
+This data instance is provided by Total Energies~\cite{total-energies}. The data
+is extracted from their SAP ERP system.  The data instance used in this paper
+is from a specific offshore platform that for  the 2 year time horizon contains
+3487 outstanding work orders ($\SetWorkOrder{}$), have 16 different resource
+skill sets ($\SetResource$) (e.g. mechanics, electricians,  turbine specialists,
+etc.), and finally the scheduling horizon stretches over a 52 bi-weekly periods
+($\SetPeriod$) meaning approximately 2 years.
  
 \begin{table}[H]
 \centering
@@ -32,11 +32,13 @@ Instance 1 & 3487                                                          & 16 
 \end{table}
 
 \subsection{Response to Inclusion of Work Orders}\label{sec:response_work_orders}
-The $\ParStrategicInclude$ parameter specifies whether a work order should be scheduled into a specific period.
-As the parameter has the time variable $\VarMetaTime$ it means that this parameter can change at any time while
-the metaheuristic is running. The $\ParStrategicInclude$ parameter constrains the model in equation~\ref{eqn:constraint:strategic:include}.
-Table~\ref{tab:responses:inclusion} shows the responses that the model will be subject to while it is running for different 
-points in time $\VarMetaTime$. 
+The $\ParStrategicInclude$ parameter specifies whether a work order
+should be scheduled into a specific period. As the parameter has the time
+variable $\VarMetaTime$ it means that this parameter can change at any time
+while the metaheuristic is running. The $\ParStrategicInclude$ parameter
+constrains the model in equation~\ref{eqn:constraint:strategic:include}.
+Table~\ref{tab:responses:inclusion} shows the responses that the model will be
+subject to while it is running for different timepoints $\VarMetaTime$.
 
 \begin{table}[H]
 	\centering
@@ -45,15 +47,16 @@ points in time $\VarMetaTime$.
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicInclude|$\end{tabular} & 50                                                            & 50                                                               & 50                                                             & 50                                                             & 50                                                       \\ \hline
 	\end{tabular}
-	\caption{The perturbations of including work orders into the weekly scheduling that the AbLNS is affected by. 
+	\caption{The including work orders perturbations that the AbLNS will be affected by. 
 	Perturbations occur at 60 second time intervals affecting 50 randomly chosen work orders included into random periods.}
 	\label{tab:responses:inclusion}
 \end{table}
 
 Figure~\ref{fig:responses:inclusion} shows the effects of changing the $
-\ParStrategicInclude$ parameter in real-time. The model quickly
-converges and when the system is pertubed by an input response the objective
-value \ref{eqn:objective:strategic} shows a small spike and then quickly converges to a new solution. 
+\ParStrategicInclude$ parameter in real-time. The model quickly converges
+and when the system is pertubed by an input response the objective value
+\ref{eqn:objective:strategic} shows a small spike and then quickly converges to
+a new solution.
 
 \begin{figure}[H]
 	\centering
@@ -63,17 +66,17 @@ value \ref{eqn:objective:strategic} shows a small spike and then quickly converg
 	\caption{Effects of perturbing the solution by forcing work orders into specific periods.}
 	\label{fig:responses:inclusion}
 \end{figure}
-Figure~\ref{fig:responses:inclusion} 
-show 5 perturbations with the first at
-time = 60s where the objective value  slightly increases in response to the
-inclusion, the objective value increases due to the inclusion either causing
-the capacity to be exceeded or the inclusion resulting in a selected $
-\ParStrategicUrgency$ that has a lower value. The remaining 4 perturbations
-all show the same  pattern, an increase in the objective value followed by a
-subsequent convergence. Notice that despite the convergence, the objective after
-convergence is higher. This is to be expected, since forcing specific 
+Figure~\ref{fig:responses:inclusion}  show 5 perturbations with the first
+at time = 60s where the objective value  slightly increases in response to
+the inclusion, the objective value increases due to the inclusion either
+causing the capacity to be exceeded or the inclusion resulting in a selected
+$ \ParStrategicUrgency$ that has a lower value. The remaining 4 perturbations
+all show the same  pattern, an increase in the objective value followed by
+a subsequent convergence. Notice that despite the convergence, the objective
+after convergence is higher. This is to be expected, since forcing specific
 workorders into specific weeks constrains the optimization problem more.
 
+%% WARN
 \subsection{Response to Exclusion}\label{sec:exclusion}
 The response to exclusion is associated with the $\ParStrategicExclude$
 parameter and is found in equation~\ref{eqn:strategic:constraint:exclude}.
@@ -93,7 +96,7 @@ of affected work orders is chosen as many exclusions of do not affect the assign
 	\begin{tabular}[c]{@{}c@{}}\end{tabular}                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 60$\end{tabular} & \begin{tabular}[c]{@{}c@{}} $\VarMetaTime_2 = 120$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 180$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_4 = 240$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_5 = 300$\end{tabular} \\ \hline
 	\begin{tabular}[c]{@{}c@{}}$\Delta |\ParStrategicExclude|$\end{tabular} & 500                                                           & 500                                                              & 500                                                            & 500                                                            & 500                                                       \\ \hline
 	\end{tabular}
-	\caption{The perturbations of excluding a work order from specific periods in the weekly schedule. 
+	\caption{The exclusion of work orders perturbations from specific periods on the weekly schedule. 
 	Perturbations occur at 60 second time intervals affecting 500 work orders each time.}
 	\label{tab:responses:exclusion}
 \end{table}
@@ -127,22 +130,23 @@ second intervals are specified instead of 60 second intervals.
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
-	$\Delta |\SetPeriod|$           & 52                                                             & 52                                                              & 52                                                             \\ \hline
-	$\Delta |\SetResource|$         & 16                                                             & 16                                                              & 16                                                             \\ \hline
-	$ |\ParStrategicResource|$ (hours)& 61816                                                           & 111268                                                            & 173083                                                          \\ \hline
+	                                  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 0$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular}   & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}    & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetPeriod|$             & 52                                                              & 52                                                               & 52                                                                & 52                                                             \\ \hline
+	$\Delta |\SetResource|$           & 16                                                              & 16                                                               & 16                                                                & 16                                                             \\ \hline
+	$ |\ParStrategicResource{}|$ (hours)& 111268                                                          &  61816                                                           & 111268                                                            & 173083                                                          \\ \hline
 	\end{tabular}
-	\caption{}
+	\caption{The resource perturbations that the AbLNS will be affected by measured in hours. Here all $\ElementPeriod \in \SetPeriod$ and $\ElementResource \in \SetResource$ are 
+		affected}
 	\label{tab:responses:resource-addition}
 \end{table}
 
 Figure~\ref{fig:responses:resources-addition} shows the effects of progressively
 increasing  available resources. The AbLNS starts with a base load which is
-then reduced at time = 100 seconds causing the objective value by increase
+then reduced at time = 100 seconds causing the objective value to increase
 as $\ParStrategicResourcePenalty$ in equation~\ref{eqn:strategic:constraint:resource}
 absorbs the exceeded capacity. At time = 200 the resources are increased to the
-base load again, and at time = 300 seconds the resources are  increased to their
-maximum value.
+base load again, and at time = 300 seconds the resources are increased to their
+final value.
 
 \begin{figure}[H]%% placement specifier
 	\centering
@@ -165,11 +169,13 @@ resources are progressively decreased.
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline
-	                                & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
-	$\Delta |\SetPeriod|$           & 52                                                            & 52                                                              & 52                                                             \\ \hline
-	$\Delta |\SetResource|$         & 16                                                            & 16                                                              & 16                                                             \\ \hline
-	$ |\ParStrategicResource|$ (hours)& 173083                                                         & 111268                                                            & 61816                                                           \\ \hline
+	                                  & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 0$\end{tabular}   & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_1 = 100$\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_2 = 200$\end{tabular}    & \begin{tabular}[c]{@{}c@{}}$\VarMetaTime_3 = 300$\end{tabular} \\ \hline
+	$\Delta |\SetPeriod|$             & 52                                                             & 52                                                             & 52                                                                & 52                                                             \\ \hline
+	$\Delta |\SetResource|$           & 16                                                             & 16                                                             & 16                                                                & 16                                                             \\ \hline
+	$ |\ParStrategicResource{}|$ (hours)& 111268                                                        & 173083                                                         & 111268                                                            & 61816                                                           \\ \hline
 	\end{tabular}
+	\caption{The resource perturbations that the AbLNS will be affected by measured in hours. Here all $\ElementPeriod \in \SetPeriod$ and $\ElementResource \in \SetResource$ are 
+		affected}
 	\label{tab:resources:resource-subtraction}
 \end{table}
 
@@ -207,6 +213,7 @@ table~\ref{tab:responses:value_change}.
 	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$           & 52                                                            & 52                                                             & 52                                                             & 52                                                             & 52                                                       \\ \hline
 	\makecell{$ \ParStrategicUrgency[\VarMetaTime_{n}] -$\\ $\ParStrategicUrgency[\VarMetaTime_{n - 1}]$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \hline
 	\end{tabular}
+	\caption{Perturbations that the $\ParStrategicUrgency$ will be affected by.}
 	\label{tab:responses:value_change}
 \end{table}
 

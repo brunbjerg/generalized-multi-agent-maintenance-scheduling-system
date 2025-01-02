@@ -1,32 +1,29 @@
-\section{Discussion}
-\label{sec:4-discussion}
-The maintenance scheduling process effectively solves a complex scheduling problem by
-relying in multiple actors. Through the use of actors the scheduling process handles
-uncertainty that is difficult to reason about in a single mathematical model. These 
-uncertainties are solved through coordination. Each type of stakeholder in the process 
-acts according to a  model each with different levels of aggregation and features where
-each actor understands how to exploit his own model.
-The discussion will be divided into three sections: 
-\ref{sec:discussion:actors_and_integration} 
-actors and integration;
-\ref{sec:discussion:continuous_optimization} 
-continuous optimization allows asynchronous optimization; 
-and \ref{sec:discussion:future_research} future research.
+\section{Discussion}\label{sec:4-discussion}
+The maintenance scheduling process effectively solves a complex scheduling
+problem by relying in multiple actors. Through the use of actors the scheduling
+process handles uncertainty that is difficult to reason about in a single
+mathematical model. These  uncertainties are solved through coordination in
+time (modelled as $\VarMetaTime$). Each type of actor in the process acts
+according to a model each with different levels of aggregation and properties
+where each actor has a solid understanding of his own model. In the discussion
+interesting aspects of this approach has been divided into three 
+sections: \ref{sec:discussion:actors_and_integration}
+actors and integration; \ref{sec:discussion:continuous_optimization}
+continuous optimization allows asynchronous optimization;  and
+\ref{sec:discussion:future_research} future research.
 
-\subsection{Actors \& Integration}
-\label{sec:discussion:actors_and_integration}
+\subsection{Actors \& Integration}\label{sec:discussion:actors_and_integration}
 Often in operation research the failure to reliably solve operational
-problems in  industry are not due to the problems being computationally
-intractable \cite{gendreauHandbookMetaheuristics2019} but a practical
+problems in industry are not due to the problems being computationally
+intractable \citep{gendreauHandbookMetaheuristics2019}. It is usually a practical
 problem of connecting data streams so that the solution approach continually
-receives dynamic data to handle changes and then providing the resulting
-solutions to the relevant actors (stakeholders) through a relevant interface
-\cite{meignanReviewTaxonomyInteractive2015}. The actor-based approach proposed
+receives dynamic data to handle changes and then sends the resulting
+solutions to the relevant actors (stakeholders), ideally through a relevant interface
+\citep{meignanReviewTaxonomyInteractive2015}. The actor-based approach proposed
 in this paper makes integration easier by naturally encapsulating a model with a
 reliable interface.
 
-\subsection{Continuous Optimization}
-\label{sec:discussion:continuous_optimization}
+\subsection{Continuous Optimization}\label{sec:discussion:continuous_optimization}
 With actor-based metaheuristics, the optimization loop can run indefinitely,
 optimizing based on the latest available information. This may seem like a
 detail as you could argue that you should only ever optimize the schedule
@@ -42,7 +39,7 @@ to the hierarchical model setup.
 	\label{fig:discussion:hierarchical_model_setup}
 	\caption{Effects of using hierarchical models setups in human-guided search metaheuristics.
 	Due to the dependent nature of each metaheuristic it becomes crucial that the running of 
-	the metaheuristics are well coordinated between the stakeholders.}
+	the metaheuristics are well coordinated between the actors.}
 \end{figure}
 
 In practice there are multiple problems with using a hierarchical setup.
@@ -58,8 +55,8 @@ allows for.
 \begin{figure}[H]
 	\input{../../figures/asynchronous_setup.tex}
 	\caption{Asynchronous model setup where each metaheuristic runs in perpetuity. In this setup
-	there is no need to coordinate stakeholders to run the metaheuristics. Each actor in the 
-	scheduling process will always have the solutions of the other stakeholder available to 
+	there is no need to coordinate actors to run the metaheuristics. Each actor in the 
+	scheduling process will always have the solutions of the other actors available to 
 	him to guide his own search.}
 	\label{fig:discussion:asynchronous_setup}
 \end{figure}
@@ -72,7 +69,7 @@ restarting the metaheuristics.
 
 \subsection{Future Research}
 \label{sec:discussion:future_research}
-A possible future research direction is to demonstrate that
+The future research direction is to demonstrate that
 the actor-based approach described here can be used to model and optimize 
 multi-actor/multi-level scheduling processes. 
 Figures~\ref{fig:ordinator-hexagon:persistence},
@@ -178,19 +175,27 @@ and many combinatorial problems have to be solved continuously to make operation
 run efficiently. For operation research (OR) to be helpful in this process, the solution methods 
 should be a minimally invasive in the workflow of the working stakeholders. 
 The AbLNS solution approach detailed in this paper aligns
-closely with both the known problems in operation research of the lack of integration and the issues of 
-coordination in multi-stakeholder processes. For these reasons we argue that the
-standard Operations Research approach of  first collecting data, then creating a
-model and optimizing it and then finally providing the solution to the planners
-in the company workflow, is not a sound approach in many situations.
+closely with two known problems in operation research: the lack of integration and the issues of 
+coordination in multi-actor processes. For these reasons we argue that the
+"standard" Operations Research approach of first collecting data, then creating a
+model and optimizing it, and then finally providing the solution to the planners
+in the company workflow, is not a scalable approach in many situations.
 
-We have here demonstrated AbLNS approach works in a practical setting,
-maintenance scheduling at  Total Energies and we are convinced that this
-approach, combining a number of smaller planning/optimization problems with
+We have here demonstrated that the AbLNS approach works in a practical 
+maintenance scheduling setting at Total Energies.
+
+We believe that this
+approach of combining a number of smaller planning/optimization problems with
 different actors/stakeholders responsible for their part of the overall
-solution. This paper argues that making a system of numerous smaller  "quick
-and dirty" models in an well thought out software architecture is much more
-effective in practice than large integrated models.
+solution is the future way of integrating Operation Research techniques in practice.
+
+Modern industrial companies also have the available IT-infrastructure to support
+and connect model/metaheuristics together with the relevant actors/stakeholders 
+in a way that was not possible just 10 years ago. 
+
+This also align with anacdotal evidence from practical operation research 
+that smaller "quick and dirty" often works better in practice. 
+
 
 The fundamental problem with the "older" paradigm is that optimizing across
 actors/stakeholders is very difficult, leading the literature to prefer
