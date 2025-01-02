@@ -7,10 +7,10 @@ time (modelled as $\VarMetaTime$). Each type of actor in the process acts
 according to a model each with different levels of aggregation and properties
 where each actor has a solid understanding of his own model. In the discussion
 interesting aspects of this approach has been divided into three 
-sections: \ref{sec:discussion:actors_and_integration}
-actors and integration; \ref{sec:discussion:continuous_optimization}
+sections: Section~\ref{sec:discussion:actors_and_integration}
+actors and integration; Section~\ref{sec:discussion:continuous_optimization}
 continuous optimization allows asynchronous optimization;  and
-\ref{sec:discussion:future_research} future research.
+Section~\ref{sec:discussion:future_research} future research.
 
 \subsection{Actors \& Integration}\label{sec:discussion:actors_and_integration}
 Often in operation research the failure to reliably solve operational
@@ -35,8 +35,7 @@ where the output of one model is used as the input to the next one, leading
 to the hierarchical model setup.
 
 \begin{figure}[H]
-	\input{../../figures/multimodel-setup.tex}
-	\label{fig:discussion:hierarchical_model_setup}
+	\input{../../figures/multimodel-setup.tex}\label{fig:discussion:hierarchical_model_setup}
 	\caption{Effects of using hierarchical models setups in human-guided search metaheuristics.
 	Due to the dependent nature of each metaheuristic it becomes crucial that the running of 
 	the metaheuristics are well coordinated between the actors.}
@@ -55,10 +54,10 @@ allows for.
 \begin{figure}[H]
 	\input{../../figures/asynchronous_setup.tex}
 	\caption{Asynchronous model setup where each metaheuristic runs in perpetuity. In this setup
-	there is no need to coordinate actors to run the metaheuristics. Each actor in the 
-	scheduling process will always have the solutions of the other actors available to 
-	him to guide his own search.}
-	\label{fig:discussion:asynchronous_setup}
+		there is no need to coordinate actors to run the metaheuristics. Each actor in the 
+		scheduling process will always have the solutions of the other actors available to 
+		him to guide his own search.
+	}\label{fig:discussion:asynchronous_setup}
 \end{figure}
 
 When the optimization approach optimize continuously it enables tight
@@ -67,8 +66,7 @@ models to completion you simply handle changes in model parameters, model
 solutions, user inputs, and in the dynamic data source as they occur opposed to
 restarting the metaheuristics.
 
-\subsection{Future Research}
-\label{sec:discussion:future_research}
+\subsection{Future Research}\label{sec:discussion:future_research}
 The future research direction is to demonstrate that
 the actor-based approach described here can be used to model and optimize 
 multi-actor/multi-level scheduling processes. 

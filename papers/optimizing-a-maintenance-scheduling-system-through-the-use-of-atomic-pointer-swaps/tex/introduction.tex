@@ -1,0 +1,97 @@
+\section{Introduction}
+
+
+The future research direction is to demonstrate that
+the actor-based approach described here can be used to model and optimize 
+multi-actor/multi-level scheduling processes. 
+Figures~\ref{fig:ordinator-hexagon:persistence},
+~\ref{fig:ordinator-hexagon:atomicpointerswap},
+~\ref{fig:ordinator-hexagon:metaheuristics},
+~\ref{fig:ordinator-hexagon:orchestrator},
+~\ref{fig:ordinator-hexagon:userinterfaces}
+show a larger scale setup of the actor-based approach which is being developed with Total Energies.
+Here figure~\ref{fig:ordinator-hexagon:metaheuristics}
+shows the metaheuristics of scheduling system architecture where each of the actors run an AbLNS
+and that each metaheuristic will share its solutions with the other
+metaheuristics through atomic pointer swapping shown in figure~\ref{fig:ordinator-hexagon:atomicpointerswap}.
+Communicate with the end-user
+through userinterfaces and message passing as shown in figure~\ref{fig:ordinator-hexagon:userinterfaces}, 
+integrate with a persistent storage through mutex
+locks as shown in figure~\ref{fig:ordinator-hexagon:persistence}, 
+and the lifecycle of each of the metaheuristics will be controlled by
+the orchestrator also through message passing as shown in figure~\ref{fig:ordinator-hexagon:orchestrator}. 
+
+% \begin{figure}[H]
+% 	\centering
+% 	\input{../../figures/ordinator-architecture.tex}
+% 	\drawOrdinatorArchitecture{basisinput=1cm}
+% 	\label{fig:ordinator-architecture}
+% \end{figure}
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\resizebox{0.7\textwidth}{!}{
+		\drawModelSetupHexagon[persistence=true]
+	}
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}\label{fig:ordinator-hexagon:persistence}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	% \resizebox{0.7\textwidth}{!}{
+		\drawModelSetupHexagon[atomicpointerswap=true]
+	% }
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:atomicpointerswap}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\resizebox{0.7\textwidth}{!}{
+		\drawModelSetupHexagon[metaheuristics=true]
+	}
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:metaheuristics}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\resizebox{0.7\textwidth}{!}{
+		\drawModelSetupHexagon[orchestrator=true]
+	}
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:orchestrator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{../../figures/model-setup-hexagon.tex}
+	\resizebox{0.7\textwidth}{!}{
+		\drawModelSetupHexagon[userinterface=true]
+	}
+	\caption{
+		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
+		is an actor it becomes possible to optimize parts of a large process individually instead of 
+		optimizing the scheduling problem globally from a single model implementation.
+	}
+	\label{fig:ordinator-hexagon:userinterfaces}
+\end{figure}
+

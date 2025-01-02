@@ -50,8 +50,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{pgfplots}
-\usepackage{epstopdf}  
-%% Automates EPS to PDF conversion
+\usepackage{epstopdf}  % Automates EPS to PDF conversion
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
 
@@ -106,7 +105,7 @@
 %%            country={}}
 %% \fntext[label3]{}
 
-\title{Actor-based Large Neighborhood Search for Weekly Maintenance Scheduling} %% Article title
+\title{Optimizing a Maintenance Scheduling System Through the Use of Atomic Pointer Swap} %% Article title
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -148,27 +147,7 @@
 
 %% Abstract
 \begin{abstract}
-Many planning problems in operations research are challenging due
-to their inherent uncertainty and dynamic nature. Methods such
-as Stochastic Programming~\citep{birge2011introduction}, fuzzy
-logic~\citep{zadeh1988fuzzy}, robust optimization~\citep{ben2009robust},
-dynamic optimization~\citep{yangMetaheuristicsDynamicCombinatorial2013}, and
-human-guided search optimization~\citep{talbiMetaheuristicsDesignImplementation2009}
-have been proposed to address these issues. However, these methods often
-assume static data and problem settings. Maintenance scheduling exemplifies a
-dynamic problem where information is continually updated, requiring frequent
-rescheduling. While traditionally viewed as an operations management task, this
-paper argues that general maintenance scheduling approaches can be developed by
-integrating optimization solutions into business processes guided by operations
-management principles (e.g., plan-do-check-act)~\citep{w.edwardsdemingOutCrisis}.
-This paper proposes a novel actor-based optimization approach using a large
-neighborhood search metaheuristic to address dynamic scheduling problems
-characterized by real-time data updates and external inputs influencing
-optimization with future research focusing on integrating interdependent
-decisions by multiple actors with differing objectives. The framework is tested
-on real-world maintenance scheduling for offshore platforms operated by Total
-Energies in the North Sea and demonstrates general applicability to a range of
-operational planning problems.
+            
 \end{abstract}
 
 %%Graphical abstract
@@ -191,21 +170,16 @@ Large Neighborhood Search
 \sep\ Real-time Optimization
 \sep\ Human-centered Computing
 \sep\ Decision Support Systems
-\sep\ Interactive Optimization.
-
+\sep\ Concurrent Software Architecture
 %% PACS codes here, in the form: \PACS code \sep code
 
 %% MSC codes here, in the form: \MSC code \sep code
 %% or \MSC[2008] code \sep code (2000 is the default)
-
 \end{keyword}
 
 \end{frontmatter}
-\input{../actor-based-large-neighborhood-search/tex/introduction.tex}
-\input{../actor-based-large-neighborhood-search/tex/solution_method.tex}
-\input{../actor-based-large-neighborhood-search/tex/results.tex}
-\input{../actor-based-large-neighborhood-search/tex/case_study.tex}
-\input{../actor-based-large-neighborhood-search/tex/discussion.tex}
+
+\input{../optimizing-a-maintenance-scheduling-system-through-the-use-of-atomic-pointer-swaps/tex/introduction.tex}
 
 \bibliography{refs}
 
