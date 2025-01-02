@@ -1,5 +1,5 @@
-\newif\ifincludeclustering
-\newif\ifincludebeta
+\newif\ifincludeclustering\
+\newif\ifincludebeta\
 
 \pgfkeys{
 	/strategicmodel/.is family, /strategicmodel,
@@ -13,17 +13,17 @@
 \newcommand{\strategicmodel}[1][]{
 	\pgfkeys{/strategicmodel, default, #1}
 	\begin{alignat}{2}
-		& \text{\rule{\linewidth}{0.4pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
+		& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
 		& \textbf{Meta variables:} \notag                                                                                                                                                                                                                                                                                                                                                \\ 
 		& \ElementScheduler \in \SetScheduler                                                                                                                                                                                                                                                                                                                                           \label{eqn:meta:scheduler:strategic}  \\ 
 		\ifincludebeta
-		& \VarTacticalWork{}{}                                                                                                                                                                                                                                                                                                                                                          \label{eqn:meta:tactical:strategic}      \\ 
+		& \VarTacticalWork{}{}                                                                                                                                                                                                                                                                                                                                                                \\ 
 		\fi
 		& \tau \in [0, \infty]                                                                                                                                                                                                                                                                                                                                                          \label{eqn:meta:time:strategic}                                     \\ 
 		& \text{\rule{\linewidth}{0.4pt}} \notag                                                                                                                                                                                                                                                                                                                                              \\
 		& \textbf{Minimize:} \notag                                                                                                                                                                                                                                                                                                                                                     \label{eqn:objective:strategic}                                     \\
 		\ifincludeclustering
-		& -\sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicUrgency \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}  \notag                                                                                                                                                                                                                             \\ 
+		& - \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicUrgency \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}  \notag                                                                                                                                                                                                                             \\ 
 		& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicResourcePenalty \cdot \VarStrategicExcess     \notag                                                                                                                                                                                                                                                                          \\
 		& - \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementWorkOrder1 \in \SetWorkOrder{}} \sum_{\ElementWorkOrder2 \in \SetWorkOrder{}} 	 \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder1}{\ElementPeriod} \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder2}{\ElementPeriod}                                                                                             \\
 		\else
@@ -43,6 +43,6 @@
 		& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 1,                                                            \quad if\quad \ParStrategicInclude \ \ \forall \ElementWorkOrder \in \SetWorkOrder{}\quad \forall \ElementPeriod \in \SetPeriod                                                                                                                                                                                              \label{eqn:strategic:constraint:exclude}\\
 		& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \in \{0, 1\}                                                   \quad \forall \ElementWorkOrder \in \SetWorkOrder{} \quad \forall \ElementPeriod \in \SetPeriod                                                                                                                                                                           \label{eqn:variable:strategic:assignment}      \\ 
 		& \VarStrategicExcess \in \mathbb{R}^{+}                                                                                             \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource                                                                                                                                                                               \label{eqn:variable:strateigc:penalty}\\ 
-		& \text{\rule{\linewidth}{0.4pt}} \notag
+		& \text{\rule{\linewidth}{0.8pt}} \notag
 	\end{alignat}
 }

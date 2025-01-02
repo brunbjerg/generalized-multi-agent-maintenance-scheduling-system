@@ -1,5 +1,4 @@
-\section{Solution Method}
-\label{sec:2-solution-method}
+\section{Solution Method}\label{sec:2-solution-method}
 
 \subsection{Actor-based Large Neighborhood Search} 
 A metaheuristic that is affected by the end user and requires real-time
@@ -11,15 +10,15 @@ The most general form of the LNS metaheuristic is defined for static
 problems, meaning that the parameters that make up the problem instance
 is not subject to change after the algorithm has started. To make the
 LNS adapt to changing parameters in real-time a message system have been
-implemented into the existing framework. This  extension is shown in algorithm
-\ref{alg:actor-based-large-neighborhood-search}.
+implemented into the existing framework. This  extension is shown in 
+algorithm~\ref{alg:actor-based-large-neighborhood-search}.
 
 \subsubsection{Messages and Destructors}
 LNS in its most basic form has one constructor and one destructor which
 repeatedly destroy and rebuild the solution. For the AbLNS we will
 generalize on this concept by including messages as destructors. This
 generalization can be seen as being somewhat similar to how the adaptive
-LNS (ALNS)~\cite{pisinger2007general} is formulated, but where the different
+LNS (ALNS)~\citep{pisinger2007general} is formulated, but where the different
 constructors and destructors are also chosen from sources external to the
 algorithm.
 
@@ -72,7 +71,7 @@ to handle changes in data.
 
 \input{../../tex/algorithms/actor-based-large-neighborhood-search}
 
-The basic LNS setup have here been extended with a `message queue` $
+The basic LNS setup have here been extended with a ``message queue'' $
 \MessageQueue$. The message queue will be read from on every iteration of
 the LNS's main iteration loop. Here we notice that the incoming message is
 able to change both the solution $\Solution$ but also the problem instance $
