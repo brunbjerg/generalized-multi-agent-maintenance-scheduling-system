@@ -12,6 +12,7 @@ write-project PROJECT:
 
 nushell-strategic-data-extract GNUPLOT_OUTPUT_FILE: 
     #!/usr/bin/env nu
+    echo hello 0
     let ordinator_log = open ../ordinator-api/logging/logs/ordinator.developer.log | from json -o
     echo hello 1
     let ordinator_strategic_data = $ordinator_log | each { |row| { time: ($row.timestamp | into datetime | format date '%s'), strategic_objective_value: $row.fields.strategic_objective_value?} } | where { |row| $row.strategic_objective_value != null}

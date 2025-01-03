@@ -13,7 +13,7 @@ in Section~\ref{sec:results:strategic_value_changes}.
 
 \subsection{Data Instance}\label{sec:data_instance}
 This data instance is provided by Total Energies~\citep{total-energies}. The data
-is extracted from their SAP ERP system.  The data instance used in this paper
+is extracted from their SAP ERP system. The data instance used in this paper
 is from a specific offshore platform that for  the 2 year time horizon contains
 3487 outstanding work orders ($\SetWorkOrder{}$), have 16 different resource
 skill sets ($\SetResource$) (e.g.\ mechanics, electricians,  turbine specialists,
@@ -130,10 +130,10 @@ second intervals are specified instead of 60 second intervals.
 	\centering
 	\begin{tabular}{cccccc}
 	\toprule
-	                                    & $\VarMetaTime_1 = 0$ & $\VarMetaTime_1 = 100$ & $\VarMetaTime_2 = 200$ & $\VarMetaTime_3 = 300$ \\ \midrule
-	$\Delta |\SetPeriod|$               & 52                   & 52                     & 52                     & 52                     \\ \midrule
-	$\Delta |\SetResource|$             & 16                   & 16                     & 16                     & 16                     \\ \midrule
-	$ |\ParStrategicResource{}|$ (hours)& 111268               &  61816                 & 111268                 & 173083                 \\ \bottomrule
+	                                     & $\VarMetaTime_1 = 0$ & $\VarMetaTime_2 = 100$ & $\VarMetaTime_3 = 200$   \\ \midrule
+	$\Delta |\SetPeriod|$                & 52                     & 52                     & 52                     \\ \midrule
+	$\Delta |\SetResource|$              & 16                     & 16                     & 16                     \\ \midrule
+	$ |\ParStrategicResource{}|$ (hours) &  61816                 & 111268                 & 173083                 \\ \bottomrule
 	\end{tabular}
 	\caption{The resource perturbations that the AbLNS will be affected by measured in hours. Here all $\ElementPeriod \in \SetPeriod$ and $\ElementResource \in \SetResource$ are 
 		affected
@@ -169,10 +169,10 @@ resources are progressively decreased.
 	\centering
 	\begin{tabular}{cccccc}
 	\toprule
-	                                    & $\VarMetaTime_1 = 0$ & $\VarMetaTime_1 = 100$ & $\VarMetaTime_2 = 200$ & $\VarMetaTime_3 = 300$ \\ \midrule
-	$\Delta |\SetPeriod|$               & 52                   & 52                     & 52                     & 52                     \\ \midrule
-	$\Delta |\SetResource|$             & 16                   & 16                     & 16                     & 16                     \\ \midrule
-	$ |\ParStrategicResource{}|$ (hours)& 111268               & 173083                 & 111268                 & 61816                  \\ \bottomrule
+	                                    & $\VarMetaTime_1 = 0$ & $\VarMetaTime_2 = 100$ & $\VarMetaTime_3 = 200$ \\ \midrule
+	$\Delta |\SetPeriod|$               & 52                     & 52                     & 52                   \\ \midrule
+	$\Delta |\SetResource|$             & 16                     & 16                     & 16                   \\ \midrule
+	$ |\ParStrategicResource{}|$ (hours)& 173083                 & 111268                 & 61816                \\ \bottomrule
 	\end{tabular}
 	\caption{The resource perturbations that the AbLNS will be affected by measured in hours. Here all $\ElementPeriod \in \SetPeriod$ and $\ElementResource \in \SetResource$ are 
 		affected}\label{tab:resources:resource-subtraction}
