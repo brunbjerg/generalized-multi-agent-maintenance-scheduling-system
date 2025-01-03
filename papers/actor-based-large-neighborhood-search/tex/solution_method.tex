@@ -27,33 +27,36 @@ destructor messages, $\ElementMessage{}{} \in \SetMessageQueue$. Each
 message is received by the system at time $\VarMetaTime \in \mathbb{R}$.
 
 \begin{itemize}
-	\item $m_1(\VarMetaTime)$: Inclusion destruct message, modifies $\ParStrategicInclude$	
+	\item $m^{wp}_{1}(\VarMetaTime)$: Inclusion destruct message, modifies $\ParStrategicInclude$	
 	\begin{itemize}
-		\item Each instance of this message forces a particular work order to be scheduled into
-			a specific period. If a specific work order was already assigned to a period then this 
-			parameter is set to zero, making sure that equation~\ref{eqn:constraint:strategic:schedule_once}
-			is not violated.
+		\item Each instance of this message unschedules a particular work order and then it forces
+			it to be scheduled into the period specified by $\ParStrategicInclude$. If a
+			specific work order was already assigned to a period then $\ParStrategicInclude$ is set
+			to zero, making sure that constraint~\ref{eqn:constraint:strategic:schedule_once}
+			is not violated for that $\ElementPeriod \in \SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$. 
 	\end{itemize}
-	\item $m_2(\VarMetaTime)$: Exclusion destruct message, modifies $\ParStrategicExclude$
+	\item $m^{wp}_{2}(\VarMetaTime)$: Exclusion destruct message, modifies $\ParStrategicExclude$
 	\begin{itemize}
 		\item Each instance of this message excludes a work order from a specific set of periods.
-			If a specific message is already included in a specific period by equation~\ref{eqn:constraint:strategic:include}
-			this message will set that specific parameter to zero removing the effect of the constraint. 
+			If a specific work order is already included in a specific period $\ElementPeriod$ by 
+			constraint~\ref{eqn:constraint:strategic:include}
+			this message will set the $\ParStrategicExclude$ to zero removing the effect of the constraint 
+			for that $\ElementPeriod \in \SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$. 
 	\end{itemize}
-	\item $m_3(\VarMetaTime)$: Capacities destruct message, modifies $\ParStrategicResource$
+	\item $m^{pr}_{3}(\VarMetaTime)$: Capacities destruct message, modifies $\ParStrategicResource$
 	\begin{itemize}
 		\item Each instance of this message perturbes the value of available hours of a given resource $\ElementResource \in \SetResource$ for
 			a given $\ElementPeriod \in \SetPeriod$.
 	\end{itemize}
-	\item $m_4(\VarMetaTime)$: Strategic urgency destruct message, modifies $\ParStrategicUrgency$
+	\item $m^{wp}_{4}(\VarMetaTime)$: Strategic urgency destruct message, modifies $\ParStrategicUrgency$
 	\begin{itemize}
 		\item Each instance of this message perturbes the strategic urgency of a work order. Here it should be noted that the
-			message changes the $\ParStrategicUrgency$ of every $\ElementPeriod$ for a given $\ElementWorkOrder$. 
+			message changes the $\ParStrategicUrgency$ of every $\ElementPeriod \in \SetPeriod$ for a given $\ElementWorkOrder \in \SetWorkOrder$. $\ElementPeriod$. 
 	\end{itemize}
-	\item $m_5(\VarMetaTime)$: Random destruct message, modifies $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
+	\item $m^{wk}_{5}(\VarMetaTime)$: Random destruct message, modifies $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
 	\begin{itemize}
-		\item Each instance of this message modifies the main decision variable, $\VarStrategicWorkOrderAssignment{}{}$. This destroys the 
-			solution space similar to a usual destruct method in an LNS setup.
+		\item Each instance of this message modifies the main decision variable, $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$. 
+			Removing random work order assignments from $k$ randomly chosen $\ElementWorkOrder \in \SetWorkOrder$, where $k \in \mathbb{N}$ is a parameter of the AbLNS.	
 	\end{itemize}
 \end{itemize}
 
