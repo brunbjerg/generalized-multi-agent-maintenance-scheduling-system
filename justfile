@@ -14,17 +14,12 @@ nushell-strategic-data-extract GNUPLOT_OUTPUT_FILE:
     #!/usr/bin/env nu
     echo hello 0
     let ordinator_log = open ../ordinator-api/logging/logs/ordinator.developer.log | from json -o
-    echo hello 1
-    let ordinator_strategic_data = $ordinator_log | each { |row| { time: ($row.timestamp | into datetime | format date '%s'), strategic_objective_value: $row.fields.strategic_objective_value?} } | where { |row| $row.strategic_objective_value != null}
-    echo hello 2
+    # let ordinator_strategic_data = $ordinator_log | each { |row| { time: ($row.timestamp | into datetime | format date '%s'), strategic_objective_value: $row.fields.strategic_objective_value?} } | where { |row| $row.strategic_objective_value != null}
+    let ordinator_strategic_data = $ordinator_log | each { |row| { time: ($row.timestamp | into datetime | format date '%s'), strategic_urgency: $row.fields.strategic_urgency?, strategic_resource_penalty: $row.fields.strategic_resource_penalty?} } | where { |row| $row.strategic_urgency != null}
     $ordinator_strategic_data | to csv | save --force gnuplot_data.csv 
-    echo hello 3
     $ordinator_strategic_data | length | print
-    echo hello 4
     gnuplot -e "set output '{{GNUPLOT_OUTPUT_FILE}}'" -p gnuplot/strategic_objective_value.gp
-    echo hello 5
     rm gnuplot_data.csv
-    echo hello 6
     mv {{GNUPLOT_OUTPUT_FILE}} papers/actor-based-large-neighborhood-search/figures/
     echo hello 7
 
