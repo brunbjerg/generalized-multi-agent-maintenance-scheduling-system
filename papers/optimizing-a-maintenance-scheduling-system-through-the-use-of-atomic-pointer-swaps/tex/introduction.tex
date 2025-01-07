@@ -4,27 +4,17 @@
 
 
 
-\subsection{}
-The future research direction is to demonstrate that
-the actor-based approach described here can be used to model and optimize 
-multi-actor/multi-level scheduling processes. 
-Figures~\ref{fig:ordinator-hexagon:persistence},
-~\ref{fig:ordinator-hexagon:atomicpointerswap},
-~\ref{fig:ordinator-hexagon:metaheuristics},
-~\ref{fig:ordinator-hexagon:orchestrator},
-~\ref{fig:ordinator-hexagon:userinterfaces}
-show a larger scale setup of the actor-based approach which is being developed with Total Energies.
-Here figure~\ref{fig:ordinator-hexagon:metaheuristics}
-shows the metaheuristics of scheduling system architecture where each of the actors run an AbLNS
-and that each metaheuristic will share its solutions with the other
-metaheuristics through atomic pointer swapping shown in figure~\ref{fig:ordinator-hexagon:atomicpointerswap}.
-Communicate with the end-user
-through userinterfaces and message passing as shown in figure~\ref{fig:ordinator-hexagon:userinterfaces}, 
-integrate with a persistent storage through mutex
-locks as shown in figure~\ref{fig:ordinator-hexagon:persistence}, 
-and the lifecycle of each of the metaheuristics will be controlled by
-the orchestrator also through message passing as shown in figure~\ref{fig:ordinator-hexagon:orchestrator}. 
+\subsection{Problem Setting}
 
+
+\subsection{Software Architecture}
+Metaheuristics present unique challenges when it comes to designing a high level software architecture
+where the metaheuristics can be reliably implemented and scale. One of the reasons for this is that 
+metaheuristics have very high requirements when it comes to state mutation. State mutation is the 
+primary way in which metaheuristics achieve optimization by changing the solution space rapidly
+according to special rules \citep{han}
+
+\subsection{Mathematical Models}
 % \begin{figure}[H]
 % 	\centering
 % 	\input{../../figures/ordinator-architecture.tex}
@@ -46,9 +36,9 @@ the orchestrator also through message passing as shown in figure~\ref{fig:ordina
 \begin{figure}[H]
 	\centering
 	\input{../../figures/model-setup-hexagon.tex}
-	% \resizebox{0.7\textwidth}{!}{
+	\resizebox{0.7\textwidth}{!}{
 		\drawModelSetupHexagon[atomicpointerswap=true]
-	% }
+	}
 	\caption{
 		Overview of the scheduling process when modelled as actors. When LNS is encapsulated 
 		is an actor it becomes possible to optimize parts of a large process individually instead of 
