@@ -9,11 +9,12 @@ set timefmt "%Y-%m-%dT%H:%M:%S"
 set style line 1 lc "#000000" lt 1 lw 2.5
 set style line 2 lc "#2F3EEA" lt 1 lw 2.5
 
-set ylabel "Objective value" offset -5,0
+set ylabel "Strategic Objective Value" offset -5,0
 set y2label "Strategic Urgency" offset 5,0
 
+
 set format x ""
-set xtics rotate by 270
+set xtics 60 rotate by 270
 set ytics nomirror
 set ytics  nomirror offset 0,1
 set y2tics  offset 0,1
@@ -49,7 +50,7 @@ set ylabel "Strategic Resource Penalty [Hours]" offset -5,0
 set y2label "Strategic Clustering Value" offset 5,0
 
 set format x "%.0f"
-set xtics rotate by 270
+set xtics 60 rotate by 270
 set y2tics offset 0,-1
 set ytics nomirror
 set ytics offset 0,-1

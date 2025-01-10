@@ -1,5 +1,5 @@
 \begin{alignat}{2}
-	& \text{\rule{\linewidth}{0.4pt}} \notag\\
+	& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
 	& \textbf{Meta variables:} \notag\\
 	& \ElementSupervisor \in \SetSupervisor \\
 	& \VarStrategicWorkOrderAssignment{}{} \\
@@ -17,5 +17,5 @@
 	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq \ParFeasible  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\
 	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \in \{0, 1\}  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\ 
 	& \VarActivityWork{\ElementActivity} \in [\ParLowerActivityWork, \ParOperationWork{\ElementActivity}]  \quad \forall \ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}\\ 
-	& \text{\rule{\linewidth}{0.4pt}} \notag
+	& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
 \end{alignat}

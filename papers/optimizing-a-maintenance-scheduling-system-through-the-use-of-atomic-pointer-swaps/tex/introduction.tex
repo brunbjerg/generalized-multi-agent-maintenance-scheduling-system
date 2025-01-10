@@ -1,20 +1,51 @@
-\section{Introduction}
-
-
-
-
+\section{Introduction}\label{sec:introduction}
+This paper will be structured into four sections: Section~\ref{sec:introduction} will explain the
+problem setting that necessitates the solution method; describe the relevant software architecture
+literature to fix the problem; and provide mathematical models for each component of the system for 
+a detailed understanding of the problem that the optimization system aims to solve. Section~\ref{sec:solution_method}
+will describe the chosen approach to solve the system, highlighting why low-level memory operations
+are necessary to effective scale metaheuristics. Section~\ref{sec:results} will provide a high level
+understanding of how the system is behaving. Finally Section~\ref{sec:discussion} will discuss the 
+implication of the provided solution approach and which other optimization problems could benefit 
+from the presented optimization approach.
 
 \subsection{Problem Setting}
+Many operational optimzation problems are difficult to solve in practice as the underlying business 
+process is made up of many different actors. This makes single model approaches difficult as it is 
+difficult to assign responsibility for the output of the solution provided by the optimization
+approach \citep{INTERACTIVEOPTIMIZATION}. Furthermore this decomposition of business process into 
+specific actors is not only done to make the underlying optimization problem easier to solve, but 
+also to handle dynamic changes in the optimization process and make each process compliant with 
+respect to safety, regulation, etc. 
 
+Maintenance scheduling has all these components and it is one of the keys reasons that the presented
+solution method was developed. 
+
+\begin{figure}
+	\input{../../figures/maintenance_actor_architecture.tex}
+	\caption{Simple overview of the scheduling process with its primary types of
+		actors. The planner, the scheduler, the supervisor(s), and the technicians. 		
+		The green color highlights the scheduler as it the actor in the maintenance
+		scheduling process that is modelled in this paper.
+	}\label{fig:integrated:maintenance-process}
+\end{figure}
 
 \subsection{Software Architecture}
 Metaheuristics present unique challenges when it comes to designing a high level software architecture
 where the metaheuristics can be reliably implemented and scale. One of the reasons for this is that 
 metaheuristics have very high requirements when it comes to state mutation. State mutation is the 
 primary way in which metaheuristics achieve optimization by changing the solution space rapidly
-according to special rules \citep{han}
+according to special rules \citep{gendreauHandbookMetaheuristics2019}. 
 
-\subsection{Mathematical Models}
+If you want to scale metaheuristics if becomes necessary to determine a software architecture that 
+can accomodate high levels of state changes. Most attempts at this has centered around message
+passing \citep{talbiMetaheuristicsDesignImplementation2009} and in more advanced setup might 
+also incorporate methods from the multi-agent systems literature to 
+speed up the optimization process \citep{MultiagentMetaheuristicOptimization}.
+
+This paper will present a different way of scaling metaheuristics using low-level memory operations
+such as atomic operations. \citep{!!! CITE THE LOCK FREE DATA STRUCTURE ARTICLE}.
+
 % \begin{figure}[H]
 % 	\centering
 % 	\input{../../figures/ordinator-architecture.tex}
@@ -89,3 +120,27 @@ according to special rules \citep{han}
 	\label{fig:ordinator-hexagon:userinterfaces}
 \end{figure}
 
+\subsection{Mathematical Models}
+Each actor of the maintenance scheduling process will here be modelled by a mathematical model. There
+are multiple driving ideas behind these approaches:
+\begin{itemize}
+	\item A model should encapsulate the decision that a single decision-maker is responsible for and
+		nothing more
+	\item Coordination between different actors is done by sharing relevant information 
+		by turning the solution of one actor/model into parameters of the other model.
+\end{itemize}
+
+\subsubsection{Strategic Model: Scheduler}
+\input{../../tex/models/strategic.tex}
+\strategicmodel
+
+\subsubsection{Tactical Model: Scheduler}
+\input{../../tex/models/tactical.tex}
+\subsubsection{Supervisor Model: Supervisor}
+\input{../../tex/models/supervisor.tex}
+\subsubsection{Operational Model: Technicial}
+\input{../../tex/models/operational.tex}
+
+
+\subsection{Contribution}
+Provide a software architectual pattern to allow metaheuristics to be integrated together in real-time.
