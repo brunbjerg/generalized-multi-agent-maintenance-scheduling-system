@@ -35,6 +35,7 @@
 
 \input{../../tex/definitions.tex}
 \input{../../figures/ordinator-architecture.tex}
+\input{../../papers/optimizing-a-maintenance-scheduling-system-through-the-use-of-atomic-pointer-swaps/figures/atomic-pointer-swap-figure.tex}
 
 \frame{\titlepage}
 \begin{frame}{Agenda}
@@ -166,22 +167,6 @@
 
 \begin{frame}[t]{}
     \begin{block}{}
-
-		% \input{../../figures/uncertainty-complexity-value.tex}
-
-		% \drawUncertaintyComplexityValue[
-		% 	show_useless_operation_research =true,			
-		% 	show_simplistic_heuristics=true,
-		% ]
-		% \only<1>{}
-		% \only<2>{
-
-		% 	\begin{itemize}
-		% 		\item An engineering trade off will have to be made
-		% 	\end{itemize}
-		% }
-
-
 		
     \end{block}
 \end{frame}
@@ -239,6 +224,30 @@
 		% are then combined to create a decision process.
   %       \begin{enumerate}
   %       \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Atomic Pointer Swapping}
+		\drawAtomicPointerSwapping[onesolution=true]
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Thread one finds a better solution and swaps it in}
+		\drawAtomicPointerSwapping[twosolutions=true]
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Thread two and three loads the new Shared Solution at the top of their optimization loop}
+		\drawAtomicPointerSwapping[threesolutions=true]
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Shared Solution 1 is dropped from memory when is it no longer referenced by any threads}
+		\drawAtomicPointerSwapping[threesolutions=true]
     \end{block}
 \end{frame}
 

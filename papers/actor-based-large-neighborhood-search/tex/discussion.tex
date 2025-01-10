@@ -77,9 +77,12 @@ providing each other with high quality parameters.
 Figure~\ref{fig:discussion:hexagon-setup} shows one such possible setup.
 
 
-\begin{figure}
+\begin{figure}[H]
 	\input{../../figures/model-setup-hexagon.tex}
-	\drawModelSetupHexagon[simplified=true]
+	\centering
+	\resizebox{12cm}{!}{
+		\drawModelSetupHexagon[simplified=true]
+	}
 	\caption{A software architecture tailored to metaheuristics (green and red)
 		where solutions are shared between AbLNS algorithms in real-time through the
 		use of atomic pointer swaps (purple). The messages in $m_{n}^{}(\tau)$ are

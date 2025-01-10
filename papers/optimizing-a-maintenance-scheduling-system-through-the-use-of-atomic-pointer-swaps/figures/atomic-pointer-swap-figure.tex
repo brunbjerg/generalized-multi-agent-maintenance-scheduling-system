@@ -1,0 +1,72 @@
+\usetikzlibrary {positioning}
+
+\newif\ifonesolutionlayer
+\newif\iftwosolutionslayer
+\newif\ifthreesolutionslayer
+\newlength{\ba}
+
+\pgfkeys{
+	/atomicpointerswap/.is family, /atomicpointerswap,
+	default/.style = {
+		onesolution=false,
+		twosolutions=false,
+		threesolutions=false,
+		basis=1cm,
+	},
+	onesolution/.is if=onesolutionlayer,
+	twosolutions/.is if=twosolutionslayer,
+	threesolutions/.is if=threesolutionslayer,
+	basis/.store in=\ba,
+}
+
+\setlength{\ba}{2cm}
+\newcommand{\drawAtomicPointerSwapping}[1][]{
+	\pgfkeys{/atomicpointerswap, default, #1}
+
+	\begin{tikzpicture}[font=\footnotesize, scale=0.5, line width=1.05]
+
+	\ifonesolutionlayer
+		\draw ( 2.0*\ba,  2.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_1) {Thread/Metaheuristic 1};
+		\draw ( 2.0*\ba,  0.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_2) {Thread/Metaheuristic 2};
+		\draw ( 2.0*\ba, -2.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_3) {Thread/Metaheuristic 3};
+
+		\draw (14.0*\ba, -0.5*\ba) node[minimum height=3.0*\ba, draw=dtu-purple, minimum width=3*\ba, rounded corners=0.1\ba, align=center, label=above:{Atomic Pointer Swapper}] (atomic_pointer_swap) {};
+		\draw (14.0*\ba,  1.5*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (shared_solution_1) {Shared Solution 1};
+
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_1) to[out=0, in=180] (shared_solution_1);
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_2) to[out=0, in=180] (shared_solution_1);
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_3) to[out=0, in=180] (shared_solution_1);
+	\fi
+
+	\iftwosolutionslayer
+		\draw ( 2.0*\ba,  2.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_1) {Thread/Metaheuristic 1};
+		\draw ( 2.0*\ba,  0.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_2) {Thread/Metaheuristic 2};
+		\draw ( 2.0*\ba, -2.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_3) {Thread/Metaheuristic 3};
+
+		\draw (14.0*\ba, -0.5*\ba) node[minimum height=3.0*\ba, draw=dtu-purple, minimum width=3*\ba, rounded corners=0.1\ba, align=center, label=above:{Atomic Pointer Swapper}] (atomic_pointer_swap) {};
+
+		\draw (14.0*\ba,  1.5*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (shared_solution_2) {Shared Solution 2};
+		\draw (14.0*\ba,  0.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (shared_solution_1) {Shared Solution 1};
+
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_1) to[out=0, in=180] (shared_solution_2);
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_2) to[out=0, in=180] (shared_solution_1);
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_3) to[out=0, in=180] (shared_solution_1);
+	\fi
+	\ifthreesolutionslayer
+		\draw ( 2.0*\ba,  2.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_1) {Thread/Metaheuristic 1};
+		\draw ( 2.0*\ba,  0.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_2) {Thread/Metaheuristic 2};
+		\draw ( 2.0*\ba, -2.0*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (thread_metaheuristic_3) {Thread/Metaheuristic 3};
+		\draw (thread_metaheuristic_1.west) edge [in=225, out=135,looseness=6] (thread_metaheuristic_1.west);
+		\draw (thread_metaheuristic_2.west) edge [in=225, out=135,looseness=6] (thread_metaheuristic_2.west);
+		\draw (thread_metaheuristic_3.west) edge [in=225, out=135,looseness=6] (thread_metaheuristic_3.west);
+		\draw (14.0*\ba, -0.5*\ba) node[minimum height=3.0*\ba, draw=dtu-purple, minimum width=3*\ba, rounded corners=0.1\ba, align=center, label=above:{Atomic Pointer Swapper}] (atomic_pointer_swap) {};
+
+		\draw (14.0*\ba,  1.5*\ba) node[minimum height=0.5*\ba, fill=dtu-red, minimum width=2*\ba, rounded corners=0.1\ba] (shared_solution_2) {Shared Solution 2};
+
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_1) to[out=0, in=180] (shared_solution_2);
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_2) to[out=0, in=180] (shared_solution_2);
+		\draw[<->, thick, line width=0.05\ba] (thread_metaheuristic_3) to[out=0, in=180] (shared_solution_2);
+	\fi
+		
+	\end{tikzpicture}
+}

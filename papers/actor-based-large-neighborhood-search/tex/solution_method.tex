@@ -112,12 +112,12 @@ optimization algorithms are deemed unworkable.
 
 \subsection{Atomic Pointer Swapping and Software Architecture}
 Atomic pointer swapping offers a novel approach for managing the best
-solution found by the AbLNS (and LNS) algorithm.
+solution found by the AbLNS (and LNS) algorithms.
 Traditionally, in a metaheuristics such as Large Neighborhood Search (LNS)
 setup, the best solution is cloned (deep copy) before the search continues. However, atomic
 pointer swapping enables the best solution to be shared across system components
 without introducing data races. This technique is essential in multithreaded
-environments, as it ensures the integrity of the solution during swaps, elaborated on in 
+environments, as it ensures the integrity of the solution during swaps, this elaborated in 
 \citep{herlihy2020art}. Multiprocessor programming has long been considered an art but 
 in recent years new tools have emerged to make this type of programming much 
 easier most notably \citep{noauthor_rust_nodate}. In
@@ -150,6 +150,7 @@ message passing. This method provides a streamlined, modular way to integrate
 metaheuristics, aligning with modern software architecture principles while
 avoiding their typical pitfalls \citep{richards_fundamentals_2020}. It should
 be noted that message passing is exceptional at dealing with one-off events that
-have varied and sporatic nature such as interfacing with actors and external
-systems.
+have varied and sporatic nature such as interfacing with actors, external
+systems, and handling constraints that are hard to find the data for or are 
+so rarely binding that you would rather handle it through manual intervention.
 
