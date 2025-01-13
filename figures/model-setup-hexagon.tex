@@ -92,35 +92,38 @@
 	\fi
 
 	\ifsimplifiedlayer
-		\node[align=right, anchor=west] at ({-5.5}, +17.0) {Layer One};
-		\drawHexagon{{+2 + 0 * (2 - sqrt(3)) }}{14}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{+4 - 1 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{+0 + 1 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{+2 - 0 * (2 - sqrt(3)) }}{8}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{+6 - 2 * (2 - sqrt(3)) }}{8}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{8}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{+8 - 3 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
-		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \node[align=right, anchor=west] at ({-5.5}, +17.0) {Layer One};
+		% \drawHexagon{{+2 + 0 * (2 - sqrt(3)) }}{14}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{+4 - 1 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{+0 + 1 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{+2 - 0 * (2 - sqrt(3)) }}{8}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{+6 - 2 * (2 - sqrt(3)) }}{8}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{8}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{+8 - 3 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
+		% \drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{11}{dtu-purple}{Shared\\Atomic\\Pointer}{2}
 
-		\node[align=right, anchor=west] at ({10.5}, +17.00) {Layer Two};
-		\drawHexagon{{18 + 0 * (2 - sqrt(3)) }}{14}{dtu-green}{Scheduler}{2}
-		\drawHexagon{{20 - 1 * (2 - sqrt(3)) }}{11}{dtu-red}{Supervisor}{2}
-		\drawHexagon{{16 + 1 * (2 - sqrt(3)) }}{11}{dtu-red}{Supervisor}{2}
-		\drawHexagon{{18 - 0 * (2 - sqrt(3)) }}{8}{dtu-corporate-red}{Technician}{2}
-		\drawHexagon{{22 - 2 * (2 - sqrt(3)) }}{8}{dtu-corporate-red}{Technician}{2}
-		\drawHexagon{{14 + 2 * (2 - sqrt(3)) }}{8}{dtu-corporate-red}{Technician}{2}
-		\drawHexagon{{24 - 3 * (2 - sqrt(3)) }}{11}{dtu-corporate-red}{Technician}{2}
-		\drawHexagon{{12 + 3 * (2 - sqrt(3)) }}{11}{dtu-corporate-red}{Technician}{2}
+		\node[align=right, anchor=west] at ({-5.5}, +3.75) {};
+		\drawHexagon{{+2 + 0 * (2 - sqrt(3)) }}{ 2}{dtu-green}{Scheduler}{2}
+		\drawHexagon{{+4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
+		\drawHexagon{{+0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
+		\drawHexagon{{+2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{+6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{+8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}{2}
 
-		\node[align=right, anchor=west] at ({-5.5}, 5) {Layer Three};
-		\drawHexagon{{+2 + 0 * (2 - sqrt(3)) }}{ 2}{dtu-yellow}{UI}{2}
-		\drawHexagon{{+4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
-		\drawHexagon{{+0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
-		\drawHexagon{{+2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
-		\drawHexagon{{+6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
-		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
-		\drawHexagon{{+8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
-		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		\draw[align=center] ({+2 - 0 * (2 - sqrt(3)) },2)  ++(45:2) -- ++(135:2) -- ++(225:2) -- ++(315:2) -- cycle; 
+		\draw[circle,fill=dtu-purple] (2,2);
+
+		% \node[align=right, anchor=west] at ({-5.5}, 5) {Layer Three};
+		% \drawHexagon{{+2 + 0 * (2 - sqrt(3)) }}{ 2}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{+4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{+0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{+2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{+6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{+8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
+		% \drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-yellow}{UI}{2}
 
 		% Legend for each layer
 		\node[align=right, anchor=west] at ({15.0}, +3.75) {Atomic Pointer};
