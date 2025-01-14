@@ -5,69 +5,68 @@ A metaheuristic that is affected by the end user and requires real-time
 feedback inherently requires an optimization approach that is able to repair
 infeasible solutions while also converging quickly. The large neighborhood
 search (LNS)~\citep{shaw1998using} metaheuristic has been shown satisfy these
-requirements in the literature \citep{gendreauHandbookMetaheuristics2019}.
+requirements in the literature \citep{gendreauHandbookMetaheuristics2019lnschapter}.
 The most general form of the LNS metaheuristic is defined for static
 problems, meaning that the parameters that make up the problem instance
 is not subject to change after the algorithm has started. To make the
 LNS adapt to changing parameters in real-time a message system have been
 implemented into the existing framework. This  extension is shown in 
-algorithm~\ref{alg:actor-based-large-neighborhood-search}.
+algorithm~\ref{alg:ablns}.
 
-\subsubsection{Messages and Destructors}
-LNS in its most basic form has one constructor and one destructor which
-repeatedly destroy and rebuild the solution. For the AbLNS we will
-generalize on this concept by including messages as destructors. This
+\subsubsection{Messages and Destroy Functions}
+LNS in its most basic form has one repair and one destroy function which
+repeatedly destroy and rebuild the solution. For the AbLNS (pseudocode shown in
+algorithm~\ref{alg:ablns}) we will
+generalize on this concept by including messages as destroy functions. This
 generalization can be seen as being somewhat similar to how the adaptive
 LNS (ALNS)~\citep{pisinger2007general} is formulated, but where the different
-constructors and destructors are also chosen from sources external to the
+repair and destroy functions are also chosen from sources external to the
 algorithm.
 
 Extending on the classic setup we define the following set of 
-destructor messages, $\ElementMessage{}{} \in \SetMessageQueue$. Each
+destroy messages, $\ElementMessage{}{} \in \SetMessageQueue$. Each
 message is received by the system at time $\VarMetaTime \in \mathbb{R}$.
 
 \begin{itemize}
-	\item $m^{wp}_{1}(\VarMetaTime)$: Inclusion destruct message, modifies $\ParStrategicInclude$	
+	\item $m^{wp}_{1}(\VarMetaTime)$: Inclusion destroy message, modifies $\ParStrategicInclude$	
 	\begin{itemize}
-		\item Each instance of this message unschedules a particular work order and then it forces
-			it to be scheduled into the period specified by $\ParStrategicInclude$. If a
-			specific work order was already assigned to a period then $\ParStrategicInclude$ is set
-			to zero, making sure that constraint~\ref{eqn:constraint:strategic:schedule_once}
-			is not violated for that $\ElementPeriod \in \SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$. 
+		\item Each instance of this message destroys the solution in line~\ref{alg:ablns:solution-update} 
+			and updates the problem parameters in line~\ref{alg:ablns:problem-update} of algorithm~\ref{alg:ablns}.
+			On line~\ref{alg:ablns:repair} the repair function then reschedules according to the value of $\ParStrategicInclude$.
 	\end{itemize}
-	\item $m^{wp}_{2}(\VarMetaTime)$: Exclusion destruct message, modifies $\ParStrategicExclude$
+	\item $m^{wp}_{2}(\VarMetaTime)$: Exclusion destroy message, modifies $\ParStrategicExclude$
 	\begin{itemize}
-		\item Each instance of this message excludes a work order from a specific set of periods.
-			If a specific work order is already included in a specific period $\ElementPeriod$ by 
-			constraint~\ref{eqn:constraint:strategic:include}
-			this message will set the $\ParStrategicExclude$ to zero removing the effect of the constraint 
-			for that $\ElementPeriod \in \SetPeriod$ and $\ElementWorkOrder \in \SetWorkOrder$. 
+		\item Each instance of this message updates the $\ParStrategicExclude$ on line~\ref{alg:ablns:problem-update}
+			and if the message excludes an already scheduled work order the destroy function on line~\ref{alg:ablns:solution-update}
+			will update the solution as well. If the work order was already forced into the schedule by $\ParStrategicInclude$ line~\ref{alg:ablns:problem-update}
+			and line~\ref{alg:ablns:problem-update} will also update $\ParStrategicInclude$.
 	\end{itemize}
-	\item $m^{pr}_{3}(\VarMetaTime)$: Capacities destruct message, modifies $\ParStrategicResource$
+	\item $m^{pr}_{3}(\VarMetaTime)$: Capacities destroy message, modifies $\ParStrategicResource$
 	\begin{itemize}
 		\item Each instance of this message perturbes the value of available hours of a given resource $\ElementResource \in \SetResource$ for
-			a given $\ElementPeriod \in \SetPeriod$.
+			a given $\ElementPeriod \in \SetPeriod$, this update happens on line~\ref{alg:ablns:problem-update} in algorithm~\ref{alg:ablns}.
 	\end{itemize}
-	\item $m^{wp}_{4}(\VarMetaTime)$: Strategic urgency destruct message, modifies $\ParStrategicUrgency$
+	\item $m^{wp}_{4}(\VarMetaTime)$: Strategic urgency destroy message, modifies $\ParStrategicUrgency$
 	\begin{itemize}
-		\item Each instance of this message perturbes the strategic urgency of a work order. Here it should be noted that the
-			message changes the $\ParStrategicUrgency$ of every $\ElementPeriod \in \SetPeriod$ for a given $\ElementWorkOrder \in \SetWorkOrder$. $\ElementPeriod$. 
+		\item Each instance of this message perturbes the strategic urgency of a work order, this happens on line~\ref{alg:ablns:problem-update} and
+		line~\ref{alg:ablns:solution-update} of algorithm~\ref{alg:ablns}. Here it should be noted that the
+			message changes the $\ParStrategicUrgency$ $\forall\ElementPeriod \in \SetPeriod$ for a given $\ElementWorkOrder \in \SetWorkOrder$. 
 	\end{itemize}
-	\item $m^{wk}_{5}(\VarMetaTime)$: Random destruct message, modifies $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
+	\item $m^{wk}_{5}(\VarMetaTime)$: Random destroy message, modifies $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$
 	\begin{itemize}
 		\item Each instance of this message modifies the main decision variable, $\VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}$. 
-			Removing random work order assignments from $k$ randomly chosen $\ElementWorkOrder \in \SetWorkOrder$, where $k \in \mathbb{N}$ is a parameter of the AbLNS.	
+			Removing random work order assignments from $k$ randomly chosen $\ElementWorkOrder \in \SetWorkOrder$, where $k\in\mathbb{N}$ is a parameter of the AbLNS.
 	\end{itemize}
 \end{itemize}
 
-Each of these messages affect different parts of the weekly maintenance
-scheduling  problem. Notice here that the first four messages destruct the
-solution by changing the parameter space and the last message is a random
-destructor that destroys the solution space.
+Each of these messages impacts different aspects of the weekly maintenance
+scheduling problem. Notably, the first four messages destroys the solution by
+modifying both the parameter/data space and the solution itself, while the final
+message serves as a random destruction function that affects only the solution.
 
-For a correct implementation it is critical that the that destruct messages
+For a correct implementation it is critical that the that destroy messages
 are  handled one by one, and are not allowed to simply write to the solution and
-problem instance whenever they appear. Generalizing the destructors from being
+problem instance whenever they appear. Generalizing the destroy functions from being
 static structures into messages allows the solution to change in real-time to a
 changing parameter space. This means that the algorithm does not need to restart
 to handle changes in data.
@@ -77,10 +76,10 @@ to handle changes in data.
 The basic LNS setup have here been extended with a ``message queue'' $
 \MessageQueue$. The message queue will be read from on every iteration of
 the LNS's main iteration loop. Here we notice that the incoming message is
-able to change both the solution $\Solution$ but also the problem instance $
-\ProblemInstance$ itself. Due to the inherent property of LNS being able to
+able to change both the solution $\Solution$ (on line~\ref{alg:ablns:solution-update}) but also the problem instance $
+\ProblemInstance$ (on line~\ref{alg:ablns:problem-update}) itself. Due to the inherent property of LNS being able to
 optimize a solution that have become infeasible, LNS is well suited to handle
-changing parameters  in the problem instance $\ProblemInstance$. Another
+changing parameters in the problem instance $\ProblemInstance$. Another
 property of the message queue is  that the algorithm can run indefinitely and
 as opposed to restarting the algorithm you pass messages containing new data
 and/or state. This property avoids the time consuming initial convergence as the
@@ -89,34 +88,34 @@ Notice that:
 
 \begin{itemize}
     \item The algorithm responds quickly to changes. In each iteration
-		line~\ref{alg:actor-based-large-neighborhood-search:message-loop}. We
+		line~\ref{alg:ablns:message-loop}. We
 		call this a fine-grained response algorithm     
 	\item If an improved
-		solution is found, it is immediately being pushed to the persistence
-		on line~\ref{alg:actor-based-large-neighborhood-search:better-solution}
+		solution is found, it is immediately being pointer swapped
+		on line~\ref{alg:ablns:better-solution}
 	\item That the optimization occurs in the repair function on
-		line~\ref{alg:actor-based-large-neighborhood-search:repair},
+		line~\ref{alg:ablns:repair},
 		which inserts work orders using a greedy algorithm.  	
 	\item The atomic pointer swapping that is performed on
-		line~\ref{alg:actor-based-large-neighborhood-search:atomic-pointer-swap} when a
+		line~\ref{alg:ablns:atomic-pointer-swap} when a
 		new best solution is found instantaneously makes the solution available to other
-		actors/systems. The pointer swapping is crucial as it allows non-hierarchical
-		model setups.
+		actors/systems. The pointer swapping is crucial as it allows for lock-free
+		sharing of state and makes non-hierarchical model setups easier.
 \end{itemize}
 
-The AbLNS algorithm will continuously run, either optimizing the current
+The AbLNS algorithm will run continuously, either optimizing the current
 schedule or updating the schedule with new external input. Since the
 effects of a message is considered in every iteration, changing conditions
-will immediately get acted upon. Since a fast response is paramount, exact
-optimization algorithms are deemed unworkable.
+will immediately get optimized upon. Since a fast response is paramount, exact
+optimization algorithms are deemed impractical.
 
 \subsection{Atomic Pointer Swapping and Software Architecture}
 Atomic pointer swapping offers a novel approach for managing the best
-solution found by the AbLNS (and LNS) algorithms.
+solution found by the AbLNS and LNS algorithms.
 Traditionally, in a metaheuristics such as Large Neighborhood Search (LNS)
 setup, the best solution is cloned (deep copy) before the search continues. However, atomic
 pointer swapping enables the best solution to be shared across system components
-without introducing data races. This technique is essential in multithreaded
+without introducing data races. This approach is essential in multithreaded
 environments, as it ensures the integrity of the solution during swaps, this elaborated in 
 \citep{herlihy2020art}. Multiprocessor programming has long been considered an art but 
 in recent years new tools have emerged to make this type of programming much 
@@ -131,7 +130,7 @@ Message passing in metaheuristics can create unpredictable behaviors, especially
 with bidirectional communication between components and metaheuristics. The
 limitations of message-passing systems in metaheuristics are well-documented,
 particularly in the context of parallel and multi-agent metaheuristics
-\citep{talbiMetaheuristicsDesignImplementation2009}. These systems often suffer
+\citep{talbiMetaheuristicsDesignImplementation2009parallelchapter}. These systems often suffer
 from excessive message generation, leading to poor scalability, explainability,
 extendability, and performance. Key issues include:
 
@@ -151,6 +150,6 @@ metaheuristics, aligning with modern software architecture principles while
 avoiding their typical pitfalls \citep{richards_fundamentals_2020}. It should
 be noted that message passing is exceptional at dealing with one-off events that
 have varied and sporatic nature such as interfacing with actors, external
-systems, and handling constraints that are hard to find the data for or are 
-so rarely binding that you would rather handle it through manual intervention.
+systems, or handling constraints that are hard to find the data for or are 
+so rarely binding that you would rather handle them through manual intervention.
 

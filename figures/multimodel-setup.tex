@@ -44,4 +44,10 @@
 	\draw[<-,>=Triangle, thick, line width=0.1\basisb] (UserInterface2) to[out=180, in=0,looseness=1.0] (Supervisor);
 	\draw[<-,>=Triangle, thick, line width=0.1\basisb] (UserInterface3) to[out=180, in=0,looseness=1.0] (Technician);
 	% \draw[<->, thick, line width=0.1\basisb] (Scheduler) -- (UserInterface);
+	\begin{scope}[shift={(7,0)}] % Adjust shift to position the legend
+    % Legend box
+    % Legend lines and text
+	    \draw[thick, line width=0.1\basisb] (-1.5,2.4) node[right, font=\footnotesize, align=center] {Solution\\Transfer};
+	    \draw[thick, line width=0.1\basisb] (1.0,1.2) node[right, font=\footnotesize, align=center] {Solution\\Transfer};
+	\end{scope}
 \end{tikzpicture}

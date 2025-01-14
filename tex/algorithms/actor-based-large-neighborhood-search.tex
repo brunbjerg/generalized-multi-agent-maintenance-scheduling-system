@@ -13,23 +13,23 @@
 % \State $\Solution^b = \Solution$
 \Repeat\
 	\State$\Solution^t = \Solution$
-	\While{$\MessageQueue.has\_message()$}\label{alg:actor-based-large-neighborhood-search:message-loop}
+	\While{$\MessageQueue.has\_message()$}\label{alg:ablns:message-loop}
         % \State $m = queue.pop()$
         % \State $m.destruct(\Solution^b)$
-		\State$\ProblemInstance.update(\SharedSolution, m_n(\VarMetaTime))$
-        \State$\Solution^t.destruct(\SharedSolution, m_n(\VarMetaTime))$
+		\State$\ProblemInstance.update(\SharedSolution, m_n(\VarMetaTime))$\label{alg:ablns:problem-update}
+        \State$\Solution^t.destroy(\SharedSolution, m_n(\VarMetaTime))$\label{alg:ablns:solution-update}
     \EndWhile\
-    \State$\Solution^t.repair(\SharedSolution)$\label{alg:actor-based-large-neighborhood-search:repair}
+    \State$\Solution^t.repair(\SharedSolution)$\label{alg:ablns:repair}
 
-    \If{accept ($\Solution^t, \Solution$)}
+    \If{accept ($\Solution^t, \Solution$)}\label{alg:ablns:accept-criteria}
         \State$\Solution.update(\Solution^t)$
     \EndIf\                                        
-    \If{$c(\Solution^t) < c(\Solution)$}\label{alg:actor-based-large-neighborhood-search:better-solution}                             
+    \If{$c(\Solution^t) < c(\Solution)$}\label{alg:ablns:better-solution}                             
         \State$\Solution.update(\Solution^t)$
-		\State$\SharedSolution.atomic\_pointer\_swap(\Solution)$\label{alg:actor-based-large-neighborhood-search:atomic-pointer-swap}
+		\State$\SharedSolution.atomic\_pointer\_swap(\Solution)$\label{alg:ablns:atomic-pointer-swap}
     \EndIf\                                    
 	\State$\MessageQueue.push(m_5(\VarMetaTime))$
 \Until\
-\end{algorithmic}\label{alg:actor-based-large-neighborhood-search}
+\end{algorithmic}\label{alg:ablns}
 \end{algorithm}
 

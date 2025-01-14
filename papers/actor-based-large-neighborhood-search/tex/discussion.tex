@@ -80,13 +80,15 @@ Figure~\ref{fig:discussion:hexagon-setup} shows one such possible setup.
 \begin{figure}[H]
 	\input{../../figures/model-setup-hexagon.tex}
 	\centering
-	\resizebox{12cm}{!}{
+	\resizebox{14cm}{!}{
 		\drawModelSetupHexagon[simplified=true]
 	}
 	\caption{A software architecture tailored to metaheuristics (green and red)
 		where solutions are shared between AbLNS algorithms in real-time through the
-		use of atomic pointer swaps (purple). The messages in $m_{n}^{}(\tau)$ are
-		inputted through userinterfaces (yellow)
+		use of atomic pointer swaps (purple) in line~\ref{alg:ablns:atomic-pointer-swap} of
+		algorithm~\ref{alg:ablns}. The messages $m_{n}^{}(\tau)$ where $n\in {1,2,3,4}$ are
+		inputted through userinterfaces (yellow) in line~\ref{alg:ablns:message-loop} of
+		algorithm~\ref{alg:ablns}
 	}\label{fig:discussion:hexagon-setup}
 \end{figure}
 
@@ -103,7 +105,8 @@ make operations run efficiently. For operation research (OR) to be helpful
 in this process, the solution methods should be a minimally invasive in the
 workflow of the working stakeholders. The AbLNS solution approach detailed in
 this paper aligns closely with two known problems in operation research: the
-lack of integration and the issues of coordination in multi-actor processes.
+lack of integration and the issues of coordination in multi-actor processes
+\citep{pinedoSchedulingTheoryAlgorithms2022chapter17}, \citep{pinedoSchedulingTheoryAlgorithms2022chapter18}.
 For these reasons we argue that the ``standard'' Operations Research approach
 of first collecting data, then creating a model and optimizing it, and then
 finally providing the solution to the planners in the company workflow, is not a
@@ -117,17 +120,15 @@ future way of integrating Operation Research techniques in practice.
 
 Modern industrial companies also have the available IT-infrastructure to support
 and connect model/metaheuristics together with the relevant actors/stakeholders
-in a way that was not possible just 10 years ago.
-
-This also align with anacdotal evidence from practical operation research 
-that smaller ``quick and dirty'' often works better in practice. 
+in a way that was difficult just 10 years ago.
 
 The fundamental problem with the existing paradigm is that optimizing across
 actors/stakeholders is very difficult, leading the literature to prefer
 integrated models instead of decomposing the model by each of the
-processes that make up a business process such as maintenance scheduling.
+subprocesses that make up a business process such as maintenance scheduling.
 This paper argues that this is mainly due to an dated understanding of
-software architecture that is available today in industry, but not
+the software architecture that is available today in industry, but not
 acknowledged by broader the Operations Research and Metaheuristic
 communities \citep{talbiMetaheuristicsDesignImplementation2009},
-\citep{gendreauHandbookMetaheuristics2019}.
+\citep{gendreauHandbookMetaheuristics2019}, \citep{meignanReviewTaxonomyInteractive2015}.
+
