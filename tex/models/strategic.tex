@@ -1,14 +1,20 @@
 \newif\ifincludeclustering\
 \newif\ifincludebeta\
+\newif\ifincludemultiskill\
+\newif\ifincludenormal\
 
 \pgfkeys{
 	/strategicmodel/.is family, /strategicmodel,
 	default/.style = {
+		normal=true,
 		clustering=true,
-		beta=true
+		beta=true,
+		multiskill=false,
 	},
+	normal/.is if=includenormal,
 	clustering/.is if=includeclustering,
-	beta/.is if=includebeta
+	beta/.is if=includebeta,
+	multiskill/.is if=includemultiskill,
 }
 \newcommand{\strategicmodel}[1][]{
 	\pgfkeys{/strategicmodel, default, #1}
@@ -34,15 +40,26 @@
 		& \textbf{Subject to:} \notag                                                                                                                                                                                                                                                                                                                                                                                        \\
 		\ifincludebeta
 		& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \ParStrategicWorkOrderWorkLoad \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \leq \ \ParStrategicResource{, \VarTacticalWork{}{}} + \VarStrategicExcess  \notag\\
-		\else
-		& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \ParStrategicWorkOrderWorkLoad \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \leq \ \ParStrategicResource{} + \VarStrategicExcess  \notag\\
+		\fi
+		\ifincludemultiskill
+		& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \ParStrategicWorkOrderWorkLoad \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \leq \ \sum_{\ElementTechnician \in \SetTechnician}\VarStrategicResource{}{\ElementTechnician} + \VarStrategicExcess \notag\\
+		\fi
+		\ifincludenormal
+		& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \ParStrategicWorkOrderWorkLoad \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \leq \ \ParStrategicResource{}{} + \VarStrategicExcess \notag\\
 		\fi
 		& \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource                                \label{eqn:strategic:constraint:resource}\\
+		\ifincludemultiskill
+		& \sum_{\ElementResource \in \SetResource} \VarStrategicResource{}{\ElementTechnician} \leq \ParStrategicTechnicianWork{, \VarTacticalWork{}{}} \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementTechnician \in \SetTechnician \\
+		& \sum_{\ElementPeriod \in \SetPeriod} \VarStrategicResource{}{\ElementTechnician} \leq \ParTechnicianSkill \quad \forall \ElementResource \in \SetResource \quad \forall \ElementTechnician \in \SetTechnician \\
+		\fi
 		& \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 1              \quad \forall \ElementPeriod \in \SetPeriod                                                                                                                                                                                                                               \label{eqn:constraint:strategic:schedule_once}\\
 		& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 0,                                                     \quad if\quad \ParStrategicExclude \ \ \forall \ElementWorkOrder \in \SetWorkOrder{}\quad \forall \ElementPeriod \in \SetPeriod                                                                                                                                                                                              \label{eqn:constraint:strategic:include}\\
 		& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} = 1,                                                            \quad if\quad \ParStrategicInclude \ \ \forall \ElementWorkOrder \in \SetWorkOrder{}\quad \forall \ElementPeriod \in \SetPeriod                                                                                                                                                                                              \label{eqn:strategic:constraint:exclude}\\
 		& \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod} \in \{0, 1\}                                                   \quad \forall \ElementWorkOrder \in \SetWorkOrder{} \quad \forall \ElementPeriod \in \SetPeriod                                                                                                                                                                           \label{eqn:variable:strategic:assignment}      \\ 
+		\ifincludemultiskill
+		& \VarStrategicResource{}{\ElementTechnician} \in \mathbb{R}^{+}                                                                                             \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource  \quad \forall \ElementTechnician \in \SetTechnician \label{eqn:variable:strateigc:resource}\\ 
+		\fi
 		& \VarStrategicExcess \in \mathbb{R}^{+}                                                                                             \quad \forall \ElementPeriod \in \SetPeriod \quad \forall \ElementResource \in \SetResource                                                                                                                                                                               \label{eqn:variable:strateigc:penalty}\\ 
-		& \text{\rule{\linewidth}{0.8pt}} \notag
+		& \text{\rule{\linewidth}{0.8pt}} \notag 
 	\end{alignat}
 }

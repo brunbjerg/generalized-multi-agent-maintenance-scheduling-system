@@ -68,14 +68,13 @@ solutions, user inputs, and in the dynamic data source as they occur opposed to
 restarting the metaheuristics.
 
 \subsection{Future Research}\label{sec:discussion:future_research}
-The next step in this direction will be to model the remaining stakeholders as
-their own  AbLNS metaheuristics, and then make them communicate together through
-atomic pointer swaps and message passing. This enables modular concurrency at
-each layer and ensures real-time synchronization across multiple optimization
-levels. Making each metaheuristic expose solutions to each  other in real-time
-providing each other with high quality parameters. 
-Figure~\ref{fig:discussion:hexagon-setup} shows one such possible setup.
-
+The next step will be to model the remaining stakeholders as individual AbLNS
+metaheuristics, and facilitate their interaction through atomic pointer swaps
+and message passing. This enables modular concurrency at each layer and ensures
+real-time synchronization across multiple optimization levels. Making each
+metaheuristic expose solutions to each  other in real-time providing each other
+with high quality parameters.  Figure~\ref{fig:discussion:hexagon-setup} shows
+one such possible setup.
 
 \begin{figure}[H]
 	\input{../../figures/model-setup-hexagon.tex}

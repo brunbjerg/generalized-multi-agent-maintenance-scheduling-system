@@ -1,21 +1,35 @@
-\begin{alignat}{2}
-	& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
-	& \textbf{Meta variables:} \notag\\
-	& \ElementSupervisor \in \SetSupervisor \\
-	& \VarStrategicWorkOrderAssignment{}{} \\
-	& \VarIncludeActivity{} \\
-	& \tau \in [0, \infty] \\
-	& \text{\rule{\linewidth}{0.4pt}} \notag\\
-	& \textbf{Maximize:} \notag\\
-	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}} \sum_{\ElementTechnician \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \\ 
-	& \text{\rule{\linewidth}{0.4pt}} \notag\\
-	& \textbf{Subject to:} \notag\\ 
-	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarActivityWork{\ElementActivity} = \ParOperationWork{\ElementOperation}    \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}\\
-	& \sum_{\ElementTechnician \in \SetTechnician} \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}}\VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} = \VarSupervisorAssignmentWhole \cdot \ParNumberOfPeople  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}  \\
-	& \sum_{\ElementOperation \in \SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}} \VarSupervisorAssignmentWhole = |\SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}| \ \quad \forall \ElementWorkOrder \in \SetWorkOrder{,\VarStrategicWorkOrderAssignment{}{}} \\
-	& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq 1  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\  
-	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq \ParFeasible  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\
-	& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \in \{0, 1\}  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\ 
-	& \VarActivityWork{\ElementActivity} \in [\ParLowerActivityWork, \ParOperationWork{\ElementActivity}]  \quad \forall \ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}\\ 
-	& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
-\end{alignat}
+\newif\ifincludenormal\
+
+\pgfkeys{
+	/supervisormodel/.is family, /supervisormodel,
+	default/.style = {
+		normal=true,
+	},
+	normal/.is if=includenormal,
+}
+\newcommand{\supervisorModel}[1][]{
+	\pgfkeys{/supervisormodel, default, #1}
+	\begin{alignat}{2}
+		& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
+		& \textbf{Meta variables:} \notag\\
+		& \ElementSupervisor \in \SetSupervisor \\
+		& \VarStrategicWorkOrderAssignment{}{} \\
+		& \VarIncludeActivity{} \\
+		& \tau \in [0, \infty] \\
+		& \text{\rule{\linewidth}{0.4pt}} \notag\\
+		& \textbf{Maximize:} \notag\\
+		& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}} \sum_{\ElementTechnician \in \SetTechnician} \ParSupervisorValue \cdot \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \\ 
+		& \text{\rule{\linewidth}{0.4pt}} \notag\\
+		& \textbf{Subject to:} \notag\\ 
+		& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarActivityWork{\ElementActivity} = \ParOperationWork{\ElementOperation}    \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}\\
+		& \sum_{\ElementTechnician \in \SetTechnician} \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}}\VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} = \VarSupervisorOperationWhole \cdot \ParNumberOfPeople  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}}  \\
+		& \sum_{\ElementOperation \in \SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}} \VarSupervisorOperationWhole = |\SetOperation{\ElementWorkOrder}{\VarStrategicWorkOrderAssignment{}{}}| \cdot \VarSupervisorWorkOrderWhole  \quad \forall \ElementWorkOrder \in \SetWorkOrder{,\VarStrategicWorkOrderAssignment{}{}} \\
+		& \sum_{\ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{\ElementOperation}} \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq 1  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\  
+		& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \leq \ParFeasible  \quad \forall \ElementActivity \in \SetActivity{\VarTacticalWork}{\ElementOperation} \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\
+		& \VarSupervisorAssignment{\ElementActivity}{\ElementTechnician} \in \{0, 1\}  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \quad \forall \ElementTechnician \in \SetTechnician \\ 
+		& \VarSupervisorOperationWhole \in \{0, 1\}  \quad \forall \ElementOperation \in \SetOperation{}{\VarStrategicWorkOrderAssignment{}{}} \\ 
+		& \VarSupervisorWorkOrderWhole \in \{0, 1\}  \quad \forall \ElementWorkOrder \in \SetWorkOrder{,\VarStrategicWorkOrderAssignment{}{}} \\ 
+		& \VarActivityWork{\ElementActivity} \in [\ParLowerActivityWork, \ParOperationWork{\ElementActivity}]  \quad \forall \ElementActivity \in \SetActivity{\VarStrategicWorkOrderAssignment{}{}}{}\\ 
+		& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                      
+	\end{alignat}
+}

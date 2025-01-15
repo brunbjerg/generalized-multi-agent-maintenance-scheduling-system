@@ -39,9 +39,9 @@ message is received by the system at time $\VarMetaTime \in \mathbb{R}$.
 		\item Each instance of this message updates the $\ParStrategicExclude$ on line~\ref{alg:ablns:problem-update}
 			and if the message excludes an already scheduled work order the destroy function on line~\ref{alg:ablns:solution-update}
 			will update the solution as well. If the work order was already forced into the schedule by $\ParStrategicInclude$ line~\ref{alg:ablns:problem-update}
-			and line~\ref{alg:ablns:problem-update} will also update $\ParStrategicInclude$.
+			and line~\ref{alg:ablns:problem-update} of algorithm~\ref{alg:ablns} will also update $\ParStrategicInclude$.
 	\end{itemize}
-	\item $m^{pr}_{3}(\VarMetaTime)$: Capacities destroy message, modifies $\ParStrategicResource$
+	\item $m^{pr}_{3}(\VarMetaTime)$: Capacities destroy message, modifies $\ParStrategicResource{}{}$
 	\begin{itemize}
 		\item Each instance of this message perturbes the value of available hours of a given resource $\ElementResource \in \SetResource$ for
 			a given $\ElementPeriod \in \SetPeriod$, this update happens on line~\ref{alg:ablns:problem-update} in algorithm~\ref{alg:ablns}.

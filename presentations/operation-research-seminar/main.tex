@@ -102,15 +102,16 @@
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
 			\input{../../tex/models/strategic.tex}
-			\strategicmodel
+			\strategicmodel[multiskill=true, beta=false, normal=false]
 		\end{minipage}
 	}
 \end{frame}
 
-\begin{frame}[t]{Tactical}
+\begin{frame}[t]{}
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
 			\input{../../tex/models/tactical.tex}
+			\tacticalModel[normal=true]
 		\end{minipage}
 	}
 \end{frame}
@@ -119,6 +120,7 @@
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
 			\input{../../tex/models/supervisor.tex}
+			\supervisorModel[normal=true]
 		\end{minipage}
 	}
 \end{frame}
@@ -127,6 +129,7 @@
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
 			\input{../../tex/models/operational.tex}
+			\operationalModel[normal=true]
 		\end{minipage}
 	}
 \end{frame}
