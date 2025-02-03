@@ -1,0 +1,12 @@
+\pgfkeys{
+	/hexagon/.is family, /hexagon,
+	default/.style = {
+	},
+}
+\newcommand{\drawClusteringFunctionalLocation}[1][]{
+	\pgfkeys{/hexagon, default, #1}
+
+	\begin{tikzpicture}[font=\footnotesize, scale=0.5, line width=1.05]
+		\draw (0,0) node[circle] {A};
+	\end{tikzpicture}
+}

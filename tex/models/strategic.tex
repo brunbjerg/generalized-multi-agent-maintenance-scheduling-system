@@ -2,21 +2,24 @@
 \newif\ifincludebeta\
 \newif\ifincludemultiskill\
 \newif\ifincludenormal\
+\newif\ifincludehighlightclustering\
 
 \pgfkeys{
 	/strategicmodel/.is family, /strategicmodel,
 	default/.style = {
-		normal=true,
-		clustering=true,
-		beta=true,
+		normal=false,
+		clustering=false,
+		beta=false,
 		multiskill=false,
+		highlightclustering,
 	},
 	normal/.is if=includenormal,
 	clustering/.is if=includeclustering,
 	beta/.is if=includebeta,
 	multiskill/.is if=includemultiskill,
+	highlightclustering/.is if=includehighlightclustering,
 }
-\newcommand{\strategicmodel}[1][]{
+\newcommand{\strategicModel}[1][]{
 	\pgfkeys{/strategicmodel, default, #1}
 	\begin{alignat}{2}
 		& \text{\rule{\linewidth}{0.8pt}} \notag \label{}                                                                                                                                                                                                                                                                                                                                                                     \\ 
@@ -31,9 +34,9 @@
 		\ifincludeclustering
 		& + \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicUrgency \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}  \notag                                                                                                                                                                                                                             \\ 
 		& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicResourcePenalty \cdot \VarStrategicExcess     \notag                                                                                                                                                                                                                                                                          \\
-		& - \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementWorkOrder1 \in \SetWorkOrder{}} \sum_{\ElementWorkOrder2 \in \SetWorkOrder{}} 	 \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder1}{\ElementPeriod} \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder2}{\ElementPeriod}                                                                                             \\
+		& - \colorbox{dtu-red}{$\sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementWorkOrder1 \in \SetWorkOrder{}} \sum_{\ElementWorkOrder2 \in \SetWorkOrder{}} 	 \quad \ParClusteringValue \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder1}{\ElementPeriod} \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder2}{\ElementPeriod}                                                                                             $}\\
 		\else
-		& - \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicUrgency \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}  \notag                                                                                                                                                                                                                             \\ 
+		& + \sum_{\ElementWorkOrder \in \SetWorkOrder{}} \sum_{\ElementPeriod \in \SetPeriod} \ParStrategicUrgency \cdot \VarStrategicWorkOrderAssignment{\ElementWorkOrder}{\ElementPeriod}  \notag                                                                                                                                                                                                                             \\ 
 		& + \sum_{\ElementPeriod \in \SetPeriod} \sum_{\ElementResource \in \SetResource} \ParStrategicPenalty \cdot \VarStrategicExcess                                                                                                                                                                                                                                                                               \\
 		\fi
 		& \text{\rule{\linewidth}{0.4pt}} \notag                                                                                                                                                                                                                                                                                                                                                                             \\

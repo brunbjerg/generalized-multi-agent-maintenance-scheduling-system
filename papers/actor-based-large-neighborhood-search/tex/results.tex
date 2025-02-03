@@ -20,16 +20,7 @@ resource skill sets ($\SetResource$) (e.g., mechanics, electricians, turbine
 specialists, etc.), and spans 52 bi-weekly periods ($\SetPeriod$), roughly
 equivalent to two years.
  
-\begin{table}[H]
-\centering
-\begin{tabular}{lrrrr}
-\toprule
-           & $|\SetWorkOrder{}|$ & $|\SetResource|$ & $|\SetPeriod|$ \\ \midrule
-Instance 1 & 3487                & 16               & 52             \\ \bottomrule
-\end{tabular}
-
-\caption{Specific data instances from the case company. Here $\SetWorkOrder$ is the set of work orders, $\SetResource$ is the set of resources, and $\SetPeriod$ is the set of weekly periods.} % \label{fig1}
-\end{table}
+\input{./tables/data-instance.tex}
 
 \subsection{Value of Objective Function Parameters}
 The optimization problem has three terms and it could be argued that the
@@ -51,17 +42,7 @@ constrains the model in equation~\ref{eqn:constraint:strategic:include}.
 Table~\ref{tab:responses:inclusion} shows the responses that the model will be
 subject to while it is running for different timepoints $\VarMetaTime$.
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{lrrrrr}
-	\toprule
-	                                & $\VarMetaTime_1 = 60$ & $\VarMetaTime_2 = 120$ & $\VarMetaTime_3 = 180$ & $\VarMetaTime_4 = 240$ & $\VarMetaTime_5 = 300$ \\ \midrule
-	$\Delta \ParStrategicInclude$ & 50                    & 50                     & 50                     & 50                     & 50                     \\ \bottomrule
-	\end{tabular}
-	\caption{The including work orders perturbations that the AbLNS will be affected by. 
-		Perturbations occur at 60 second time intervals affecting 50 randomly chosen work orders included into random periods.
-	}\label{tab:responses:inclusion}
-\end{table}
+\input{./tables/inclusion-table.tex}
 
 Figure~\ref{fig:responses:inclusion} shows the effects of changing the $
 \ParStrategicInclude$ parameter in real-time. The model quickly converges
@@ -79,6 +60,8 @@ a new solution.
 		is minimized.
 	}\label{fig:responses:inclusion}
 \end{figure}
+
+
 Figure~\ref{fig:responses:inclusion}  show 5 perturbations with the first
 at $\tau = 60s$ where the objective value slightly increases in response to
 the inclusion, the objective value increases due to the inclusion either
@@ -99,17 +82,7 @@ one in table~\ref{tab:responses:inclusion}.
 The main distinction being that the perturbation affects 500 instead of 50 work orders, the higher number 
 of affected work orders is chosen as many exclusions of do not affect the assignment of a work order.
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{lrrrrr}
-	\toprule
-	                                & $\VarMetaTime_1 = 60$ & $\VarMetaTime_2 = 120$ & $\VarMetaTime_3 = 180$ & $\VarMetaTime_4 = 240$ & $\VarMetaTime_5 = 300$ \\ \midrule
-	$\Delta \ParStrategicExclude$ & 500                   & 500                    & 500                    & 500                    & 500                    \\ \bottomrule
-	\end{tabular}
-	\caption{The exclusion of work orders perturbations from specific periods on the weekly schedule. 
-		Perturbations occur at 60 second time intervals affecting 500 work orders each time.
-	}\label{tab:responses:exclusion}
-\end{table}
+\input{./tables/exclusion-table.tex}
 
 Figure~\ref{fig:responses:exclusion}  show a substantial spike in the strategic urgency
 and a substantial decrease in the strategic resource penalty   
@@ -138,20 +111,7 @@ $\ParStrategicResource$ affects the solution considerably more than
 perturbing $\ParStrategicExclude$ and $\ParStrategicInclude$ and therefore 100
 second intervals are specified instead of 60 second intervals.
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{lrrrrr}
-	\toprule
-	                                     & $\VarMetaTime_1 = 0$ & $\VarMetaTime_2 = 100$ & $\VarMetaTime_3 = 200$   \\ \midrule
-	$\Delta |\SetPeriod|$                & 52                     & 52                     & 52                     \\ \midrule
-	$\Delta |\SetResource|$              & 16                     & 16                     & 16                     \\ \midrule
-	$ ||\ParStrategicResource{}||$ (hours) &  61816                 & 111268                 & 173083                 \\ \bottomrule
-	\end{tabular}
-	\caption{The resource perturbations that the AbLNS will be affected by measured in hours.
-		Here all $\ElementPeriod \in \SetPeriod$ and $\ElementResource \in \SetResource$ are 
-		affected
-	}\label{tab:responses:resource-addition}
-\end{table}
+\input{./tables/resource-addition-table.tex}
 
 Figure~\ref{fig:responses:resources-addition} shows the effects of progressively
 increasing  available resources. The AbLNS starts with an initial load which is
@@ -174,19 +134,8 @@ to their final value.
 Table~\ref{tab:resources:resource-subtraction} details the perturbations that the
 AbLNS will affected by. Starting from an initial amount of available
 resource, the resources are progressively decreased.
-\begin{table}[H]
-	\centering
-	\begin{tabular}{lrrrrr}
-	\toprule
-	                                    & $\VarMetaTime_1 = 0$ & $\VarMetaTime_2 = 100$ & $\VarMetaTime_3 = 200$ \\ \midrule
-	$\Delta |\SetPeriod|$               & 52                     & 52                     & 52                   \\ \midrule
-	$\Delta |\SetResource|$             & 16                     & 16                     & 16                   \\ \midrule
-	$ |\ParStrategicResource{}|$ (hours)& 173,083                 & 111,268                 & 61,816                \\ \bottomrule
-	\end{tabular}
-	\caption{The resource perturbations that the AbLNS will be affected by measured in hours.
-		Here all $\ElementPeriod \in \SetPeriod$ and $\ElementResource \in \SetResource$ are 
-		affected}\label{tab:resources:resource-subtraction}
-\end{table}
+
+\input{./tables/resource-subtraction-table.tex}
 
 Figure~\ref{fig:responses:resource-subtraction} shows the effects of perturbing
 the AbLNS by starting from an initial load and then progressively reducing
@@ -211,18 +160,7 @@ perturbations that the AbLNS will by affected by. On each iteration 100 work
 orders are having their values changed by the amount  shown in the 4th row of
 table~\ref{tab:responses:urgency-change}.
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{lrrrrrr}
-	\toprule
-	                                                                                                                   & $\VarMetaTime_1 = 60$ & $\VarMetaTime_2 = 120$ & $\VarMetaTime_3 = 180$ & $\VarMetaTime_4 = 240$ & $\VarMetaTime_5 = 300$ \\ \midrule
-	$\Delta |\SetWorkOrder[\VarMetaTime_{n}]{} \triangle \SetWorkOrder[\VarMetaTime_{n-1}]{}              |$           & 100                                                           & 100                                                            & 100                                                            & 100                                                            & 100                                                      \\ \midrule
-	$\Delta |\SetPeriod[\VarMetaTime_{n}]{} \triangle \SetPeriod[\VarMetaTime_{n-1}]{}                    |$           & 52                                                            & 52                                                             & 52                                                             & 52                                                             & 52                                                       \\ \midrule
-	\makecell{$ ||\ParStrategicUrgency[\VarMetaTime_{n}] -$\\ $\ParStrategicUrgency[\VarMetaTime_{n - 1}]||$}        & $3.75 \cdot 10^{7}$                                           & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                            & $3.75 \cdot 10^{7}$                                       \\ \bottomrule
-	\end{tabular}
-	\caption{Perturbations that the $\ParStrategicUrgency$ will be affected by
-	}\label{tab:responses:urgency-change}
-\end{table}
+\input{./tables/urgency-change-table.tex}
 
 Figure~\ref{fig:responses:value_change} shows the effects of
 perturbing the AbLNS by changing the $\ParStrategicUrgency$ parameter in the objective

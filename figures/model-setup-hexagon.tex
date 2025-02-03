@@ -10,30 +10,33 @@
 \newif\ifuserinterfacelayer
 \newif\iforchestratorlayer
 \newif\ifsimplifiedlayer
+\newif\ifsimplifiedtechnicallanguagelayer
+
 
 \pgfkeys{
 	/hexagon/.is family, /hexagon,
 	default/.style = {
-		persistence=false,
-		atomicpointerswap=false,
-		metaheuristics=false,
-		orchestrator=false,
-		userinterface=false,
-		simplified=false,
+		persistence                 = false,
+		atomicpointerswap           = false,
+		metaheuristics              = false,
+		orchestrator                = false,
+		userinterface               = false,
+		simplified                  = false,
+		simplifiedtechnicallanguage = false
 	},
-	persistence/.is if=persistencelayer,
-	atomicpointerswap/.is if=atomicpointerswaplayer,
-	metaheuristics/.is if=metaheuristicslayer,
-	orchestrator/.is if=orchestratorlayer,
-	userinterface/.is if=userinterfacelayer,
-	simplified/.is if=simplifiedlayer,
+	persistence/.is if                 = persistencelayer,
+	atomicpointerswap/.is if           = atomicpointerswaplayer,
+	metaheuristics/.is if              = metaheuristicslayer,
+	orchestrator/.is if                = orchestratorlayer,
+	userinterface/.is if               = userinterfacelayer,
+	simplified/.is if                  = simplifiedlayer,
+	simplifiedtechnicallanguage/.is if = simplifiedtechnicallanguagelayer
 }
 \newcommand{\drawModelSetupHexagon}[1][]{
 	\pgfkeys{/hexagon, default, #1}
 
 	\begin{tikzpicture}[font=\footnotesize, scale=0.5, line width=1.05]
 	
-
 	\ifpersistencelayer
 		\drawHexagon[draw=none]{ 2                      }{ 2}{dtu-blue}{}{2}
 		\drawHexagon[draw=none]{{6 - 2 * (2 - sqrt(3)) }}{ 2}{dtu-blue}{}{2}
@@ -61,7 +64,6 @@
 		\drawHexagon{{14.0  }}{-3.0}{dtu-white}{}{0.75}
 		\node[align=right, anchor=west] at ({15.0}, -2.25) {User interfaces};
 	\fi
-
 
 	\ifatomicpointerswaplayer
 		\drawHexagon[]{ 2                      }{ 2}{dtu-green}{Shared\\solution\\pointer}{2}
@@ -130,6 +132,56 @@
 
 		% Legend for each layer
 		\node[align=right, anchor=west] at ({12.0}, +3.75) {Atomic Pointer};
+		\draw[fill=dtu-purple] (11.0,  +3.75) circle (0.5);
+
+		\node[align=right, anchor=west] at ({12.0}, +2.25) {Scheduler Metaheuristic};
+		\drawHexagon{{11.0  }}{+1.75}{dtu-green}{}{0.5}
+		\node[align=right, anchor=west] at ({12.0}, +0.75) {Supervisor Metaheuristic};
+		\drawHexagon{{11.0  }}{+0.25}{dtu-red}{}{0.5}
+		\node[align=right, anchor=west] at ({12.0}, -0.75) {Technician Metaheuristic};
+		\drawHexagon{{11.0  }}{-1.25}{dtu-corporate-red}{}{0.5}
+		\node[align=right, anchor=west] at ({12.0}, -2.25) {User interfaces (Message Passing)};
+		\draw[fill=dtu-yellow] (11.0, -2.25) circle (0.5);
+	\fi
+
+	\ifsimplifiedtechnicallanguagelayer
+		\node[align=right, anchor=west] at ({-5.5}, +3.75) {};
+		\drawHexagon{{+2 + 0 * (2 - sqrt(3)) }}{ 2}{dtu-green}{Scheduler}{2}
+		\drawHexagon{{+4 - 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
+		\drawHexagon{{+0 + 1 * (2 - sqrt(3)) }}{-1}{dtu-red}{Supervisor}{2}
+		\drawHexagon{{+2 - 0 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{+6 - 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{-2 + 2 * (2 - sqrt(3)) }}{-4}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{+8 - 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}{2}
+		\drawHexagon{{-4 + 3 * (2 - sqrt(3)) }}{-1}{dtu-corporate-red}{Technician}{2}
+
+		% Scheduler
+		\draw[thin, fill=dtu-yellow] (2, 5) circle (0.35);
+		\draw[thin, fill=dtu-purple] (2, 3) circle (0.35);
+		% Supervisor 1
+		\draw[thin, fill=dtu-yellow] ({+4 - 1 * (2 - sqrt(3)) }, 02) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({+4 - 1 * (2 - sqrt(3)) }, -0) circle (0.35);
+		% Supervisor 2
+		\draw[thin, fill=dtu-yellow] ({+0 + 1 * (2 - sqrt(3)) }, 02) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({+0 + 1 * (2 - sqrt(3)) }, -0) circle (0.35);
+		% Technician 1
+		\draw[thin, fill=dtu-yellow] ({+2 - 0 * (2 - sqrt(3)) }, -1) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({+2 - 0 * (2 - sqrt(3)) }, -3) circle (0.35);
+		% Technician 2
+		\draw[thin, fill=dtu-yellow] ({+6 - 2 * (2 - sqrt(3)) }, -1) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({+6 - 2 * (2 - sqrt(3)) }, -3) circle (0.35);
+		% Technician 3
+		\draw[thin, fill=dtu-yellow] ({-2 + 2 * (2 - sqrt(3)) }, -1) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({-2 + 2 * (2 - sqrt(3)) }, -3) circle (0.35);
+		% Technician 4
+		\draw[thin, fill=dtu-yellow] ({+8 - 3 * (2 - sqrt(3)) }, 02) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({+8 - 3 * (2 - sqrt(3)) }, -0) circle (0.35);
+		% Technician 5
+		\draw[thin, fill=dtu-yellow] ({-4 + 3 * (2 - sqrt(3)) }, 02) circle (0.35);
+		\draw[thin, fill=dtu-purple] ({-4 + 3 * (2 - sqrt(3)) }, -0) circle (0.35);
+
+		% Legend for each layer
+		\node[align=right, anchor=west] at ({12.0}, +3.75) {Shared Solution};
 		\draw[fill=dtu-purple] (11.0,  +3.75) circle (0.5);
 
 		\node[align=right, anchor=west] at ({12.0}, +2.25) {Scheduler Metaheuristic};

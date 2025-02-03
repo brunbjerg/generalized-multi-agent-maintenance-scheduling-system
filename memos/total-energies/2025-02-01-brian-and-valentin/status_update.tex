@@ -1,0 +1,117 @@
+\section{Status Update}
+
+\begin{itemize}
+	\item Clustering in the strategic model
+	\item Latest system architecture
+	\item Previous priorities
+	\item Project steps going forward
+\end{itemize}
+
+\section{Clustering}
+% \input{../../../figures/objective-functions/clustering-on-functional-location.tex}
+% \drawClusteringFunctionalLocation[]
+
+I am not sure if you remember this Brian but a while back we
+talked about clustering work orders in the algorithm. I have written
+it down in my notes that clustering on either \textbf{functional location}
+or \textbf{platform location} was the two properties that made the most
+sense.
+
+I know that this topic was not part of the priorities in the previous memo that
+I sent out to you, but I had to implement it in the code to submit the paper. I
+will quickly explain the general idea with only the functional location part. I
+have based the calculations on figure~\ref{fig:functional-location} which is an
+image that you send Brian:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{../../../figures/total-figures/functional_location_total.png}\label{fig:functional-location}
+	\caption{Functional location hierarchy for clustering calculation}
+\end{figure}
+
+In equation~\ref{eqn:clustering} a similarity between all the work order based on their functional
+location as shown below:
+
+\newcommand{\Highlight}[2]{\colorbox{#2}{#1}}
+\begin{equation}
+	\begin{aligned}
+		clus&tering\_value_{wo1, wo2}=  \\
+		      \ \ & if \ \ SITE_{wo1}      & == & \ \  SITE_{wo2}      &\ \ \{ +20 \} \\ 
+		    + \ \ & if \ \ SECTOR_{wo1}    & == & \ \  SECTOR_{wo2}    &\ \ \{ +10 \} \\ 
+		    + \ \ & if \ \ SYSTEM_{wo1}    & == & \ \  SYSTEM_{wo2}    &\ \ \{ +10 \} \\ 
+		    + \ \ & if \ \ SUBSYSTEM_{wo1} & == & \ \  SUBSYSTEM_{wo2} &\ \ \{ +10 \} \\ 
+		    + \ \ & if \ \ TAG_{wo1}       & == & \ \  TAG_{wo2}       &\ \ \{ +50 \} \\ 
+	\end{aligned}
+	\label{eqn:clustering}
+\end{equation}
+
+This $clustering\_value_{wo1, wo2}$ in equation~\ref{eqn:clustering} is then calculated for all \textbf{released} work orders
+for a given asset that the algorithm in initialized on. In table~\ref{tab:clustering-matrix} will now go through a small
+example to show how this could look like.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrrr}
+		\toprule 
+		\textbf{Functional Location} & \textbf{Site} & \textbf{Sector} & \textbf{System} & \textbf{Sybsystem} & \textbf{Tag} \\
+		\midrule  
+		\textbf{2100000001} & DF & B & 3 & 6 & DFBA-FA-4004\\
+		\textbf{2100000002} & DF & B & 3 & 6 & DFBA-FA-4004\\
+		\textbf{2100000003} & DF & B & 2 & 3 & DFFA-LIT-500106\\
+		\bottomrule
+	\end{tabular}
+	\caption{\parbox{0.6\textwidth}{Functional locations for three different example work orders}}
+
+\end{table}
+
+Using the data in Table~\ref{tab:clustering-matrix} we can calculate the following matrix so
+similarity between the different work orders.
+
+\begin{table}[ht]
+	\centering
+	\label{tab:clustering-matrix}
+	\begin{tabular}{|l|c|c|c|}
+		\toprule
+		\textbf{Work Orders}& \textbf{2100000001}        & \textbf{2100000002}         & \textbf{2100000003} \\
+		\midrule
+		\textbf{2100000001} & -                          & \Highlight{100}{dtu-green}  & \Highlight{30}{dtu-yellow} \\
+		\midrule
+		\textbf{2100000002} & \Highlight{100}{dtu-green} & -                           & \Highlight{30}{dtu-yellow} \\
+		\midrule
+		\textbf{2100000003} & \Highlight{30}{dtu-yellow} & \Highlight{30}{dtu-yellow}  & - \\
+		\bottomrule
+	\end{tabular}
+	\caption{\parbox{0.8\textwidth}{Clustering values between work orders based on functional location. Yellow values are
+		calculated as: 20 + 12 = \Highlight{30}{dtu-yellow} (SITE and SECTOR), and the green values have been calculated as:
+		20 + 10 + 10 + 10 + 50 = \Highlight{100}{dtu-green} (SITE, SECTOR, SYSTEM, SUBSYSTEM, and TAG)}}
+\end{table}
+
+To see where this goes into the strategic model, refer to \textbf{red} part in the model in Section~\ref{sec:strategic-model}.
+
+\section{Latest Architecture}
+I have updated the system architecture a little bit
+\input{../../../figures/model-setup-hexagon.tex}
+\begin{figure}[H]
+	\centering
+    \drawModelSetupHexagon[simplifiedtechnicallanguage=true]
+	\caption{\parbox{0.8\textwidth}{Every algorithm has its own user interface. This means that there will be a view into the system that is 
+		unique for each kind of stakeholder.}
+	}\label{fig:hexagon:simplified}
+\end{figure}
+
+\section{Priorities}
+Currently my priorities are:
+\begin{itemize} 
+	\item Backend: Make the tactical algorithm dynamic and functioning respect constraints 
+	\item Frontend: Let you manually upload resources
+	\item Frontend: Let you see live updating of the currect resource profile of the schedule 
+		that the algorithm is generating.
+\end{itemize}
+
+So questions for you if you disagree with the priorities:
+\begin{itemize}
+	\item \colorbox{yellow}{\textbf{What aspects of the program does each of you think should be prioritized now?}}
+	\item \colorbox{yellow}{\textbf{I believe that making this program work without any involvement of a offshore}}	\\
+    	\colorbox{yellow}{\textbf{supervisor (the person responsible for assigning names to the technicians) }} \\
+		\colorbox{yellow}{\textbf{will be very difficult. Do you aggee or disagree?}}
+\end{itemize} 
