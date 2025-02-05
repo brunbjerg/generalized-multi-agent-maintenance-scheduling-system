@@ -46,13 +46,19 @@
 	\input{status_update.tex}
 
 	\newpage
-	\section{Appendix: Strategic Model}\label{sec:strategic-model}
 	\begin{figure}
+		\section{Appendix: Strategic Model}\label{sec:strategic-model}
 		\strategicModel[clustering=true, beta=false, multiskill=true]
-		\caption{Strategic model with the clustering term highlighted. This makes the
-			corresponding algorithm cluster work order across all time periods of the problem.
+		\caption{The strategic model with the clustering term highlighted. This makes the
+			strategic algorithm cluster work order across all time periods (52 biweekly periods)
+			if there are similarities in the functional locations for the given asset. This means
+			that long term the algorithm will try to make each two week period have work orders
+			that are "close" to each other based on \textbf{functional location}.
 		}
 	\end{figure}
-	\bibliography{../../papers/actor-based-large-neighborhood-search/refs}
+	\newpage
+
+	\bibliography{../../../papers/actor-based-large-neighborhood-search/refs}
+	\bibliographystyle{elsarticle-harv}
 \end{document}
 

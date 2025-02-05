@@ -3,25 +3,24 @@
 \begin{itemize}
 	\item Clustering in the strategic model
 	\item Latest system architecture
-	\item Previous priorities
-	\item Project steps going forward
+	\item Next steps
 \end{itemize}
 
 \section{Clustering}
 % \input{../../../figures/objective-functions/clustering-on-functional-location.tex}
 % \drawClusteringFunctionalLocation[]
 
-I am not sure if you remember this Brian but a while back we
-talked about clustering work orders in the algorithm. I have written
-it down in my notes that clustering on either \textbf{functional location}
-or \textbf{platform location} was the two properties that made the most
-sense.
+Hi Brian and Valentin,
 
-I know that this topic was not part of the priorities in the previous memo that
-I sent out to you, but I had to implement it in the code to submit the paper. I
-will quickly explain the general idea with only the functional location part. I
-have based the calculations on figure~\ref{fig:functional-location} which is an
-image that you send Brian:
+A while back, we discussed clustering work orders within the
+algorithm. My notes indicate that clustering based on either \textbf{functional location}
+or \textbf{platform location} appeared to be the most promising approach (as also highlighted in \citep{palmerMaintenancePlanningScheduling2019weeklyscheduling}). Although
+this wasn’t part of the priorities outlined in my previous memo, I ended up
+implementing this feature in the code for my latest research paper.
+
+To give you a quick overview, I'll explain the general concept focusing on the
+functional location aspect. The calculations and methodology are based on the
+diagram in figure~\ref{fig:functional-location} that you provided.
 
 \begin{figure}[H]
 	\centering
@@ -29,8 +28,8 @@ image that you send Brian:
 	\caption{Functional location hierarchy for clustering calculation}
 \end{figure}
 
-In equation~\ref{eqn:clustering} a similarity between all the work order based on their functional
-location as shown below:
+Equation~\ref{eqn:clustering} defines a similarity measure between work orders based
+on their functional location as detailed below:
 
 \newcommand{\Highlight}[2]{\colorbox{#2}{#1}}
 \begin{equation}
@@ -46,14 +45,14 @@ location as shown below:
 \end{equation}
 
 This $clustering\_value_{wo1, wo2}$ in equation~\ref{eqn:clustering} is then calculated for all \textbf{released} work orders
-for a given asset that the algorithm in initialized on. In table~\ref{tab:clustering-matrix} will now go through a small
+for a given asset on which algorithm is initialized. In table~\ref{tab:work-order-functional-location} will now go through a small
 example to show how this could look like.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{lrrrrr}
 		\toprule 
-		\textbf{Functional Location} & \textbf{Site} & \textbf{Sector} & \textbf{System} & \textbf{Sybsystem} & \textbf{Tag} \\
+		\textbf{Functional Location} & \textbf{Site} & \textbf{Sector} & \textbf{System} & \textbf{Subsystem} & \textbf{Tag} \\
 		\midrule  
 		\textbf{2100000001} & DF & B & 3 & 6 & DFBA-FA-4004\\
 		\textbf{2100000002} & DF & B & 3 & 6 & DFBA-FA-4004\\
@@ -61,11 +60,13 @@ example to show how this could look like.
 		\bottomrule
 	\end{tabular}
 	\caption{\parbox{0.6\textwidth}{Functional locations for three different example work orders}}
+	\label{tab:work-order-functional-location}
 
 \end{table}
 
-Using the data in Table~\ref{tab:clustering-matrix} we can calculate the following matrix so
-similarity between the different work orders.
+Using the data in Table~\ref{tab:work-order-functional-location} we can
+calculate the matrix in Table~\ref{tab:clustering-matrix} to obtain a similarity
+between the different work orders.
 
 \begin{table}[ht]
 	\centering
@@ -82,36 +83,59 @@ similarity between the different work orders.
 		\bottomrule
 	\end{tabular}
 	\caption{\parbox{0.8\textwidth}{Clustering values between work orders based on functional location. Yellow values are
-		calculated as: 20 + 12 = \Highlight{30}{dtu-yellow} (SITE and SECTOR), and the green values have been calculated as:
-		20 + 10 + 10 + 10 + 50 = \Highlight{100}{dtu-green} (SITE, SECTOR, SYSTEM, SUBSYSTEM, and TAG)}}
+		calculated as: 20 + 10 = \Highlight{30}{dtu-yellow} (same SITE and SECTOR), and the green values have been calculated as:
+		20 + 10 + 10 + 10 + 50 = \Highlight{100}{dtu-green} (same SITE, SECTOR, SYSTEM, SUBSYSTEM, and TAG)}}
 \end{table}
 
 To see where this goes into the strategic model, refer to \textbf{red} part in the model in Section~\ref{sec:strategic-model}.
 
 \section{Latest Architecture}
-I have updated the system architecture a little bit
+I have updated the overall architecture extensively with around 5000 lines of
+code changes. This is not something that you will see the benefit of directly
+but it is crucial for the program to perform as intended if scaled up. This
+change means that we have gone from using message-passing when the algorithms
+have to share state to using atomic pointer swaps (the purple \textbf{Shared
+Solution} in Figure~\ref{fig:hexagon:simplified}).
+
 \input{../../../figures/model-setup-hexagon.tex}
 \begin{figure}[H]
 	\centering
     \drawModelSetupHexagon[simplifiedtechnicallanguage=true]
-	\caption{\parbox{0.8\textwidth}{Every algorithm has its own user interface. This means that there will be a view into the system that is 
-		unique for each kind of stakeholder.}
-	}\label{fig:hexagon:simplified}
+	\caption{\parbox{0.8\textwidth}{
+		In the system so far, we have three stakeholders, each running an algorithm
+		in perpetuity to optimize their respective schedules. The \textbf{purple} dots indicate
+		that the solutions for all algorithms will be shared among them, enabling
+		rapid response to changes once the system is fully implemented. The \textbf{yellow}
+		dots highlight points of user interaction. The idea is that the algorithms will
+		handle approximately 60–80 of the work, after which the end-user will manually
+		adjust aspects that the algorithms cannot manage.
+	}}\label{fig:hexagon:simplified}
 \end{figure}
 
-\section{Priorities}
-Currently my priorities are:
-\begin{itemize} 
-	\item Backend: Make the tactical algorithm dynamic and functioning respect constraints 
-	\item Frontend: Let you manually upload resources
-	\item Frontend: Let you see live updating of the currect resource profile of the schedule 
-		that the algorithm is generating.
-\end{itemize}
-
-So questions for you if you disagree with the priorities:
+\section{Next Steps}
+The last feedback from \textbf{Brian} is highlighted in yellow:
 \begin{itemize}
-	\item \colorbox{yellow}{\textbf{What aspects of the program does each of you think should be prioritized now?}}
-	\item \colorbox{yellow}{\textbf{I believe that making this program work without any involvement of a offshore}}	\\
-    	\colorbox{yellow}{\textbf{supervisor (the person responsible for assigning names to the technicians) }} \\
-		\colorbox{yellow}{\textbf{will be very difficult. Do you aggee or disagree?}}
+	\item What aspects of the program does each of you think should be prioritized now?
+	\item \colorbox{yellow}{\textbf{Providing some data which can be analyzed to check the output quality.}}
+	\item I believe that making this program work without any involvement of a offshore
+    	  supervisor (the person responsible for assigning names to the technicians) 
+		  will be very difficult. Do you agree or disagree?
+	\item \colorbox{yellow}{\textbf{The end-user is interested in the results and the proof we can give that the}}\\
+		  \colorbox{yellow}{\textbf{output is the best feasible solution. Offshore are not having their mindset on}}\\
+		  \colorbox{yellow}{\textbf{IT solutions in their daily work. They will be able to guide in the direction of}}\\
+		  \colorbox{yellow}{\textbf{how they want it presented as end-user.}}\\
 \end{itemize} 
+
+I have unfortunately only made a little further progress on the first point.
+I wish I had more time to test more intensively but I have to prioritize
+publishing research to finish the research project on time. I believe that if
+this project is to be successfully implemented, I will need to work full time on
+the system rather than splitting my focus with ongoing research.
+
+Without an extension of the research project we have to drop the advanced parts
+of the frontends. I cannot program that amount of code alone within the current
+timeline of the project. I hope that you will have the imagination to see how the
+system could perform if the relevant frontends were actually implemented. 
+
+I will prioritize making the \textbf{tactical} algorithm work now in line
+with the first priority that \textbf{Brian} highlighted from the last memo.
