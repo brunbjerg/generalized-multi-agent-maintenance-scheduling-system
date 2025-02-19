@@ -1,0 +1,71 @@
+\newpage
+\section{Appendix}
+\subsection{Illustrative Code Parts}\label{sec:separating-concerns}
+
+\subsubsection{All user status codes}
+\begin{alignat*}{1}
+struct\ & UserStatusCodes \\
+    & appr: bool, \\
+    & smat: bool, \\
+    & init: bool, \\
+    & rdbl: bool, \\
+    & qcap: bool, \\
+    & rfrz: bool, \\
+    & wmat: bool, \\
+    & cmat: bool, \\
+    & pmat: bool, \\
+    & ... \\
+    & dfrj: bool, \\
+    & vpas: bool, \\
+    & dfcr: bool, \\
+    & ireq: bool, \\
+    & atvd: bool, \\
+    & awmd: bool, \\
+    & dfex: bool, \\
+    & dfap: bool, \\
+    & awpr: bool, \\
+\} \ \ &\\
+\end{alignat*}
+
+\subsubsection{User status codes that the Strategic Algorithms can modify}
+\begin{alignat*}{1}
+struct\ & StrategicUserStatusCodes \ \{ \\
+    & work\_order\_numbers: Vec<WorkOrderNumber>,\\
+    & sch: Option<bool>,\\
+    & awsc: Option<bool>,\\
+    & cmat: Option<bool>,\\
+    & wmat: Option<bool>,\\
+    & pmat: Option<bool>,\\
+    & smat: Option<bool>,\\
+\}\ \ &\\
+\end{alignat*}
+
+\newpage
+\subsection{Mathematical Models}
+I have put the mathematical models in here only if you should find them interesting. 
+
+When designing scheduling systems, mathematical models should be seen as somewhat similar 
+to an architectural drawing when constructing a house. They set a high level blueprint of what
+the whole system should achieve and what outcomes it should produce. 
+
+Everytime that I have had an interview with either 
+of you, I have cross checked the material and insights that I got from the interview 
+and extended the models. Then I implement the model changes into the scheduling system code.
+
+\subsection{Strategic Model: A Knapsack Variant}
+\label{sec:model:strategic}
+\input{../../../tex/models/strategic.tex}
+\strategicmodel
+\newpage
+\subsection{Tactical Model: A Resource Constrained Project Scheduling Problem Variant}
+\label{sec:model:tactical}
+\input{../../../tex/models/tactical.tex}
+\newpage
+\subsection{Supervisor Model: An Assignment Problem Variant}
+\label{sec:model:supervisor}
+\input{../../../tex/models/supervisor.tex}
+\newpage
+\subsection{Technician Model: Single Machine Scheduling Problem Variant}
+\label{sec:model:technician}
+\input{../../../tex/models/operational.tex}
+

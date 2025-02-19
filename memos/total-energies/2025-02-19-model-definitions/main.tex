@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+\usepackage[subpreambles=true]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bibentry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{fontspec}
+\usepackage[margin=2.0cm]{geometry}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{makecell}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{parskip}
+\usepackage{pifont}
+\usepackage{pgfkeys}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage{lastpage}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\usepackage{multicol}
+% \usepackage{titlesec}
+\setcounter{secnumdepth}{3}
+\input{../../../tex/definitions.tex}
+\input{../../../styles/colors.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Memo: Ordinator Status v0.2.4}
+\rhead{Christian Brunbjerg Jespersen - cbrje@dtu.dk}
+
+\rfoot{Recipients: \textbf{Brian Friis Nielsen} \& \textbf{Valentin Ispas}}
+\lfoot{page \thepage\ of\ \pageref{LastPage}}
+
+\begin{document}
+
+	\input{../../../tex/models/strategic.tex}
+	\section{Introduction}
+	The latest memo on Ordinator version 0.2.4.
+	\input{status_update.tex}
+
+	\newpage
+	\begin{figure}
+		\section{Appendix: Strategic Model}\label{sec:strategic-model}
+		\strategicModel[clustering=true, beta=false, multiskill=true]
+		\caption{The strategic model with the clustering term highlighted. This makes the
+			strategic algorithm cluster work order across all time periods (52 biweekly periods)
+			if there are similarities in the functional locations for the given asset. This means
+			that long term the algorithm will try to make each two week period have work orders
+			that are "close" to each other based on \textbf{functional location}.
+		}
+	\end{figure}
+	
+	\newpage
+
+	\bibliography{../../../papers/actor-based-large-neighborhood-search/refs}
+	\bibliographystyle{elsarticle-harv}
+\end{document}
+

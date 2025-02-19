@@ -1,18 +1,55 @@
 \documentclass{article}
 
-\usepackage{graphicx}
 
+\usepackage{standalone}
+\usepackage{pgf}
+\usepackage{pgfkeys}
+\usepackage{gnuplottex}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{pgfplots}
+\usepackage{epstopdf}  
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{booktabs} % For professional quality tables
+\usepackage{array}    % For better column alignment
+\usepackage{tikz}
+\usepackage{pgfkeys}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{pgfplots}
+\usepackage{epstopdf}  
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{pgfkeys}
+\usepackage{gnuplottex}
+\usepackage{amsmath}
+
+\input{../../tex/definitions.tex}
+\input{../../styles/colors.tex}
 
 \begin{document}
 
 \section{Agenda}
 \begin{itemize}
 	\item Current Situation    (25 min)
-        \item Envisioned future    (25 min)
-        \item Company Structure    (10 min)
-        \item Convincing Total     (25 min)	
-        \item IP concerns          (25 min)
-        \item Milestones           (15 min)
+    \item Envisioned future    (25 min)
+    \item Company Structure    (10 min)
+    \item Convincing Total     (25 min)	
+    \item IP concerns          (25 min)
+    \item Milestones           (15 min)
 \end{itemize}
 
 \section{Current Situation}
@@ -21,19 +58,32 @@
 \begin{itemize}
     \item Manually sending email around
     \item State duplication
-    \item SAP is not made for optimization workflows. -> you copy the current state to a file (excel)
+    \item SAP is not made for/cannot handle optimization workflows. -> you copy the current SAP state to a file (excel) to continue working from there.
     \item The idea with Ordinator is to be a layer between SAP and the scheduler/supervisor. Ordinator then holds all state which can be manipulated (plannings, optimizations etc.).
 \end{itemize}
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{project-plans/scipo-total/figures/scheduling-as-is-to-be.png}
 
+
+
+\begin{figure}[H]
+\includegraphics[width=1.0\textwidth]{../../project-plans/scipo-total/figures/schedulers-view-into-the-scheduling-process.png}
+\caption{Schedulers view of the scheduling process}
 \end{figure}
-\begin{figure}
-\includegraphics[width=1.0\textwidth]{project-plans/scipo-total/figures/technician-excel.png}
+\begin{figure}[H]
+\includegraphics[width=1.0\textwidth]{../../project-plans/scipo-total/figures/technician-excel.png}
+\caption{Supervisors and Technicians view of the scheduling process}
 \end{figure}
 \section{Envisioned Future}
 
-What do we not know:
+\begin{figure}[H]
+    \includegraphics[width=1.0\textwidth]{../../project-plans/scipo-total/figures/scheduling-as-is-to-be.png}
+    \caption{Schematic difference between the current way of doing things versus how it could be done in the
+    future. Each stakeholder can immediately sees an optimized schedule based on the state in the optimization
+    algorithms. This means that the moment that a \textbf{Scheduler}, \textbf{Supervisor}, or \textbf{Technician}
+    sees that there is something wrong his part of the schedule it can be handled immediately. After an excel file
+    has been sent in the as-is example the remaining stakeholders are working blind}
+\end{figure}
+
+\subsection{What do we not know:}
 \begin{itemize}
     \item Supervisor is a big unknown. How do they work with the information? Do all supervisors do the same?
     \item Do they know what would be the best for them? DO we?
@@ -42,34 +92,121 @@ What do we not know:
 \end{itemize}
 
 
-\section{Company Structure}
-Creating a company splitting the shares equally between the founders given Niels Henrik a share 10\%. 
+\section{Possible Company Structure}
+Creating a company splitting the shares equally between the founders giving Niels Henrik a 10\% share. 
 
 \subsection{questions}
 \begin{itemize}
     \item Should Total own anything?
     \item Does DTU need to own anything?
-    \item Should there be a policy between risk taking and the amount of shares given to a person?
-    \item Where should the company have headquarters?
+    % \item Should there be a policy between risk taking and the amount of shares given to a person?
+    % \item Where should the company have headquarters?
 \end{itemize}
 
-\section{IP Concerns}
+\subsection{IP Concerns}
 \begin{itemize}
     \item What rights do DTU have to software?
     \item Do we have a case where DTU are not willing to further this project alone and therefore we can do it ourselves without them?
     \item What does TotalEnergies expect? Do they expect this to be free or are they willing to fund this project even though it would be through a "subcontractor"?
 \end{itemize}
+
 \section{Convincing Total}
-Does it make sense to pursue the idea?
-How to make total commit themselves to spend hours on the project. What does this mean for who owns what?
+\begin{itemize}
+    \item How to make Total commit themselves to spend hours on the project.
+    \begin{itemize}
+        \item What does this mean for who owns what?
+    \end{itemize}
+    \item Booking a meeting with the most relevant stakeholders, and getting a consensus on the project goals.
+    \item Drafting a budget, meaning how many hours there is needed to deliver certain milestones.
+    \item Working on an hourly basis, delivering weekly or monthly results.
+    \item What should the role of Christian's Ph.D. project be until we are ready to create the company?
+    \item One route (best-case-scenario): 
+    \begin{itemize}
+        \item Christian takes leave of PhD in Autumn
+        \item Total Energies hopefully is willing to pay for hours in development
+        \item Christian and Sebastian works full time on paid project to develop
+        \item Christian returns to finish PhD or project is so mature we cannot stop now.
+    \end{itemize}
+\end{itemize}
 
-Booking a meeting with the most relevant stakeholders, and getting a consensus on the project goals.
+\subsection{Budget}
 
-Drafting a budget, meaning how many hours there is needed to deliver certain milestones.
 
-Working on an hourly basis, delivering weekly or monthly results.
+\begin{table}[H]
 
-What should the role of Christian's Ph.D. project be until we are ready to create the company?
-One route (best-case-scenario): 
-Christian takes leave of PhD in Autumn -> Total Energies hopefully is willing to pay for hours in development -> Christian and Sebastian works full time on paid project to develop -> Christian returns to finish PhD or project is so mature we cannot stop now.
+\centering
+\begin{tabular}{lllllll}
+    \toprule
+    \textbf{Scipo}                                                          & Role                            & \makecell[lt]{Total\\Hours} & \makecell[lt]{Cost per\\Hour}        & Skills                                                                  & Period                             &  \\
+    \midrule
+    Christian Jespersen                                                     & \makecell[lt]{Core\\Developer}  & 320                         & 250 DKK                              & \makecell[lt]{Optimization\\Algorithms}                                 & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    Sebastian Dall                                                          & \makecell[lt]{Core\\Developer}  & 320                         & 250 DKK                              & \makecell[lt]{API,\\Frontend,\\Project}                                 & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \toprule
+    \textbf{Total}                                                          & Role                            & \makecell[lt]{Total\\Hours} & \makecell[lt]{Cost per\\Hour}        & Skills                                                                  & Period                             &  \\
+    \midrule
+    \makecell[tl]{TOTAL\_DEVELOPER\\Baptiste Dubillaud}                     & Integration                     & 50-70                       & 500 DKK                              & \makecell[lt]{Azure,\\IT infrastructure}                                & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{TOTAL\_MAINTENANCE\_METHOD\\Brian Friis Niels}            & Domain Expert                   & 40                          & 500 DKK                              & \makecell[lt]{Understanding of\\Business Flows}                            & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{GMC\_SCHEDULER\\Valentin Ispas}                           & Domain Expert                   & 30                          & 500 DKK                              & \makecell[lt]{Key Stakeholder}                                          & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{GMC\_SUPERVISOR\\<UNKNOWN>}                               & Domain Expert                   & 20                          & 500 DKK                              & \makecell[lt]{Key Stakeholder}                                          & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{GMC\_TECHNICIAN\\<UNKNOWN>}                               & Domain Expert                   & 20                          & 500 DKK                              & \makecell[lt]{Key Stakeholder}                                          & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \toprule
+    \textbf{Material}                                                       & Role                            & \makecell[lt]{Total\\Hours} & \makecell[lt]{Cost per\\Hour}        & Skills                                                                  & Period                             &  \\
+    \midrule
+    Server                                                                  & -                               & ~2000                       & ~1-5 DKK                             & -                                                                       & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \bottomrule
+\end{tabular}
+
+\end{table}
+
+\[
+\begin{aligned}
+    \text{Total Cost} &= (320 \times 250) + (320 \times 250) \\
+    &\quad + (70 \times 500) + (40 \times 500) + (30 \times 500) \\
+    &\quad + (20 \times 500) + (20 \times 500) + (2,000 \times 5) \\
+    &= 80,000 + 80,000 + 35,000 + 20,000 + 15,000 + 10,000 + 10,000 + 10,000  \\
+    &= 160,000 \quad (\text {Direct cost for Scipo}) \\
+    &\quad + 100,000 \quad (\text {Indirect cost for Total}) \\
+    &= 260,000 \quad \text{Total cost DKK}
+\end{aligned}
+\]
+
+Total cost per 2 month period \textbf{260,000 DKK}
+
+\section{Appendix}
+
+\input{../../figures/model-setup-hexagon.tex}
+\begin{figure}[H]
+    \section{Graphic Overview of the Model Setup}
+    \centering
+    \drawModelSetupHexagon[simplified=true]
+    \caption{Each model represents a distinct stakeholder with its own UI (yellow) and their solution spaces are tied together with
+        lock-free atomic pointer swaps (purple)}
+\end{figure}
+
+\input{../../tex/models/strategic.tex}
+\begin{figure}[H]
+    \section{Scheduler: Strategic}
+    \strategicModel[clustering=true, beta=false, normal=false, multiskill=true]
+\end{figure}
+
+
+\input{../../tex/models/tactical.tex}
+\begin{figure}[H]
+    \section{Scheduler: Tactical}
+    \tacticalModel[]
+\end{figure}
+
+\input{../../tex/models/supervisor.tex}
+\begin{figure}[H]
+    \section{Supervisor}
+    \supervisorModel[]
+\end{figure}
+
+\input{../../tex/models/operational.tex}
+\begin{figure}[H]
+    \section{Technician}
+    \operationalModel[]
+\end{figure}
+
 \end{document}
+

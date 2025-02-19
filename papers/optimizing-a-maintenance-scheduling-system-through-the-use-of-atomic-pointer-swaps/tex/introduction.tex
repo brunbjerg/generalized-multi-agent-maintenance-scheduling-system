@@ -130,16 +130,30 @@ are multiple driving ideas behind these approaches:
 		by turning the solution of one actor/model into parameters of the other model.
 \end{itemize}
 
+\newpage
+\begin{figure}[H]
 \subsubsection{Strategic Model: Scheduler}
 \input{../../tex/models/strategic.tex}
-\strategicmodel
+\strategicModel[clustering=true, beta=false, normal=false, multiskill=true]
+\end{figure}
 
+\begin{figure}[H]
 \subsubsection{Tactical Model: Scheduler}
 \input{../../tex/models/tactical.tex}
+\tacticalModel[]
+\end{figure}
+\begin{figure}[H]
 \subsubsection{Supervisor Model: Supervisor}
 \input{../../tex/models/supervisor.tex}
+\supervisorModel[]
+\end{figure}
+
+
+\begin{figure}[H]
 \subsubsection{Operational Model: Technicial}
 \input{../../tex/models/operational.tex}
+\operationalModel[]
+\end{figure}
 
 
 \subsection{Contribution}
