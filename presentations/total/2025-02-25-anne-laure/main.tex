@@ -1,0 +1,256 @@
+\documentclass{article}
+
+
+\usepackage{standalone}
+\usepackage{pgf}
+\usepackage{gnuplottex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{pgfplots}
+\usepackage{epstopdf}  
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{booktabs} % For professional quality tables
+\usepackage{array}    % For better column alignment
+\usepackage{tikz}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{pgfplots}
+\usepackage{epstopdf}  
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{gnuplottex}
+\usepackage{amsmath}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bibentry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{makecell}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{parskip}
+\usepackage{pifont}
+\usepackage{pgfkeys}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage{lastpage}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\usepackage{multicol}
+
+\input{../../../tex/definitions.tex}
+\input{../../../styles/colors.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Memo: Ordinator Status v0.2.5 \\ Date: 2025-02-25}
+\rhead{Christian Brunbjerg Jespersen \\ cbrje@dtu.dk \& christian-brunbjerg.jespersen@external.totalenergies.com}
+
+\rfoot{Recipients: \textbf{Anne-Laure Debar}}
+\lfoot{page \thepage\ of\ \pageref{LastPage}}
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+\section{Project Overview}
+\subsection{Stakeholders}
+
+\begin{itemize}
+    \item Brian Friis Nielsen (Total)
+    \item Valentin Ispas      (GMC - Norspie)
+    \item Anne-Laure Debar    (Total)
+    \item Baptiste Dubillaud  (Total)
+\end{itemize}
+
+\subsection{Highlevel Work Flow}
+\begin{figure}[H]
+    \includegraphics[width=1.0\textwidth]{../../../project-plans/scipo-total/figures/scheduling-as-is-to-be.png}
+    \caption{Schematic difference between the current way of doing things versus how it could be done in the
+    future. Each stakeholder can immediately sees an optimized schedule based on the state in the optimization
+    algorithms. This means that the moment that a \textbf{Scheduler}, \textbf{Supervisor}, or \textbf{Technician}
+    sees that there is something wrong his part of the schedule it can be handled immediately. After an excel file
+    has been sent in the as-is example the remaining stakeholders are working blind}
+\end{figure}
+
+\textbf{Issues:}
+\begin{itemize}
+    \item Manually sending email around: Manual process leads to long iteration time on schedules
+    \item State duplication: Information on the same \textbf{work order} is found in many places at any one time
+    \item SAP is not made for optimization workflows: You copy the current SAP state to excel and continue working from there.
+    \item Ordinator is a layer between SAP and the \textbf{scheduler} and \textbf{supervisor}: Ordinator holds all state which can be manipulated and optimizes it (scheduling, optimizations etc.).
+\end{itemize}
+
+\subsection{Excel Examples}
+\begin{figure}[H]
+\includegraphics[width=1.0\textwidth]{../../../project-plans/scipo-total/figures/schedulers-view-into-the-scheduling-process.png}
+\caption{Schedulers view of the scheduling process}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=1.0\textwidth]{../../../project-plans/scipo-total/figures/technician-excel.png}
+\caption{Supervisors and Technicians view of the scheduling process}
+\end{figure}
+\section{Product Vision}
+
+\input{../../../figures/model-setup-hexagon.tex}
+\begin{figure}[H]
+    \centering
+    \drawModelSetupHexagon[simplified=true]
+    \caption{Each model represents a distinct stakeholder with its own UI (yellow) and their solution spaces are tied together with
+        lock-free atomic pointer swaps (purple)}
+\end{figure}
+
+\section{Product Architecture}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{../../../figures/architecture/ordinator-architecture.png}
+    \caption{Software architecture of the Ordinator application. Databases are shown in
+    \textbf{grey}, with either SAP or Mongodb based on the data requirements, SchedulingEnvironment
+    holds all the needed data for the application to run and saves all the user interactions with
+    the system, these interaction are held in the MongoDB database, the Orchestrator is
+    shown in \textbf{blue} and is responsible for managing the whole system while it is running,
+    the Shared Solution is
+    shown in \textbf{yellow} and holds fast mutable state that is needed for the algorithms to optimize
+    across the different stakeholders, each optimization algorithms themselves is shown in \textbf{light red},
+    where each models and optimizes the scheduling process for that specific stakeholder, finally
+    the presentation views for each of the stakeholders which are shown in \textbf{green} }
+\end{figure}
+
+\section{Project going forward}
+
+\subsection{Collaboration}
+
+\textbf{Main issues:}
+\begin{itemize}
+    \item I will need time in Esbjerg to further develop the project
+    \begin{itemize}
+        \item I have family in Esbjerg that I might be able to stay with
+    \end{itemize}
+    \item I lack the project management skill to run the whole project by myself
+    \item There is one year left of the project, so the collaboration will have to depend on project scope
+    \item The project will require developer time from \textbf{Loic}
+    \item The project will require developer time from GMC and the maintenance department
+\end{itemize}
+
+\textbf{Main questions:}
+\begin{itemize}
+    \item What do you think that it would take to convince Total to further the project? 
+    \item The project could save the company a lot of money. Which steps should be
+          taken to gain the best kind of support?
+\end{itemize}
+
+\subsection{Milestones}
+\begin{enumerate}
+    \item Make the first iteration of Ordinator that can schedule for each kind of stakeholder
+    \item Providing each stakeholder with high quality excel exports 
+    \item Host the program with both a \textbf{Scheduler} and \textbf{Supervisor} frontend
+    \item Create frontends together with Total
+\end{enumerate}
+
+\subsection{Company: Scipo}
+Would a company setup be an option if the project gains financial support. This may be a
+long short. I have a good and competent friend and I think that the two of us together
+would be able to deliver you a product of high quality. This kind of collaboration would
+go along the lines:
+\begin{enumerate}
+    \item Develop Ordinator so mature that Total gains confidence in its likely success
+    \item Drafting a budget, specifying how many hours there is needed to deliver certain milestones.
+    \item Shared ownership of the product or open-source the code.
+\end{enumerate}
+
+\subsection{Example Budget}
+This is simply an example budget for how a development model could look like between \textbf{Total} and \textbf{Scipo} (an example company created for solving the scheduling problem for Total)
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lllllll}
+    \toprule
+    \textbf{Scipo}                                                          & Role                            & \makecell[lt]{Total\\Hours} & \makecell[lt]{Cost per\\Hour}        & Skills                                                                  & Period                             &  \\
+    \midrule
+    Christian Jespersen                                                     & \makecell[lt]{Core\\Developer}  & 320                         & 250 DKK                              & \makecell[lt]{Optimization\\Algorithms}                                 & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    Sebastian Dall                                                          & \makecell[lt]{Core\\Developer}  & 320                         & 250 DKK                              & \makecell[lt]{API,\\Frontend,\\Project}                                 & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \toprule
+    \textbf{Total}                                                          & Role                            & \makecell[lt]{Total\\Hours} & \makecell[lt]{Cost per\\Hour}        & Skills                                                                  & Period                             &  \\
+    \midrule
+    \makecell[tl]{TOTAL\_DEVELOPER\\Baptiste Dubillaud}                     & Integration                     & 50-70                       & 500 DKK                              & \makecell[lt]{Azure,\\IT infrastructure}                                & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{TOTAL\_MAINTENANCE\_METHOD\\Brian Friis Niels}            & Domain Expert                   & 40                          & 500 DKK                              & \makecell[lt]{Understanding of\\Business Flows}                            & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{GMC\_SCHEDULER\\Valentin Ispas}                           & Domain Expert                   & 30                          & 500 DKK                              & \makecell[lt]{Key Stakeholder}                                          & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{GMC\_SUPERVISOR\\<UNKNOWN>}                               & Domain Expert                   & 20                          & 500 DKK                              & \makecell[lt]{Key Stakeholder}                                          & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \makecell[tl]{GMC\_TECHNICIAN\\<UNKNOWN>}                               & Domain Expert                   & 20                          & 500 DKK                              & \makecell[lt]{Key Stakeholder}                                          & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \toprule
+    \textbf{Material}                                                       & Role                            & \makecell[lt]{Total\\Hours} & \makecell[lt]{Cost per\\Hour}        & Skills                                                                  & Period                             &  \\
+    \midrule
+    Server                                                                  & -                               & ~2000                       & ~1-5 DKK                             & -                                                                       & \makecell[lt]{2025-09 to\\2025-12} &  \\
+    \bottomrule
+\end{tabular}
+
+\end{table}
+
+\[
+\begin{aligned}
+    \text{Total Cost} &= (320 \times 250) + (320 \times 250) \\
+    &\quad + (70 \times 500) + (40 \times 500) + (30 \times 500) \\
+    &\quad + (20 \times 500) + (20 \times 500) + (2,000 \times 5) \\
+    &= 80,000 + 80,000 + 35,000 + 20,000 + 15,000 + 10,000 + 10,000 + 10,000  \\
+    &= 160,000 \quad (\text {Direct cost for Scipo}) \\
+    &\quad + 100,000 \quad (\text {Indirect cost for Total}) \\
+    &= 260,000 \quad \text{Total cost DKK}
+\end{aligned}
+\]
+
+Total cost per 2 month period \textbf{260,000 DKK}
+
+
+\newpage
+\section{Appendix}
+
+The mathematical model formulations are based on interviews and
+the handbook \citep{palmerMaintenancePlanningScheduling2019}.
+
+\input{../../../tex/models/strategic.tex}
+\begin{figure}[H]
+    \section{Scheduler: Strategic}
+    \strategicModel[clustering=true, beta=false, normal=false, multiskill=true]
+\end{figure}
+
+
+\input{../../../tex/models/tactical.tex}
+\begin{figure}[H]
+    \section{Scheduler: Tactical}
+    \tacticalModel[]
+\end{figure}
+
+\input{../../../tex/models/supervisor.tex}
+\begin{figure}[H]
+    \section{Supervisor}
+    \supervisorModel[]
+\end{figure}
+
+\input{../../../tex/models/operational.tex}
+\begin{figure}[H]
+    \section{Technician}
+    \operationalModel[]
+\end{figure}
+
+\bibliography{../../../papers/actor-based-large-neighborhood-search/refs}
+\bibliographystyle{elsarticle-harv}
+
+\end{document}
+
