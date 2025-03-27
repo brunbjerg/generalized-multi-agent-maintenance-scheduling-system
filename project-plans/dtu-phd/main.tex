@@ -1,0 +1,92 @@
+\documentclass{article}
+
+
+\usepackage{standalone}
+\usepackage{pgf}
+\usepackage{pgfkeys}
+\usepackage{gnuplottex}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{pgfplots}
+\usepackage{epstopdf}  
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{booktabs} % For professional quality tables
+\usepackage{array}    % For better column alignment
+\usepackage{tikz}
+\usepackage{pgfkeys}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{pgfplots}
+\usepackage{epstopdf}  
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{pgfkeys}
+\usepackage{gnuplottex}
+\usepackage{amsmath}
+\usepackage{natbib}
+
+\input{../../tex/definitions.tex}
+\input{../../styles/colors.tex}
+
+\begin{document}
+
+\section{Project Plan}
+\subsection{Introduction}
+Industrial maintenence scheduling seen as a mathematical optimization problem presents a unique challenge to develop
+state of the art modelling and solution approaches. The scope of modern industrial maintenance operations
+can be extremely vast, consisting of 1000s of work orders,
+100s of technicians on assets that have up to 5 year asset maintenance plans and designed to be operational
+for decades~\cite{palmerMaintenancePlanningScheduling2019}. This combined with high levels of uncertainty,
+real-time changes, and optimizing across multiple levels of stakeholder, means that maintenance scheduling
+touches on many of the known current limitation in the operation research/metaheuristic literature.
+
+Further it remains challenging for human planners, schedulers, and maintenance
+supervisors to plan and schedule maintenance manually. This creates a demand for
+software tools that can effectively utilize available manpower and prioritize
+the most critical maintenance operations whereever in the scheduling process
+they occur. The cost of planning maintenance in an inefficient manner can be
+extensive as processes in large-scale equipment are often linked together. If a
+single piece of equipment fails it can cause whole subsystems to shut down. To
+migigate this, it is important to prioritize maintenance operations correctly.
+This is especially true in circumstances, where it is infeasible to perform all
+maintenance operations, due to either financial or physical constraints.
+
+\subsection{Purpose}
+Given the complexity of such operations and the maturity of the practical part of the field, the maintenance
+scheduling has throughout many decades designed an effective though often inefficient way of planning and scheduling
+these activities. This Ph.D. project seeks to model the practical knowledge and rules of thumb that have been gathered
+over decades and model and optimize these using industry proven techniques coming from other mathematical optimization
+problems~\cite{talbiMetaheuristicsDesignImplementation2009}, \cite{gendreauHandbookMetaheuristics2019}. Further as this
+process presents unique challenges due to many
+
+\subsection{Research Questions}
+\begin{itemize}
+    \item How to model and optimize across multiple stakeholder each optimizing a part of the total maintenance scheduling process?
+    \item How can simulations guide decision-making in maintenance planning? 
+    \item How to implement metaheuristics that can adapt to changing requirements in near real-time? 
+    \item How to create a heuristic that is effective for both corrective and preventive maintenance? 
+    \item How can the maintenance planning problem be solved with imperfect data? 
+    \item What is the effect of the maintenance process on the ability to create a robust maintenance plan? 
+\end{itemize}
+
+\nocite{ben-dayaHandbookMaintenanceManagement2009}
+\nocite{pinedoSchedulingTheoryAlgorithms2022}
+\bibliography{refs.bib}
+
+\bibliographystyle{elsarticle-harv}
+
+\end{document}
+

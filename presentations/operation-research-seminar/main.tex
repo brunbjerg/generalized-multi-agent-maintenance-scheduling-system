@@ -102,7 +102,7 @@
 	\scalebox{0.4}{
 		\begin{minipage}{2.5\textwidth}
 			\input{../../tex/models/strategic.tex}
-			\strategicmodel[multiskill=true, beta=false, normal=false]
+			% \strategicmodel[multiskill=true, beta=false, normal=false]
 		\end{minipage}
 	}
 \end{frame}
@@ -222,9 +222,9 @@
 
 \begin{frame}{}
     \begin{block}{Business}
-		\input{../../figures/maintenance_actor_architecture.tex}
 		% Business usually handle decision making by making a series of "model changes" which 
 		% are then combined to create a decision process.
+		\input{../../figures/maintenance_actor_architecture.tex}
   %       \begin{enumerate}
   %       \end{enumerate}
     \end{block}
@@ -266,6 +266,11 @@
 	\begin{itemize}
 		\item Chinese literature.
 	\end{itemize}
+    \end{block}
+\end{frame}
+\begin{frame}{}
+    \begin{block}{Ordinator Architecture}
+		\input{../../figures/ordinator-code/crate-structure.tex}
     \end{block}
 \end{frame}
 

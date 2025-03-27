@@ -1,0 +1,34 @@
+
+\usetikzlibrary{positioning}
+\input{../../styles/colors.tex}
+
+\newlength{\basisordinatorcratestructure}
+\setlength{\basisordinatorcratestructure}{0.3cm}
+\begin{tikzpicture}[xshift=-3cm]
+    \draw (-4.0\basisordinatorcratestructure,4.0\basisordinatorcratestructure) 
+		node[minimum height=2\basisordinatorcratestructure,fill=dtu-grey,minimum width=3\basisordinatorcratestructure,draw, rounded corners=0.1\basisordinatorcratestructure] 
+			(ordinator-api-server) {ordinator-api-server};
+
+    \draw (-4.0\basisordinatorcratestructure,0.0\basisordinatorcratestructure) 
+		node[minimum height=2\basisordinatorcratestructure,fill=dtu-green,minimum width=3\basisordinatorcratestructure,draw, rounded corners=0.1\basisordinatorcratestructure] 
+			(ordinator-imperium) {ordinator-imperium};
+
+    \draw (0.0\basisordinatorcratestructure,2.0\basisordinatorcratestructure) 
+		node[minimum height=2\basisordinatorcratestructure,fill=dtu-green,minimum width=3\basisordinatorcratestructure,draw, rounded corners=0.1\basisordinatorcratestructure] 
+			(ordinator-orchestrator) {ordinator-orchestrator};
+
+    \draw (4.0\basisordinatorcratestructure,2.0\basisordinatorcratestructure) 
+		node[minimum height=2\basisordinatorcratestructure,fill=dtu-green,minimum width=3\basisordinatorcratestructure,draw, rounded corners=0.1\basisordinatorcratestructure] 
+			(ordinator-scheduling-environment) {ordinator-scheduling-environment};
+
+    \draw (4.0\basisordinatorcratestructure,6.0\basisordinatorcratestructure) 
+		node[minimum height=2\basisordinatorcratestructure,fill=dtu-green,minimum width=3\basisordinatorcratestructure,draw, rounded corners=0.1\basisordinatorcratestructure] 
+			(ordinator-configuration) {ordinator-configuration};
+
+
+	% \draw[<->, thick, line width=0.1\basisordinatorcratestructure] (Planner) -- (Scheduler);
+	% \draw[<->, thick, line width=0.1\basisordinatorcratestructure] (Scheduler) -- (Supervisor_3);
+	% \draw[<->, thick, line width=0.1\basisordinatorcratestructure] (Supervisor_3) -- (Technician_5);
+	% \draw[<->, thick, line width=0.1\basisordinatorcratestructure] (Scheduler) -- (Database);
+	% \draw[<->, thick, line width=0.1\basisordinatorcratestructure] (Scheduler) -- (UserInterface);
+\end{tikzpicture}
